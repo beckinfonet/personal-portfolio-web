@@ -33,7 +33,7 @@ Phase 1 establishes the clean, secure base for the terminal-portfolio redesign:
 - **D-01:** GitHub Actions, PR-only — workflow file at `.github/workflows/ci.yml`. Runs on every PR. No push-to-main duplicate runs (avoids 2× CI minutes; PRs are the gate).
 - **D-02:** CI checks pipeline (in order): `lint` → `typecheck (tsc --noEmit)` → `test (vitest run)` → `knip` → `build (next build)`. All must pass for merge.
 - **D-03:** **Knip hard-fails CI on any orphan finding.** No allowlist. This is the brownfield discipline guard from Pitfall 11 — orphan code must be deleted, not accumulated.
-- **D-04:** Pin Node 22 LTS via `.nvmrc` (Node version file at repo root) AND `engines.node: ">=22"` in `package.json`. CI uses `actions/setup-node@v4` with `node-version-file: .nvmrc`. Reproducible across machines.
+- **D-04:** Pin Node 22 LTS via `.nvmrc` (Node version file at repo root) AND `engines.node: "22.x"` in `package.json`. CI uses `actions/setup-node@v4` with `node-version-file: .nvmrc`. Reproducible across machines. (Revised 2026-05-06 from `">=22"` after research confirmed Vercel rejects `>=` semver — see RESEARCH.md §"D-04 Revised: Node engines pin".)
 - **D-05:** Use `npm ci` in CI (not `npm install`) — enforces lockfile reproducibility and rejects out-of-sync `package-lock.json`.
 - **D-06:** Branch protection on `main`: require CI green to merge, 0 reviewers required (solo developer; reviewer requirement would be performative). Phase 1 ships the workflow file and documents the branch protection setting; the developer configures the protection rule in GitHub UI after the first PR lands.
 
@@ -61,8 +61,8 @@ Phase 1 establishes the clean, secure base for the terminal-portfolio redesign:
 
 - **D-12:** **Engineer headers + standard security headers** in `next.config.ts` `headers()`. Engineer headers serve DEV-03 (easter egg discoverability); security headers close the CONCERNS.md gaps.
 - **D-13:** **Engineer headers (DEV-03):**
-  - `x-portfolio-source: <github-repo-url>` — lets `curl -I` viewers find the source
   - `x-built-with: nextjs-15-react-19`
+  - `x-portfolio-source` **deferred to Phase 7** — set when the public deploy URL is finalized. Phase 1 ships only `x-built-with` so no placeholder URL trips INFRA-05's grep. (Revised 2026-05-06: developer chose to defer the source URL until deploy lands.)
 - **D-14:** **Standard security headers (CONCERNS.md mitigations):**
   - `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload`
   - `X-Content-Type-Options: nosniff`
@@ -71,6 +71,10 @@ Phase 1 establishes the clean, secure base for the terminal-portfolio redesign:
   - `Permissions-Policy: camera=(), microphone=(), geolocation=()` (deny-list of sensors the portfolio never needs)
 - **D-15:** **CSP deferred** — Content-Security-Policy is NOT in Phase 1 scope. The accent boot script (Risk 1, Pitfall 3) is inline `<script dangerouslySetInnerHTML>` in `app/layout.tsx`; a strict CSP requires a nonce-based approach (middleware injects nonce into `<script nonce={...}>` and the response header). This is bigger than Phase 1's "clean foundation" boundary. Captured as deferred idea — revisit after Shell + Views land or in a v2 hardening milestone.
 - **D-16:** **URL/scheme validation on API-supplied `href`s deferred to Phase 6.** In Phase 1, all rendered URLs come from the developer-controlled `lib/portfolio-data.ts`, so the `javascript:`-injection risk in CONCERNS.md is dormant. Phase 6 (when the sibling backend cuts over) is the natural place to add the guard in `lib/api.ts` — single chokepoint, every consumer safe by construction. Phase 6 plan must include this; flagged in deferred ideas.
+
+### Wave 0 Ordering (homepage + test bridge)
+
+- **D-17:** **`app/components/homepage.tsx` and `app/components/homepage.test.tsx` are adapted to the new types in the SAME commit as the data refactor** (introduce `lib/types.ts` rewrite + `lib/portfolio-data.ts` + delete `lib/fallback-data.ts`). The adaptation is a minimal-edit shape adapter — neither file gains new behavior. They are still deleted in Phase 2's first commit when the shell skeleton ships, per CLAUDE.md brownfield discipline. Rationale: keeps build green between commits without introducing a temporary `lib/legacy-types.ts` bridge file that Phase 2 would have to remember to delete. (Locked 2026-05-06 after research surfaced the import dependency.)
 
 ### Claude's Discretion
 
@@ -165,7 +169,7 @@ Phase 1 establishes the clean, secure base for the terminal-portfolio redesign:
 - **CI workflow trigger:** `pull_request` on all branches into `main`. Do NOT add `workflow_dispatch` until needed.
 - **`npm ci` in CI, `npm install` locally** — keep developer ergonomics local while CI enforces lockfile reproducibility.
 - **`knip` configuration:** start with the default `knip.json` or `package.json#knip` config. Tune thresholds only if false positives appear (e.g. shadcn-ui style "intentional barrel exports" — none apply to this repo today).
-- **Engine pin specifics:** `engines.node: ">=22"` (not `"22.x"`) — allows minor + patch upgrades without `package.json` churn but rejects Node < 22.
+- **Engine pin specifics:** `engines.node: "22.x"` — allows minor + patch upgrades within Node 22 LTS without `package.json` churn, rejects Node < 22, and is the format Vercel's deploy runner accepts. (Updated 2026-05-06 — research confirmed `>=22` triggers Vercel `Found invalid Node.js Version` rejection. See D-04 above.)
 
 </specifics>
 
@@ -178,7 +182,9 @@ Phase 1 establishes the clean, secure base for the terminal-portfolio redesign:
 - **Dependabot / Renovate** — flagged in CONCERNS.md for ongoing dep hygiene. Not in Phase 1; revisit after Phase 7 deploy.
 - **Sentry / observability** — flagged in CONCERNS.md. Out of scope for v1 entirely; v1 has no telemetry per PROJECT.md.
 - **Per-endpoint revalidation tags** — `lib/api.ts` uses a blanket `revalidate: 300`. Per-endpoint values + `revalidateTag` integration deferred (FEATURES.md / future content pipeline territory).
-- **ESLint 9 flat-config migration** — folded into Phase 1 hygiene (Claude's discretion) IF compatible with `eslint-config-next`@15.5 peer; may downgrade to "stay on 8.57 for v1" during planning research. Either way, the dev-tooling-hygiene scope decision is captured.
+- **ESLint 9 flat-config migration** — IS in Phase 1 scope. Research confirmed `eslint-config-next@^15.5.x` peer-deps `eslint ^7.23 || ^8 || ^9`, and `next lint` is deprecated in 15.5 (removed in Next 16). Phase 1 migrates to flat config (`eslint.config.mjs` with `defineConfig` + `globalIgnores`). See RESEARCH.md §"D-X (Open Decision 2): ESLint 9 flat-config migration".
+
+- **`x-portfolio-source` response header (DEV-03)** — deferred to Phase 7 / DEPLOY when the public deploy URL is finalized. Phase 1 ships only `x-built-with: nextjs-15-react-19` from D-13 to avoid placeholder-URL strings tripping INFRA-05's grep. (Decided 2026-05-06.)
 - **Real `public/resume.pdf`** — Phase 6 / CONTENT-05. Phase 1 leaves the placeholder in place because nothing in Phase 1 links to `/resume.pdf` (the persistent top-bar resume button is a Phase 2 affordance).
 - **Vercel Analytics, `resume_download` event** — Phase 7 / DEPLOY-06.
 - **Splitting the GitHub Actions workflow into multiple jobs** (lint+typecheck parallel with test, build last) — performance optimization deferred; single-job sequential is fine for Phase 1's tiny codebase.

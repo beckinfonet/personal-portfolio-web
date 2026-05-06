@@ -22,6 +22,12 @@ import type {
  * no longer "fallback*" because this is the canonical seed).
  */
 
+/**
+ * Career start date for the uptime computation in the shell STATUS block.
+ * Update to the actual career start date before Phase 7 deploy. (Phase 6 content pass.)
+ */
+export const CAREER_START_DATE = new Date("2018-01-01");
+
 export const PROFILE: Profile = {
   name: "Bakytbek Tatibekov",
   shortName: "Bakytbek",

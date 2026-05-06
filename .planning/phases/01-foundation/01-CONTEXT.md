@@ -31,7 +31,7 @@ Phase 1 establishes the clean, secure base for the terminal-portfolio redesign:
 ### CI Tooling (INFRA-03)
 
 - **D-01:** GitHub Actions, PR-only — workflow file at `.github/workflows/ci.yml`. Runs on every PR. No push-to-main duplicate runs (avoids 2× CI minutes; PRs are the gate).
-- **D-02:** CI checks pipeline (in order): `lint` → `typecheck (tsc --noEmit)` → `test (vitest run)` → `knip` → `build (next build)`. All must pass for merge.
+- **D-02:** CI checks pipeline (in order): `lint` → `typecheck (tsc --noEmit)` → `test (vitest run)` → `knip` → `build (npm run build — chains postbuild placeholder grep per INFRA-05)`. All must pass for merge.
 - **D-03:** **Knip hard-fails CI on any orphan finding.** No allowlist. This is the brownfield discipline guard from Pitfall 11 — orphan code must be deleted, not accumulated.
 - **D-04:** Pin Node 22 LTS via `.nvmrc` (Node version file at repo root) AND `engines.node: "22.x"` in `package.json`. CI uses `actions/setup-node@v4` with `node-version-file: .nvmrc`. Reproducible across machines. (Revised 2026-05-06 from `">=22"` after research confirmed Vercel rejects `>=` semver — see RESEARCH.md §"D-04 Revised: Node engines pin".)
 - **D-05:** Use `npm ci` in CI (not `npm install`) — enforces lockfile reproducibility and rejects out-of-sync `package-lock.json`.

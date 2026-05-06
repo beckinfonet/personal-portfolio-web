@@ -18,6 +18,21 @@ if (typeof Element.prototype.scrollIntoView === "undefined") {
   Element.prototype.scrollIntoView = function () {};
 }
 
+// Polyfill window.matchMedia for jsdom — next-themes uses it when enableSystem
+// is true (to read prefers-color-scheme). jsdom does not implement it.
+if (typeof window !== "undefined" && !window.matchMedia) {
+  window.matchMedia = (query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  });
+}
+
 // Clear localStorage between tests to prevent cross-test contamination
 // of "theme" and "portfolio-accent" keys. (D-20 — test isolation)
 // NOTE: vitest.config.ts has globals: true, so beforeEach needs no import.

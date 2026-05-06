@@ -1041,22 +1041,13 @@ export default function RootLayout({
 
 **If this table is empty:** All claims in this research were verified or cited — no user confirmation needed.
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Real email address and GitHub repo URL for `next.config.ts` `x-portfolio-source`.**
-   - What we know: D-08 says real email goes in `lib/portfolio-data.ts` Phase 1; the `x-portfolio-source` header content is logically related but lives in `next.config.ts`.
-   - What's unclear: Is the GitHub repo URL the public one (`github.com/beckinfonet/portfolio-web`) or under a different handle?
-   - Recommendation: Confirm with developer in Phase 1 planning intake (single line in PLAN.md).
+1. **Real email address and GitHub repo URL for `next.config.ts` `x-portfolio-source`.** **RESOLVED 2026-05-06:** moot. Developer chose to defer the `x-portfolio-source` header to Phase 7 (D-13 revision in CONTEXT.md). Phase 1 ships only `x-built-with: nextjs-15-react-19`. The real email lands in `lib/portfolio-data.ts` per D-08 (Plan 02). No header URL needed in Phase 1.
 
-2. **Exact Node 22 LTS minor version for `.nvmrc`.**
-   - What we know: Node 22.x is current LTS; local dev shows `v20.19.1` (Mac); CONCERNS.md says "Node 22.15.17 dev target."
-   - What's unclear: Pin to a specific minor (`22.15.0`) for reproducibility, or leave at major (`22`) for patch upgrades?
-   - Recommendation: `22` (major-only) in `.nvmrc` matches how Vercel resolves `engines.node: "22.x"` — both pick the latest 22.x at install time.
+2. **Exact Node 22 LTS minor version for `.nvmrc`.** **RESOLVED 2026-05-06:** `.nvmrc` content = `22` (major-only); `engines.node` = `"22.x"` (D-04 revised — Vercel rejects `>=22`). Both resolve to the latest 22.x patch at install time, so security patches flow without `package.json` churn. Locked in Plan 01.
 
-3. **Should `app/layout.tsx` defer `metadataBase` change to Phase 2?**
-   - What we know: ROUTE-03 is in Phase 1 per REQUIREMENTS.md traceability table; CONTEXT.md `<canonical_refs>` confirms.
-   - What's unclear: Phase 1 also says "no visual output / shell ships in Phase 2." Touching `app/layout.tsx` for `metadataBase` only is one isolated line — but the existing `title` and `description` are stale (`Beck Maldin`).
-   - Recommendation: Phase 1 adds `metadataBase` only. Title/description rewrite is Phase 2 (paired with shell + ThemeProvider + accent boot). Keep Phase 1 boundary clean.
+3. **Should `app/layout.tsx` defer `metadataBase` change to Phase 2?** **RESOLVED 2026-05-06:** No — `metadataBase` is added in Phase 1 per ROUTE-03 (Plan 03). Title/description rewrite is deferred to Phase 2 (paired with shell + ThemeProvider + accent boot script). Phase 1 touches `app/layout.tsx` for the single `metadataBase` line only; no other metadata edits.
 
 ## Environment Availability
 

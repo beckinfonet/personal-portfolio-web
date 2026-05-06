@@ -13,7 +13,7 @@ Brownfield redesign of an existing Next.js 15 / React 19 portfolio into a high-f
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Upgrade Next, install deps, lock terminal data model, route registry, CI, delete orphan code
-- [ ] **Phase 2: Shell** - Persistent terminal shell with theme/accent system, command palette, sitemap, 404
+- [x] **Phase 2: Shell** - Persistent terminal shell with theme/accent system, command palette, sitemap, 404 (4 human-UAT items pending)
 - [ ] **Phase 3: Views** - Seven per-view routes with metadata, primitives, RSC content rendering
 - [ ] **Phase 4: Mobile-Responsive** - Bottom-sheet nav, mobile palette, sidebar redistribution, print styles
 - [ ] **Phase 5: SEO + Accessibility Polish** - OG images, JSON-LD, contrast audit, reduced-motion, easter eggs

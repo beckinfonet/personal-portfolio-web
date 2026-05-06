@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+# Cancel in-flight runs of the same PR when new commits push (saves CI minutes)
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies (lockfile-strict)
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
+
+      - name: Knip — fail on orphan files / unused exports
+        run: npx knip
+
+      # NOTE: This step will FAIL while lib/portfolio-data.ts still contains TODO: markers.
+      # The postbuild grep (scripts/check-placeholders.mjs) enforces the D-10 content gate.
+      # This is intentional — the build gate clears in Phase 6 / CONTENT-08 when TODO: markers
+      # are filled. Do NOT add --no-exit-code or bypass the postbuild step to work around this.
+      - name: Build
+        run: npm run build
+        env:
+          # Provide a stable site URL so metadataBase resolves cleanly during build
+          NEXT_PUBLIC_SITE_URL: https://example.com
+          # Backend is not required during CI build — getJson silently falls back
+          NEXT_PUBLIC_API_BASE_URL: ""

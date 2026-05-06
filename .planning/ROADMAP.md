@@ -57,7 +57,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] 02-04-PLAN.md — Wave 3b: Client islands — TopBar + LiveClock + Sidebar + Breadcrumb (full implementations replacing stubs)
 - [ ] 02-05-PLAN.md — Wave 3c: CommandPalette full implementation (cmdk Command.Dialog, 19 verbs, aria-live, focus management)
 - [x] 02-06-PLAN.md — Wave 4: 7 thin route stubs + app/sitemap.ts rewrite + app/not-found.tsx
-- [ ] 02-07-PLAN.md — Wave 5: Vitest TEST-02/03/04 specs (8 spec files covering shell, palette, theme/accent)
+- [x] 02-07-PLAN.md — Wave 5: Vitest TEST-02/03/04 specs (8 spec files covering shell, palette, theme/accent)
 **UI hint**: yes
 
 ### Phase 3: Views
@@ -136,7 +136,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete | 2026-05-06 |
-| 2. Shell | 3/7 | In progress | - |
+| 2. Shell | 7/7 | Complete | 2026-05-06 |
 | 3. Views | 0/TBD | Not started | - |
 | 4. Mobile-Responsive | 0/TBD | Not started | - |
 | 5. SEO + Accessibility Polish | 0/TBD | Not started | - |

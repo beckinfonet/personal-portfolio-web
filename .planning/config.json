@@ -1,0 +1,27 @@
+{
+  "mode": "yolo",
+  "granularity": "standard",
+  "parallelization": true,
+  "commit_docs": true,
+  "model_profile": "quality",
+  "models": {
+    "researcher": "opus",
+    "synthesizer": "sonnet",
+    "roadmapper": "opus",
+    "planner": "sonnet",
+    "executor": "sonnet",
+    "verifier": "sonnet",
+    "mapper": "sonnet"
+  },
+  "workflow": {
+    "research": true,
+    "plan_check": true,
+    "verifier": true,
+    "nyquist_validation": true,
+    "auto_advance": true
+  },
+  "planning": {
+    "commit_docs": true,
+    "sub_repos": []
+  }
+}

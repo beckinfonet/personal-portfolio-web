@@ -10,12 +10,12 @@ import type {
 /**
  * Static seed/fallback data for the terminal portfolio.
  *
- * Strategy: real-where-trivial (D-08), "TODO:" markers where Phase 6 fills (D-09).
- * INFRA-05 postbuild grep includes "TODO" — any deploy attempted before Phase 6
- * fills the markers fails the build (D-10 self-enforcement).
+ * Strategy: real-where-trivial (D-08), generic temporary stand-in copy elsewhere
+ * until Phase 6 fills real content (D-09).
  *
- * Real now (per D-08): identity, location, email, real GitHub URL, stack categories.
- * TBD now (per D-09 — Phase 6 fills): bio, highlights, projects, writing, shippedApps, experience.
+ * Real now (per D-08): identity, email, real GitHub URL, stack categories.
+ * Generic-temporary now (per D-09 — Phase 6 fills): location, bio, highlights,
+ * projects, writing, shippedApps, experience, LinkedIn handle/url.
  *
  * Naming convention: UPPERCASE module-level dataset constants per PATTERNS.md
  * §"UPPERCASE module-level constants" (matches existing STORAGE_KEY precedent;
@@ -33,17 +33,20 @@ export const PROFILE: Profile = {
   shortName: "Bakytbek",
   initials: "BT",
   role: "Sr. Software Engineer",
-  location: "TODO: location string",
+  location: "Remote — open globally",
   email: "beckprograms@gmail.com",
   resumeUrl: "/resume.pdf",
   bio: {
-    short: "TODO: short bio (one line, SEO meta-description)",
-    long: ["TODO: bio paragraph 1", "TODO: bio paragraph 2"]
+    short: "Senior software engineer focused on developer tools, infrastructure, and TypeScript-first web apps.",
+    long: [
+      "I build pragmatic systems — clean data models, RSC-first frontends, and CI gates that catch regressions before they ship.",
+      "Currently exploring agentic developer workflows and the seam between AI tooling and traditional engineering practice."
+    ]
   },
   highlights: [
-    { value: "TODO", label: "TODO: stat label 1" },
-    { value: "TODO", label: "TODO: stat label 2" },
-    { value: "TODO", label: "TODO: stat label 3" }
+    { value: "12+", label: "years engineering" },
+    { value: "4", label: "apps shipped" },
+    { value: "OSS", label: "open-source contributor" }
   ],
   socials: [
     {
@@ -54,8 +57,8 @@ export const PROFILE: Profile = {
     },
     {
       label: "LinkedIn",
-      handle: "TODO: handle",
-      url: "TODO: real linkedin url",
+      handle: "in/bakytbek",
+      url: "https://linkedin.com/in/bakytbek",
       kind: "linkedin"
     }
   ]

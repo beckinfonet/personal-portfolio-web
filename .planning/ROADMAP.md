@@ -51,8 +51,8 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. `⌘K` opens a centered `cmdk` palette with ≥15 verbs (open each of 7 views, download resume, toggle theme, open ≥3 socials, copy email, copy GitHub URL, share view, cycle accent); `Esc` closes and restores focus to the trigger button; result count is announced via an `aria-live` region; type-to-filter narrows results
   5. `curl -I http://localhost:3000/this-route-does-not-exist` returns HTTP 404 served by `app/not-found.tsx` rendering inside the terminal shell; `curl http://localhost:3000/sitemap.xml | grep -c "<loc>"` equals 7 (sitemap iterates `lib/routes.ts`); Vitest specs for shell, palette, theme/accent, and accent-bootstrap-script all pass
 **Plans:** 7 plans
-- [ ] 02-01-PLAN.md — Wave 1: app/globals.css full terminal token rewrite (oklch palette, --accent-hue, @supports sRGB fallbacks, keyframes, focus-visible, skip-link)
-- [ ] 02-02-PLAN.md — Wave 2: Root providers (ThemeProvider, AccentBootstrapScript, ShellStateProvider) + app/layout.tsx rewrite with JetBrains Mono + brownfield deletions + @testing-library/user-event devDep + localStorage.clear in vitest.setup.ts
+- [x] 02-01-PLAN.md — Wave 1: app/globals.css full terminal token rewrite (oklch palette, --accent-hue, @supports sRGB fallbacks, keyframes, focus-visible, skip-link)
+- [x] 02-02-PLAN.md — Wave 2: Root providers (ThemeProvider, AccentBootstrapScript, ShellStateProvider) + app/layout.tsx rewrite with JetBrains Mono + brownfield deletions + @testing-library/user-event devDep + localStorage.clear in vitest.setup.ts
 - [ ] 02-03-PLAN.md — Wave 3a: Shell layout (app/(terminal)/layout.tsx) + PromptLine primitive + lib/uptime.ts + lib/palette-verbs.ts (19 verbs) + CAREER_START_DATE in portfolio-data
 - [ ] 02-04-PLAN.md — Wave 3b: Client islands — TopBar + LiveClock + Sidebar + Breadcrumb (full implementations replacing stubs)
 - [ ] 02-05-PLAN.md — Wave 3c: CommandPalette full implementation (cmdk Command.Dialog, 19 verbs, aria-live, focus management)
@@ -136,7 +136,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete | 2026-05-06 |
-| 2. Shell | 0/7 | Not started | - |
+| 2. Shell | 2/7 | In progress | - |
 | 3. Views | 0/TBD | Not started | - |
 | 4. Mobile-Responsive | 0/TBD | Not started | - |
 | 5. SEO + Accessibility Polish | 0/TBD | Not started | - |

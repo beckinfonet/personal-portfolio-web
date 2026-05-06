@@ -1,12 +1,12 @@
-import type { BlogPost, Experience, MobileApp, Profile, Skill } from "@/lib/types";
+import type { Profile, StackCategory, Experience, ShippedApp, Writing } from "@/lib/types";
 import { ThemeToggle } from "./theme-toggle";
 
 interface HomepageProps {
   profile: Profile;
-  skills: Skill[];
+  skills: StackCategory[];
   experience: Experience[];
-  apps: MobileApp[];
-  posts: BlogPost[];
+  apps: ShippedApp[];
+  posts: Writing[];
 }
 
 export function Homepage({ profile, skills, experience, apps, posts }: HomepageProps) {
@@ -18,17 +18,17 @@ export function Homepage({ profile, skills, experience, apps, posts }: HomepageP
       </header>
 
       <section aria-labelledby="hero-heading">
-        <h1 id="hero-heading">{profile.title}</h1>
-        <p>{profile.bio}</p>
+        <h1 id="hero-heading">{profile.role}</h1>
+        <p>{profile.bio.short}</p>
         <p>{profile.location}</p>
       </section>
 
       <section aria-labelledby="skills-heading">
         <h2 id="skills-heading">Skills &amp; Tech Stack</h2>
         <ul>
-          {skills.map((skill) => (
-            <li key={skill.id}>
-              {skill.name} <span className="muted">({skill.category})</span>
+          {skills.map((category) => (
+            <li key={category.category}>
+              <strong>{category.category}</strong>: {category.items.join(", ")}
             </li>
           ))}
         </ul>
@@ -37,16 +37,20 @@ export function Homepage({ profile, skills, experience, apps, posts }: HomepageP
       <section aria-labelledby="apps-heading">
         <h2 id="apps-heading">Mobile Apps</h2>
         {apps.map((app) => (
-          <article key={app.id} className="card">
+          <article key={app.name} className="card">
             <h3>{app.name}</h3>
-            <p>{app.description}</p>
+            {app.summary ? <p>{app.summary}</p> : null}
             <p className="inline-links">
-              <a href={app.appStoreUrl} target="_blank" rel="noreferrer">
-                App Store
-              </a>
-              <a href={app.googlePlayUrl} target="_blank" rel="noreferrer">
-                Google Play
-              </a>
+              {app.appStoreUrl ? (
+                <a href={app.appStoreUrl} target="_blank" rel="noreferrer">
+                  App Store
+                </a>
+              ) : null}
+              {app.googlePlayUrl ? (
+                <a href={app.googlePlayUrl} target="_blank" rel="noreferrer">
+                  Google Play
+                </a>
+              ) : null}
             </p>
           </article>
         ))}
@@ -54,8 +58,7 @@ export function Homepage({ profile, skills, experience, apps, posts }: HomepageP
 
       <section aria-labelledby="resume-heading">
         <h2 id="resume-heading">Resume</h2>
-        <p>Updated: {profile.resumeUpdatedAt}</p>
-        <a href="/resume.pdf" download>
+        <a href={profile.resumeUrl} download>
           Download Resume
         </a>
       </section>
@@ -64,18 +67,12 @@ export function Homepage({ profile, skills, experience, apps, posts }: HomepageP
         <h2 id="experience-heading">Experience Timeline</h2>
         <ol>
           {experience.map((item) => (
-            <li key={item.id} className="card">
+            <li key={`${item.company}-${item.period}`} className="card">
               <h3>
                 {item.role} at {item.company}
               </h3>
-              <p>
-                {item.startDate} - {item.endDate ?? "Present"}
-              </p>
-              <ul>
-                {item.highlights.map((highlight) => (
-                  <li key={highlight}>{highlight}</li>
-                ))}
-              </ul>
+              <p>{item.period}</p>
+              <p>{item.summary}</p>
             </li>
           ))}
         </ol>
@@ -84,10 +81,12 @@ export function Homepage({ profile, skills, experience, apps, posts }: HomepageP
       <section aria-labelledby="blog-heading">
         <h2 id="blog-heading">Blog Preview</h2>
         {posts.map((post) => (
-          <article key={post.id} className="card">
+          <article key={post.title} className="card">
             <h3>{post.title}</h3>
             <p>{post.excerpt}</p>
-            <a href={`/blog/${post.slug}`}>Read more</a>
+            <a href={post.link} target="_blank" rel="noreferrer">
+              Read more
+            </a>
           </article>
         ))}
       </section>
@@ -100,7 +99,7 @@ export function Homepage({ profile, skills, experience, apps, posts }: HomepageP
         <ul>
           {profile.socials.map((social) => (
             <li key={social.label}>
-              <a href={social.href} target="_blank" rel="noreferrer">
+              <a href={social.url} target="_blank" rel="noreferrer">
                 {social.label}
               </a>
             </li>

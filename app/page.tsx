@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Homepage } from "./components/homepage";
-import { getApps, getExperience, getPosts, getProfile, getSkills } from "@/lib/api";
+import { getExperience, getProfile, getShipped, getStack, getWriting } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Beck Maldin | Portfolio Home",
@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 export default async function Home() {
   const [profile, skills, experience, apps, posts] = await Promise.all([
     getProfile(),
-    getSkills(),
+    getStack(),
     getExperience(),
-    getApps(),
-    getPosts(3)
+    getShipped(),
+    getWriting()
   ]);
 
   return (

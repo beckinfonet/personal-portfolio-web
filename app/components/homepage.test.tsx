@@ -1,21 +1,21 @@
 import { render, screen } from "@testing-library/react";
 import { Homepage } from "./homepage";
 import {
-  fallbackApps,
-  fallbackExperience,
-  fallbackPosts,
-  fallbackProfile,
-  fallbackSkills
-} from "@/lib/fallback-data";
+  EXPERIENCE,
+  PROFILE,
+  SHIPPED,
+  STACK,
+  WRITING
+} from "@/lib/portfolio-data";
 
 test("renders recruiter-facing homepage sections", () => {
   render(
     <Homepage
-      profile={fallbackProfile}
-      skills={fallbackSkills}
-      experience={fallbackExperience}
-      apps={fallbackApps}
-      posts={fallbackPosts}
+      profile={PROFILE}
+      skills={STACK}
+      experience={EXPERIENCE}
+      apps={SHIPPED}
+      posts={WRITING}
     />
   );
 

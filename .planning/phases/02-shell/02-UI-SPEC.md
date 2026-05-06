@@ -32,20 +32,16 @@ Source: CLAUDE.md ("pure CSS + CSS custom properties only"), 02-CONTEXT.md D-07,
 
 ## Spacing Scale
 
-Exact values from the handoff (handoff README §"Spacing scale"):
+> **Handoff scale note (handoff README §Spacing): 4/6/8/10/12/14/16/18/20/24/32/40/64/80px — values 6, 10, 14, 18 are not multiples of 4. Per CLAUDE.md pixel-faithful mandate, these are documented exceptions, not errors.**
+
+Full scale (all values verbatim from handoff README §"Spacing scale"):
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| 3px  | 3px   | Tech chip top/bottom padding |
 | 4px  | 4px   | Minimal inline gap |
-| 6px  | 6px   | Sidebar file row top/bottom padding |
 | 8px  | 8px   | Tech chip left/right padding |
-| 10px | 10px  | TopBar padding-top/bottom; palette input padding-top/bottom; sidebar icon gap |
-| 11px | 11px  | TopBar/sidebar micro text, traffic-light dot diameter, clock font size |
 | 12px | 12px  | Sidebar download card label; projects subhead; period right-aligned |
-| 14px | 14px  | Palette input padding-top/bottom; stat card padding; base font size |
 | 16px | 16px  | TopBar padding-left/right; sidebar file row left/right padding; sidebar icon slot width; md element spacing |
-| 18px | 18px  | Palette input/row left/right padding |
 | 20px | 20px  | Sidebar top/bottom padding; sidebar download margin-top; stack pre-card left/right padding |
 | 24px | 24px  | Breadcrumb margin-bottom; stack pre-card top/bottom padding |
 | 32px | 32px  | Main content padding-top/left-right (top) |
@@ -53,7 +49,22 @@ Exact values from the handoff (handoff README §"Spacing scale"):
 | 64px | 64px  | Footer margin-top |
 | 80px | 80px  | Main content padding-bottom |
 
-Exceptions:
+### Spacing Exceptions (Handoff-Locked)
+
+These five values are not multiples of 4. They are pixel-faithful to the handoff scale (handoff README §Spacing scale: `4/6/8/10/12/14/16/18/20/24/32/40/64/80px`) and must NOT be rounded. Per CLAUDE.md pixel-faithful mandate, rounding would break visible proportions.
+
+| Value | Usage | Justification |
+|-------|-------|---------------|
+| 3px | Tech chip top/bottom padding | Handoff README §Spacing scale: chip padding `3px 8px` for visual proportion against 11–12px label text; rounding to 4px breaks the typographic rhythm and is visible at the chip border. |
+| 6px | Sidebar file row top/bottom padding | Handoff §Sidebar: row padding `6px 16px` matches the 11–12px file label height; rounding to 8px increases row height by ~6% and breaks the dense-IDE aesthetic. |
+| 10px | TopBar padding-top/bottom; sidebar icon gap | Handoff §Top bar: TopBar height ~38px from `10px 16px` padding around 12px line-height. Rounding to 8px or 12px shifts TopBar height by ±4px and would force every downstream layout calc to re-derive. |
+| 14px | Palette input padding-top/bottom; stat card padding | Handoff §Command palette: matches the 14px base font-size for visual centering inside the input; arbitrary 16px would create asymmetric padding-vs-text. |
+| 18px | Palette input/row left/right padding | Handoff §Command palette: row padding `12px 18px` for comfortable click targets at 14px base text; rounding to 16px or 20px shifts target proportions. |
+
+Additionally, 11px appears as a typographic/diameter measurement (TopBar/sidebar micro text, traffic-light dot diameter, clock font-size) — it is part of the typography scale, not a spacing token.
+
+### Layout Dimensions (not spacing-scale tokens)
+
 - TopBar height: ~38px (derived from 10px top + 10px bottom + 18px content)
 - Sidebar width: 240px (fixed, not a scale multiple — handoff-locked)
 - Main max-width: 920px
@@ -73,6 +84,10 @@ Font family: JetBrains Mono, ui-monospace, "SF Mono", "Cascadia Mono", monospace
 `next/font/google` emits --font-mono CSS variable; applied via `font-family: var(--font-mono)` on body.
 `adjustFontFallback: true` keeps CLS < 0.1 (THEME-06 / Pitfall 10).
 
+### Type Scale (Handoff-Locked Exceptions)
+
+> **Handoff-locked pixel-faithful values per `design_handoff_terminal_portfolio/README.md` §Typography. CLAUDE.md mandates pixel-faithful recreation. The 4-size BLOCK rule is intentionally exceeded; flagged as a documented exception. The handoff specifies: "Base font-size 14px, line-height 1.6. H1 26/700, view headings 16–22, body 13–14, micro 11–12." All 7 distinct sizes and all 3 weights must be preserved — collapsing the scale would violate handoff fidelity.**
+
 | Role | Size | Weight | Line Height | Color token | Usage |
 |------|------|--------|-------------|-------------|-------|
 | Base body | 14px | 400 | 1.6 | --text | Default prose, view body text |
@@ -80,10 +95,20 @@ Font family: JetBrains Mono, ui-monospace, "SF Mono", "Cascadia Mono", monospace
 | Micro | 11px | 400 | 1.4 | --muted | TopBar labels, sidebar header EXPLORER, sidebar status block, tech chips, project index numbers, project year/status/role |
 | UI label | 12px | 400 | 1.5 | --muted | Sidebar file tree labels, TopBar clock, breadcrumb, footer, palette footer hint, projects subhead |
 | Heading H1 | 26px | 700 | 1.2 | --text-hi | View H1 (about.md name) — letter-spacing: -0.01em |
-| View heading | 16–22px | 600 | 1.3 | --accent | View sub-headings; writing post titles (16px/600/accent); stat card values (22px/700/accent) |
+| View heading | 16px | 600 | 1.3 | --accent | View sub-headings; writing post titles |
 | Palette input | 14px | 400 | 1.6 | --text | cmdk input field |
 
-Weights used: 400 (regular) and 600 (semibold), with 700 reserved strictly for H1 only.
+**Font weight exceptions (handoff-locked):**
+
+> **Handoff specifies 3 weights: 400 (body/regular), 600 (semibold for nav, view-headings, project names), 700 (H1 only). The 2-weight BLOCK rule is intentionally exceeded. The checker's 2-weight max cannot apply here without violating the pixel-faithful mandate. Justification: handoff README §Typography and app.jsx S.h1 explicitly assign weight 700 to the H1 only — this is a single-use exception, not a general-purpose weight. All three weights are required to recreate the handoff faithfully.**
+
+| Weight | Role | Where used |
+|--------|------|-----------|
+| 400 | Regular | All body text, micro labels, UI labels, palette input |
+| 600 | Semibold | Sidebar file row labels (active), view sub-headings, writing post titles, project names, palette item labels |
+| 700 | Bold | H1 only (`about.md` name, 26px) |
+
+**Phase 2 note on 22px:** The handoff references `22px/700` for stat card values (about view). Stat cards are a Phase 3 view-body concern. Phase 2 shell stubs do not render stat cards. The 22px/700 combination is therefore excluded from the Phase 2 type scale and will be reintroduced in the Phase 3 UI-SPEC when the about view body is specified.
 
 Source: handoff README §"Typography", app.jsx S.h1/S.para/S.chip/S.sidebar styles, 02-CONTEXT.md additional_context §"Type scale".
 
@@ -706,8 +731,8 @@ The Phase 2 UI-SPEC does not define these breakpoints. Phase 4's UI-SPEC will ex
 - [ ] Dimension 1 Copywriting: PASS
 - [ ] Dimension 2 Visuals: PASS
 - [ ] Dimension 3 Color: PASS
-- [ ] Dimension 4 Typography: PASS
-- [ ] Dimension 5 Spacing: PASS
+- [ ] Dimension 4 Typography: FLAG (handoff-locked exception — 7 sizes and 3 weights documented with explicit justification; see Type Scale section)
+- [ ] Dimension 5 Spacing: FLAG (handoff-locked exception — 5 non-multiple-of-4 values documented with explicit justification; see Spacing Exceptions section)
 - [ ] Dimension 6 Registry Safety: PASS
 
 **Approval:** pending
@@ -732,4 +757,5 @@ The Phase 2 UI-SPEC does not define these breakpoints. Phase 4's UI-SPEC will ex
 
 *Phase: 02-shell*
 *UI-SPEC generated: 2026-05-06*
+*UI-SPEC revised: 2026-05-06 — Dimensions 4 and 5 checker flags resolved by reclassifying handoff-locked values as documented exceptions*
 *Status: draft — awaiting gsd-ui-checker verification*

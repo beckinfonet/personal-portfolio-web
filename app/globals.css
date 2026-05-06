@@ -344,3 +344,192 @@ a:hover {
   .traffic-dot { display: none; }
   .live-clock  { display: none; }
 }
+
+/* ─────────────────────────────────────────
+   Sidebar (Plan 04)
+   ───────────────────────────────────────── */
+
+.sidebar {
+  width: 240px;
+  border-right: 1px solid var(--border);
+  background: var(--panel);
+  padding: 20px 0;
+  font-size: 13px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.sb-section-header {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  padding: 0 16px 8px;
+}
+
+.sb-tree-root {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 16px 8px;
+  color: var(--muted-hi);
+  font-size: 12px;
+}
+
+.sb-tree-caret {
+  color: var(--warn);
+}
+
+/* File row buttons */
+.sb-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  cursor: pointer;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  font-family: inherit;
+  font-size: 12px;
+  width: 100%;
+  text-align: left;
+  transition: background 0.1s;
+}
+
+.sb-item:hover {
+  background: var(--panel-hi);
+}
+
+.sb-item--active {
+  color: var(--accent);
+  background: var(--accent-bg);
+  border-left-color: var(--accent);
+  font-weight: 600;
+}
+
+.sb-icon {
+  width: 16px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.sb-item--active .sb-icon {
+  color: var(--accent);
+}
+
+/* Recruiter download card */
+.sb-download {
+  margin: 20px 16px 0;
+  padding: 12px;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.sb-download-header {
+  color: var(--muted-hi);
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.sb-download-btn {
+  display: block;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sb-download-btn:hover {
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+/* STATUS block */
+.sb-status-header {
+  margin-top: 24px;
+}
+
+.sb-status {
+  padding: 0 16px;
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sb-status-row {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+}
+
+.sb-status-dot {
+  color: var(--accent);
+}
+
+.sb-status-key {
+  color: var(--muted-hi);
+}
+
+/* ─────────────────────────────────────────
+   Breadcrumb (Plan 04)
+   ───────────────────────────────────────── */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.breadcrumb-path {
+  color: var(--muted);
+}
+
+.breadcrumb-sep {
+  color: var(--muted);
+}
+
+.breadcrumb-active {
+  color: var(--text);
+}
+
+.breadcrumb-hint {
+  margin-left: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.breadcrumb-hint--visible {
+  opacity: 1;
+}
+
+.breadcrumb-hint kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  font-family: inherit;
+  font-size: 10px;
+  border: 1px solid var(--border-hi);
+  border-radius: 3px;
+  color: var(--muted-hi);
+  background: var(--panel);
+}

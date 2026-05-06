@@ -1112,32 +1112,22 @@ describe("Per-view metadata uniqueness (Pitfall 1 mitigation)", () => {
 
 **If this table grows, the discuss-phase / plan-phase has more confirmation work to do.** All A-rows above are LOW or MEDIUM risk and can be addressed at execute-time or by Wave 2 vertical-slice validation.
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Cross-view title uniqueness spec location**
-   - What we know: it MUST exist (D-18 + ROADMAP Phase 3 success criterion 1: "each route's `metadata.title` is unique (Vitest set-deduplication test passes)").
-   - What's unclear: best filesystem location — co-located in `app/(terminal)/` or in a `tests/` directory or at the project root.
-   - Recommendation: `app/(terminal)/views.test.tsx` (sibling of `layout.tsx`). Vitest discovery picks it up via `**/*.test.tsx`; co-location signals it tests the route group as a whole. Planner makes the final call.
+   - RESOLVED: Plan 12 places the spec at `app/(terminal)/views.test.tsx` (sibling of `layout.tsx`). Vitest picks it up via the default `**/*.test.tsx` glob; co-location signals it tests the route group as a whole.
 
 2. **Should `app/globals.css` `.stub-body` class be removed in Phase 3?**
-   - What we know: `.stub-body` was added Phase 2 (line 669-674 of `app/globals.css`) for the placeholder bodies. Phase 3 replaces all 7 stub bodies; `.stub-body` becomes orphan CSS.
-   - What's unclear: whether to keep it (orphan CSS is small) or remove it (Knip will eventually flag, brownfield discipline says clean up).
-   - Recommendation: remove in the same wave that lands the 7th view body (Wave 3 last commit, or Wave 4 metadata-enrichment commit). Brownfield discipline applies.
+   - RESOLVED: Plan 04 deletes `.stub-body` in the Wave 2 globals.css append. Plan 05 also removes the `<p className="stub-body">` line from `app/(terminal)/page.tsx` when it rewrites the page body — same-commit replacement preserved.
 
 3. **Apple / Google badge SVG sourcing during plan-phase: account-required or public?**
-   - What we know: Apple's tools.applemediaservices.com may require Apple Developer Program membership; Google's Partner Marketing Hub is public.
-   - What's unclear: whether the planner agent's tool environment can fetch Apple's SVG without auth.
-   - Recommendation: planner attempts public fetch; if blocked, escalate to user (the developer IS an Apple Developer Program member per the resume context — they can manually source and commit).
+   - RESOLVED: Plan 03 is `autonomous: false`. Task 1 of Plan 03 has the user download official SVGs to `public/badges/`; Task 2 wraps them in the `StoreBadge` primitive. JSDoc citations record source URLs and sourcing date.
 
 4. **`<ExternalLink>` `aria-label` propagation**
-   - What we know: D-08 component API is `<ExternalLink href={...} className?={...}>{children}</ExternalLink>`.
-   - What's unclear: should `aria-label` be a first-class prop or rely on `{...rest}` spread?
-   - Recommendation: explicit `aria-label?: string` prop (not `{...rest}`) — keeps the API surface minimal and explicit. `aria-label` is the only ARIA attr Phase 3 callsites use; future expansion via separate commits.
+   - RESOLVED: Plan 01 defines `<ExternalLink>` with an explicit `aria-label?: string` prop (not `{...rest}` spread). Aligns with D-08's minimal API.
 
 5. **`copy-button.tsx` `setTimeout` cleanup**
-   - What we know: 1500ms label swap (D-06).
-   - What's unclear: should the component clear the timeout on unmount (e.g. user navigates away mid-swap)?
-   - Recommendation: yes — `useEffect` cleanup or `useRef` for the timer ID. Avoids "Can't perform a React state update on an unmounted component" warnings during navigation. Planner adds during Wave 1 primitives implementation.
+   - RESOLVED: Plan 02 implements `useRef` for the timer ID + `useEffect` cleanup. Avoids React unmount-warning during navigation mid-swap.
 
 ## Environment Availability
 

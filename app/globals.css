@@ -243,3 +243,104 @@ a:hover {
   gap: 8px;
   align-items: center;
 }
+
+/* ─────────────────────────────────────────
+   TopBar (Plan 04)
+   ───────────────────────────────────────── */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--panel-hi);
+  font-size: 12px;
+  color: var(--muted);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: 38px;
+  box-sizing: border-box;
+}
+
+.topbar-path {
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.topbar-spacer {
+  flex: 1;
+  min-width: 0;
+}
+
+.topbar-btn {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.topbar-btn:hover {
+  border-color: var(--border-hi);
+  color: var(--text);
+}
+
+.topbar-resume {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+}
+
+.topbar-resume:hover {
+  color: var(--accent);
+  text-decoration: none;
+  background: var(--accent-bg);
+}
+
+.topbar-cmd-key {
+  color: var(--accent);
+}
+
+/* Traffic-light dots */
+.traffic-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 99px;
+  flex-shrink: 0;
+}
+
+.traffic-dot--red    { background: #ff5f57; }
+.traffic-dot--yellow { background: #febc2e; }
+.traffic-dot--green  { background: #28c840; }
+
+/* LiveClock */
+.live-clock {
+  font-size: 11px;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+/* Responsive: hide path label below ~600px */
+@media (max-width: 600px) {
+  .topbar-path { display: none; }
+}
+
+/* Responsive: hide traffic dots + clock below ~480px */
+@media (max-width: 480px) {
+  .traffic-dot { display: none; }
+  .live-clock  { display: none; }
+}

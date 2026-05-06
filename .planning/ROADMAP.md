@@ -53,7 +53,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 7 plans
 - [x] 02-01-PLAN.md — Wave 1: app/globals.css full terminal token rewrite (oklch palette, --accent-hue, @supports sRGB fallbacks, keyframes, focus-visible, skip-link)
 - [x] 02-02-PLAN.md — Wave 2: Root providers (ThemeProvider, AccentBootstrapScript, ShellStateProvider) + app/layout.tsx rewrite with JetBrains Mono + brownfield deletions + @testing-library/user-event devDep + localStorage.clear in vitest.setup.ts
-- [ ] 02-03-PLAN.md — Wave 3a: Shell layout (app/(terminal)/layout.tsx) + PromptLine primitive + lib/uptime.ts + lib/palette-verbs.ts (19 verbs) + CAREER_START_DATE in portfolio-data
+- [x] 02-03-PLAN.md — Wave 3a: Shell layout (app/(terminal)/layout.tsx) + PromptLine primitive + lib/uptime.ts + lib/palette-verbs.ts (18 verbs) + CAREER_START_DATE in portfolio-data
 - [ ] 02-04-PLAN.md — Wave 3b: Client islands — TopBar + LiveClock + Sidebar + Breadcrumb (full implementations replacing stubs)
 - [ ] 02-05-PLAN.md — Wave 3c: CommandPalette full implementation (cmdk Command.Dialog, 19 verbs, aria-live, focus management)
 - [ ] 02-06-PLAN.md — Wave 4: 7 thin route stubs + app/sitemap.ts rewrite + app/not-found.tsx
@@ -136,7 +136,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete | 2026-05-06 |
-| 2. Shell | 2/7 | In progress | - |
+| 2. Shell | 3/7 | In progress | - |
 | 3. Views | 0/TBD | Not started | - |
 | 4. Mobile-Responsive | 0/TBD | Not started | - |
 | 5. SEO + Accessibility Polish | 0/TBD | Not started | - |

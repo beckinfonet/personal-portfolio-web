@@ -4,11 +4,12 @@
 // Implements INFRA-05 / D-10 / D-11.
 //
 // Forbidden strings:
-//   lorem          (case-insensitive)
-//   example.com    (case-insensitive)
-//   placeholder    (case-insensitive)
-//   TODO           (CASE-SENSITIVE — D-10 grammar; lowercase "todo" in prose passes)
-//   Product Studio (CASE-SENSITIVE — exact demo company name leak from CONCERNS.md)
+//   lorem                              (case-insensitive)
+//   example.com                        (case-insensitive)
+//   placeholder + (text|content|string|image|name)  (case-insensitive — phrase-based to avoid the
+//                                       legitimate HTML "placeholder" attribute)
+//   TODO                               (CASE-SENSITIVE — D-10 grammar; lowercase "todo" in prose passes)
+//   Product Studio                     (CASE-SENSITIVE — exact demo company name leak from CONCERNS.md)
 //
 // Exits 0 on clean, 1 on any hit. Chained automatically as `npm run build`
 // runs build then postbuild; failure here = failed build = no Vercel deploy.
@@ -20,7 +21,7 @@ const BUILD_DIR = ".next/server";
 const FORBIDDEN = [
   /lorem/i,
   /example\.com/i,
-  /placeholder/i,
+  /placeholder (text|content|string|image|name)/i,
   /TODO/,
   /Product Studio/
 ];

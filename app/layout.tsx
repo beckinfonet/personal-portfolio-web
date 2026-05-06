@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+// Use logical OR (||) not nullish coalescing (??) — empty-string env vars bypass ??
+// and produce `Invalid URL` runtime errors. (See RESEARCH.md Pitfall D.)
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Beck Maldin | Mobile & Full-Stack Engineer",
   description:
     "Recruiter-friendly portfolio featuring mobile apps, experience timeline, skills, and technical writing.",

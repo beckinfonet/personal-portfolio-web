@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 1 context gathered — CI tooling, DATA-02 content strategy, INFRA-04 hardening scope locked
-last_updated: "2026-05-06T11:00:00.000Z"
-last_activity: 2026-05-06 -- Wave 3 complete (plans 01-04, 01-05 merged)
+stopped_at: Phase 1 complete — all 6 plans merged; ESLint 9 flat config, knip, CI pipeline in place
+last_updated: "2026-05-06T14:04:00.000Z"
+last_activity: 2026-05-06 -- Wave 4 complete: ESLint 9 flat config + knip + GitHub Actions CI
 progress:
   total_phases: 7
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 6
-  completed_plans: 5
-  percent: 83
+  completed_plans: 6
+  percent: 100
 ---
 
 # Project State
@@ -25,12 +25,12 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 
 ## Current Position
 
-Phase: 1 (Foundation) — EXECUTING
-Plan: 6 of 6 (Wave 4 next)
-Status: Executing Phase 1
-Last activity: 2026-05-06 -- Wave 3 complete: HTTP security headers + postbuild placeholder gate
+Phase: 1 (Foundation) — COMPLETE
+Plan: 6 of 6 (all complete)
+Status: Phase 1 done — ready to start Phase 2 (Shell)
+Last activity: 2026-05-06 -- Wave 4 complete: ESLint 9 flat config + knip + GitHub Actions CI
 
-Progress: [████████░░] 83%
+Progress: [██████████] 100% (Phase 1)
 
 ## Performance Metrics
 
@@ -90,5 +90,5 @@ Items acknowledged and carried forward from previous milestone close:
 ## Session Continuity
 
 Last session: 2026-05-06
-Stopped at: Completed 01-01-PLAN.md — dep baseline, engines pin, .nvmrc, tsconfig ES2022, .gitignore widened
-Resume file: .planning/phases/01-foundation/01-02-PLAN.md
+Stopped at: Completed 01-06-PLAN.md — ESLint 9 flat config, knip, GitHub Actions CI pipeline
+Resume file: .planning/phases/02-shell/ (Phase 2 planning next)

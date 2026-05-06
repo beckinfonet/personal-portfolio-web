@@ -12,7 +12,7 @@ Brownfield redesign of an existing Next.js 15 / React 19 portfolio into a high-f
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation** - Upgrade Next, install deps, lock terminal data model, route registry, CI, delete orphan code
+- [x] **Phase 1: Foundation** - Upgrade Next, install deps, lock terminal data model, route registry, CI, delete orphan code
 - [ ] **Phase 2: Shell** - Persistent terminal shell with theme/accent system, command palette, sitemap, 404
 - [ ] **Phase 3: Views** - Seven per-view routes with metadata, primitives, RSC content rendering
 - [ ] **Phase 4: Mobile-Responsive** - Bottom-sheet nav, mobile palette, sidebar redistribution, print styles
@@ -38,7 +38,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 01-03-PLAN.md — Wave 2: Create lib/routes.ts (7-entry typed registry) and add metadataBase to app/layout.tsx (using `||` per Pitfall D)
 - [x] 01-04-PLAN.md — Wave 3: next.config.ts headers — 5 security headers (HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) + x-built-with engineer header
 - [x] 01-05-PLAN.md — Wave 3: scripts/check-placeholders.mjs postbuild grep + package.json postbuild + typecheck script entries (D-10 self-enforcement)
-- [ ] 01-06-PLAN.md — Wave 4: ESLint 9 flat config (eslint.config.mjs) + delete .eslintrc.json, knip.json with ignores, .github/workflows/ci.yml (5-step PR pipeline), package.json knip script
+- [x] 01-06-PLAN.md — Wave 4: ESLint 9 flat config (eslint.config.mjs) + delete .eslintrc.json, knip.json with ignores, .github/workflows/ci.yml (5-step PR pipeline), package.json knip script
 
 ### Phase 2: Shell
 **Goal**: Ship the persistent terminal shell with correct RSC/client boundaries, dual-script SSR-flash prevention, full a11y semantics, the ⌘K command palette, and the recruiter-facing top-bar resume button on every viewport
@@ -128,7 +128,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 1/6 | In progress | - |
+| 1. Foundation | 6/6 | Complete | 2026-05-06 |
 | 2. Shell | 0/TBD | Not started | - |
 | 3. Views | 0/TBD | Not started | - |
 | 4. Mobile-Responsive | 0/TBD | Not started | - |

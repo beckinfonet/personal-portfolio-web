@@ -196,105 +196,114 @@ Explicitly excluded for the v1 milestone. Documented to prevent scope creep and 
 
 ## Traceability
 
-Phase mapping is populated by `gsd-roadmapper` during the next step.
+Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | TBD | Pending |
-| INFRA-02 | TBD | Pending |
-| INFRA-03 | TBD | Pending |
-| INFRA-04 | TBD | Pending |
-| INFRA-05 | TBD | Pending |
-| DATA-01 | TBD | Pending |
-| DATA-02 | TBD | Pending |
-| DATA-03 | TBD | Pending |
-| DATA-04 | TBD | Pending |
-| DATA-05 | TBD | Pending |
-| SHELL-01 | TBD | Pending |
-| SHELL-02 | TBD | Pending |
-| SHELL-03 | TBD | Pending |
-| SHELL-04 | TBD | Pending |
-| SHELL-05 | TBD | Pending |
-| SHELL-06 | TBD | Pending |
-| SHELL-07 | TBD | Pending |
-| SHELL-08 | TBD | Pending |
-| SHELL-09 | TBD | Pending |
-| THEME-01 | TBD | Pending |
-| THEME-02 | TBD | Pending |
-| THEME-03 | TBD | Pending |
-| THEME-04 | TBD | Pending |
-| THEME-05 | TBD | Pending |
-| THEME-06 | TBD | Pending |
-| ROUTE-01 | TBD | Pending |
-| ROUTE-02 | TBD | Pending |
-| ROUTE-03 | TBD | Pending |
-| ROUTE-04 | TBD | Pending |
-| ROUTE-05 | TBD | Pending |
-| SEO-01 | TBD | Pending |
-| SEO-02 | TBD | Pending |
-| SEO-03 | TBD | Pending |
-| SEO-04 | TBD | Pending |
-| SEO-05 | TBD | Pending |
-| VIEW-01 | TBD | Pending |
-| VIEW-02 | TBD | Pending |
-| VIEW-03 | TBD | Pending |
-| VIEW-04 | TBD | Pending |
-| VIEW-05 | TBD | Pending |
-| VIEW-06 | TBD | Pending |
-| VIEW-07 | TBD | Pending |
-| VIEW-08 | TBD | Pending |
-| PALETTE-01 | TBD | Pending |
-| PALETTE-02 | TBD | Pending |
-| PALETTE-03 | TBD | Pending |
-| PALETTE-04 | TBD | Pending |
-| PALETTE-05 | TBD | Pending |
-| A11Y-01 | TBD | Pending |
-| A11Y-02 | TBD | Pending |
-| A11Y-03 | TBD | Pending |
-| A11Y-04 | TBD | Pending |
-| A11Y-05 | TBD | Pending |
-| A11Y-06 | TBD | Pending |
-| A11Y-07 | TBD | Pending |
-| A11Y-08 | TBD | Pending |
-| A11Y-09 | TBD | Pending |
-| MOBILE-01 | TBD | Pending |
-| MOBILE-02 | TBD | Pending |
-| MOBILE-03 | TBD | Pending |
-| MOBILE-04 | TBD | Pending |
-| MOBILE-05 | TBD | Pending |
-| BACKEND-01 | TBD | Pending |
-| BACKEND-02 | TBD | Pending |
-| BACKEND-03 | TBD | Pending |
-| BACKEND-04 | TBD | Pending |
-| CONTENT-01 | TBD | Pending |
-| CONTENT-02 | TBD | Pending |
-| CONTENT-03 | TBD | Pending |
-| CONTENT-04 | TBD | Pending |
-| CONTENT-05 | TBD | Pending |
-| CONTENT-06 | TBD | Pending |
-| CONTENT-07 | TBD | Pending |
-| CONTENT-08 | TBD | Pending |
-| DEV-01 | TBD | Pending |
-| DEV-02 | TBD | Pending |
-| DEV-03 | TBD | Pending |
-| TEST-01 | TBD | Pending |
-| TEST-02 | TBD | Pending |
-| TEST-03 | TBD | Pending |
-| TEST-04 | TBD | Pending |
-| TEST-05 | TBD | Pending |
-| DEPLOY-01 | TBD | Pending |
-| DEPLOY-02 | TBD | Pending |
-| DEPLOY-03 | TBD | Pending |
-| DEPLOY-04 | TBD | Pending |
-| DEPLOY-05 | TBD | Pending |
-| DEPLOY-06 | TBD | Pending |
-| DEPLOY-07 | TBD | Pending |
+| INFRA-01 | Phase 1 | Pending |
+| INFRA-02 | Phase 1 | Pending |
+| INFRA-03 | Phase 1 | Pending |
+| INFRA-04 | Phase 1 | Pending |
+| INFRA-05 | Phase 1 | Pending |
+| DATA-01 | Phase 1 | Pending |
+| DATA-02 | Phase 1 | Pending |
+| DATA-03 | Phase 1 | Pending |
+| DATA-04 | Phase 1 | Pending |
+| DATA-05 | Phase 1 | Pending |
+| SHELL-01 | Phase 2 | Pending |
+| SHELL-02 | Phase 2 | Pending |
+| SHELL-03 | Phase 2 | Pending |
+| SHELL-04 | Phase 2 | Pending |
+| SHELL-05 | Phase 2 | Pending |
+| SHELL-06 | Phase 2 | Pending |
+| SHELL-07 | Phase 2 | Pending |
+| SHELL-08 | Phase 2 | Pending |
+| SHELL-09 | Phase 2 | Pending |
+| THEME-01 | Phase 2 | Pending |
+| THEME-02 | Phase 2 | Pending |
+| THEME-03 | Phase 2 | Pending |
+| THEME-04 | Phase 2 | Pending |
+| THEME-05 | Phase 2 | Pending |
+| THEME-06 | Phase 2 | Pending |
+| ROUTE-01 | Phase 3 | Pending |
+| ROUTE-02 | Phase 3 | Pending |
+| ROUTE-03 | Phase 1 | Pending |
+| ROUTE-04 | Phase 2 | Pending |
+| ROUTE-05 | Phase 2 | Pending |
+| SEO-01 | Phase 5 | Pending |
+| SEO-02 | Phase 5 | Pending |
+| SEO-03 | Phase 5 | Pending |
+| SEO-04 | Phase 5 | Pending |
+| SEO-05 | Phase 3 | Pending |
+| VIEW-01 | Phase 3 | Pending |
+| VIEW-02 | Phase 3 | Pending |
+| VIEW-03 | Phase 3 | Pending |
+| VIEW-04 | Phase 3 | Pending |
+| VIEW-05 | Phase 3 | Pending |
+| VIEW-06 | Phase 3 | Pending |
+| VIEW-07 | Phase 3 | Pending |
+| VIEW-08 | Phase 3 | Pending |
+| PALETTE-01 | Phase 2 | Pending |
+| PALETTE-02 | Phase 2 | Pending |
+| PALETTE-03 | Phase 2 | Pending |
+| PALETTE-04 | Phase 2 | Pending |
+| PALETTE-05 | Phase 4 | Pending |
+| A11Y-01 | Phase 2 | Pending |
+| A11Y-02 | Phase 2 | Pending |
+| A11Y-03 | Phase 5 | Pending |
+| A11Y-04 | Phase 2 | Pending |
+| A11Y-05 | Phase 2 | Pending |
+| A11Y-06 | Phase 2 | Pending |
+| A11Y-07 | Phase 5 | Pending |
+| A11Y-08 | Phase 2 | Pending |
+| A11Y-09 | Phase 4 | Pending |
+| MOBILE-01 | Phase 4 | Pending |
+| MOBILE-02 | Phase 4 | Pending |
+| MOBILE-03 | Phase 4 | Pending |
+| MOBILE-04 | Phase 4 | Pending |
+| MOBILE-05 | Phase 4 | Pending |
+| BACKEND-01 | Phase 6 | Pending |
+| BACKEND-02 | Phase 6 | Pending |
+| BACKEND-03 | Phase 6 | Pending |
+| BACKEND-04 | Phase 6 | Pending |
+| CONTENT-01 | Phase 6 | Pending |
+| CONTENT-02 | Phase 6 | Pending |
+| CONTENT-03 | Phase 6 | Pending |
+| CONTENT-04 | Phase 6 | Pending |
+| CONTENT-05 | Phase 6 | Pending |
+| CONTENT-06 | Phase 6 | Pending |
+| CONTENT-07 | Phase 6 | Pending |
+| CONTENT-08 | Phase 6 | Pending |
+| DEV-01 | Phase 5 | Pending |
+| DEV-02 | Phase 5 | Pending |
+| DEV-03 | Phase 5 | Pending |
+| TEST-01 | Phase 1 | Pending |
+| TEST-02 | Phase 2 | Pending |
+| TEST-03 | Phase 2 | Pending |
+| TEST-04 | Phase 2 | Pending |
+| TEST-05 | Phase 3 | Pending |
+| DEPLOY-01 | Phase 7 | Pending |
+| DEPLOY-02 | Phase 7 | Pending |
+| DEPLOY-03 | Phase 7 | Pending |
+| DEPLOY-04 | Phase 7 | Pending |
+| DEPLOY-05 | Phase 7 | Pending |
+| DEPLOY-06 | Phase 7 | Pending |
+| DEPLOY-07 | Phase 7 | Pending |
 
 **Coverage:**
-- v1 requirements: 88 total
-- Mapped to phases: 0 (filled by roadmapper)
-- Unmapped: 88 ⚠️ (resolved by roadmap creation)
+- v1 requirements: 89 total (traceability table)
+- Mapped to phases: 89 / 89 ✓
+- Unmapped: 0
+- Per-phase distribution:
+  - Phase 1 (Foundation): 12 requirements
+  - Phase 2 (Shell): 29 requirements
+  - Phase 3 (Views): 12 requirements
+  - Phase 4 (Mobile-Responsive): 7 requirements
+  - Phase 5 (SEO + A11y Polish): 9 requirements
+  - Phase 6 (Backend + Content): 12 requirements
+  - Phase 7 (Deploy + Verification): 7 requirements
+- Note: SEO-06 listed in v1 narrative is explicitly deferred to v1.x and excluded from the v1 traceability table; the requirements summary count of "88" in earlier drafts has been corrected to 89 to match the table entries.
 
 ---
 *Requirements defined: 2026-05-06*
-*Last updated: 2026-05-06 after initial definition*
+*Last updated: 2026-05-06 — traceability populated by gsd-roadmapper*

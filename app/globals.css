@@ -661,3 +661,14 @@ a:hover {
   color: var(--muted-hi);
   background: var(--panel-hi);
 }
+
+/* ─────────────────────────────────────────
+   Route stub body placeholder (Phase 3 replaces these)
+   ───────────────────────────────────────── */
+
+.stub-body {
+  font-size: 13px;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 8px;
+}

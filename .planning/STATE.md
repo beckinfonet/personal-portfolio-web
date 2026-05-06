@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 3 context gathered — 4 areas discussed, 19 decisions locked, CONTEXT.md committed (d6e91c1); ready for /gsd-plan-phase 3
-last_updated: "2026-05-06T10:15:00Z"
-last_activity: "2026-05-06 -- Phase 3 discuss complete: empty-state UX, copy-button arch, ExternalLink, shipped.app layout locked; CONTEXT.md + DISCUSSION-LOG.md written"
+stopped_at: Phase 3 UI-SPEC approved — 6/6 dimensions pass (2 non-blocking FLAGs inherited from Phase 2); UI-SPEC committed (4869225); ready for /gsd-plan-phase 3
+last_updated: "2026-05-06T11:30:00Z"
+last_activity: "2026-05-06 -- Phase 3 UI-SPEC complete: 7 view contracts + 5 primitives declared as additions over 02-UI-SPEC inheritance; checker APPROVED"
 progress:
   total_phases: 7
   completed_phases: 2
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 ## Current Position
 
 Phase: 3 (Views) — entering plan
-Plan: 0 of TBD · CONTEXT.md committed (d6e91c1)
-Status: Phase 3 discuss complete; 4 gray areas resolved (empty-state UX, copy-button arch, <ExternalLink>, shipped.app); ready for /gsd-plan-phase 3
-Last activity: 2026-05-06 -- Phase 3 discuss complete: 19 decisions locked, DISCUSSION-LOG.md written, ROADMAP unchanged
+Plan: 0 of TBD · CONTEXT.md committed (d6e91c1) · UI-SPEC committed (4869225)
+Status: Phase 3 UI-SPEC approved (6/6 dimensions; 2 inherited FLAGs); ready for /gsd-plan-phase 3
+Last activity: 2026-05-06 -- Phase 3 UI-SPEC complete: 7 view contracts + 5 primitives (TechChip, Kbd, ExternalLink, CopyButton, StoreBadge), inherits 02-UI-SPEC tokens/scale/palette
 
-Progress: [████████░░] Phase 1 complete · Phase 2 complete · Phase 3 discuss complete (plan next)
+Progress: [████████░░] Phase 1 complete · Phase 2 complete · Phase 3 discuss + UI-SPEC complete (plan next)
 
 ## Performance Metrics
 
@@ -91,5 +91,5 @@ Items acknowledged and carried forward from previous milestone close:
 ## Session Continuity
 
 Last session: 2026-05-06
-Stopped at: Phase 2 Plan 07 complete — 8 Vitest specs, 36 tests passing (commit a002e9b); Phase 2 fully done; run /gsd-execute-phase 3 for Phase 3
-Resume file: .planning/phases/02-shell/02-07-SUMMARY.md
+Stopped at: Phase 3 UI-SPEC approved — 6/6 dimensions pass, 2 non-blocking FLAGs inherited from Phase 2 handoff exceptions (commit 4869225); ready for /gsd-plan-phase 3
+Resume file: .planning/phases/03-views/03-UI-SPEC.md

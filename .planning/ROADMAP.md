@@ -34,8 +34,8 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. `npm run build` log shows zero `metadataBase` warnings; `prebuild` script greps the build output for `lorem|example.com|placeholder|TODO` and exits non-zero on any hit
 **Plans:** 6 plans
 - [x] 01-01-PLAN.md — Wave 1: Upgrade deps (next ^15.5.15, next-themes, cmdk), pin Node 22.x, bump tsconfig ES2022, widen .gitignore
-- [ ] 01-02-PLAN.md — Wave 2: Atomic data refactor — rewrite lib/types.ts, create lib/portfolio-data.ts, adapt lib/api.ts + homepage.tsx + homepage.test.tsx, delete lib/fallback-data.ts (one commit, D-17)
-- [ ] 01-03-PLAN.md — Wave 2: Create lib/routes.ts (7-entry typed registry) and add metadataBase to app/layout.tsx (using `||` per Pitfall D)
+- [x] 01-02-PLAN.md — Wave 2: Atomic data refactor — rewrite lib/types.ts, create lib/portfolio-data.ts, adapt lib/api.ts + homepage.tsx + homepage.test.tsx, delete lib/fallback-data.ts (one commit, D-17)
+- [x] 01-03-PLAN.md — Wave 2: Create lib/routes.ts (7-entry typed registry) and add metadataBase to app/layout.tsx (using `||` per Pitfall D)
 - [ ] 01-04-PLAN.md — Wave 3: next.config.ts headers — 5 security headers (HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy) + x-built-with engineer header
 - [ ] 01-05-PLAN.md — Wave 3: scripts/check-placeholders.mjs postbuild grep + package.json postbuild + typecheck script entries (D-10 self-enforcement)
 - [ ] 01-06-PLAN.md — Wave 4: ESLint 9 flat config (eslint.config.mjs) + delete .eslintrc.json, knip.json with ignores, .github/workflows/ci.yml (5-step PR pipeline), package.json knip script

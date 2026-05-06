@@ -56,7 +56,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 02-03-PLAN.md — Wave 3a: Shell layout (app/(terminal)/layout.tsx) + PromptLine primitive + lib/uptime.ts + lib/palette-verbs.ts (18 verbs) + CAREER_START_DATE in portfolio-data
 - [ ] 02-04-PLAN.md — Wave 3b: Client islands — TopBar + LiveClock + Sidebar + Breadcrumb (full implementations replacing stubs)
 - [ ] 02-05-PLAN.md — Wave 3c: CommandPalette full implementation (cmdk Command.Dialog, 19 verbs, aria-live, focus management)
-- [ ] 02-06-PLAN.md — Wave 4: 7 thin route stubs + app/sitemap.ts rewrite + app/not-found.tsx
+- [x] 02-06-PLAN.md — Wave 4: 7 thin route stubs + app/sitemap.ts rewrite + app/not-found.tsx
 - [ ] 02-07-PLAN.md — Wave 5: Vitest TEST-02/03/04 specs (8 spec files covering shell, palette, theme/accent)
 **UI hint**: yes
 

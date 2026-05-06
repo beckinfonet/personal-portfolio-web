@@ -3,10 +3,7 @@
   "ignoreDependencies": [
     "next-themes",
     "cmdk",
-    "eslint-config-next",
-    "@typescript-eslint/eslint-plugin",
-    "@typescript-eslint/parser",
-    "@next/eslint-plugin-next"
+    "eslint-config-next"
   ],
   "ignore": [
     "design_handoff_terminal_portfolio/**",

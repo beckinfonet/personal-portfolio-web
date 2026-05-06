@@ -28,7 +28,7 @@ export const ROUTES = [
     slug: null,
     pathname: "/",
     label: "about.md",
-    ariaLabel: "About",
+    ariaLabel: "About me",
     description: "About — Sr. Software Engineer; bio, highlights, contact"
   },
   {

@@ -50,7 +50,10 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # Provide a stable site URL so metadataBase resolves cleanly during build
-          NEXT_PUBLIC_SITE_URL: https://example.com
+          # NEXT_PUBLIC_SITE_URL is intentionally NOT set: any non-localhost value would be
+          # inlined into .next/server/ output and trigger the postbuild placeholder grep
+          # (e.g. https://example.com matches /example\.com/i and self-blocks CI).
+          # app/layout.tsx falls back to http://localhost:3000 via `||` (Pitfall D), which
+          # matches no forbidden patterns — safe for build-time metadata.
           # Backend is not required during CI build — getJson silently falls back
           NEXT_PUBLIC_API_BASE_URL: ""

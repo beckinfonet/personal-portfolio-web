@@ -663,17 +663,6 @@ a:hover {
 }
 
 /* ─────────────────────────────────────────
-   Route stub body placeholder (Phase 3 replaces these)
-   ───────────────────────────────────────── */
-
-.stub-body {
-  font-size: 13px;
-  color: var(--muted);
-  font-style: italic;
-  margin-top: 8px;
-}
-
-/* ─────────────────────────────────────────
    404 Not Found
    ───────────────────────────────────────── */
 
@@ -715,4 +704,518 @@ a:hover {
 .not-found-route-desc {
   font-size: 12px;
   color: var(--muted);
+}
+
+/* ─────────────────────────────────────────
+   Phase 3 — View primitives (VIEW-08, SEO-05)
+   ───────────────────────────────────────── */
+
+.tech-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  font-size: 11px;
+  color: var(--muted-hi);
+  margin-right: 4px;
+  margin-top: 4px;
+  background: var(--bg-raised);
+}
+
+.kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  font-family: inherit;
+  font-size: 10px;
+  border: 1px solid var(--border-hi);
+  border-radius: 3px;
+  color: var(--muted-hi);
+  background: var(--panel);
+}
+
+.copy-button {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 11px;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.copy-button:hover {
+  border-color: var(--border-hi);
+  color: var(--text);
+}
+
+.copy-button--confirmed {
+  color: var(--accent);
+}
+
+.copy-button--icon {
+  padding: 4px 6px;
+}
+
+.store-badge-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.store-badge-link img {
+  display: block;
+  /* DO NOT add filter/opacity rules — modifying official Apple/Google badge artwork
+     violates Marketing Identity Guidelines / Brand Guidelines (Phase 3 / D-13). */
+}
+
+/* ─────────────────────────────────────────
+   Phase 3 — Shared CTA buttons (.btn / .btn-ghost — VIEW-01, VIEW-06)
+   ───────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: var(--bg);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  text-decoration: none;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.btn-ghost:hover {
+  border-color: var(--border-hi);
+  color: var(--text-hi);
+  text-decoration: none;
+}
+
+/* ─────────────────────────────────────────
+   Phase 3 — Shared empty-state (D-03 — VIEW-02, VIEW-04, VIEW-05, VIEW-07)
+   ───────────────────────────────────────── */
+
+.empty-state {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 14px;
+}
+
+/* ─────────────────────────────────────────
+   Phase 3 — about-view (VIEW-01)
+   ───────────────────────────────────────── */
+
+.terminal-main h1 {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-hi);
+  margin: 0 0 4px;
+}
+
+.about-role {
+  font-size: 14px;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.about-meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.about-para {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.6;
+  max-width: 68ch;
+  margin: 12px 0;
+}
+
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 480px;
+  margin: 24px 0;
+}
+
+.about-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 14px;
+}
+
+.about-card-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.2;
+}
+
+.about-card-label {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.about-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* ─────────────────────────────────────────
+   Phase 3 — projects-view (VIEW-02)
+   ───────────────────────────────────────── */
+
+.projects-subhead {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.projects-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.projects-row {
+  display: grid;
+  grid-template-columns: 32px 1fr 110px;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.projects-row:hover {
+  text-decoration: none;
+  background: var(--panel);
+}
+
+.projects-row-index {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.projects-row-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.projects-row-summary {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.projects-row-chips {
+  margin-top: 8px;
+}
+
+.projects-row-meta {
+  text-align: right;
+}
+
+.projects-row-year {
+  font-size: 11px;
+  color: var(--muted-hi);
+}
+
+.projects-row-status {
+  font-size: 11px;
+  color: var(--warn);
+  margin-top: 2px;
+}
+
+.projects-row-role {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ─────────────────────────────────────────
+   Phase 3 — stack-view (VIEW-03)
+   ───────────────────────────────────────── */
+
+.stack-pre-wrap {
+  position: relative;
+}
+
+.stack-pre {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 24px 20px;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text);
+  margin: 0;
+  overflow: auto;
+}
+
+.stack-copy {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.json-key {
+  color: var(--warn);
+}
+
+.json-string {
+  color: var(--accent);
+}
+
+.json-punc {
+  color: var(--muted);
+}
+
+/* ─────────────────────────────────────────
+   Phase 3 — experience-view (VIEW-04)
+   ───────────────────────────────────────── */
+
+.experience-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.experience-row {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.experience-row-header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.experience-hash {
+  font-size: 13px;
+  color: var(--warn);
+}
+
+.experience-role {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.experience-company {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.experience-period {
+  font-size: 12px;
+  color: var(--muted);
+  margin-left: auto;
+}
+
+.experience-summary {
+  font-size: 13px;
+  color: var(--text);
+  max-width: 64ch;
+  margin-top: 6px;
+}
+
+/* ─────────────────────────────────────────
+   Phase 3 — writing-view (VIEW-05)
+   ───────────────────────────────────────── */
+
+.writing-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.writing-post {
+  display: block;
+  padding: 18px 0;
+  border-bottom: 1px dashed var(--border);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.writing-post:hover {
+  text-decoration: none;
+}
+
+.writing-post-meta {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.writing-post-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 6px;
+}
+
+.writing-post-excerpt {
+  font-size: 13px;
+  color: var(--text);
+  max-width: 64ch;
+  margin-top: 8px;
+  line-height: 1.55;
+}
+
+/* ─────────────────────────────────────────
+   Phase 3 — contact-view (VIEW-06)
+   ───────────────────────────────────────── */
+
+.contact-lead {
+  font-size: 14px;
+  color: var(--text);
+  max-width: 68ch;
+  line-height: 1.6;
+}
+
+.contact-card {
+  max-width: 480px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  gap: 12px;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.contact-row:last-child {
+  border-bottom: none;
+}
+
+.contact-label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.contact-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* ─────────────────────────────────────────
+   Phase 3 — shipped-view (VIEW-07)
+   ───────────────────────────────────────── */
+
+.shipped-subhead {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.shipped-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.shipped-row {
+  display: grid;
+  grid-template-columns: 32px 1fr 110px;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.shipped-row-index {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.shipped-row-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.shipped-row-summary {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.shipped-row-affordances {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.shipped-row-meta {
+  text-align: right;
+}
+
+.shipped-row-year {
+  font-size: 11px;
+  color: var(--muted-hi);
+}
+
+.shipped-row-status {
+  font-size: 11px;
+  color: var(--warn);
+  margin-top: 2px;
+}
+
+.shipped-row-role {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
 }

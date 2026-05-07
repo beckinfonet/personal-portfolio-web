@@ -153,6 +153,12 @@ a:hover {
   .cursor { animation: none; }
   .content-block { animation: none; }
   .breadcrumb-hint { transition: none; opacity: 1; }
+
+  /* Phase 4 additions */
+  .drawer-sheet[data-state="open"],
+  .drawer-sheet[data-state="closed"] { animation: none; }
+  .drawer-backdrop { transition: none; }
+  [cmdk-dialog] { animation: none; }
 }
 
 /* ── Cursor primitive and prompt-line CSS ────────────────────────────────── */
@@ -1218,4 +1224,167 @@ a:hover {
   font-size: 11px;
   color: var(--muted);
   margin-top: 2px;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Phase 4: Mobile (<=960px) — drawer + palette + STATUS + touch targets
+   ──────────────────────────────────────────────────────────── */
+
+/* Drawer — visible only at <=960px (Surface 1; D-03..D-07) */
+.drawer-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 89;
+}
+.drawer-sheet {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: fit-content;
+  max-height: 75vh;
+  overflow-y: auto;
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.3);
+  z-index: 90;
+  padding: 20px 0;
+}
+@keyframes drawerSlideIn {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+.drawer-sheet[data-state="open"] {
+  display: block;
+  animation: drawerSlideIn 200ms ease-out;
+}
+.drawer-backdrop[data-state="open"] {
+  display: block;
+}
+.drawer-file-row {
+  /* Inherits .sb-item visual; mobile padding override below for 44px touch target */
+}
+.drawer-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 18px;
+  cursor: pointer;
+}
+.drawer-close-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Hamburger trigger — visible only at <=960px (Surface 5; D-04) */
+.topbar-hamburger {
+  display: none; /* default — desktop hides */
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 10px 12px; /* 44×44px touch slot */
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  margin-right: 8px;
+}
+.topbar-hamburger:hover {
+  background: var(--panel-hi);
+}
+.topbar-hamburger:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* About-view mobile STATUS slot (Surface 3; D-12) — desktop hidden */
+.about-status-mobile {
+  display: none;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* Mobile breakpoint — single boundary at 960px (D-01) */
+@media (max-width: 960px) {
+  /* Sidebar hide — paired with drawer + about-view STATUS rehome (Pitfall 7 audit) */
+  .sidebar {
+    display: none;
+  }
+
+  /* Main content reclaims width and tightens padding above the fold (MOBILE-03) */
+  .terminal-main {
+    max-width: 100%;
+    padding: 24px 16px 64px;
+  }
+
+  /* Hamburger visible on mobile only */
+  .topbar-hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Tablet portrait (768-960px) constrains drawer width for centered look */
+  .drawer-sheet {
+    max-width: 100vw;
+  }
+
+  /* About-view STATUS rehome — visible only at <=960px on /about (D-12, D-13) */
+  .about-status-mobile {
+    display: block;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Drawer file-row touch target (D-07, D-11; WCAG 2.5.5) */
+  .drawer-sheet .sb-item,
+  .drawer-file-row {
+    padding: 14px 16px;
+    min-height: 44px;
+  }
+
+  /* Palette bottom-sheet overrides (Surface 2; D-08, D-11) */
+  [cmdk-overlay] {
+    align-items: flex-end;
+    justify-content: stretch;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  [cmdk-dialog] {
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 80vh;
+    border-radius: 12px 12px 0 0;
+    animation: drawerSlideIn 200ms ease-out;
+  }
+  [cmdk-input] {
+    position: sticky;
+    top: 0;
+    background: var(--panel);
+    z-index: 1;
+  }
+  [cmdk-list] {
+    max-height: calc(80vh - 64px - 40px);
+    overflow-y: auto;
+  }
+  [cmdk-item] {
+    padding: 14px 18px;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+  [cmdk-empty] {
+    padding: 24px 18px;
+  }
 }

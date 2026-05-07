@@ -1,16 +1,24 @@
-// NO "use client" — RSC stub (D-12)
+// NO "use client" — RSC route page (Phase 3)
 import type { Metadata } from "next";
+import { ROUTES } from "@/lib/routes";
+import { getShipped } from "@/lib/api";
+import { ShippedView } from "@/app/components/views/shipped-view";
 import { PromptLine } from "@/app/components/primitives/prompt-line";
 
+const route = ROUTES[6]; // shipped
+
 export const metadata: Metadata = {
-  title: "shipped.app — Bakytbek Tatibekov"
+  title: `${route.label} — Bakytbek Tatibekov`,
+  description: route.description,
+  alternates: { canonical: route.pathname }
 };
 
-export default function ShippedPage() {
+export default async function ShippedPage() {
+  const shipped = await getShipped();
   return (
     <>
       <PromptLine cmd="ls -la shipped/" />
-      <p className="stub-body">// view body lands in Phase 3</p>
+      <ShippedView shipped={shipped} />
     </>
   );
 }

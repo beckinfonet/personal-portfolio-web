@@ -101,7 +101,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 04-01-PLAN.md — Wave 1: Append @media (max-width: 960px) + @media print + drawer/hamburger/about-status-mobile rules to app/globals.css; ship 3 audit scripts (sidebar redistribution, print rules, mobile palette CSS) + check:mobile npm script
 - [x] 04-02-PLAN.md — Wave 2: ExplorerDrawer client island (6th) + ☰ hamburger trigger in TopBar + useDrawer() slice in ShellStateProvider with palette mutual exclusion + drawer/top-bar/palette test extensions; mount drawer in (terminal)/layout
 - [x] 04-03-PLAN.md — Wave 2: Extract <StatusBlock /> RSC primitive + <StatusTz /> client leaf; refactor Sidebar to consume; append mobile STATUS render to AboutView; wire uptime via about page; ship status-block.test + about-view.test + sidebar.test update
-- [ ] 04-04-PLAN.md — Wave 2: <PrintFooter /> RSC primitive (URL · email) + mount in (terminal)/layout with NEXT_PUBLIC_SITE_URL fallback + co-located test
+- [x] 04-04-PLAN.md — Wave 2: <PrintFooter /> RSC primitive (URL · email) + mount in (terminal)/layout with NEXT_PUBLIC_SITE_URL fallback + co-located test
 - [ ] 04-05-PLAN.md — Wave 3 (manual): Cross-viewport screenshot review (375 / 768 / 1024) + print preview on all 7 views + recruiter dry-run on 375px localhost; populate 04-VERIFICATION.md
 **UI hint**: yes
 

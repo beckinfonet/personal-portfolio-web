@@ -71,7 +71,7 @@ Each view is RSC by default; client behavior lives in shell-level islands.
 - [ ] **PALETTE-02**: Verb taxonomy of **at least 15 verbs** (per FEATURES.md differentiator threshold): open each of the 7 views (7), download resume (1), toggle theme (1), open each social (≥3), copy email (1), copy GitHub profile URL (1), share this view / copy current URL (1), cycle accent hue (1) — total ≥16
 - [ ] **PALETTE-03**: Type-to-filter against item label and aliases (e.g. `mail` matches `copy email`); result count exposed via `aria-live` region
 - [ ] **PALETTE-04**: Focus trap inside the modal; on close, focus restored to the element that opened it (per Pitfall 6); palette uses `cmdk`'s built-in `Dialog.Title`
-- [ ] **PALETTE-05**: Mobile equivalent — palette opens as a bottom-sheet (or full-height modal) triggered by a hamburger / "command" button in the mobile top bar; same verb list and type-to-filter (per Pitfall 6 + Pitfall 7)
+- [x] **PALETTE-05**: Mobile equivalent — palette opens as a bottom-sheet (or full-height modal) triggered by a hamburger / "command" button in the mobile top bar; same verb list and type-to-filter (per Pitfall 6 + Pitfall 7) — shipped in Phase 4 Plan 01 (CSS bottom-sheet overrides) + Plan 04-02 (state-machine intact under mutual exclusion; component-level mobile-toggle test added)
 
 ### Accessibility (A11Y)
 
@@ -87,8 +87,8 @@ Each view is RSC by default; client behavior lives in shell-level islands.
 
 ### Responsive (MOBILE)
 
-- [ ] **MOBILE-01**: Mobile breakpoint at ~960px collapses the 240px sidebar; sidebar contents redistributed (NOT just `display: none` per Pitfall 7)
-- [ ] **MOBILE-02**: Bottom-sheet drawer for the EXPLORER file tree, triggered from a hamburger in the mobile top bar; 44×44px touch targets per WCAG 2.5.5
+- [x] **MOBILE-01**: Mobile breakpoint at ~960px collapses the 240px sidebar; sidebar contents redistributed (NOT just `display: none` per Pitfall 7) — shipped in Phase 4 Plan 01 (CSS sidebar hide + paired drawer/about-status-mobile rehomes) + Plan 04-02 (ExplorerDrawer client island wired to TopBar trigger)
+- [x] **MOBILE-02**: Bottom-sheet drawer for the EXPLORER file tree, triggered from a hamburger in the mobile top bar; 44×44px touch targets per WCAG 2.5.5 — shipped in Phase 4 Plan 04-02 (ExplorerDrawer with role=dialog aria-modal sheet rendering 7 ROUTES file rows + recruiter resume card; 44px padding from Plan 04-01 CSS)
 - [ ] **MOBILE-03**: Resume download CTA visible above the fold on the about view at 375px (mobile recruiter never has to scroll for resume per Risk 3)
 - [ ] **MOBILE-04**: Sidebar STATUS block (`● Available for hire`, `uptime`, `tz`) rehomed to the about-view footer on mobile
 - [ ] **MOBILE-05**: Mobile palette UX (covered in PALETTE-05); responsive typography per handoff scale (4 / 6 / 8 / 10 / 12 / 14 / 16 / 18 / 20 / 24 / 32 / 40 / 64 / 80px)
@@ -247,7 +247,7 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | PALETTE-02 | Phase 2 | Pending |
 | PALETTE-03 | Phase 2 | Pending |
 | PALETTE-04 | Phase 2 | Pending |
-| PALETTE-05 | Phase 4 | Pending |
+| PALETTE-05 | Phase 4 | Complete (04-01 + 04-02) |
 | A11Y-01 | Phase 2 | Pending |
 | A11Y-02 | Phase 2 | Pending |
 | A11Y-03 | Phase 5 | Pending |
@@ -257,8 +257,8 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | A11Y-07 | Phase 5 | Pending |
 | A11Y-08 | Phase 2 | Pending |
 | A11Y-09 | Phase 4 | Complete (04-01) |
-| MOBILE-01 | Phase 4 | Pending |
-| MOBILE-02 | Phase 4 | Pending |
+| MOBILE-01 | Phase 4 | Complete (04-01 + 04-02) |
+| MOBILE-02 | Phase 4 | Complete (04-02) |
 | MOBILE-03 | Phase 4 | Pending |
 | MOBILE-04 | Phase 4 | Pending |
 | MOBILE-05 | Phase 4 | Pending |

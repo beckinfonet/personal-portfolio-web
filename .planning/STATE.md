@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 4 Plan 01 complete (mobile + print CSS foundation + 3 audit scripts shipped)
-last_updated: "2026-05-07T16:50:00.000Z"
-last_activity: 2026-05-07 -- Phase 04 Plan 01 executed (Wave 1 CSS foundation)
+stopped_at: Phase 4 Plan 02 complete (ExplorerDrawer client island + ☰ TopBar trigger + useDrawer slice with palette mutual exclusion)
+last_updated: "2026-05-07T16:58:14.000Z"
+last_activity: 2026-05-07 -- Phase 04 Plan 02 executed (Wave 2a ExplorerDrawer + TopBar wiring)
 progress:
   total_phases: 7
   completed_phases: 3
   total_plans: 31
-  completed_plans: 27
-  percent: 87
+  completed_plans: 28
+  percent: 90
 ---
 
 # Project State
@@ -26,30 +26,31 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 ## Current Position
 
 Phase: 04 (mobile-responsive) — EXECUTING
-Plan: 2 of 5 (Plan 01 complete)
+Plan: 3 of 5 (Plans 01 + 02 complete)
 Status: Executing Phase 04
-Last activity: 2026-05-07 -- Phase 04 Plan 01 complete (Wave 1 CSS + audit scripts)
+Last activity: 2026-05-07 -- Phase 04 Plan 02 complete (Wave 2a ExplorerDrawer client island + TopBar trigger)
 
-Progress: [█████████████░] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 1/5
+Progress: [██████████████░] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 2/5
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 1 (this milestone — execute-phase metrics)
-- Average duration: 4m 23s
-- Total execution time: 4m 23s
+- Total plans completed: 2 (this milestone — execute-phase metrics)
+- Average duration: 4m 9s
+- Total execution time: 8m 17s
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 04    | 1     | 4m 23s | 4m 23s |
+| 04    | 2     | 8m 17s | 4m 9s |
 
 **Recent Trend:**
 
-- Last plan: 04-01 (4m 23s) — 3 tasks, 5 files modified, +279 lines on globals.css, 3 new audit scripts
-- Trend: clean execution, all gates green (lint + build + 67 vitest + 3 audit scripts + check:mobile npm script)
+- Last plan: 04-02 (3m 54s) — 3 tasks (1 TDD), 4 commits, 2 files created + 5 modified, +354 lines, 14 new test cases (9 drawer + 4 top-bar + 1 palette mobile-toggle), 81 vitest tests passing (up from 67)
+- Previous: 04-01 (4m 23s) — 3 tasks, 5 files modified, +279 lines on globals.css, 3 new audit scripts
+- Trend: clean execution, all gates green (lint + build + 81 vitest + 3 audit scripts + check:mobile + check-placeholders)
 
 *Updated after each plan completion*
 
@@ -68,6 +69,9 @@ Recent decisions affecting current work:
 - Phase 4 Plan 01: Single mobile breakpoint at 960px (D-01); existing top-bar internal breakpoints (600/480) preserved unchanged — they predate Phase 4 and serve a different concern
 - Phase 4 Plan 01: Drawer slide-in 200ms ease-out keyframes shared with mobile palette (one keyframe def — `drawerSlideIn` — two consumers: `.drawer-sheet[data-state="open"]` and `[cmdk-dialog]` at <=960px)
 - Phase 4 Plan 01: Per-token print color normalization to #000 / #333 / #999 borders preserves tonal hierarchy on b/w printers without leaking accent colors (16+ selectors mapped)
+- Phase 4 Plan 02: Mutual exclusion lives in the ShellStateProvider reducer (PALETTE_OPEN sets drawerOpen:false; DRAWER_OPEN sets paletteOpen:false; toggles only force the other closed when transitioning closed→open) — components calling setOpen don't need to know about the other overlay
+- Phase 4 Plan 02: ExplorerDrawer always mounts; data-state attribute drives CSS show/hide (display:none at desktop, slideIn at <=960px) — keeps the dialog in the accessibility tree across open/close, prevents re-mount glitches, lets Plan 04-01 CSS own visibility semantics
+- Phase 4 Plan 02: Focus restore uses document.getElementById('topbar-hamburger-btn') instead of capturing document.activeElement at open-time — the trigger lives in TopBar (different component) and is stable across renders, so id-lookup is cleaner than threading a ref through Context
 
 ### Pending Todos
 
@@ -94,6 +98,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-07T16:50:00.000Z
-Stopped at: Phase 4 Plan 01 complete (Wave 1 mobile + print CSS foundation + 3 audit scripts shipped). Wave 2 plans (04-02, 04-03, 04-04) unblocked — they render INTO selectors now defined in app/globals.css.
-Resume file: .planning/phases/04-mobile-responsive/04-02-PLAN.md
+Last session: 2026-05-07T16:58:14.000Z
+Stopped at: Phase 4 Plan 02 complete (Wave 2a — ExplorerDrawer client island + TopBar ☰ hamburger trigger + useDrawer slice with palette mutual exclusion + drawer/top-bar/palette test coverage; mounted in (terminal)/layout). Remaining Wave 2 plans (04-03 status-block-and-about-mobile, 04-04 print-footer-rsc) unblocked and independent of this plan's surface.
+Resume file: .planning/phases/04-mobile-responsive/04-03-PLAN.md

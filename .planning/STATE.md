@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Phase 3 all 13 plans complete (Wave 5 merged) — pending phase verification
-last_updated: "2026-05-06T17:38:00Z"
-last_activity: "2026-05-06 -- Phase 3 Wave 5 merged: 03-12 cross-view metadata test (4 assertions); 67/67 tests, build green; ready for verifier"
+status: phase_complete
+stopped_at: Phase 3 (Views) COMPLETE — verifier passed 10/10 after VIEW-08 gap closure (Kbd primitive wired into shell)
+last_updated: "2026-05-06T18:32:00Z"
+last_activity: "2026-05-06 -- Phase 3 marked complete: all 13 plans + cross-view test green, 67/67 tests, build green, VIEW-08 closed via ce8124d (Kbd wired into command-palette + breadcrumb)"
 progress:
   total_phases: 7
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 13
   completed_plans: 13
   percent: 100
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-06)
 
 **Core value:** A distinctive personal portfolio that signals engineering craft through a terminal/IDE aesthetic — without making non-technical recruiters work to find the resume and contact info.
-**Current focus:** Phase 3 — Views (planned, awaiting execution)
+**Current focus:** Phase 4 — Mobile-Responsive (next up)
 
 ## Current Position
 
-Phase: 3 (Views) — ready to execute
-Plan: 13 plans across 5 waves · CONTEXT, UI-SPEC, RESEARCH, PATTERNS, VALIDATION all committed · 13 PLANs committed (a2b64fb, 054874a)
-Status: Plan-checker VERIFICATION PASSED after 1 revision (resolved 1 BLOCKER + 4 WARNINGs); ready for /gsd-execute-phase 3
-Last activity: 2026-05-06 -- Phase 3 planning complete: 13 plans, build-gate fix in Plan 13, cross-view spec in Plan 12, RESEARCH RESOLVED markers added
+Phase: 3 (Views) — COMPLETE; next phase 4 (Mobile-Responsive)
+Plan: 13/13 plans complete; cross-view metadata test green; all 7 views render as RSCs with unique metadata + ExternalLink safety
+Status: VERIFICATION 10/10 PASSED (commit ce8124d closed the only gap — Kbd primitive wired into command-palette footer + breadcrumb hint)
+Last activity: 2026-05-06 -- Phase 3 marked complete
 
-Progress: [█████████░] Phase 1 complete · Phase 2 complete · Phase 3 planned (execute next)
+Progress: [████████████░] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 next
 
 ## Performance Metrics
 

@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation** - Upgrade Next, install deps, lock terminal data model, route registry, CI, delete orphan code
 - [x] **Phase 2: Shell** - Persistent terminal shell with theme/accent system, command palette, sitemap, 404 (4 human-UAT items pending)
-- [ ] **Phase 3: Views** - Seven per-view routes with metadata, primitives, RSC content rendering
+- [x] **Phase 3: Views** - Seven per-view routes with metadata, primitives, RSC content rendering (2026-05-06)
 - [ ] **Phase 4: Mobile-Responsive** - Bottom-sheet nav, mobile palette, sidebar redistribution, print styles
 - [ ] **Phase 5: SEO + Accessibility Polish** - OG images, JSON-LD, contrast audit, reduced-motion, easter eggs
 - [ ] **Phase 6: Backend + Content Population** - Sibling backend endpoints, real bio/projects/posts/resume PDF
@@ -70,8 +70,22 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. View components in `app/components/views/` carry no `"use client"` directive (RSCs); shared primitives `prompt-line.tsx`, `tech-chip.tsx`, `kbd.tsx` are imported by views and are RSC-friendly
   4. `grep -rE "target=\"_blank\"" app/components/views/` shows every match paired with `rel="noopener noreferrer"` (via the shared `<ExternalLink>` component)
   5. One Vitest smoke test per view passes: each view renders, exports a unique `<title>`, and contains a `$ <command>` prompt line
-**Plans**: TBD
+**Plans:** 13 plans
+- [x] 03-01-PLAN.md — Wave 1: ExternalLink, TechChip, Kbd RSC primitives
+- [x] 03-02-PLAN.md — Wave 1: CopyButton client island + unit test
+- [x] 03-03-PLAN.md — Wave 1: StoreBadge primitive + official Apple/Google badge SVGs
+- [x] 03-13-PLAN.md — Wave 1: Inherited build-gate fix (clear TODO seeds + tighten placeholder regex)
+- [x] 03-04-PLAN.md — Wave 2: Append all view + primitive CSS to app/globals.css (no new tokens)
+- [x] 03-05-PLAN.md — Wave 3: About view RSC + page wrapper + smoke spec (establishes pattern)
+- [x] 03-06-PLAN.md — Wave 4: Projects view (tech chips + year/status grid)
+- [x] 03-07-PLAN.md — Wave 4: Stack view (hand-rolled JSON syntax highlighter + CopyButton)
+- [x] 03-08-PLAN.md — Wave 4: Experience view (hex-hash decorated rows)
+- [x] 03-09-PLAN.md — Wave 4: Writing view (defensive Date.parse sort)
+- [x] 03-10-PLAN.md — Wave 4: Contact view (mailto + CopyButton + ghost github CTA)
+- [x] 03-11-PLAN.md — Wave 4: Shipped view (StoreBadge per-platform + per-app CopyButton)
+- [x] 03-12-PLAN.md — Wave 5: Cross-view metadata test (title uniqueness + canonical pathname audit)
 **UI hint**: yes
+**Verification**: passed 10/10 (2026-05-06) — VIEW-08 closed via Kbd primitive wired into shell
 
 ### Phase 4: Mobile-Responsive
 **Goal**: Redistribute every sidebar element to a viable mobile home (not `display: none`), ship a touch-equivalent for the ⌘K palette, keep the resume CTA above the fold at 375px, and ship a print stylesheet for recruiters who print

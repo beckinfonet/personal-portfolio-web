@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Kbd } from "@/app/components/primitives/kbd";
 import { ROUTES } from "@/lib/routes";
 
 export function Breadcrumb() {
@@ -26,7 +27,7 @@ export function Breadcrumb() {
         className={`breadcrumb-hint${bootDone ? " breadcrumb-hint--visible" : ""}`}
         aria-hidden="true"
       >
-        press <kbd>⌘K</kbd> for commands
+        press <Kbd>⌘K</Kbd> for commands
       </span>
     </div>
   );

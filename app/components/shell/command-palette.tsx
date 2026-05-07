@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { usePalette, useAccent } from "@/app/components/shell/shell-state-provider";
+import { Kbd } from "@/app/components/primitives/kbd";
 import { PALETTE_VERBS } from "@/lib/palette-verbs";
 
 export function CommandPalette() {
@@ -118,9 +119,9 @@ export function CommandPalette() {
 
       {/* Footer keyboard hint */}
       <div className="palette-footer">
-        <span><kbd>↵</kbd> select</span>
-        <span><kbd>↑↓</kbd> navigate</span>
-        <span><kbd>esc</kbd> close</span>
+        <span><Kbd>↵</Kbd> select</span>
+        <span><Kbd>↑↓</Kbd> navigate</span>
+        <span><Kbd>esc</Kbd> close</span>
       </div>
     </Command.Dialog>
   );

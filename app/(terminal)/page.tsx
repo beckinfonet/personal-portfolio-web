@@ -1,16 +1,24 @@
-// NO "use client" — RSC stub (D-12)
+// NO "use client" — RSC route page (Phase 3)
 import type { Metadata } from "next";
+import { ROUTES } from "@/lib/routes";
+import { getProfile } from "@/lib/api";
+import { AboutView } from "@/app/components/views/about-view";
 import { PromptLine } from "@/app/components/primitives/prompt-line";
 
+const route = ROUTES[0]; // about
+
 export const metadata: Metadata = {
-  title: "about.md — Bakytbek Tatibekov"
+  title: `${route.label} — Bakytbek Tatibekov`,
+  description: route.description,
+  alternates: { canonical: route.pathname }
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const profile = await getProfile();
   return (
     <>
       <PromptLine cmd="cat about.md" />
-      <p className="stub-body">// view body lands in Phase 3</p>
+      <AboutView profile={profile} />
     </>
   );
 }

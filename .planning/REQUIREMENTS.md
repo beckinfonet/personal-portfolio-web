@@ -89,8 +89,8 @@ Each view is RSC by default; client behavior lives in shell-level islands.
 
 - [x] **MOBILE-01**: Mobile breakpoint at ~960px collapses the 240px sidebar; sidebar contents redistributed (NOT just `display: none` per Pitfall 7) — shipped in Phase 4 Plan 01 (CSS sidebar hide + paired drawer/about-status-mobile rehomes) + Plan 04-02 (ExplorerDrawer client island wired to TopBar trigger)
 - [x] **MOBILE-02**: Bottom-sheet drawer for the EXPLORER file tree, triggered from a hamburger in the mobile top bar; 44×44px touch targets per WCAG 2.5.5 — shipped in Phase 4 Plan 04-02 (ExplorerDrawer with role=dialog aria-modal sheet rendering 7 ROUTES file rows + recruiter resume card; 44px padding from Plan 04-01 CSS)
-- [ ] **MOBILE-03**: Resume download CTA visible above the fold on the about view at 375px (mobile recruiter never has to scroll for resume per Risk 3)
-- [ ] **MOBILE-04**: Sidebar STATUS block (`● Available for hire`, `uptime`, `tz`) rehomed to the about-view footer on mobile
+- [x] **MOBILE-03**: Resume download CTA visible above the fold on the about view at 375px (mobile recruiter never has to scroll for resume per Risk 3) — unit-locked in Phase 4 Plan 04-03 (about-view.test.tsx asserts `<a download>` with aria-label "Download resume" renders); above-the-fold visual gate owned by Wave 4 manual review (04-05)
+- [x] **MOBILE-04**: Sidebar STATUS block (`● Available for hire`, `uptime`, `tz`) rehomed to the about-view footer on mobile — shipped in Phase 4 Plan 04-03 (`<StatusBlock />` shared RSC primitive + `<StatusTz />` client leaf; AboutView renders `<div class="about-status-mobile"><StatusBlock /></div>` after CTA row; visibility via Plan 04-01 CSS — display:none default, display:block at <=960px)
 - [ ] **MOBILE-05**: Mobile palette UX (covered in PALETTE-05); responsive typography per handoff scale (4 / 6 / 8 / 10 / 12 / 14 / 16 / 18 / 20 / 24 / 32 / 40 / 64 / 80px)
 
 ### Backend Coordination (BACKEND)
@@ -259,8 +259,8 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | A11Y-09 | Phase 4 | Complete (04-01) |
 | MOBILE-01 | Phase 4 | Complete (04-01 + 04-02) |
 | MOBILE-02 | Phase 4 | Complete (04-02) |
-| MOBILE-03 | Phase 4 | Pending |
-| MOBILE-04 | Phase 4 | Pending |
+| MOBILE-03 | Phase 4 | Complete (04-03) |
+| MOBILE-04 | Phase 4 | Complete (04-03) |
 | MOBILE-05 | Phase 4 | Pending |
 | BACKEND-01 | Phase 6 | Pending |
 | BACKEND-02 | Phase 6 | Pending |

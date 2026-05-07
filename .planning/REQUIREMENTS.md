@@ -83,7 +83,7 @@ Each view is RSC by default; client behavior lives in shell-level islands.
 - [ ] **A11Y-06**: Live clock has `aria-hidden="true"` (decoration; no SR announcement every 30s)
 - [ ] **A11Y-07**: Color contrast meets WCAG 2.1 AA: ≥ 4.5:1 for body, ≥ 3:1 for large text, audited across 4 hues × 2 themes = 8 combinations using `@axe-core/playwright`; per-hue chroma overrides applied where needed (amber on light theme is the predicted failure per Pitfall 8)
 - [ ] **A11Y-08**: Full keyboard nav: tab order top-bar → palette button → theme toggle → sidebar files → main content → footer; ⌘K trap; Esc restores focus
-- [ ] **A11Y-09**: `@media print` stylesheet (white bg, black text, hide top bar / sidebar / palette, force serif fallback) so recruiter-printed pages are legible
+- [x] **A11Y-09**: `@media print` stylesheet (white bg, black text, hide top bar / sidebar / palette, force serif fallback) so recruiter-printed pages are legible — shipped in Phase 4 Plan 01 (globals.css @media print block + check-print-rules.mjs CI gate)
 
 ### Responsive (MOBILE)
 
@@ -256,7 +256,7 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | A11Y-06 | Phase 2 | Pending |
 | A11Y-07 | Phase 5 | Pending |
 | A11Y-08 | Phase 2 | Pending |
-| A11Y-09 | Phase 4 | Pending |
+| A11Y-09 | Phase 4 | Complete (04-01) |
 | MOBILE-01 | Phase 4 | Pending |
 | MOBILE-02 | Phase 4 | Pending |
 | MOBILE-03 | Phase 4 | Pending |

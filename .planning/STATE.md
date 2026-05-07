@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: in_progress
-stopped_at: Phase 4 plans verified (5 plans / 3 waves; all 7 REQ-IDs covered; ready to execute)
-last_updated: "2026-05-07T16:35:00.000Z"
-last_activity: 2026-05-07 -- Phase 4 plans verified
+status: executing
+stopped_at: Phase 4 Plan 01 complete (mobile + print CSS foundation + 3 audit scripts shipped)
+last_updated: "2026-05-07T16:50:00.000Z"
+last_activity: 2026-05-07 -- Phase 04 Plan 01 executed (Wave 1 CSS foundation)
 progress:
   total_phases: 7
   completed_phases: 3
   total_plans: 31
-  completed_plans: 26
-  percent: 84
+  completed_plans: 27
+  percent: 87
 ---
 
 # Project State
@@ -21,35 +21,35 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-06)
 
 **Core value:** A distinctive personal portfolio that signals engineering craft through a terminal/IDE aesthetic — without making non-technical recruiters work to find the resume and contact info.
-**Current focus:** Phase 4 — Mobile-Responsive (next up)
+**Current focus:** Phase 04 — mobile-responsive
 
 ## Current Position
 
-Phase: 4 (Mobile-Responsive) — plans verified, ready to execute
-Plan: 5 plans in 3 waves; all 21 decisions D-01..D-21 mapped to tasks; all 7 REQ-IDs covered
-Status: plan-phase complete (verifier passed Dimensions 1–12); next is `/gsd-execute-phase 4`
-Last activity: 2026-05-07 -- Phase 4 plans verified
+Phase: 04 (mobile-responsive) — EXECUTING
+Plan: 2 of 5 (Plan 01 complete)
+Status: Executing Phase 04
+Last activity: 2026-05-07 -- Phase 04 Plan 01 complete (Wave 1 CSS + audit scripts)
 
-Progress: [████████████░] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 (ready to execute)
+Progress: [█████████████░] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 1/5
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 0
-- Average duration: —
-- Total execution time: —
+- Total plans completed: 1 (this milestone — execute-phase metrics)
+- Average duration: 4m 23s
+- Total execution time: 4m 23s
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 04    | 1     | 4m 23s | 4m 23s |
 
 **Recent Trend:**
 
-- Last 5 plans: —
-- Trend: —
+- Last plan: 04-01 (4m 23s) — 3 tasks, 5 files modified, +279 lines on globals.css, 3 new audit scripts
+- Trend: clean execution, all gates green (lint + build + 67 vitest + 3 audit scripts + check:mobile npm script)
 
 *Updated after each plan completion*
 
@@ -64,6 +64,10 @@ Recent decisions affecting current work:
 - Roadmap: Backend work in Phase 6 is parallelizable with Phases 3–5 because the frontend renders against `lib/portfolio-data.ts` fallbacks until cutover
 - Roadmap: Recruiter usability requirements (top-bar resume button, plain-noun aria-labels, mobile bottom-sheet) bundled into the Shell phase — non-deferrable
 - Roadmap: Brownfield deletions (homepage.tsx, fallback-data.ts, theme-toggle.tsx, homepage.test.tsx) live in the same phase that introduces their replacements (Phase 1 + Phase 2)
+- Phase 4 Plan 01: No `print-color-adjust:exact` anywhere in globals.css (threat T-04-01 — default `economy` keeps printer from rendering theme-specific oklch values; `check-print-rules.mjs` enforces this as a CI gate)
+- Phase 4 Plan 01: Single mobile breakpoint at 960px (D-01); existing top-bar internal breakpoints (600/480) preserved unchanged — they predate Phase 4 and serve a different concern
+- Phase 4 Plan 01: Drawer slide-in 200ms ease-out keyframes shared with mobile palette (one keyframe def — `drawerSlideIn` — two consumers: `.drawer-sheet[data-state="open"]` and `[cmdk-dialog]` at <=960px)
+- Phase 4 Plan 01: Per-token print color normalization to #000 / #333 / #999 borders preserves tonal hierarchy on b/w printers without leaking accent colors (16+ selectors mapped)
 
 ### Pending Todos
 
@@ -90,6 +94,6 @@ Items acknowledged and carried forward from previous milestone close:
 
 ## Session Continuity
 
-Last session: 2026-05-07T16:35:00.000Z
-Stopped at: Phase 4 plans verified (5 plans / 3 waves; ready to execute)
-Resume file: .planning/phases/04-mobile-responsive/04-01-PLAN.md
+Last session: 2026-05-07T16:50:00.000Z
+Stopped at: Phase 4 Plan 01 complete (Wave 1 mobile + print CSS foundation + 3 audit scripts shipped). Wave 2 plans (04-02, 04-03, 04-04) unblocked — they render INTO selectors now defined in app/globals.css.
+Resume file: .planning/phases/04-mobile-responsive/04-02-PLAN.md

@@ -98,7 +98,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. `grep -E "display:\s*none" app/globals.css` for sidebar selectors is paired with a corresponding mobile-home rule for every former sidebar element (no orphan CSS hides)
   5. Print preview (browser print dialog) renders white background, black text, hidden top-bar/sidebar/palette, and a serif-fallback body — every view legible on paper
 **Plans:** 5 plans
-- [ ] 04-01-PLAN.md — Wave 1: Append @media (max-width: 960px) + @media print + drawer/hamburger/about-status-mobile rules to app/globals.css; ship 3 audit scripts (sidebar redistribution, print rules, mobile palette CSS) + check:mobile npm script
+- [x] 04-01-PLAN.md — Wave 1: Append @media (max-width: 960px) + @media print + drawer/hamburger/about-status-mobile rules to app/globals.css; ship 3 audit scripts (sidebar redistribution, print rules, mobile palette CSS) + check:mobile npm script
 - [ ] 04-02-PLAN.md — Wave 2: ExplorerDrawer client island (6th) + ☰ hamburger trigger in TopBar + useDrawer() slice in ShellStateProvider with palette mutual exclusion + drawer/top-bar/palette test extensions; mount drawer in (terminal)/layout
 - [ ] 04-03-PLAN.md — Wave 2: Extract <StatusBlock /> RSC primitive + <StatusTz /> client leaf; refactor Sidebar to consume; append mobile STATUS render to AboutView; wire uptime via about page; ship status-block.test + about-view.test + sidebar.test update
 - [ ] 04-04-PLAN.md — Wave 2: <PrintFooter /> RSC primitive (URL · email) + mount in (terminal)/layout with NEXT_PUBLIC_SITE_URL fallback + co-located test
@@ -157,7 +157,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 1. Foundation | 6/6 | Complete | 2026-05-06 |
 | 2. Shell | 7/7 | Complete | 2026-05-06 |
 | 3. Views | 0/TBD | Not started | - |
-| 4. Mobile-Responsive | 0/TBD | Not started | - |
+| 4. Mobile-Responsive | 1/5 | In progress | - |
 | 5. SEO + Accessibility Polish | 0/TBD | Not started | - |
 | 6. Backend + Content Population | 0/TBD | Not started | - |
 | 7. Deploy + Verification | 0/TBD | Not started | - |

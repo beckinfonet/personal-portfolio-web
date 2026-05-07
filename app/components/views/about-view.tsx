@@ -6,12 +6,14 @@
 
 import type { Profile } from "@/lib/types";
 import { ExternalLink } from "@/app/components/primitives/external-link";
+import { StatusBlock } from "@/app/components/shell/status-block";
 
 interface AboutViewProps {
   profile: Profile;
+  uptime: string;
 }
 
-export function AboutView({ profile }: AboutViewProps) {
+export function AboutView({ profile, uptime }: AboutViewProps) {
   return (
     <div className="content-block">
       <h1>{profile.name}</h1>
@@ -52,6 +54,12 @@ export function AboutView({ profile }: AboutViewProps) {
             {s.label.toLowerCase()}/
           </ExternalLink>
         ))}
+      </div>
+
+      {/* Mobile STATUS rehome — visibility CSS-driven by Plan 04-01 globals.css
+          (display: none at >=961px; display: block at <=960px). D-12, D-13. */}
+      <div className="about-status-mobile">
+        <StatusBlock uptime={uptime} />
       </div>
     </div>
   );

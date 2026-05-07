@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { TopBar } from "./top-bar";
 import { ShellStateProvider } from "./shell-state-provider";
 
@@ -36,5 +37,32 @@ describe("TopBar", () => {
     const resumeLink = screen.getByRole("link", { name: /download resume/i });
     expect(resumeLink).toBeInTheDocument();
     expect(resumeLink).toHaveAttribute("download");
+  });
+
+  test("renders hamburger button with correct aria-label", () => {
+    render(<TopBar />, { wrapper: Providers });
+    expect(
+      screen.getByRole("button", { name: /open file explorer/i })
+    ).toBeInTheDocument();
+  });
+
+  test("hamburger button has aria-expanded='false' when drawer is closed", () => {
+    render(<TopBar />, { wrapper: Providers });
+    const btn = screen.getByRole("button", { name: /open file explorer/i });
+    expect(btn).toHaveAttribute("aria-expanded", "false");
+  });
+
+  test("hamburger button has aria-controls referencing the drawer sheet id", () => {
+    render(<TopBar />, { wrapper: Providers });
+    const btn = screen.getByRole("button", { name: /open file explorer/i });
+    expect(btn).toHaveAttribute("aria-controls", "explorer-drawer-sheet");
+  });
+
+  test("hamburger click toggles aria-expanded to 'true'", async () => {
+    const user = userEvent.setup();
+    render(<TopBar />, { wrapper: Providers });
+    const btn = screen.getByRole("button", { name: /open file explorer/i });
+    await user.click(btn);
+    expect(btn).toHaveAttribute("aria-expanded", "true");
   });
 });

@@ -1,17 +1,30 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { usePalette } from "@/app/components/shell/shell-state-provider";
+import { usePalette, useDrawer } from "@/app/components/shell/shell-state-provider";
 import { LiveClock } from "@/app/components/shell/live-clock";
 import { PROFILE } from "@/lib/portfolio-data";
 
 export function TopBar() {
   const { resolvedTheme, setTheme } = useTheme();
   const { toggle } = usePalette();
+  const { open: drawerOpen, toggle: toggleDrawer } = useDrawer();
   const isDark = resolvedTheme === "dark";
 
   return (
     <header className="topbar">
+      {/* Hamburger trigger — visible only at <=960px via CSS (display: none at desktop) */}
+      <button
+        id="topbar-hamburger-btn"
+        className="topbar-hamburger"
+        aria-label="Open file explorer"
+        aria-expanded={drawerOpen}
+        aria-controls="explorer-drawer-sheet"
+        onClick={toggleDrawer}
+      >
+        ☰
+      </button>
+
       {/* Traffic lights — decorative (A11Y-05 <header>) */}
       <span className="traffic-dot traffic-dot--red" aria-hidden="true" />
       <span className="traffic-dot traffic-dot--yellow" aria-hidden="true" />

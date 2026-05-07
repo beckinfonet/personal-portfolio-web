@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import { TopBar } from "@/app/components/shell/top-bar";
 import { Sidebar } from "@/app/components/shell/sidebar";
 import { CommandPalette } from "@/app/components/shell/command-palette";
+import { ExplorerDrawer } from "@/app/components/shell/explorer-drawer";
 import { Breadcrumb } from "@/app/components/shell/breadcrumb";
 import { PROFILE, CAREER_START_DATE } from "@/lib/portfolio-data";
 import { formatUptime } from "@/lib/uptime";
@@ -47,6 +48,9 @@ export default function TerminalLayout({ children }: { children: ReactNode }) {
           </footer>
         </main>
       </div>
+
+      {/* ExplorerDrawer: 6th client island; visible only at <=960px via CSS */}
+      <ExplorerDrawer />
 
       {/* CommandPalette: mounted once outside terminal-body so its z-index overlay covers everything */}
       <CommandPalette />

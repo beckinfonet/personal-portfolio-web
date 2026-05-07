@@ -86,4 +86,13 @@ describe("CommandPalette", () => {
     expect(accentIds).toContain("accent-cyan");
     expect(accentIds).toContain("accent-magenta");
   });
+
+  test("⌘K toggle still fires after Phase 4 mutual-exclusion changes (PALETTE-05 component-level state)", async () => {
+    const user = userEvent.setup();
+    render(<CommandPalette />, { wrapper: Providers });
+    await user.keyboard("{Meta>}k{/Meta}");
+    await waitFor(() => expect(screen.getByRole("dialog")).toBeInTheDocument());
+    await user.keyboard("{Meta>}k{/Meta}");
+    await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
+  });
 });

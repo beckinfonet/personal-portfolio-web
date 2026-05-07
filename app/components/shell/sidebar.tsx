@@ -4,6 +4,7 @@ import { useSelectedLayoutSegment } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
 import { PROFILE } from "@/lib/portfolio-data";
+import { StatusBlock } from "@/app/components/shell/status-block";
 
 interface SidebarProps {
   uptime: string; /* Pre-computed in RSC layout via formatUptime() */
@@ -26,21 +27,6 @@ export function Sidebar({ uptime }: SidebarProps) {
 
   /* Active derivation: null segment === index route (about.md); "projects" === projects/ etc. */
   const isActive = (slug: string | null) => segment === slug;
-
-  /* Timezone: computed once on client; no SSR mismatch since this is a client component */
-  const tz = (() => {
-    try {
-      const resolved = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      if (!resolved) return "GMT+5 (flex)";
-      /* Convert IANA zone (e.g. "Asia/Almaty") to offset abbreviation */
-      const offset = new Intl.DateTimeFormat("en", { timeZoneName: "short" })
-        .formatToParts(new Date())
-        .find((p) => p.type === "timeZoneName")?.value ?? "GMT+5 (flex)";
-      return `${offset} (flex)`;
-    } catch {
-      return "GMT+5 (flex)";
-    }
-  })();
 
   return (
     <nav className="sidebar" aria-label="File explorer">
@@ -83,22 +69,8 @@ export function Sidebar({ uptime }: SidebarProps) {
         </a>
       </div>
 
-      {/* Section E: STATUS block */}
-      <div className="sb-section-header sb-status-header">STATUS</div>
-      <div className="sb-status">
-        <div className="sb-status-row">
-          <span className="sb-status-dot" aria-hidden="true">●</span>
-          <span>Available for hire</span>
-        </div>
-        <div className="sb-status-row">
-          <span className="sb-status-key">uptime:</span>
-          <span>{uptime}</span>
-        </div>
-        <div className="sb-status-row">
-          <span className="sb-status-key">tz:</span>
-          <span>{tz}</span>
-        </div>
-      </div>
+      {/* Section E: STATUS block — extracted as shared primitive (D-14) */}
+      <StatusBlock uptime={uptime} />
 
     </nav>
   );

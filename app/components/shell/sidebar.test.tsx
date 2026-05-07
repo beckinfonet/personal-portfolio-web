@@ -52,4 +52,9 @@ describe("Sidebar", () => {
     const links = screen.getAllByRole("link", { name: /download resume/i });
     expect(links.length).toBeGreaterThanOrEqual(1);
   });
+
+  test("STATUS block renders via <StatusBlock /> with 'STATUS' header", () => {
+    render(<Sidebar uptime="8y 125d" />);
+    expect(screen.getByText("STATUS")).toBeInTheDocument();
+  });
 });

@@ -1,16 +1,24 @@
-// NO "use client" — RSC stub (D-12)
+// NO "use client" — RSC route page (Phase 3)
 import type { Metadata } from "next";
+import { ROUTES } from "@/lib/routes";
+import { getExperience } from "@/lib/api";
+import { ExperienceView } from "@/app/components/views/experience-view";
 import { PromptLine } from "@/app/components/primitives/prompt-line";
 
+const route = ROUTES[3]; // experience
+
 export const metadata: Metadata = {
-  title: "experience.log — Bakytbek Tatibekov"
+  title: `${route.label} — Bakytbek Tatibekov`,
+  description: route.description,
+  alternates: { canonical: route.pathname }
 };
 
-export default function ExperiencePage() {
+export default async function ExperiencePage() {
+  const experience = await getExperience();
   return (
     <>
       <PromptLine cmd="git log --oneline --decorate experience.log" />
-      <p className="stub-body">// view body lands in Phase 3</p>
+      <ExperienceView experience={experience} />
     </>
   );
 }

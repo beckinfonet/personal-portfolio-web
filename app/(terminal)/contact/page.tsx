@@ -1,16 +1,24 @@
-// NO "use client" — RSC stub (D-12)
+// NO "use client" — RSC route page (Phase 3)
 import type { Metadata } from "next";
+import { ROUTES } from "@/lib/routes";
+import { getProfile } from "@/lib/api";
+import { ContactView } from "@/app/components/views/contact-view";
 import { PromptLine } from "@/app/components/primitives/prompt-line";
 
+const route = ROUTES[5]; // contact
+
 export const metadata: Metadata = {
-  title: "contact.sh — Bakytbek Tatibekov"
+  title: `${route.label} — Bakytbek Tatibekov`,
+  description: route.description,
+  alternates: { canonical: route.pathname }
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const profile = await getProfile();
   return (
     <>
       <PromptLine cmd="./contact.sh --whoami" />
-      <p className="stub-body">// view body lands in Phase 3</p>
+      <ContactView profile={profile} />
     </>
   );
 }

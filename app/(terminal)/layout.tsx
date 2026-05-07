@@ -8,6 +8,7 @@ import { Sidebar } from "@/app/components/shell/sidebar";
 import { CommandPalette } from "@/app/components/shell/command-palette";
 import { ExplorerDrawer } from "@/app/components/shell/explorer-drawer";
 import { Breadcrumb } from "@/app/components/shell/breadcrumb";
+import { PrintFooter } from "@/app/components/print-footer";
 import { PROFILE, CAREER_START_DATE } from "@/lib/portfolio-data";
 import { formatUptime } from "@/lib/uptime";
 
@@ -54,6 +55,12 @@ export default function TerminalLayout({ children }: { children: ReactNode }) {
 
       {/* CommandPalette: mounted once outside terminal-body so its z-index overlay covers everything */}
       <CommandPalette />
+
+      {/* PrintFooter: always in DOM; visible only via @media print (Plan 04-04 / A11Y-09) */}
+      <PrintFooter
+        siteUrl={process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}
+        email={PROFILE.email}
+      />
     </>
   );
 }

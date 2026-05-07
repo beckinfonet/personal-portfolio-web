@@ -1,16 +1,24 @@
-// NO "use client" — RSC stub (D-12)
+// NO "use client" — RSC route page (Phase 3)
 import type { Metadata } from "next";
+import { ROUTES } from "@/lib/routes";
+import { getWriting } from "@/lib/api";
+import { WritingView } from "@/app/components/views/writing-view";
 import { PromptLine } from "@/app/components/primitives/prompt-line";
 
+const route = ROUTES[4]; // writing
+
 export const metadata: Metadata = {
-  title: "writing/ — Bakytbek Tatibekov"
+  title: `${route.label} — Bakytbek Tatibekov`,
+  description: route.description,
+  alternates: { canonical: route.pathname }
 };
 
-export default function WritingPage() {
+export default async function WritingPage() {
+  const writing = await getWriting();
   return (
     <>
       <PromptLine cmd="ls writing/ && cat *.md" />
-      <p className="stub-body">// view body lands in Phase 3</p>
+      <WritingView writing={writing} />
     </>
   );
 }

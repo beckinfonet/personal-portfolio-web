@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 3 Wave 2 complete (5 of 13 plans) — all view + primitive CSS appended to globals.css
-last_updated: "2026-05-06T17:10:00Z"
-last_activity: "2026-05-06 -- Phase 3 Wave 2 merged: 03-04 view CSS (~80 selectors, no new tokens, .stub-body removed); 42/42 tests, build green"
+stopped_at: Phase 3 Wave 3 complete (6 of 13 plans) — about-view slice established the pattern for Wave 4
+last_updated: "2026-05-06T17:20:00Z"
+last_activity: "2026-05-06 -- Phase 3 Wave 3 merged: 03-05 about view (RSC + enriched page.tsx + smoke test); 45/45 tests, build green"
 progress:
   total_phases: 7
   completed_phases: 2
   total_plans: 13
-  completed_plans: 5
-  percent: 38
+  completed_plans: 6
+  percent: 46
 ---
 
 # Project State

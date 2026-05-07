@@ -1388,3 +1388,113 @@ a:hover {
     padding: 24px 18px;
   }
 }
+
+/* ────────────────────────────────────────────────────────────
+   Phase 4: Print stylesheet (A11Y-09; D-15..D-18)
+   ──────────────────────────────────────────────────────────── */
+
+/* PrintFooter — always in DOM; visible only via @media print */
+.print-footer {
+  display: none;
+}
+
+@media print {
+  /* Hide screen chrome (D-15) */
+  .topbar,
+  .sidebar,
+  .breadcrumb,
+  .topbar-hamburger,
+  .drawer-backdrop,
+  .drawer-sheet,
+  [cmdk-overlay],
+  [cmdk-dialog],
+  .skip-link,
+  .cursor,
+  .live-clock {
+    display: none !important;
+  }
+
+  /* Surface (D-15, D-16) */
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  body {
+    font-family: Georgia, "Times New Roman", serif !important;
+  }
+
+  /* Code-block-like content keeps mono so JSON/commands stay legible (D-16 carve-outs) */
+  .stack-pre,
+  .prompt-line .prompt-cmd,
+  .prompt-line .prompt-dollar,
+  .tech-chip,
+  .exp-hash,
+  .stack-key,
+  .stack-string,
+  .stack-punct {
+    font-family: var(--font-mono), ui-monospace, "SF Mono", "Cascadia Mono", monospace !important;
+  }
+
+  /* Animations + transitions disabled */
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  /* Layout: full-bleed */
+  .terminal-shell {
+    display: block !important;
+  }
+  .terminal-main {
+    max-width: 100% !important;
+    padding: 16px !important;
+  }
+
+  /* Color normalization — preserve hierarchy on b/w printers */
+  .about-card-value,
+  .stack-string,
+  .exp-role,
+  .writing-title,
+  .contact-link,
+  .btn,
+  .sb-status-dot {
+    color: #000 !important;
+  }
+  .about-card-label,
+  .about-meta,
+  .stack-punct,
+  .stack-key,
+  .exp-hash,
+  .exp-period,
+  .writing-meta,
+  .contact-label,
+  .sb-status-key {
+    color: #333 !important;
+  }
+  .stack-pre,
+  .about-card,
+  .contact-card,
+  .projects-row,
+  .exp-row,
+  .writing-row,
+  .shipped-row {
+    border-color: #999 !important;
+  }
+
+  /* PrintFooter visible (D-17) */
+  .print-footer {
+    display: block !important;
+    margin-top: 32px;
+    padding-top: 8px;
+    border-top: 1px solid #999;
+    font-size: 10pt;
+    color: #333 !important;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+
+  /* Defensive page-break safety on footer (D-18) */
+  .shell-footer {
+    page-break-inside: avoid;
+  }
+}

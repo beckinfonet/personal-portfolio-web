@@ -1,16 +1,24 @@
-// NO "use client" — RSC stub (D-12)
+// NO "use client" — RSC route page (Phase 3)
 import type { Metadata } from "next";
+import { ROUTES } from "@/lib/routes";
+import { getProjects } from "@/lib/api";
+import { ProjectsView } from "@/app/components/views/projects-view";
 import { PromptLine } from "@/app/components/primitives/prompt-line";
 
+const route = ROUTES[1]; // projects
+
 export const metadata: Metadata = {
-  title: "projects/ — Bakytbek Tatibekov"
+  title: `${route.label} — Bakytbek Tatibekov`,
+  description: route.description,
+  alternates: { canonical: route.pathname }
 };
 
-export default function ProjectsPage() {
+export default async function ProjectsPage() {
+  const projects = await getProjects();
   return (
     <>
       <PromptLine cmd="ls -la projects/" />
-      <p className="stub-body">// view body lands in Phase 3</p>
+      <ProjectsView projects={projects} />
     </>
   );
 }

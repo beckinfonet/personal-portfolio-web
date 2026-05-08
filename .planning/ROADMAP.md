@@ -15,7 +15,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Foundation** - Upgrade Next, install deps, lock terminal data model, route registry, CI, delete orphan code
 - [x] **Phase 2: Shell** - Persistent terminal shell with theme/accent system, command palette, sitemap, 404 (4 human-UAT items pending)
 - [x] **Phase 3: Views** - Seven per-view routes with metadata, primitives, RSC content rendering (2026-05-06)
-- [ ] **Phase 4: Mobile-Responsive** - Bottom-sheet nav, mobile palette, sidebar redistribution, print styles
+- [x] **Phase 4: Mobile-Responsive** - Bottom-sheet nav, mobile palette, sidebar redistribution, print styles (2026-05-07 — verdict PASS with Phase 5 + Phase 7 carry-forwards)
 - [ ] **Phase 5: SEO + Accessibility Polish** - OG images, JSON-LD, contrast audit, reduced-motion, easter eggs
 - [ ] **Phase 6: Backend + Content Population** - Sibling backend endpoints, real bio/projects/posts/resume PDF
 - [ ] **Phase 7: Deploy + Verification** - Production deploy, Lighthouse, Search Console, recruiter test, audits
@@ -102,7 +102,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 04-02-PLAN.md — Wave 2: ExplorerDrawer client island (6th) + ☰ hamburger trigger in TopBar + useDrawer() slice in ShellStateProvider with palette mutual exclusion + drawer/top-bar/palette test extensions; mount drawer in (terminal)/layout
 - [x] 04-03-PLAN.md — Wave 2: Extract <StatusBlock /> RSC primitive + <StatusTz /> client leaf; refactor Sidebar to consume; append mobile STATUS render to AboutView; wire uptime via about page; ship status-block.test + about-view.test + sidebar.test update
 - [x] 04-04-PLAN.md — Wave 2: <PrintFooter /> RSC primitive (URL · email) + mount in (terminal)/layout with NEXT_PUBLIC_SITE_URL fallback + co-located test
-- [ ] 04-05-PLAN.md — Wave 3 (manual): Cross-viewport screenshot review (375 / 768 / 1024) + print preview on all 7 views + recruiter dry-run on 375px localhost; populate 04-VERIFICATION.md
+- [x] 04-05-PLAN.md — Wave 3 (manual): Cross-viewport screenshot review (375 / 768 / 1024) + print preview on all 7 views + recruiter dry-run on 375px localhost; populated 04-VERIFICATION.md (verdict PASS, 7 gates PASS / 2 DEFERRED-PHASE-7)
 **UI hint**: yes
 
 ### Phase 5: SEO + Accessibility Polish
@@ -157,7 +157,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 1. Foundation | 6/6 | Complete | 2026-05-06 |
 | 2. Shell | 7/7 | Complete | 2026-05-06 |
 | 3. Views | 0/TBD | Not started | - |
-| 4. Mobile-Responsive | 3/5 | In progress | - |
+| 4. Mobile-Responsive | 5/5 | Complete | 2026-05-07 |
 | 5. SEO + Accessibility Polish | 0/TBD | Not started | - |
 | 6. Backend + Content Population | 0/TBD | Not started | - |
 | 7. Deploy + Verification | 0/TBD | Not started | - |

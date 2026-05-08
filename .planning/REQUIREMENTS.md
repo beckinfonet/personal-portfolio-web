@@ -91,7 +91,7 @@ Each view is RSC by default; client behavior lives in shell-level islands.
 - [x] **MOBILE-02**: Bottom-sheet drawer for the EXPLORER file tree, triggered from a hamburger in the mobile top bar; 44×44px touch targets per WCAG 2.5.5 — shipped in Phase 4 Plan 04-02 (ExplorerDrawer with role=dialog aria-modal sheet rendering 7 ROUTES file rows + recruiter resume card; 44px padding from Plan 04-01 CSS)
 - [x] **MOBILE-03**: Resume download CTA visible above the fold on the about view at 375px (mobile recruiter never has to scroll for resume per Risk 3) — unit-locked in Phase 4 Plan 04-03 (about-view.test.tsx asserts `<a download>` with aria-label "Download resume" renders); above-the-fold visual gate owned by Wave 4 manual review (04-05)
 - [x] **MOBILE-04**: Sidebar STATUS block (`● Available for hire`, `uptime`, `tz`) rehomed to the about-view footer on mobile — shipped in Phase 4 Plan 04-03 (`<StatusBlock />` shared RSC primitive + `<StatusTz />` client leaf; AboutView renders `<div class="about-status-mobile"><StatusBlock /></div>` after CTA row; visibility via Plan 04-01 CSS — display:none default, display:block at <=960px)
-- [ ] **MOBILE-05**: Mobile palette UX (covered in PALETTE-05); responsive typography per handoff scale (4 / 6 / 8 / 10 / 12 / 14 / 16 / 18 / 20 / 24 / 32 / 40 / 64 / 80px)
+- [x] **MOBILE-05**: Mobile palette UX (covered in PALETTE-05); responsive typography per handoff scale (4 / 6 / 8 / 10 / 12 / 14 / 16 / 18 / 20 / 24 / 32 / 40 / 64 / 80px) — closed in Phase 4 Plan 04-05 manual verification (Phase 4 Verdict PASS); mobile palette UX validated at Gate 3 (375 / 768 bottom-sheet behavior PASS) and the responsive typography scale was confirmed via the cross-viewport screenshot review at 375 / 768 / 1024 + per-route print preview on all 7 routes
 
 ### Backend Coordination (BACKEND)
 
@@ -261,7 +261,7 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | MOBILE-02 | Phase 4 | Complete (04-02) |
 | MOBILE-03 | Phase 4 | Complete (04-03) |
 | MOBILE-04 | Phase 4 | Complete (04-03) |
-| MOBILE-05 | Phase 4 | Pending |
+| MOBILE-05 | Phase 4 | Complete (04-05) |
 | BACKEND-01 | Phase 6 | Pending |
 | BACKEND-02 | Phase 6 | Pending |
 | BACKEND-03 | Phase 6 | Pending |

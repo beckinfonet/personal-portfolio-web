@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 4 Plan 04 complete (PrintFooter RSC primitive + layout mount with NEXT_PUBLIC_SITE_URL fallback)
-last_updated: "2026-05-07T17:14:20.000Z"
-last_activity: 2026-05-07 -- Phase 04 Plan 04 executed (Wave 2c PrintFooter RSC + layout mount; Wave 2 complete)
+stopped_at: Phase 4 complete (Plan 04-05 manual verification — 7 PASS / 2 DEFERRED-PHASE-7 / Phase 4 Verdict PASS with carry-forwards)
+last_updated: "2026-05-07T18:30:00.000Z"
+last_activity: 2026-05-07 -- Phase 04 Plan 05 executed (manual verification flow closed; Phase 4 verdict PASS)
 progress:
   total_phases: 7
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 31
-  completed_plans: 30
-  percent: 97
+  completed_plans: 31
+  percent: 100
 ---
 
 # Project State
@@ -25,34 +25,35 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 
 ## Current Position
 
-Phase: 04 (mobile-responsive) — EXECUTING
-Plan: 5 of 5 (Plans 01 + 02 + 03 + 04 complete; Wave 2 complete)
-Status: Executing Phase 04
-Last activity: 2026-05-07 -- Phase 04 Plan 04 complete (Wave 2c PrintFooter RSC primitive + layout mount; Wave 2 done; only 04-05 manual verification remains)
+Phase: 04 (mobile-responsive) — COMPLETE (verdict PASS)
+Plan: 5 of 5 (all Phase 4 plans complete; Plan 04-05 manual verification closed with verdict PASS)
+Status: Phase 4 closed; ready for Phase 5 (SEO + Accessibility Polish)
+Last activity: 2026-05-07 -- Phase 04 Plan 05 complete (9 manual gates resolved: 7 PASS / 2 DEFERRED-PHASE-7; Phase 4 Verdict PASS with carry-forwards)
 
-Progress: [███████████████░] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 4/5
+Progress: [████████████████] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ (5/5)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 4 (this milestone — execute-phase metrics)
-- Average duration: 3m 30s
-- Total execution time: 14m 0s
+- Total plans completed: 5 (this milestone — execute-phase metrics)
+- Average duration: ~3m 0s (excluding 04-05 reviewer wall-clock)
+- Total execution time: ~14m 0s agent-side + ~30m reviewer wall-clock for Plan 04-05 manual verification
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 04    | 4     | 14m 0s | 3m 30s |
+| 04    | 5     | 14m 0s agent + 30m reviewer | n/a (mixed agent/manual) |
 
 **Recent Trend:**
 
-- Last plan: 04-04 (2m 14s) — 2 tasks (1 TDD), 3 commits, 2 files created + 1 modified, +70 lines (20 component + 42 test + 8 layout net), 4 new test cases (PrintFooter), 97 vitest tests passing (up from 93)
-- Previous: 04-03 (3m 29s) — 3 tasks (2 TDD), 5 commits, 4 files created + 4 modified, net +84 lines (+125 created, -41 sidebar shrink), 12 new test cases (6 status-block + 5 about-view + 1 sidebar STATUS lock), 93 vitest tests passing (up from 81)
+- Last plan: 04-05 (~30m reviewer wall-clock; agent-side <2min) — 4 tasks (1 automated battery + 3 manual checkpoints), 6 commits, 1 file created (SUMMARY) + 4 modified (VERIFICATION + STATE + ROADMAP + REQUIREMENTS) + 2 mid-plan amendment files (globals.css + check-sidebar-redistribution.mjs in commit bf38cf3), Phase 4 verdict PASS, 9 manual gates resolved (7 PASS / 2 DEFERRED-PHASE-7)
+- Previous: 04-04 (2m 14s) — 2 tasks (1 TDD), 3 commits, 2 files created + 1 modified, +70 lines (20 component + 42 test + 8 layout net), 4 new test cases (PrintFooter), 97 vitest tests passing (up from 93)
+- Earlier: 04-03 (3m 29s) — 3 tasks (2 TDD), 5 commits, 4 files created + 4 modified, net +84 lines (+125 created, -41 sidebar shrink), 12 new test cases (6 status-block + 5 about-view + 1 sidebar STATUS lock), 93 vitest tests passing (up from 81)
 - Earlier: 04-02 (3m 54s) — 3 tasks (1 TDD), 4 commits, 2 files created + 5 modified, +354 lines, 14 new test cases, 81 vitest tests passing
 - Earliest: 04-01 (4m 23s) — 3 tasks, 5 files modified, +279 lines on globals.css, 3 new audit scripts
-- Trend: clean execution, all gates green (lint + build 12 routes + 97 vitest + 3 audit scripts + check:mobile + check-placeholders); Plan 04-04 was the smallest Wave 2 plan (1 RSC + 1 mount + 1 test) and the fastest at 2m 14s
+- Trend: clean execution, all gates green (lint + build 12 routes + 97 vitest + 3 audit scripts + check:mobile + check-placeholders); Plan 04-05 surfaced one mid-plan CSS bug (orphan grid track) caught by Gate 4 visual review and fixed inline (commit bf38cf3) with audit-script invariant added — Phase 4 contract strengthened, not expanded
 
 *Updated after each plan completion*
 
@@ -80,6 +81,9 @@ Recent decisions affecting current work:
 - Phase 4 Plan 04: PrintFooter stays RSC (no "use client") — content is fully static (props from build-time env + portfolio-data const); CSS visibility was shipped in Plan 04-01. Build gate enforces RSC purity (any accidental client-only code in the component would surface as a Next.js boundary error). T-04-09 mitigated.
 - Phase 4 Plan 04: Env-var resolution lives in the parent (layout.tsx), NOT inside PrintFooter — keeps the component pure/testable and matches the same defensive pattern lib/api.ts uses for NEXT_PUBLIC_SITE_URL with localhost fallback. PrintFooter accepts siteUrl as a prop and renders it verbatim; unit tests can construct it with any string and assert exact output.
 - Phase 4 Plan 04: PrintFooter mounts as the LAST child of the layout return fragment (after ExplorerDrawer + CommandPalette). Plan 04-01 print stylesheet's `margin-top: 32px` then naturally spaces it away from the (hidden-when-printing) preceding chrome. The Wave 2 mount sequence is now: skip-link → TopBar → terminal-body → ExplorerDrawer (Plan 04-02) → CommandPalette (Phase 2) → PrintFooter (Plan 04-04).
+- Phase 4 Plan 05: Phase 4 verdict is PASS even though Gate 9 surfaced friction (recruiter self-simulation took 8–10s to find contact info because the hamburger menu was not discoverable on first glance). The 8–10s number is within the < 10s target — the friction is Phase 5 fuel, not a Phase 4 fail. Lightest fix: lift the 3-row socials block (email + github + linkedin) inline onto /about beneath the lead paragraph; pattern already exists in app/components/views/contact-view.tsx. Defer to Phase 5 to avoid Phase 4 scope creep.
+- Phase 4 Plan 05: Real-device gates 7 (iPhone Safari) + 8 (Android Chrome) deferred to Phase 7 production recruiter test (DEPLOY-04) — no physical devices during Phase 4 close, and DEPLOY-04 against the production URL is the stronger validation. Pre-authorized by 04-CONTEXT.md `<deferred>`.
+- Phase 4 Plan 05: Mid-plan CSS amendment (commit bf38cf3) caught an orphan-grid-track whitespace bug at phone widths via Gate 4 visual review — `.terminal-body` retained its desktop `grid-template-columns: 240px 1fr` after `.sidebar` was hidden via display:none in `@media (max-width: 960px)`, leaking a 240px empty column onto the mobile layout. Fixed by adding `.terminal-body { grid-template-columns: 1fr; }` inside the existing mobile @media block; check-sidebar-redistribution.mjs gained a 6th invariant scoped to that block to lock the fix. Strengthens the Phase 4 contract — same regression cannot recur silently.
 
 ### Pending Todos
 
@@ -98,14 +102,15 @@ Open questions surfaced during research synthesis (status updated 2026-05-06 aft
 
 ## Deferred Items
 
-Items acknowledged and carried forward from previous milestone close:
+Items acknowledged and carried forward to later phases:
 
 | Category | Item | Status | Deferred At |
 |----------|------|--------|-------------|
-| *(none — first milestone)* | | | |
+| Phase 4 → Phase 5 | Gate 9 friction: recruiter self-simulation took 8–10s to find contact info because the hamburger menu was not discoverable on first glance. Lightest fix: lift the 3-row socials block (email + github + linkedin) inline onto /about beneath the lead paragraph. Pattern already exists in app/components/views/contact-view.tsx. | Open — Phase 5 candidate work | 2026-05-07 (Plan 04-05) |
+| Phase 4 → Phase 7 | Real-device gates 7 (iPhone Safari) + 8 (Android Chrome): confirm dvh/svh handling on actual devices, soft-keyboard behavior in palette, address-bar overlap at top bar. | Bundled with DEPLOY-04 production recruiter test | 2026-05-07 (Plan 04-05) |
 
 ## Session Continuity
 
-Last session: 2026-05-07T17:14:20.000Z
-Stopped at: Phase 4 Plan 04 complete (Wave 2c — PrintFooter RSC primitive + layout mount with NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000" fallback + PROFILE.email; 4 unit tests; 22 files / 97 vitest tests). Wave 2 complete (04-02 + 04-03 + 04-04 all landed). Remaining Phase 4 plan: 04-05 manual verification (cross-viewport screenshot review at 375 / 768 / 1024 + per-route print preview review on all 7 views + 5-second recruiter dry-run on 375px localhost).
-Resume file: .planning/phases/04-mobile-responsive/04-05-PLAN.md
+Last session: 2026-05-07T18:30:00.000Z
+Stopped at: Phase 4 complete (Plan 04-05 manual verification closed with verdict PASS — 9 manual gates resolved: 7 PASS / 2 DEFERRED-PHASE-7; mid-plan CSS amendment in commit bf38cf3 caught an orphan-grid-track bug via Gate 4 visual review and locked the fix with a 6th audit invariant; full automated battery green throughout — 22 vitest files / 97 tests, lint clean, build clean across 12 routes, all 3 mobile audits + check-placeholders passing). All 5 Phase 4 plans landed. Phase 4 → Phase 5 carry-forward: Gate 9 friction (inline socials on /about candidate). Phase 4 → Phase 7 carry-forward: real-device gates 7 + 8 bundled with DEPLOY-04 production recruiter test.
+Resume file: (Phase 5 not yet planned — next command: /gsd-discuss-phase 5 or /gsd-plan-phase 5)

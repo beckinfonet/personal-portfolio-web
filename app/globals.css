@@ -1323,6 +1323,13 @@ a:hover {
     display: none;
   }
 
+  /* Collapse the 240px sidebar grid track once the sidebar is hidden — without this,
+     terminal-main is still bound to the 1fr column and the 240px track becomes dead
+     whitespace at the right edge of every page on phone/tablet widths. */
+  .terminal-body {
+    grid-template-columns: 1fr;
+  }
+
   /* Main content reclaims width and tightens padding above the fold (MOBILE-03) */
   .terminal-main {
     max-width: 100%;

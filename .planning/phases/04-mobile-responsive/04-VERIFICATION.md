@@ -117,17 +117,17 @@ If you don't have devices on hand, mark these as **DEFERRED-PHASE-7** — that's
 
 | Gate | What it checks | Requirement | Viewport | Result | Notes |
 |------|----------------|-------------|----------|--------|-------|
-| 1 | Resume button visible without scrolling on the home page | MOBILE-03 | 375 | PENDING | {observation} |
-| 2 | Hamburger menu opens as a bottom panel | MOBILE-02 | 375 / 768 | PENDING | {observation} |
-| 3 | `⌘K` search opens as a bottom panel | PALETTE-05 | 375 / 768 | PENDING | {observation} |
-| 4a | "Available for hire" block visible at bottom of home page | MOBILE-04 | 375 / 768 | PENDING | {observation} |
-| 4b | "Available for hire" block hidden on the other 6 pages | MOBILE-04 | 375 (×6) | PENDING | {observation} |
-| 4c | At desktop size, "Available for hire" block only in left sidebar (not duplicated in page body) | MOBILE-04 | 1024 | PENDING | {observation} |
-| 5 | Print preview is clean on all 7 pages | A11Y-09 | Cmd+P per page | PENDING | {see per-route table below} |
-| 6 | With Reduce Motion ON, menus open instantly with no slide | A11Y-09 (motion) | 375 + Reduce Motion | PENDING | {observation} |
-| 7 | iPhone Safari real-device behaves correctly | MOBILE-02 / PALETTE-05 | iPhone Safari | PENDING | {observation or DEFERRED-PHASE-7} |
-| 8 | Android Chrome real-device behaves correctly | MOBILE-02 / PALETTE-05 | Android Chrome | PENDING | {observation or DEFERRED-PHASE-7} |
-| 9 | 5-second recruiter dry-run finds resume + contact quickly | MOBILE-01..05 / SHELL-03 | 375 localhost | PENDING | time-to-resume: {Ns}; time-to-contact: {Ns}; friction: {note} |
+| 1 | Resume button visible without scrolling on the home page | MOBILE-03 | 375 | PASS | Reviewer-confirmed at iPhone SE 375×667; `↓ resume.pdf` button visible above the fold. |
+| 2 | Hamburger menu opens as a bottom panel | MOBILE-02 | 375 / 768 | PASS | Reviewer-confirmed at 375 and 768; drawer slides up from bottom, backdrop dims, file-row tap closes drawer + navigates. |
+| 3 | `⌘K` search opens as a bottom panel | PALETTE-05 | 375 / 768 | PASS | Reviewer-confirmed at 375 and 768; bottom-sheet anchored to viewport bottom, sticky search input, type-to-filter works. |
+| 4a | "Available for hire" block visible at bottom of home page | MOBILE-04 | 375 / 768 | PASS | Reviewer-confirmed `.about-status-mobile` renders at bottom of `/about` after `bf38cf3` grid-track fix. |
+| 4b | "Available for hire" block hidden on the other 6 pages | MOBILE-04 | 375 (×6) | PASS | Reviewer-confirmed STATUS not rendered on `/projects`, `/stack`, `/experience`, `/writing`, `/contact`, `/shipped` at phone width. |
+| 4c | At desktop size, "Available for hire" block only in left sidebar (not duplicated in page body) | MOBILE-04 | 1024 | PASS | Reviewer-confirmed at 1024; sidebar STATUS visible, no double-render in about-view body. |
+| 5 | Print preview is clean on all 7 pages | A11Y-09 | Cmd+P per page | PENDING | See per-route table — awaiting reviewer Cmd+P walk-through. |
+| 6 | With Reduce Motion ON, menus open instantly with no slide | A11Y-09 (motion) | 375 + Reduce Motion | PASS | Reviewer-confirmed; drawer + palette appear without slide animation when Reduce Motion is ON. |
+| 7 | iPhone Safari real-device behaves correctly | MOBILE-02 / PALETTE-05 | iPhone Safari | DEFERRED-PHASE-7 | No physical device available during Phase 4 review; defer to Phase 7 production recruiter test (per 04-CONTEXT `<deferred>`). |
+| 8 | Android Chrome real-device behaves correctly | MOBILE-02 / PALETTE-05 | Android Chrome | DEFERRED-PHASE-7 | No physical device available during Phase 4 review; defer to Phase 7. |
+| 9 | 5-second recruiter dry-run finds resume + contact quickly | MOBILE-01..05 / SHELL-03 | 375 localhost | PENDING | Awaiting reviewer dry-run + numbers. |
 
 ### Gate 5 — Print Preview Per-Route Detail
 

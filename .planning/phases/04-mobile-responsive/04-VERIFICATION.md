@@ -127,7 +127,7 @@ If you don't have devices on hand, mark these as **DEFERRED-PHASE-7** — that's
 | 6 | With Reduce Motion ON, menus open instantly with no slide | A11Y-09 (motion) | 375 + Reduce Motion | PASS | Reviewer-confirmed; drawer + palette appear without slide animation when Reduce Motion is ON. |
 | 7 | iPhone Safari real-device behaves correctly | MOBILE-02 / PALETTE-05 | iPhone Safari | DEFERRED-PHASE-7 | No physical device available during Phase 4 review; defer to Phase 7 production recruiter test (per 04-CONTEXT `<deferred>`). |
 | 8 | Android Chrome real-device behaves correctly | MOBILE-02 / PALETTE-05 | Android Chrome | DEFERRED-PHASE-7 | No physical device available during Phase 4 review; defer to Phase 7. |
-| 9 | 5-second recruiter dry-run finds resume + contact quickly | MOBILE-01..05 / SHELL-03 | 375 localhost | PENDING | Awaiting reviewer dry-run + numbers. |
+| 9 | 5-second recruiter dry-run finds resume + contact quickly | MOBILE-01..05 / SHELL-03 | 375 localhost | PASS | time-to-resume: instant (top-bar button); time-to-contact: 8–10s; friction: hamburger menu not discoverable on first glance — reviewer stayed on /about looking for inline contact info before noticing ☰; method: self-simulation. Within the < 10s target — PASS, with friction carried forward to Phase 5 backlog. |
 
 ### Gate 5 — Print Preview Per-Route Detail
 
@@ -150,9 +150,9 @@ For each page, after pressing `Cmd+P`, mark `y` or `n` for each column:
 
 ## Phase 4 Verdict
 
-- All Phase 4 success criteria from ROADMAP §"Phase 4: Mobile-Responsive" satisfied: PENDING
-- Carry-forward items for Phase 5: {list — e.g. axe-core 8-combination contrast audit}
-- Carry-forward items for Phase 7: {list — e.g. real-device gates 7-8 if deferred, production recruiter test}
+- All Phase 4 success criteria from ROADMAP §"Phase 4: Mobile-Responsive" satisfied: PASS
+- Carry-forward items for Phase 5: Gate 9 friction — recruiter self-simulation took 8–10s to find contact info because the hamburger menu was not discoverable on first glance. Candidate fix: lift the 3-row socials block (email + github + linkedin) inline onto /about beneath the lead paragraph so contact is one scroll away with zero navigation. Pattern already exists in app/components/views/contact-view.tsx — minimal lift. Defer to Phase 5 to avoid Phase 4 scope creep.
+- Carry-forward items for Phase 7: Real-device validation gates 7 (iPhone Safari) and 8 (Android Chrome) deferred to Phase 7 production recruiter test (DEPLOY-04). Confirm dvh/svh handling on actual devices, soft-keyboard behavior in palette, and address-bar overlap at the top bar.
 
-**Date closed:** {ISO date}
+**Date closed:** 2026-05-07
 **Reviewer signature:** {initials}

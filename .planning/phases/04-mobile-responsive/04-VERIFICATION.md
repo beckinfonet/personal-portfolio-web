@@ -123,7 +123,7 @@ If you don't have devices on hand, mark these as **DEFERRED-PHASE-7** — that's
 | 4a | "Available for hire" block visible at bottom of home page | MOBILE-04 | 375 / 768 | PASS | Reviewer-confirmed `.about-status-mobile` renders at bottom of `/about` after `bf38cf3` grid-track fix. |
 | 4b | "Available for hire" block hidden on the other 6 pages | MOBILE-04 | 375 (×6) | PASS | Reviewer-confirmed STATUS not rendered on `/projects`, `/stack`, `/experience`, `/writing`, `/contact`, `/shipped` at phone width. |
 | 4c | At desktop size, "Available for hire" block only in left sidebar (not duplicated in page body) | MOBILE-04 | 1024 | PASS | Reviewer-confirmed at 1024; sidebar STATUS visible, no double-render in about-view body. |
-| 5 | Print preview is clean on all 7 pages | A11Y-09 | Cmd+P per page | PENDING | See per-route table — awaiting reviewer Cmd+P walk-through. |
+| 5 | Print preview is clean on all 7 pages | A11Y-09 | Cmd+P per page | PASS | Reviewer-confirmed all 7 routes via Cmd+P preview — see per-route table below. |
 | 6 | With Reduce Motion ON, menus open instantly with no slide | A11Y-09 (motion) | 375 + Reduce Motion | PASS | Reviewer-confirmed; drawer + palette appear without slide animation when Reduce Motion is ON. |
 | 7 | iPhone Safari real-device behaves correctly | MOBILE-02 / PALETTE-05 | iPhone Safari | DEFERRED-PHASE-7 | No physical device available during Phase 4 review; defer to Phase 7 production recruiter test (per 04-CONTEXT `<deferred>`). |
 | 8 | Android Chrome real-device behaves correctly | MOBILE-02 / PALETTE-05 | Android Chrome | DEFERRED-PHASE-7 | No physical device available during Phase 4 review; defer to Phase 7. |
@@ -140,13 +140,13 @@ For each page, after pressing `Cmd+P`, mark `y` or `n` for each column:
 
 | Page | White bg | Serif body | Code stays mono | Chrome hidden | Footer present | Result |
 |------|----------|------------|-----------------|---------------|----------------|--------|
-| /            (home / about) | y/n | y/n | y/n | y/n | y/n | PENDING |
-| /projects                   | y/n | y/n | y/n (tech chips) | y/n | y/n | PENDING |
-| /stack                      | y/n | y/n | y/n (JSON block) | y/n | y/n | PENDING |
-| /experience                 | y/n | y/n | y/n (hex codes)  | y/n | y/n | PENDING |
-| /writing                    | y/n | y/n | y/n | y/n | y/n | PENDING |
-| /contact                    | y/n | y/n | y/n | y/n | y/n | PENDING |
-| /shipped                    | y/n | y/n | y/n | y/n | y/n | PENDING |
+| /            (home / about) | y | y | y | y | y | PASS |
+| /projects                   | y | y | y (tech chips) | y | y | PASS |
+| /stack                      | y | y | y (JSON block) | y | y | PASS |
+| /experience                 | y | y | y (hex codes)  | y | y | PASS |
+| /writing                    | y | y | y | y | y | PASS |
+| /contact                    | y | y | y | y | y | PASS |
+| /shipped                    | y | y | y | y | y | PASS |
 
 ## Phase 4 Verdict
 

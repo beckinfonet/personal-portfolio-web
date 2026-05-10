@@ -1,9 +1,52 @@
+import { render } from "@testing-library/react";
 import { describe, test, expect } from "vitest";
-// SCAFFOLD: Wave 0 stub. Real assertions land in Plan 05-05 (depends on
-// app/components/shell/json-ld-person.tsx). For now, prove the file is wired into
-// vitest discovery so Plan 05-05 can extend in place.
-describe("JsonLdPerson (scaffold)", () => {
-  test("scaffold sentinel — real tests added in Plan 05-05", () => {
-    expect(true).toBe(true);
+import { JsonLdPerson } from "./json-ld-person";
+
+describe("JsonLdPerson", () => {
+  test("renders a <script> element", () => {
+    const { container } = render(<JsonLdPerson />);
+    const script = container.querySelector("script");
+    expect(script).not.toBeNull();
+  });
+
+  test("script carries type='application/ld+json'", () => {
+    const { container } = render(<JsonLdPerson />);
+    const script = container.querySelector("script");
+    expect(script).toHaveAttribute("type", "application/ld+json");
+  });
+
+  test("script innerHTML is valid JSON", () => {
+    const { container } = render(<JsonLdPerson />);
+    const script = container.querySelector("script");
+    expect(script).not.toBeNull();
+    expect(() => JSON.parse(script!.innerHTML)).not.toThrow();
+  });
+
+  test("parsed JSON has @type: Person (SEO-02)", () => {
+    const { container } = render(<JsonLdPerson />);
+    const script = container.querySelector("script");
+    const parsed = JSON.parse(script!.innerHTML);
+    expect(parsed["@type"]).toBe("Person");
+    expect(parsed["@context"]).toBe("https://schema.org");
+  });
+
+  test("parsed JSON has name, jobTitle, url, email, sameAs keys (D-08)", () => {
+    const { container } = render(<JsonLdPerson />);
+    const script = container.querySelector("script");
+    const parsed = JSON.parse(script!.innerHTML);
+    expect(parsed).toHaveProperty("name");
+    expect(parsed).toHaveProperty("jobTitle");
+    expect(parsed).toHaveProperty("url");
+    expect(parsed).toHaveProperty("email");
+    expect(parsed).toHaveProperty("sameAs");
+    expect(Array.isArray(parsed.sameAs)).toBe(true);
+  });
+
+  test("script innerHTML escapes < to \\u003c (Pitfall 6 — XSS prevention)", () => {
+    const { container } = render(<JsonLdPerson />);
+    const script = container.querySelector("script");
+    // The rendered innerHTML should NOT contain a literal `<` character —
+    // every `<` (none in current PROFILE, but future-proofing) is encoded.
+    expect(script!.innerHTML).not.toMatch(/</);
   });
 });

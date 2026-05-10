@@ -150,6 +150,16 @@ a:hover {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* Phase 5 D-16 — belt-and-suspenders universal reset.
+     Catches every keyframe + transition automatically — including future additions.
+     CRITICAL: 0.01ms not 0ms (Pitfall 7 — some browsers treat 0 as falsy). */
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Existing targeted rules — kept for documenting historical intent (D-17). */
   .cursor { animation: none; }
   .content-block { animation: none; }
   .breadcrumb-hint { transition: none; opacity: 1; }

@@ -6,6 +6,7 @@ import type { ReactNode } from "react";
 import { TopBar } from "@/app/components/shell/top-bar";
 import { Sidebar } from "@/app/components/shell/sidebar";
 import { CommandPalette } from "@/app/components/shell/command-palette";
+import { ConsoleSignature } from "@/app/components/shell/console-signature";
 import { ExplorerDrawer } from "@/app/components/shell/explorer-drawer";
 import { Breadcrumb } from "@/app/components/shell/breadcrumb";
 import { PrintFooter } from "@/app/components/print-footer";
@@ -55,6 +56,10 @@ export default function TerminalLayout({ children }: { children: ReactNode }) {
 
       {/* CommandPalette: mounted once outside terminal-body so its z-index overlay covers everything */}
       <CommandPalette />
+
+      {/* ConsoleSignature: 7th client island; fires console.log on first paint (DEV-01).
+          MUST be in (terminal)/layout — NOT in app/layout (Pitfall 8 — would collapse RSC tree). */}
+      <ConsoleSignature />
 
       {/* PrintFooter: always in DOM; visible only via @media print (Plan 04-04 / A11Y-09) */}
       <PrintFooter

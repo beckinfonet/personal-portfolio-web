@@ -34,3 +34,43 @@ describe("AboutView", () => {
     expect(screen.getByText("8y 125d")).toBeInTheDocument();
   });
 });
+
+describe("AboutView — Phase 4 carry-forward inline socials (D-31..D-34)", () => {
+  test("renders <AboutSocials /> wrapper with role=group + aria-label", () => {
+    const { container } = render(<AboutView profile={PROFILE} uptime="8y 125d" />);
+    const block = container.querySelector(".about-socials-card");
+    expect(block).not.toBeNull();
+    expect(block).toHaveAttribute("role", "group");
+    expect(block).toHaveAttribute("aria-label", "Quick contact");
+  });
+
+  test("renders EMAIL row with mailto: href to PROFILE.email", () => {
+    render(<AboutView profile={PROFILE} uptime="8y 125d" />);
+    const link = screen.getByRole("link", { name: /send email to/i });
+    expect(link).toHaveAttribute("href", `mailto:${PROFILE.email}`);
+  });
+
+  test("renders GITHUB row as ExternalLink with target=_blank when URL is real", () => {
+    render(<AboutView profile={PROFILE} uptime="8y 125d" />);
+    const link = screen.getByRole("link", { name: /open github/i });
+    expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveAttribute("rel", "noopener noreferrer");
+  });
+
+  test("renders LINKEDIN row as ExternalLink when URL is real (current PROFILE.socials)", () => {
+    render(<AboutView profile={PROFILE} uptime="8y 125d" />);
+    const link = screen.getByRole("link", { name: /open linkedin/i });
+    expect(link).toHaveAttribute("target", "_blank");
+  });
+
+  test("AboutSocials renders BEFORE .about-cards in the DOM (D-31 scan path)", () => {
+    const { container } = render(<AboutView profile={PROFILE} uptime="8y 125d" />);
+    const block = container.querySelector(".about-socials-card");
+    const cards = container.querySelector(".about-cards");
+    expect(block).not.toBeNull();
+    expect(cards).not.toBeNull();
+    // compareDocumentPosition bitmask 4 means "block precedes cards"
+    const position = block!.compareDocumentPosition(cards!);
+    expect(position & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+});

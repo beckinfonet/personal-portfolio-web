@@ -4,6 +4,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/app/components/shell/theme-provider";
 import { ShellStateProvider } from "@/app/components/shell/shell-state-provider";
 import { AccentBootstrapScript } from "@/app/components/shell/accent-bootstrap-script";
+import { HeadComment } from "@/app/components/shell/head-comment";
+import { JsonLdPerson } from "@/app/components/shell/json-ld-person";
 
 // Use logical OR (||) not nullish coalescing (??) — empty-string env vars bypass ??
 // and produce `Invalid URL` runtime errors. (Phase 1 D-Pitfall D — do not change.)
@@ -62,6 +64,10 @@ export default function RootLayout({
             and sets --accent-hue on <html>. next-themes auto-injects its own theme script;
             do NOT add a second manual theme script here. (D-08) */}
         <AccentBootstrapScript />
+        {/* HeadComment: 6-line lowercase letter for view-source: viewers (DEV-02 / Phase 5). */}
+        <HeadComment />
+        {/* JsonLdPerson: schema.org Person on every route (SEO-02 / Phase 5). XSS-safe payload. */}
+        <JsonLdPerson />
       </head>
       <body>
         <ThemeProvider

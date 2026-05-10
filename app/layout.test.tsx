@@ -1,5 +1,7 @@
 import { describe, test, expect } from "vitest";
+import { renderToStaticMarkup } from "react-dom/server";
 import { metadata, viewport } from "./layout";
+import RootLayout from "./layout";
 
 describe("RootLayout metadata", () => {
   test("metadata.twitter.card is summary_large_image (SEO-01 / D-06)", () => {
@@ -50,5 +52,36 @@ describe("RootLayout viewport (SEO-04 / D-15 corrected per Pitfall 3)", () => {
       .themeColor!;
     const light = themeColor.find((t) => t.media.includes("light"));
     expect(light?.color).toBe("#f4f2ea");
+  });
+});
+
+describe("RootLayout <head> mount points (Phase 5 SEO-02 + DEV-02)", () => {
+  // RootLayout renders <html><head>...</head><body>...</body></html>. RTL refuses
+  // to mount that into a <div> container ("<html> cannot be a child of <div>"), so
+  // we serialize the JSX tree to an HTML string via react-dom/server and grep the
+  // markup. Same contract — "<JsonLdPerson /> + <HeadComment /> are mounted in
+  // <head>" — different inspection surface (string vs DOM).
+  function renderLayoutMarkup(): string {
+    return renderToStaticMarkup(
+      <RootLayout>
+        <div>child</div>
+      </RootLayout>
+    );
+  }
+
+  test("renders <JsonLdPerson /> as a child of <head>", () => {
+    const html = renderLayoutMarkup();
+    // <script type="application/ld+json"> is unique to JsonLdPerson in this layout
+    expect(html).toMatch(
+      /<head>[\s\S]*<script type="application\/ld\+json"[\s\S]*<\/head>/
+    );
+  });
+
+  test("renders <HeadComment /> noscript host as a child of <head>", () => {
+    const html = renderLayoutMarkup();
+    // <noscript> is unique to HeadComment in this layout; its payload is the
+    // 6-line lowercase greeting (rendered as raw HTML inside the <noscript>).
+    expect(html).toMatch(/<head>[\s\S]*<noscript>[\s\S]*<\/head>/);
+    expect(html).toContain("hello, you found the source");
   });
 });

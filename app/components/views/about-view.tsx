@@ -7,6 +7,7 @@
 import type { Profile } from "@/lib/types";
 import { ExternalLink } from "@/app/components/primitives/external-link";
 import { StatusBlock } from "@/app/components/shell/status-block";
+import { AboutSocials } from "./about-socials";
 
 interface AboutViewProps {
   profile: Profile;
@@ -25,6 +26,8 @@ export function AboutView({ profile, uptime }: AboutViewProps) {
           {para}
         </p>
       ))}
+
+      <AboutSocials profile={profile} />
 
       <div className="about-cards">
         {profile.highlights.map((h, i) => (

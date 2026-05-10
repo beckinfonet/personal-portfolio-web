@@ -51,16 +51,28 @@ describe("AboutView — Phase 4 carry-forward inline socials (D-31..D-34)", () =
   });
 
   test("renders GITHUB row as ExternalLink with target=_blank when URL is real", () => {
-    render(<AboutView profile={PROFILE} uptime="8y 125d" />);
-    const link = screen.getByRole("link", { name: /open github/i });
+    const { container } = render(<AboutView profile={PROFILE} uptime="8y 125d" />);
+    /* Scope to the AboutSocials block — the existing about-cta-row also exposes
+       an ExternalLink with aria-label /open github/i, so a top-level getByRole
+       would match multiple elements. The AboutSocials contract is the row-link
+       inside .about-socials-card. */
+    const block = container.querySelector(".about-socials-card");
+    expect(block).not.toBeNull();
+    const link = block!.querySelector('a[aria-label^="Open GitHub"]');
+    expect(link).not.toBeNull();
     expect(link).toHaveAttribute("target", "_blank");
     expect(link).toHaveAttribute("rel", "noopener noreferrer");
   });
 
   test("renders LINKEDIN row as ExternalLink when URL is real (current PROFILE.socials)", () => {
-    render(<AboutView profile={PROFILE} uptime="8y 125d" />);
-    const link = screen.getByRole("link", { name: /open linkedin/i });
+    const { container } = render(<AboutView profile={PROFILE} uptime="8y 125d" />);
+    /* Same scoping as the GITHUB row — see comment above. */
+    const block = container.querySelector(".about-socials-card");
+    expect(block).not.toBeNull();
+    const link = block!.querySelector('a[aria-label^="Open LinkedIn"]');
+    expect(link).not.toBeNull();
     expect(link).toHaveAttribute("target", "_blank");
+    expect(link).toHaveAttribute("rel", "noopener noreferrer");
   });
 
   test("AboutSocials renders BEFORE .about-cards in the DOM (D-31 scan path)", () => {

@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Phase 5 UI-SPEC approved (5/6 PASS, 1 FLAG: inherited spacing scale, non-blocking)"
-last_updated: "2026-05-10T15:45:02.203Z"
-last_activity: 2026-05-10 -- Phase 5 planning complete
+stopped_at: "Plan 05-01 complete (Wave 0 scaffold foundation)"
+last_updated: "2026-05-10T16:01:48Z"
+last_activity: 2026-05-10 -- Plan 05-01 complete (Wave 0 foundation — devdeps, fonts, 9 scaffolds)
 progress:
   total_phases: 7
   completed_phases: 4
   total_plans: 39
-  completed_plans: 31
-  percent: 79
+  completed_plans: 32
+  percent: 82
 ---
 
 # Project State
@@ -21,34 +21,36 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-06)
 
 **Core value:** A distinctive personal portfolio that signals engineering craft through a terminal/IDE aesthetic — without making non-technical recruiters work to find the resume and contact info.
-**Current focus:** Phase 04 — mobile-responsive
+**Current focus:** Phase 05 — seo-accessibility-polish
 
 ## Current Position
 
-Phase: 04 (mobile-responsive) — COMPLETE (verdict PASS)
-Plan: 5 of 5 (all Phase 4 plans complete; Plan 04-05 manual verification closed with verdict PASS)
+Phase: 05 (seo-accessibility-polish) — EXECUTING
+Plan: 2 of 8
 Status: Ready to execute
-Last activity: 2026-05-10 -- Phase 5 planning complete
+Last activity: 2026-05-10
 
-Progress: [████████████████] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ (5/5)
+Progress: [████████░░] 82% · Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 (1/8)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 5 (this milestone — execute-phase metrics)
-- Average duration: ~3m 0s (excluding 04-05 reviewer wall-clock)
-- Total execution time: ~14m 0s agent-side + ~30m reviewer wall-clock for Plan 04-05 manual verification
+- Total plans completed: 6 (this milestone — execute-phase metrics)
+- Average duration: ~3m 30s (excluding 04-05 reviewer wall-clock)
+- Total execution time: ~20m agent-side + ~30m reviewer wall-clock for Plan 04-05 manual verification
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 04    | 5     | 14m 0s agent + 30m reviewer | n/a (mixed agent/manual) |
+| 05    | 1     | ~6m agent | ~6m (Wave 0 scaffold-heavy, 3 Rule-3 tooling auto-fixes) |
 
 **Recent Trend:**
 
-- Last plan: 04-05 (~30m reviewer wall-clock; agent-side <2min) — 4 tasks (1 automated battery + 3 manual checkpoints), 6 commits, 1 file created (SUMMARY) + 4 modified (VERIFICATION + STATE + ROADMAP + REQUIREMENTS) + 2 mid-plan amendment files (globals.css + check-sidebar-redistribution.mjs in commit bf38cf3), Phase 4 verdict PASS, 9 manual gates resolved (7 PASS / 2 DEFERRED-PHASE-7)
+- Last plan: 05-01 (~6m) — 3 tasks (all autonomous), 3 task commits + final-metadata commit, 13 files created (3 fonts/license + 1 playwright config + 1 contrast spec + 4 vitest scaffolds + 4 smoke scripts) + 5 modified (package.json, package-lock.json, .gitignore, vitest.config.ts, vitest.setup.ts), 4 new vitest scaffold files (101 tests passing up from 97), 4 smoke scripts wired (1 passes today, 3 fail-loud by design until Wave 1+ ships), 3 Rule-3 deviations (added @playwright/test devdep, excluded tests/ from vitest, mocked next/font/google) — all tooling/test-pipeline unblocks, no production-code changes
+- Previous: 04-05 (~30m reviewer wall-clock; agent-side <2min) — 4 tasks (1 automated battery + 3 manual checkpoints), 6 commits, 1 file created (SUMMARY) + 4 modified (VERIFICATION + STATE + ROADMAP + REQUIREMENTS) + 2 mid-plan amendment files (globals.css + check-sidebar-redistribution.mjs in commit bf38cf3), Phase 4 verdict PASS, 9 manual gates resolved (7 PASS / 2 DEFERRED-PHASE-7)
 - Previous: 04-04 (2m 14s) — 2 tasks (1 TDD), 3 commits, 2 files created + 1 modified, +70 lines (20 component + 42 test + 8 layout net), 4 new test cases (PrintFooter), 97 vitest tests passing (up from 93)
 - Earlier: 04-03 (3m 29s) — 3 tasks (2 TDD), 5 commits, 4 files created + 4 modified, net +84 lines (+125 created, -41 sidebar shrink), 12 new test cases (6 status-block + 5 about-view + 1 sidebar STATUS lock), 93 vitest tests passing (up from 81)
 - Earlier: 04-02 (3m 54s) — 3 tasks (1 TDD), 4 commits, 2 files created + 5 modified, +354 lines, 14 new test cases, 81 vitest tests passing
@@ -84,6 +86,11 @@ Recent decisions affecting current work:
 - Phase 4 Plan 05: Phase 4 verdict is PASS even though Gate 9 surfaced friction (recruiter self-simulation took 8–10s to find contact info because the hamburger menu was not discoverable on first glance). The 8–10s number is within the < 10s target — the friction is Phase 5 fuel, not a Phase 4 fail. Lightest fix: lift the 3-row socials block (email + github + linkedin) inline onto /about beneath the lead paragraph; pattern already exists in app/components/views/contact-view.tsx. Defer to Phase 5 to avoid Phase 4 scope creep.
 - Phase 4 Plan 05: Real-device gates 7 (iPhone Safari) + 8 (Android Chrome) deferred to Phase 7 production recruiter test (DEPLOY-04) — no physical devices during Phase 4 close, and DEPLOY-04 against the production URL is the stronger validation. Pre-authorized by 04-CONTEXT.md `<deferred>`.
 - Phase 4 Plan 05: Mid-plan CSS amendment (commit bf38cf3) caught an orphan-grid-track whitespace bug at phone widths via Gate 4 visual review — `.terminal-body` retained its desktop `grid-template-columns: 240px 1fr` after `.sidebar` was hidden via display:none in `@media (max-width: 960px)`, leaking a 240px empty column onto the mobile layout. Fixed by adding `.terminal-body { grid-template-columns: 1fr; }` inside the existing mobile @media block; check-sidebar-redistribution.mjs gained a 6th invariant scoped to that block to lock the fix. Strengthens the Phase 4 contract — same regression cannot recur silently.
+- Phase 5 Plan 01: `@playwright/test` devdep is required alongside `playwright` — the plan's research called for `playwright` only, but the test-runner CLI (`playwright test`) and the `defineConfig` / `test` / `expect` API live in the sibling `@playwright/test` package. Both pin to ^1.59.1; npm dedupes the underlying `playwright@1.59.1`. Logged as Rule-3 blocking auto-fix.
+- Phase 5 Plan 01: Vitest excludes `tests/` (Playwright's directory) — added `exclude: ["**/node_modules/**", "**/dist/**", "**/.next/**", "tests/**"]` to vitest.config.ts. Without this, vitest's default glob picks up `tests/contrast.spec.ts` and fails on `@playwright/test` imports under jsdom. Playwright owns `tests/`; vitest owns `*.test.{ts,tsx}` colocated with source.
+- Phase 5 Plan 01: vitest.setup.ts mocks `next/font/google` — module-load-time `JetBrains_Mono({...})` in app/layout.tsx is a Next.js compiler primitive (transformed at build time, not a real runtime function). Without the mock, any test that imports `metadata` from app/layout.tsx throws `JetBrains_Mono is not a function`. Mock returns `{ variable: "--font-mono", className: "font-mono" }` — drop-in replacement for the layout's destructure.
+- Phase 5 Plan 01: JetBrains Mono OG fonts live in `assets/`, NOT `public/` (T-05-01 information-disclosure mitigation). RSC code (`opengraph-image.tsx`, `app/icon.tsx`, etc.) reads them at build time via `readFile(join(process.cwd(), "assets/..."))`; the binaries never appear in `.next/static/` route surface. `assets/JetBrainsMono-{Bold,Medium}.ttf` (v2.304) + `assets/JETBRAINS-MONO-LICENSE.txt` (OFL-1.1) committed.
+- Phase 5 Plan 01: Wave 0 contract — every later plan's `<verify>` block resolves to a file path that already exists. 4 vitest scaffolds + 4 smoke scripts seeded; 3 of 4 smoke scripts intentionally exit 1 with FAIL output until Wave 1+ ships their source. The moment a Wave 1+ task ships its source, the corresponding smoke script flips green automatically (no script edits needed).
 
 ### Pending Todos
 
@@ -111,6 +118,6 @@ Items acknowledged and carried forward to later phases:
 
 ## Session Continuity
 
-Last session: 2026-05-10T14:50:36.823Z
-Stopped at: Phase 5 UI-SPEC approved (5/6 PASS, 1 FLAG: inherited spacing scale, non-blocking)
-Resume file: .planning/phases/05-seo-accessibility-polish/05-UI-SPEC.md
+Last session: 2026-05-10T15:58:05Z
+Stopped at: Plan 05-01 complete (Wave 0 foundation — devdeps + JetBrains Mono fonts + 9 scaffold files; npm test 26/26 / 101 tests green; npm run test:contrast scaffold passes)
+Resume file: .planning/phases/05-seo-accessibility-polish/05-02-PLAN.md (Wave 1 — favicon + manifest + 8 OG cards)

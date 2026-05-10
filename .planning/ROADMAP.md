@@ -115,7 +115,15 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. `@axe-core/playwright` runs against all 4 hues × 2 themes = 8 combinations, all passing WCAG 2.1 AA (≥4.5:1 body, ≥3:1 large text); per-hue chroma overrides applied where needed (amber-on-light is the predicted failure)
   4. `@media (prefers-reduced-motion: reduce)` block disables `slideIn`, dampens cursor blink, and stops boot fade — verified by enabling Reduce Motion in OS settings and reloading
   5. `curl -I <localhost-url>` shows `x-portfolio-source` and `x-built-with: nextjs-15-react-19` headers; opening DevTools console on first paint shows the JetBrains-style ASCII signature with email + GitHub URL; `view-source:` shows a 6-line HTML comment greeting in `<head>`
-**Plans**: TBD
+**Plans:** 8 plans
+- [ ] 05-01-PLAN.md — Wave 0: Devdeps (@axe-core/playwright + playwright + chromium binary), JetBrains Mono TTFs (with OFL-1.1 license) committed to assets/, playwright.config.ts, 4 Vitest test scaffolds, 4 smoke-script scaffolds, test:contrast script
+- [ ] 05-02-PLAN.md — Wave 1: 8 OG image cards (root + 7 routes via next/og ImageResponse, JetBrains Mono via readFile, inline hex per Pitfall 1, display:flex per Pitfall 2) + app/icon.tsx + app/apple-icon.tsx (>_ glyph) + app/manifest.ts (minimal, display:browser, icons:[] per Pitfall 12)
+- [ ] 05-03-PLAN.md — Wave 1: app/layout.tsx adds metadata.twitter (summary_large_image) + SEPARATE viewport export with themeColor per-scheme array (Pitfall 3 — corrects CONTEXT.md D-15's deprecated location); globals.css universal-selector reduced-motion reset (0.01ms per Pitfall 7); 8 layout.test.tsx assertions
+- [ ] 05-04-PLAN.md — Wave 1: AboutSocials RSC inline mini-contact card (Phase 4 → 5 carry-forward) — 3 rows (EMAIL/GITHUB/LINKEDIN) inserted after bio paragraphs, before highlights; reuses ExternalLink + .contact-row; TODO-guard via /^https?:\/\// regex; 5 new about-view.test.tsx assertions
+- [ ] 05-05-PLAN.md — Wave 2: lib/json-ld.ts (buildPersonSchema + filterValidUrls) with 10 unit tests; JsonLdPerson RSC with XSS escape (`<` → `\u003c` per Pitfall 6); HeadComment RSC (`<noscript dangerouslySetInnerHTML>` 6-line lowercase letter per Pattern 9); both mounted in app/layout.tsx <head>
+- [ ] 05-06-PLAN.md — Wave 3: ConsoleSignature client island ('use client', useEffect once on mount, %c-styled "BT" ASCII art + 2 plain lines, returns null); mounted in (terminal)/layout.tsx sibling to CommandPalette (NEVER in app/layout.tsx — Pitfall 8)
+- [ ] 05-07-PLAN.md — Wave 4: 4-hue × 2-theme × 7-route axe matrix in tests/contrast.spec.ts (56 cells, addInitScript localStorage seeding + data-theme canary per Pitfall 10); 1 human checkpoint authorizing remediation strategy; conditional per-hue chroma overrides in globals.css (D-22 conservative — predicted: amber-on-light)
+- [ ] 05-08-PLAN.md — Wave 5 (manual): 4 manual gates — DEV-03 curl x-built-with on all 7 routes, DEV-02 view-source HTML comment in Chrome+Firefox (Assumption A1), A11Y-03 macOS Reduce Motion OS toggle, optional SEO-03c Slack/LinkedIn unfurl via ngrok; populate 05-VERIFICATION.md
 **UI hint**: yes
 
 ### Phase 6: Backend + Content Population
@@ -158,6 +166,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 2. Shell | 7/7 | Complete | 2026-05-06 |
 | 3. Views | 0/TBD | Not started | - |
 | 4. Mobile-Responsive | 5/5 | Complete | 2026-05-07 |
-| 5. SEO + Accessibility Polish | 0/TBD | Not started | - |
+| 5. SEO + Accessibility Polish | 0/8 | Planned | - |
 | 6. Backend + Content Population | 0/TBD | Not started | - |
 | 7. Deploy + Verification | 0/TBD | Not started | - |

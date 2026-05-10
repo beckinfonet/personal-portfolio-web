@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/app/components/shell/theme-provider";
@@ -27,7 +27,25 @@ export const metadata: Metadata = {
     title: "Bakytbek Tatibekov — Sr. Software Engineer",
     description: "Terminal-styled portfolio — engineering work, shipped apps, tech stack, and contact.",
     type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Bakytbek Tatibekov — Sr. Software Engineer",
+    description: "Terminal-styled portfolio — engineering work, shipped apps, tech stack, and contact."
   }
+};
+
+// PHASE 5 — separate viewport export per Next 14+ (Pitfall 3 / Pattern 4).
+// The theme-color field is DEPRECATED on the metadata export in Next.js 14+;
+// the correct location is here on viewport. Per-scheme array emits both
+// <meta name="theme-color" media="..."> tags automatically.
+// Hex values match app/globals.css `--bg` tokens verbatim (D-15 — do NOT use var(--*),
+// Next.js metadata composition rejects CSS variables).
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#0a0c0b" },
+    { media: "(prefers-color-scheme: light)", color: "#f4f2ea" }
+  ]
 };
 
 // NO "use client" — this file stays RSC (SHELL-02 / Pitfall 9).

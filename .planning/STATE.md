@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Plan 05-02 complete (Wave 1 Branch A — 8 OG cards + favicon set + manifest)"
-last_updated: "2026-05-10T16:08:30Z"
-last_activity: 2026-05-10 -- Plan 05-02 complete (Wave 1 Branch A — 11 next/og file-convention RSCs)
+stopped_at: "Plan 05-02 complete (Wave 1 Branch A — 11 next/og RSCs: 8 OG cards + favicon + apple-icon + manifest; scripts/check-og-files.mjs green; npm run build 23 pages OK; npm test 26/26 / 101 green)"
+last_updated: "2026-05-10T16:20:02.694Z"
+last_activity: 2026-05-10
 progress:
   total_phases: 7
   completed_phases: 4
   total_plans: 39
-  completed_plans: 33
-  percent: 85
+  completed_plans: 34
+  percent: 87
 ---
 
 # Project State
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 ## Current Position
 
 Phase: 05 (seo-accessibility-polish) — EXECUTING
-Plan: 3 of 8
+Plan: 4 of 8
 Status: Ready to execute
 Last activity: 2026-05-10
 
@@ -59,6 +59,7 @@ Progress: [████████▌░] 85% · Phase 1 ✓ · Phase 2 ✓ · 
 - Trend: clean execution, all gates green (lint + build 12 routes + 97 vitest + 3 audit scripts + check:mobile + check-placeholders); Plan 04-05 surfaced one mid-plan CSS bug (orphan grid track) caught by Gate 4 visual review and fixed inline (commit bf38cf3) with audit-script invariant added — Phase 4 contract strengthened, not expanded
 
 *Updated after each plan completion*
+| Phase 5 P3 | 3m 12s | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -94,6 +95,9 @@ Recent decisions affecting current work:
 - Phase 5 Plan 01: Wave 0 contract — every later plan's `<verify>` block resolves to a file path that already exists. 4 vitest scaffolds + 4 smoke scripts seeded; 3 of 4 smoke scripts intentionally exit 1 with FAIL output until Wave 1+ ships their source. The moment a Wave 1+ task ships its source, the corresponding smoke script flips green automatically (no script edits needed).
 - Phase 5 Plan 02: 8 sibling opengraph-image.tsx files (no shared helper) — RESEARCH Open Question 1 disposition. Per-route diff is one ROUTE_LABEL constant + one alt suffix; ~75 lines × 8 = ~600 lines duplicated. Clarity > DRY in v1; consolidation is a v1.1 candidate if the template diverges per route. Root + (terminal)/ both render about.md (homepage default + about-route landing) — Next.js metadata composition picks the most-specific match.
 - Phase 5 Plan 02: First next/og use in repo. All 11 RSCs (8 OG + 2 icon + 1 manifest) inline-style with hardcoded hex constants — Satori does NOT consume external CSS or var(--*). display:flex on every container (Pitfall 2). Font binaries loaded via readFile(join(process.cwd(), "assets/JetBrainsMono-{Bold,Medium}.ttf")) — assets/ vs public/ separation enforces T-05-05 (no public exposure of font binaries). manifest.ts ships icons:[] empty per Pitfall 12 (Next.js auto-includes from app/icon.tsx + app/apple-icon.tsx); display:browser locks T-05-09 (no PWA install push).
+- [Phase ?]: Phase 5 Plan 03: Reworded viewport-export comment to avoid literal 'metadata.themeColor' substring — plan's example violated its own acceptance criteria gates (forbid metadata.themeColor + require grep -c themeColor == 1). Rewording preserves intent without forbidden substring. Same self-correction class as Plan 05-02's manifest.ts service-worker comment edit.
+- [Phase ?]: Phase 5 Plan 03: Single @media (prefers-reduced-motion: reduce) block — universal-selector reset *, *::before, *::after appended INSIDE existing block at globals.css line 152, NOT a new block. Multiple matching media queries produce duplicate rules and unpredictable cascade order (T-05-12 mitigation). 0.01ms timings (NOT 0ms — Pitfall 7); some browsers treat 0 as falsy. All 6 existing targeted rules preserved (D-17).
+- [Phase ?]: Phase 5 Plan 03: viewport.themeColor uses inlined hex literals (#0a0c0b dark, #f4f2ea light) NOT var(--bg) — Next.js metadata composition rejects CSS variables at build time. Hex pulled verbatim from app/globals.css --bg tokens (D-15: 'do NOT re-derive'). themeColor MUST live in separate viewport export, NOT metadata — Pitfall 3 / T-05-10. Build-log scan confirms no 'themeColor in metadata is deprecated' warning. CONTEXT.md D-15 originally said 'metadata.themeColor' (deprecated location); this plan corrected to viewport per RESEARCH Pitfall 3.
 
 ### Pending Todos
 
@@ -121,6 +125,6 @@ Items acknowledged and carried forward to later phases:
 
 ## Session Continuity
 
-Last session: 2026-05-10T16:08:30Z
+Last session: 2026-05-10T16:20:02.690Z
 Stopped at: Plan 05-02 complete (Wave 1 Branch A — 11 next/og RSCs: 8 OG cards + favicon + apple-icon + manifest; scripts/check-og-files.mjs green; npm run build 23 pages OK; npm test 26/26 / 101 green)
-Resume file: .planning/phases/05-seo-accessibility-polish/05-03-PLAN.md (Wave 1 Branch B — Twitter card + viewport.themeColor + reduced-motion CSS reset)
+Resume file: None

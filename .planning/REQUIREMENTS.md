@@ -45,7 +45,7 @@ Requirements for the terminal-redesign milestone. Each maps to a roadmap phase.
 - [ ] **ROUTE-03**: `metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000")` set on root `app/layout.tsx` metadata (resolves the existing `metadataBase` warning surfaced in CONCERNS.md)
 - [ ] **ROUTE-04**: `app/sitemap.ts` enumerates all 7 routes by mapping over `lib/routes.ts` (no hardcoding); `app/robots.ts` references the sitemap URL; `lastModified` set to build time
 - [ ] **ROUTE-05**: Terminal-styled 404 page at `app/not-found.tsx` rendering inside the terminal shell (`$ cat /var/log/portfolio.log | grep "$pathname"` style) with links to all 7 views; returns HTTP 404 (verified with `curl -I`)
-- [ ] **SEO-01**: Twitter card metadata (`twitter: { card: "summary_large_image", ... }`) on root metadata; per-route OG inherits
+- [x] **SEO-01**: Twitter card metadata (`twitter: { card: "summary_large_image", ... }`) on root metadata; per-route OG inherits
 - [ ] **SEO-02**: JSON-LD `Person` schema (`<script type="application/ld+json">`) in root layout with `@type: Person`, `jobTitle`, `url`, `sameAs: [github, linkedin, ...]`
 - [x] **SEO-03**: Dynamic OG image per route via `opengraph-image.tsx` + `next/og` `ImageResponse`; pure-text design with name + role + active "file name" + accent block; JetBrains Mono passed as `fonts` to `ImageResponse`
 - [x] **SEO-04**: Favicon set: `app/icon.tsx` (generated terminal-prompt glyph), `app/apple-icon.png`, `app/manifest.ts`, and `<meta name="theme-color">` per scheme
@@ -77,7 +77,7 @@ Each view is RSC by default; client behavior lives in shell-level islands.
 
 - [ ] **A11Y-01**: Skip-link to `#main-content` revealed on `:focus` at the top of `<body>` (WCAG 2.4.1)
 - [ ] **A11Y-02**: All interactive elements (sidebar buttons, palette items, palette trigger, theme toggle, accent picker, links) show a 2px accent `:focus-visible` outline with 2px offset; default outlines never killed without replacement
-- [ ] **A11Y-03**: `@media (prefers-reduced-motion: reduce)` block disables `slideIn`, dampens cursor blink, and stops boot-fade animations (WCAG 2.3.3)
+- [x] **A11Y-03**: `@media (prefers-reduced-motion: reduce)` block disables `slideIn`, dampens cursor blink, and stops boot-fade animations (WCAG 2.3.3)
 - [ ] **A11Y-04**: Sidebar file rows are real `<button>` elements with `aria-label` that includes a plain-noun label (e.g. `aria-label="Contact information"` on `contact.sh`); `aria-current="page"` on the active row (per Risk 3 — recruiter usability)
 - [ ] **A11Y-05**: Semantic landmarks: `<header>` for top bar, `<nav aria-label="File explorer">` for sidebar, `<main id="main-content">` for content, `<footer>` for credits
 - [ ] **A11Y-06**: Live clock has `aria-hidden="true"` (decoration; no SR announcement every 30s)
@@ -230,10 +230,10 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | ROUTE-03 | Phase 1 | Pending |
 | ROUTE-04 | Phase 2 | Pending |
 | ROUTE-05 | Phase 2 | Pending |
-| SEO-01 | Phase 5 | Pending |
+| SEO-01 | Phase 5 | Complete (05-03) |
 | SEO-02 | Phase 5 | Pending |
 | SEO-03 | Phase 5 | Complete (05-02) |
-| SEO-04 | Phase 5 | Complete (05-02) |
+| SEO-04 | Phase 5 | Complete (05-02 + 05-03) |
 | SEO-05 | Phase 3 | Pending |
 | VIEW-01 | Phase 3 | Pending |
 | VIEW-02 | Phase 3 | Pending |
@@ -250,7 +250,7 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | PALETTE-05 | Phase 4 | Complete (04-01 + 04-02) |
 | A11Y-01 | Phase 2 | Pending |
 | A11Y-02 | Phase 2 | Pending |
-| A11Y-03 | Phase 5 | Pending |
+| A11Y-03 | Phase 5 | Complete (05-03) |
 | A11Y-04 | Phase 2 | Pending |
 | A11Y-05 | Phase 2 | Pending |
 | A11Y-06 | Phase 2 | Pending |

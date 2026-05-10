@@ -913,6 +913,26 @@ a:hover {
   margin-top: 24px;
 }
 
+/* ── Phase 5: AboutSocials inline mini-contact card (D-31..D-34) ─────────────
+   Renders below the bio paragraphs and above the highlights row on /about.
+   Always visible (no @media gating per D-32). The .contact-row children
+   inherit their own grid-template-columns: 90px 1fr auto from the existing
+   contact-view CSS in this file (LABEL + LINK + spacer). */
+.about-socials-card {
+  max-width: 480px;
+  margin: 24px 0 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.contact-muted {
+  font-size: 13px;
+  color: var(--muted);
+}
+
 /* ─────────────────────────────────────────
    Phase 3 — projects-view (VIEW-02)
    ───────────────────────────────────────── */

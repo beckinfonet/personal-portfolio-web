@@ -12,6 +12,9 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./vitest.setup.ts",
     globals: true,
-    passWithNoTests: true
+    passWithNoTests: true,
+    // Exclude Playwright spec dir — Playwright owns tests/ via playwright.config.ts.
+    // Without this, vitest picks up tests/*.spec.ts and fails on @playwright/test imports.
+    exclude: ["**/node_modules/**", "**/dist/**", "**/.next/**", "tests/**"]
   }
 });

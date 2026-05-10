@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Plan 05-04 complete (Wave 2 — AboutSocials inline mini-contact card on /about; Phase 4 → Phase 5 carry-forward (Plan 04-05 Gate 9 friction) RESOLVED; A11Y-04 shipped; 26/113 vitest green; build OK; lint clean; 3 task commits c7d0d16/9c40f4c/951d988)"
-last_updated: "2026-05-10T16:28:51.897Z"
+stopped_at: "Plan 05-05 complete (Wave 2 — lib/json-ld.ts + JsonLdPerson RSC + HeadComment RSC + mounts in app/layout.tsx <head>; SEO-02 + DEV-02 shipped; 26/129 vitest green; build OK 24 static pages; lint clean; check-head-comment.mjs flips PASS (3rd of 4 fail-loud scripts); 6 task commits 4dfd9f8/c07702b/e5298c1/c7eb4d2/c5bebe0/4aacb60)"
+last_updated: "2026-05-10T16:37:55Z"
 last_activity: 2026-05-10
 progress:
   total_phases: 7
   completed_phases: 4
   total_plans: 39
-  completed_plans: 35
-  percent: 90
+  completed_plans: 36
+  percent: 92
 ---
 
 # Project State
@@ -26,30 +26,31 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 ## Current Position
 
 Phase: 05 (seo-accessibility-polish) — EXECUTING
-Plan: 5 of 8
+Plan: 6 of 8
 Status: Ready to execute
 Last activity: 2026-05-10
 
-Progress: [█████████░] 90% · Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 (4/8)
+Progress: [█████████░] 92% · Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 (5/8)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 7 (this milestone — execute-phase metrics)
-- Average duration: ~3m 25s (excluding 04-05 reviewer wall-clock)
-- Total execution time: ~24m agent-side + ~30m reviewer wall-clock for Plan 04-05 manual verification
+- Total plans completed: 8 (this milestone — execute-phase metrics)
+- Average duration: ~3m 38s (excluding 04-05 reviewer wall-clock)
+- Total execution time: ~29m agent-side + ~30m reviewer wall-clock for Plan 04-05 manual verification
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 04    | 5     | 14m 0s agent + 30m reviewer | n/a (mixed agent/manual) |
-| 05    | 4     | ~17m agent | ~4m (Wave 0 + Wave 1A + Wave 1B + Wave 2A) |
+| 05    | 5     | ~22m agent | ~4m 24s (Wave 0 + Wave 1A + Wave 1B + Wave 2A + Wave 2B) |
 
 **Recent Trend:**
 
-- Last plan: 05-04 (3m 51s) — 2 tasks (Task 1 TDD; Task 2 autonomous), 3 task commits (c7d0d16 RED + 9c40f4c GREEN + 951d988 CSS), 1 file created (about-socials.tsx ~76 lines RSC) + 3 modified (about-view.tsx +2 lines wire-in; about-view.test.tsx +44 lines for 5 new assertions; globals.css +20 lines for .about-socials-card + .contact-muted), 5 new test cases (wrapper + EMAIL mailto + GITHUB ExternalLink + LINKEDIN ExternalLink + DOM-position invariant), vitest now 26/113 (was 26/108), 1 Rule-3 deviation (test-locator scoping fix to disambiguate aria-label collision with existing .about-cta-row), Phase 4 → Phase 5 carry-forward (Plan 04-05 Gate 9 recruiter friction) RESOLVED, A11Y-04 requirement shipped
+- Last plan: 05-05 (4m 49s) — 4 tasks (Tasks 1+2 TDD with explicit RED commits; Tasks 3+4 autonomous), 6 task commits (4dfd9f8 RED + c07702b GREEN for lib/json-ld; e5298c1 RED + c7eb4d2 GREEN for JsonLdPerson; c5bebe0 for HeadComment; 4aacb60 for app/layout.tsx mounts), 3 files created (lib/json-ld.ts 47 lines pure helpers; json-ld-person.tsx 22 lines RSC with XSS escape; head-comment.tsx 21 lines RSC with <noscript> 6-line letter) + 4 modified (lib/json-ld.test.ts +121/-4 for 10 assertions; json-ld-person.test.tsx +49/-6 for 6 assertions; app/layout.tsx +5 lines for 2 mounts; app/layout.test.tsx +34 lines for 2 mount-point assertions), 16 new test cases (10 lib/json-ld + 6 JsonLdPerson — incl. T-05-16 XSS-escape invariant `expect(script.innerHTML).not.toMatch(/</)` — + 2 layout mount via renderToStaticMarkup), vitest now 26/129 (was 26/113), scripts/check-head-comment.mjs flips FAIL→PASS (3rd of 4 fail-loud scripts to flip; only check-headers remains, which already passes Phase 1's x-built-with), 1 Rule-3 deviation (RTL refused to mount <html> into <div> container — switched layout mount-point assertions to react-dom/server.renderToStaticMarkup with regex over serialized HTML; same contract verified, different inspection surface), SEO-02 + DEV-02 requirements shipped, npm run build emits 24 static pages OK, lint + typecheck + check:mobile clean
+- Previous: 05-04 (3m 51s) — 2 tasks (Task 1 TDD; Task 2 autonomous), 3 task commits (c7d0d16 RED + 9c40f4c GREEN + 951d988 CSS), 1 file created (about-socials.tsx ~76 lines RSC) + 3 modified (about-view.tsx +2 lines wire-in; about-view.test.tsx +44 lines for 5 new assertions; globals.css +20 lines for .about-socials-card + .contact-muted), 5 new test cases (wrapper + EMAIL mailto + GITHUB ExternalLink + LINKEDIN ExternalLink + DOM-position invariant), vitest now 26/113 (was 26/108), 1 Rule-3 deviation (test-locator scoping fix to disambiguate aria-label collision with existing .about-cta-row), Phase 4 → Phase 5 carry-forward (Plan 04-05 Gate 9 recruiter friction) RESOLVED, A11Y-04 requirement shipped
 - Previous: 05-02 (~4m) — 3 tasks (all autonomous), 3 task commits + final-metadata commit, 11 files created (2 favicon RSCs + 1 manifest + 8 OG image RSCs) + 0 modified, scripts/check-og-files.mjs flips green (was fail-loud since 05-01), npm run build emits 23 static pages including all OG/icon/manifest endpoints, vitest stays at 26/26 / 101 green, no deviations from plan (only adjustment was a self-correcting rewording of a comment in manifest.ts to avoid a regex self-match against `! grep -q 'service.worker'`)
 - Previous: 05-01 (~6m) — 3 tasks (all autonomous), 3 task commits + final-metadata commit, 13 files created (3 fonts/license + 1 playwright config + 1 contrast spec + 4 vitest scaffolds + 4 smoke scripts) + 5 modified (package.json, package-lock.json, .gitignore, vitest.config.ts, vitest.setup.ts), 4 new vitest scaffold files (101 tests passing up from 97), 4 smoke scripts wired (1 passes today, 3 fail-loud by design until Wave 1+ ships), 3 Rule-3 deviations (added @playwright/test devdep, excluded tests/ from vitest, mocked next/font/google) — all tooling/test-pipeline unblocks, no production-code changes
 - Previous: 04-05 (~30m reviewer wall-clock; agent-side <2min) — 4 tasks (1 automated battery + 3 manual checkpoints), 6 commits, 1 file created (SUMMARY) + 4 modified (VERIFICATION + STATE + ROADMAP + REQUIREMENTS) + 2 mid-plan amendment files (globals.css + check-sidebar-redistribution.mjs in commit bf38cf3), Phase 4 verdict PASS, 9 manual gates resolved (7 PASS / 2 DEFERRED-PHASE-7)
@@ -62,6 +63,7 @@ Progress: [█████████░] 90% · Phase 1 ✓ · Phase 2 ✓ · 
 *Updated after each plan completion*
 | Phase 5 P3 | 3m 12s | 2 tasks | 3 files |
 | Phase 5 P4 | 3m 51s | 2 tasks | 4 files (1 created + 3 modified) |
+| Phase 5 P5 | 4m 49s | 4 tasks | 7 files (3 created + 4 modified) |
 
 ## Accumulated Context
 
@@ -104,6 +106,11 @@ Recent decisions affecting current work:
 - Phase 5 Plan 04: Test-side scoping fix [Rule 3]: GITHUB and LINKEDIN row assertions originally used top-level getByRole, which matches multiple elements because the existing .about-cta-row (Phase 3) also exposes ExternalLinks with aria-label /open github/i and /open linkedin/i. Scoped to container.querySelector('.about-socials-card') then querySelector('a[aria-label^="Open GitHub"]') / 'Open LinkedIn' to assert the contract under test (the row inside the new block). Plain-noun aria-label phrasing preserved for A11Y-04 — only the test-locator changed (no production aria-label changes). Same self-correction class as Plan 05-02 / 05-03 mid-task adjustments.
 - Phase 5 Plan 04: Reused existing .contact-row class with its 90px 1fr auto 3-column grid as-is. UI-SPEC mentions an 80px LABEL column; the existing .contact-row uses 90px. Redefining .contact-row would have cascaded onto contact-view (which has a working 90px column today). The 90px column produces the same visual hierarchy (LABEL + LINK + spacer); UI-SPEC's 80px figure was a design-system reference, not a binding override. Visual fidelity to contact-view is the design intent (D-33: 'Borrows the existing app/components/views/contact-view.tsx row pattern').
 - Phase 5 Plan 04: D-34 invalid-url guard via /^https?:\/\// regex — RSC component falls back to <span class="contact-muted"> when URL fails the check; INFRA-05 prebuild grep blocks TODO sentinels from reaching production builds. Defense-in-depth against javascript: protocol URLs (T-05-13 mitigation). Comment wording uses 'invalid-url guard' (NOT 'TODO-guard') to keep new file's grep clean — the regex enforces the guard, not the string TODO.
+- Phase 5 Plan 05: lib/json-ld.ts emits unsanitized schema; XSS escape (`<` → `<`) lives ONLY in the JSX emitter (json-ld-person.tsx). Separation of concerns: builder produces typed object; emitter handles HTML-escaping for inline-script safety. Pre-sanitizing in the lib would over-escape future non-script callers (API endpoints, structured logs). Two-layer defense for T-05-16: source-level grep verifies escape exists; vitest `expect(script.innerHTML).not.toMatch(/</)` verifies it works at render time. Both layers required.
+- Phase 5 Plan 05: filterValidUrls regex is /^https?:\/\// (case-sensitive http(s) prefix only — does NOT special-case 'todo:' string). Lowercase 'todo:' sentinels filter out as a side effect of failing the prefix check; the function does not couple to placeholder semantics. INFRA-05 prebuild grep enforces no-uppercase-TODO at build time; the lib filter just guarantees only valid http(s) URLs reach JSON-LD sameAs (T-05-17 mitigation).
+- Phase 5 Plan 05: Layout mount-point assertions use react-dom/server.renderToStaticMarkup — NOT @testing-library/react render. RTL's default container is <div>; React refuses to mount <html> into a non-document parent ('In HTML, <html> cannot be a child of <div>') and silently strips <head> children from the queryable DOM. Switched to renderToStaticMarkup (serializes JSX tree to HTML string); regex assertions over the string verify the same contract — '<head>...<script type=application/ld+json>...</head>' + '<head>...<noscript>...</head>' + 'hello, you found the source' substring. Logged as Rule-3 self-correction; same self-correction class as Plan 05-03's viewport-comment rewording and Plan 05-04's test-locator scoping fix.
+- Phase 5 Plan 05: HeadComment uses <noscript dangerouslySetInnerHTML> for the 6-line lowercase letter (Pattern 9 §Option B). React/JSX strips literal <!-- --> in source; <noscript> is the standard host for raw HTML injection that needs to pass through to view-source: unchanged. <noscript> contents are inert in browsers with JS enabled (so the comment never renders visibly), but raw HTML inside the <noscript> tag is preserved verbatim by view-source: across Chrome/Firefox/Safari (RESEARCH Assumption A1; Plan 05-08 manual gate verifies cross-browser).
+- Phase 5 Plan 05: Order of <head> children locked: AccentBootstrapScript (must run before paint — sets --accent-hue) → HeadComment (cosmetic, <noscript> is inert) → JsonLdPerson (data, search-engine consumption only). Order between HeadComment and JsonLdPerson is technically order-independent, but explicit ordering documents intent via inline JSX comments.
 
 ### Pending Todos
 
@@ -131,6 +138,6 @@ Items acknowledged and carried forward to later phases:
 
 ## Session Continuity
 
-Last session: 2026-05-10T16:28:51.894Z
-Stopped at: Plan 05-04 complete (Wave 2 — AboutSocials inline mini-contact card on /about; Phase 4 → Phase 5 carry-forward (Plan 04-05 Gate 9 friction) RESOLVED; A11Y-04 shipped; 26/113 vitest green; build OK; lint clean; 3 task commits c7d0d16/9c40f4c/951d988)
+Last session: 2026-05-10T16:37:55Z
+Stopped at: Plan 05-05 complete (Wave 2 — lib/json-ld.ts pure helpers + JsonLdPerson RSC with XSS escape + HeadComment RSC + mounts in app/layout.tsx <head>; SEO-02 + DEV-02 shipped; 26/129 vitest green; npm run build emits 24 static pages OK; lint + typecheck + check:mobile clean; scripts/check-head-comment.mjs flips PASS — 3rd of 4 fail-loud scripts to flip; 6 task commits 4dfd9f8/c07702b/e5298c1/c7eb4d2/c5bebe0/4aacb60)
 Resume file: None

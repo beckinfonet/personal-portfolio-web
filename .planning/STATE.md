@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Plan 05-05 complete (Wave 2 — lib/json-ld.ts + JsonLdPerson RSC + HeadComment RSC + mounts in app/layout.tsx <head>; SEO-02 + DEV-02 shipped; 26/129 vitest green; build OK 24 static pages; lint clean; check-head-comment.mjs flips PASS (3rd of 4 fail-loud scripts); 6 task commits 4dfd9f8/c07702b/e5298c1/c7eb4d2/c5bebe0/4aacb60)"
-last_updated: "2026-05-10T16:37:55Z"
+stopped_at: "Plan 05-06 complete (Wave 3 — ConsoleSignature client island + mount in app/(terminal)/layout.tsx; DEV-01 shipped; 26/134 vitest green; build OK 24 static pages; lint + typecheck clean; 7th client island in project; Pitfall 8 enforced (NOT in app/layout.tsx); 3 task commits b8da728/f63c0dc/b090001)"
+last_updated: "2026-05-10T16:47:54Z"
 last_activity: 2026-05-10
 progress:
   total_phases: 7
   completed_phases: 4
   total_plans: 39
-  completed_plans: 36
-  percent: 92
+  completed_plans: 37
+  percent: 95
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 ## Current Position
 
 Phase: 05 (seo-accessibility-polish) — EXECUTING
-Plan: 6 of 8
+Plan: 7 of 8
 Status: Ready to execute
 Last activity: 2026-05-10
 
-Progress: [█████████░] 92% · Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 (5/8)
+Progress: [█████████▌] 95% · Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 (6/8)
 
 ## Performance Metrics
 
@@ -45,11 +45,12 @@ Progress: [█████████░] 92% · Phase 1 ✓ · Phase 2 ✓ · 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 04    | 5     | 14m 0s agent + 30m reviewer | n/a (mixed agent/manual) |
-| 05    | 5     | ~22m agent | ~4m 24s (Wave 0 + Wave 1A + Wave 1B + Wave 2A + Wave 2B) |
+| 05    | 6     | ~24m agent | ~4m 0s (Wave 0 + Wave 1A + Wave 1B + Wave 2A + Wave 2B + Wave 3) |
 
 **Recent Trend:**
 
-- Last plan: 05-05 (4m 49s) — 4 tasks (Tasks 1+2 TDD with explicit RED commits; Tasks 3+4 autonomous), 6 task commits (4dfd9f8 RED + c07702b GREEN for lib/json-ld; e5298c1 RED + c7eb4d2 GREEN for JsonLdPerson; c5bebe0 for HeadComment; 4aacb60 for app/layout.tsx mounts), 3 files created (lib/json-ld.ts 47 lines pure helpers; json-ld-person.tsx 22 lines RSC with XSS escape; head-comment.tsx 21 lines RSC with <noscript> 6-line letter) + 4 modified (lib/json-ld.test.ts +121/-4 for 10 assertions; json-ld-person.test.tsx +49/-6 for 6 assertions; app/layout.tsx +5 lines for 2 mounts; app/layout.test.tsx +34 lines for 2 mount-point assertions), 16 new test cases (10 lib/json-ld + 6 JsonLdPerson — incl. T-05-16 XSS-escape invariant `expect(script.innerHTML).not.toMatch(/</)` — + 2 layout mount via renderToStaticMarkup), vitest now 26/129 (was 26/113), scripts/check-head-comment.mjs flips FAIL→PASS (3rd of 4 fail-loud scripts to flip; only check-headers remains, which already passes Phase 1's x-built-with), 1 Rule-3 deviation (RTL refused to mount <html> into <div> container — switched layout mount-point assertions to react-dom/server.renderToStaticMarkup with regex over serialized HTML; same contract verified, different inspection surface), SEO-02 + DEV-02 requirements shipped, npm run build emits 24 static pages OK, lint + typecheck + check:mobile clean
+- Last plan: 05-06 (2m 8s) — 2 tasks (Task 1 TDD with explicit RED commit; Task 2 autonomous), 3 task commits (b8da728 RED + f63c0dc GREEN for ConsoleSignature; b090001 for (terminal)/layout mount), 1 file created (console-signature.tsx 39 lines 'use client' island with BT-initials ASCII art + console.log on mount + return null) + 2 modified (console-signature.test.tsx +49/-8 sentinel→6 real assertions via vi.spyOn(console, 'log'); (terminal)/layout.tsx +5 lines for import + JSX mount with Pitfall 8 inline comment), 6 new test cases (call-count + ASCII art match + github line + email line + arg-count + null DOM), vitest now 26/134 (was 26/129; +5 net since scaffold sentinel was replaced), 0 deviations from plan (clean first-pass execution; ASCII art = "BT" initials per CONTEXT D-24 / RESEARCH Open Question disposition; no idempotency guard added because T-05-23 ACCEPTS StrictMode double-fire), DEV-01 requirement shipped, 7th client island in project, npm run build emits 24 static pages OK, lint + typecheck clean
+- Previous: 05-05 (4m 49s) — 4 tasks (Tasks 1+2 TDD with explicit RED commits; Tasks 3+4 autonomous), 6 task commits (4dfd9f8 RED + c07702b GREEN for lib/json-ld; e5298c1 RED + c7eb4d2 GREEN for JsonLdPerson; c5bebe0 for HeadComment; 4aacb60 for app/layout.tsx mounts), 3 files created (lib/json-ld.ts 47 lines pure helpers; json-ld-person.tsx 22 lines RSC with XSS escape; head-comment.tsx 21 lines RSC with <noscript> 6-line letter) + 4 modified (lib/json-ld.test.ts +121/-4 for 10 assertions; json-ld-person.test.tsx +49/-6 for 6 assertions; app/layout.tsx +5 lines for 2 mounts; app/layout.test.tsx +34 lines for 2 mount-point assertions), 16 new test cases (10 lib/json-ld + 6 JsonLdPerson — incl. T-05-16 XSS-escape invariant `expect(script.innerHTML).not.toMatch(/</)` — + 2 layout mount via renderToStaticMarkup), vitest now 26/129 (was 26/113), scripts/check-head-comment.mjs flips FAIL→PASS (3rd of 4 fail-loud scripts to flip; only check-headers remains, which already passes Phase 1's x-built-with), 1 Rule-3 deviation (RTL refused to mount <html> into <div> container — switched layout mount-point assertions to react-dom/server.renderToStaticMarkup with regex over serialized HTML; same contract verified, different inspection surface), SEO-02 + DEV-02 requirements shipped, npm run build emits 24 static pages OK, lint + typecheck + check:mobile clean
 - Previous: 05-04 (3m 51s) — 2 tasks (Task 1 TDD; Task 2 autonomous), 3 task commits (c7d0d16 RED + 9c40f4c GREEN + 951d988 CSS), 1 file created (about-socials.tsx ~76 lines RSC) + 3 modified (about-view.tsx +2 lines wire-in; about-view.test.tsx +44 lines for 5 new assertions; globals.css +20 lines for .about-socials-card + .contact-muted), 5 new test cases (wrapper + EMAIL mailto + GITHUB ExternalLink + LINKEDIN ExternalLink + DOM-position invariant), vitest now 26/113 (was 26/108), 1 Rule-3 deviation (test-locator scoping fix to disambiguate aria-label collision with existing .about-cta-row), Phase 4 → Phase 5 carry-forward (Plan 04-05 Gate 9 recruiter friction) RESOLVED, A11Y-04 requirement shipped
 - Previous: 05-02 (~4m) — 3 tasks (all autonomous), 3 task commits + final-metadata commit, 11 files created (2 favicon RSCs + 1 manifest + 8 OG image RSCs) + 0 modified, scripts/check-og-files.mjs flips green (was fail-loud since 05-01), npm run build emits 23 static pages including all OG/icon/manifest endpoints, vitest stays at 26/26 / 101 green, no deviations from plan (only adjustment was a self-correcting rewording of a comment in manifest.ts to avoid a regex self-match against `! grep -q 'service.worker'`)
 - Previous: 05-01 (~6m) — 3 tasks (all autonomous), 3 task commits + final-metadata commit, 13 files created (3 fonts/license + 1 playwright config + 1 contrast spec + 4 vitest scaffolds + 4 smoke scripts) + 5 modified (package.json, package-lock.json, .gitignore, vitest.config.ts, vitest.setup.ts), 4 new vitest scaffold files (101 tests passing up from 97), 4 smoke scripts wired (1 passes today, 3 fail-loud by design until Wave 1+ ships), 3 Rule-3 deviations (added @playwright/test devdep, excluded tests/ from vitest, mocked next/font/google) — all tooling/test-pipeline unblocks, no production-code changes
@@ -64,6 +65,7 @@ Progress: [█████████░] 92% · Phase 1 ✓ · Phase 2 ✓ · 
 | Phase 5 P3 | 3m 12s | 2 tasks | 3 files |
 | Phase 5 P4 | 3m 51s | 2 tasks | 4 files (1 created + 3 modified) |
 | Phase 5 P5 | 4m 49s | 4 tasks | 7 files (3 created + 4 modified) |
+| Phase 5 P6 | 2m 8s  | 2 tasks | 3 files (1 created + 2 modified) |
 
 ## Accumulated Context
 
@@ -111,6 +113,11 @@ Recent decisions affecting current work:
 - Phase 5 Plan 05: Layout mount-point assertions use react-dom/server.renderToStaticMarkup — NOT @testing-library/react render. RTL's default container is <div>; React refuses to mount <html> into a non-document parent ('In HTML, <html> cannot be a child of <div>') and silently strips <head> children from the queryable DOM. Switched to renderToStaticMarkup (serializes JSX tree to HTML string); regex assertions over the string verify the same contract — '<head>...<script type=application/ld+json>...</head>' + '<head>...<noscript>...</head>' + 'hello, you found the source' substring. Logged as Rule-3 self-correction; same self-correction class as Plan 05-03's viewport-comment rewording and Plan 05-04's test-locator scoping fix.
 - Phase 5 Plan 05: HeadComment uses <noscript dangerouslySetInnerHTML> for the 6-line lowercase letter (Pattern 9 §Option B). React/JSX strips literal <!-- --> in source; <noscript> is the standard host for raw HTML injection that needs to pass through to view-source: unchanged. <noscript> contents are inert in browsers with JS enabled (so the comment never renders visibly), but raw HTML inside the <noscript> tag is preserved verbatim by view-source: across Chrome/Firefox/Safari (RESEARCH Assumption A1; Plan 05-08 manual gate verifies cross-browser).
 - Phase 5 Plan 05: Order of <head> children locked: AccentBootstrapScript (must run before paint — sets --accent-hue) → HeadComment (cosmetic, <noscript> is inert) → JsonLdPerson (data, search-engine consumption only). Order between HeadComment and JsonLdPerson is technically order-independent, but explicit ordering documents intent via inline JSX comments.
+- Phase 5 Plan 06: ASCII art = "BT" initials (6 rows × ~17 cols), not full "BAKYTBEK" (6 rows × ~65 cols). Per CONTEXT D-24 + RESEARCH Open Question + UI-SPEC §"Console signature copy". Initials read cleanly in narrow terminals + mobile DevTools; full art wraps and becomes unreadable. Initials match PROFILE.initials. v1 ships initials; first-run user feedback drives any swap.
+- Phase 5 Plan 06: No module-level idempotency guard for console.log fires-once invariant. Plan suggested defending against React 19 StrictMode double-mount in DEV; skipped because (a) threat model T-05-23 ACCEPTS the StrictMode double-fire (by-design DEV behavior), (b) jsdom in vitest doesn't wrap in StrictMode (toHaveBeenCalledTimes(1) passes), (c) production hydration runs effects once, (d) guard would couple to React internals + complicate testing for zero production benefit.
+- Phase 5 Plan 06: ART_STYLE color is `#16a34a` (sRGB hex), NOT `oklch(0.78 0.18 145)` or `var(--accent)`. DevTools console parses CSS color values from `%c` style strings via the browser's CSS parser; oklch support is Chrome 111+/Firefox 113+/Safari 16.4+, but inlining sRGB hex matches the same mitigation pattern Plan 05-02 used for OG ImageResponse (Pitfall 1). #16a34a is the matrix-accent sRGB equivalent (hue 145, ~oklch 0.65); reads on both light + dark DevTools themes.
+- Phase 5 Plan 06: ConsoleSignature is the first side-effect-only client island in the project (no DOM, no state, no props — just useEffect + return null). Establishes a canonical shape for future analytics/instrumentation islands (Phase 7 DEPLOY-06 resume_download tracking?). LiveClock is the closest precedent but renders text from state; ConsoleSignature is purely event-driven null-render.
+- Phase 5 Plan 06: Pitfall 8 boundary preservation — ConsoleSignature mounted in (terminal)/layout.tsx (also RSC) keeps the client boundary local. Island has no children (returns null), so the RSC subtree stays RSC. Mounting in app/layout.tsx would force the entire app to client and spike First Load JS by ~50-200KB. Acceptance criteria explicitly check `! grep -q '<ConsoleSignature />' app/layout.tsx`; verified during Task 2.
 
 ### Pending Todos
 
@@ -138,6 +145,6 @@ Items acknowledged and carried forward to later phases:
 
 ## Session Continuity
 
-Last session: 2026-05-10T16:37:55Z
-Stopped at: Plan 05-05 complete (Wave 2 — lib/json-ld.ts pure helpers + JsonLdPerson RSC with XSS escape + HeadComment RSC + mounts in app/layout.tsx <head>; SEO-02 + DEV-02 shipped; 26/129 vitest green; npm run build emits 24 static pages OK; lint + typecheck + check:mobile clean; scripts/check-head-comment.mjs flips PASS — 3rd of 4 fail-loud scripts to flip; 6 task commits 4dfd9f8/c07702b/e5298c1/c7eb4d2/c5bebe0/4aacb60)
+Last session: 2026-05-10T16:47:54Z
+Stopped at: Plan 05-06 complete (Wave 3 — ConsoleSignature client island ('use client' + useEffect-on-mount + return null) + mount in app/(terminal)/layout.tsx as sibling between <CommandPalette /> and <PrintFooter />; DEV-01 shipped; 7th client island in project; BT-initials ASCII art via %c-styled console.log on first paint; Pitfall 8 enforced (NOT in app/layout.tsx); 26/134 vitest green (was 26/129; +5 net since scaffold sentinel was replaced with 6 real assertions); npm run build emits 24 static pages OK; lint + typecheck clean; 0 deviations from plan; 3 task commits b8da728/f63c0dc/b090001)
 Resume file: None

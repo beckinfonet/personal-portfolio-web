@@ -113,7 +113,7 @@ Each view is RSC by default; client behavior lives in shell-level islands.
 
 ### Engineer Easter Eggs (DEV)
 
-- [ ] **DEV-01**: `console.log` signature on first paint — JetBrains-style ASCII art name + "Like the site? Source at github.com/..." + email; mounted via `useEffect` in root layout
+- [x] **DEV-01**: `console.log` signature on first paint — JetBrains-style ASCII art name + "Like the site? Source at github.com/..." + email; mounted via `useEffect` in root layout
 - [x] **DEV-02**: 6-line HTML comment greeting in `<head>` for `view-source:` viewers (different message from console — e.g. job preferences, "want to talk?")
 - [ ] **DEV-03**: Custom HTTP response headers (`x-portfolio-source`, `x-built-with: nextjs-15-react-19`) declared in `next.config.ts` `headers()` (covered by INFRA-04 — DEV-03 is the content/copy decision)
 
@@ -274,7 +274,7 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | CONTENT-06 | Phase 6 | Pending |
 | CONTENT-07 | Phase 6 | Pending |
 | CONTENT-08 | Phase 6 | Pending |
-| DEV-01 | Phase 5 | Pending |
+| DEV-01 | Phase 5 | Complete |
 | DEV-02 | Phase 5 | Complete (05-05) |
 | DEV-03 | Phase 5 | Pending |
 | TEST-01 | Phase 1 | Pending |

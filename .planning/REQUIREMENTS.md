@@ -47,8 +47,8 @@ Requirements for the terminal-redesign milestone. Each maps to a roadmap phase.
 - [ ] **ROUTE-05**: Terminal-styled 404 page at `app/not-found.tsx` rendering inside the terminal shell (`$ cat /var/log/portfolio.log | grep "$pathname"` style) with links to all 7 views; returns HTTP 404 (verified with `curl -I`)
 - [ ] **SEO-01**: Twitter card metadata (`twitter: { card: "summary_large_image", ... }`) on root metadata; per-route OG inherits
 - [ ] **SEO-02**: JSON-LD `Person` schema (`<script type="application/ld+json">`) in root layout with `@type: Person`, `jobTitle`, `url`, `sameAs: [github, linkedin, ...]`
-- [ ] **SEO-03**: Dynamic OG image per route via `opengraph-image.tsx` + `next/og` `ImageResponse`; pure-text design with name + role + active "file name" + accent block; JetBrains Mono passed as `fonts` to `ImageResponse`
-- [ ] **SEO-04**: Favicon set: `app/icon.tsx` (generated terminal-prompt glyph), `app/apple-icon.png`, `app/manifest.ts`, and `<meta name="theme-color">` per scheme
+- [x] **SEO-03**: Dynamic OG image per route via `opengraph-image.tsx` + `next/og` `ImageResponse`; pure-text design with name + role + active "file name" + accent block; JetBrains Mono passed as `fonts` to `ImageResponse`
+- [x] **SEO-04**: Favicon set: `app/icon.tsx` (generated terminal-prompt glyph), `app/apple-icon.png`, `app/manifest.ts`, and `<meta name="theme-color">` per scheme
 - [ ] **SEO-05**: External links use a shared `<ExternalLink>` component that sets `target="_blank"` and `rel="noopener noreferrer"`
 - [ ] **SEO-06**: Per-project anchors (`/projects#project-name`) — deferred to v1.x per FEATURES.md prioritization (anchors will churn during initial content writing)
 
@@ -232,8 +232,8 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | ROUTE-05 | Phase 2 | Pending |
 | SEO-01 | Phase 5 | Pending |
 | SEO-02 | Phase 5 | Pending |
-| SEO-03 | Phase 5 | Pending |
-| SEO-04 | Phase 5 | Pending |
+| SEO-03 | Phase 5 | Complete (05-02) |
+| SEO-04 | Phase 5 | Complete (05-02) |
 | SEO-05 | Phase 3 | Pending |
 | VIEW-01 | Phase 3 | Pending |
 | VIEW-02 | Phase 3 | Pending |

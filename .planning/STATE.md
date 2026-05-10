@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Plan 05-01 complete (Wave 0 scaffold foundation)"
-last_updated: "2026-05-10T16:01:48Z"
-last_activity: 2026-05-10 -- Plan 05-01 complete (Wave 0 foundation — devdeps, fonts, 9 scaffolds)
+stopped_at: "Plan 05-02 complete (Wave 1 Branch A — 8 OG cards + favicon set + manifest)"
+last_updated: "2026-05-10T16:08:30Z"
+last_activity: 2026-05-10 -- Plan 05-02 complete (Wave 1 Branch A — 11 next/og file-convention RSCs)
 progress:
   total_phases: 7
   completed_phases: 4
   total_plans: 39
-  completed_plans: 32
-  percent: 82
+  completed_plans: 33
+  percent: 85
 ---
 
 # Project State
@@ -26,30 +26,31 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 ## Current Position
 
 Phase: 05 (seo-accessibility-polish) — EXECUTING
-Plan: 2 of 8
+Plan: 3 of 8
 Status: Ready to execute
 Last activity: 2026-05-10
 
-Progress: [████████░░] 82% · Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 (1/8)
+Progress: [████████▌░] 85% · Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 (2/8)
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 6 (this milestone — execute-phase metrics)
-- Average duration: ~3m 30s (excluding 04-05 reviewer wall-clock)
-- Total execution time: ~20m agent-side + ~30m reviewer wall-clock for Plan 04-05 manual verification
+- Total plans completed: 7 (this milestone — execute-phase metrics)
+- Average duration: ~3m 25s (excluding 04-05 reviewer wall-clock)
+- Total execution time: ~24m agent-side + ~30m reviewer wall-clock for Plan 04-05 manual verification
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 04    | 5     | 14m 0s agent + 30m reviewer | n/a (mixed agent/manual) |
-| 05    | 1     | ~6m agent | ~6m (Wave 0 scaffold-heavy, 3 Rule-3 tooling auto-fixes) |
+| 05    | 2     | ~10m agent | ~5m (Wave 0 + Wave 1A: scaffold + 11 next/og RSCs) |
 
 **Recent Trend:**
 
-- Last plan: 05-01 (~6m) — 3 tasks (all autonomous), 3 task commits + final-metadata commit, 13 files created (3 fonts/license + 1 playwright config + 1 contrast spec + 4 vitest scaffolds + 4 smoke scripts) + 5 modified (package.json, package-lock.json, .gitignore, vitest.config.ts, vitest.setup.ts), 4 new vitest scaffold files (101 tests passing up from 97), 4 smoke scripts wired (1 passes today, 3 fail-loud by design until Wave 1+ ships), 3 Rule-3 deviations (added @playwright/test devdep, excluded tests/ from vitest, mocked next/font/google) — all tooling/test-pipeline unblocks, no production-code changes
+- Last plan: 05-02 (~4m) — 3 tasks (all autonomous), 3 task commits + final-metadata commit, 11 files created (2 favicon RSCs + 1 manifest + 8 OG image RSCs) + 0 modified, scripts/check-og-files.mjs flips green (was fail-loud since 05-01), npm run build emits 23 static pages including all OG/icon/manifest endpoints, vitest stays at 26/26 / 101 green, no deviations from plan (only adjustment was a self-correcting rewording of a comment in manifest.ts to avoid a regex self-match against `! grep -q 'service.worker'`)
+- Previous: 05-01 (~6m) — 3 tasks (all autonomous), 3 task commits + final-metadata commit, 13 files created (3 fonts/license + 1 playwright config + 1 contrast spec + 4 vitest scaffolds + 4 smoke scripts) + 5 modified (package.json, package-lock.json, .gitignore, vitest.config.ts, vitest.setup.ts), 4 new vitest scaffold files (101 tests passing up from 97), 4 smoke scripts wired (1 passes today, 3 fail-loud by design until Wave 1+ ships), 3 Rule-3 deviations (added @playwright/test devdep, excluded tests/ from vitest, mocked next/font/google) — all tooling/test-pipeline unblocks, no production-code changes
 - Previous: 04-05 (~30m reviewer wall-clock; agent-side <2min) — 4 tasks (1 automated battery + 3 manual checkpoints), 6 commits, 1 file created (SUMMARY) + 4 modified (VERIFICATION + STATE + ROADMAP + REQUIREMENTS) + 2 mid-plan amendment files (globals.css + check-sidebar-redistribution.mjs in commit bf38cf3), Phase 4 verdict PASS, 9 manual gates resolved (7 PASS / 2 DEFERRED-PHASE-7)
 - Previous: 04-04 (2m 14s) — 2 tasks (1 TDD), 3 commits, 2 files created + 1 modified, +70 lines (20 component + 42 test + 8 layout net), 4 new test cases (PrintFooter), 97 vitest tests passing (up from 93)
 - Earlier: 04-03 (3m 29s) — 3 tasks (2 TDD), 5 commits, 4 files created + 4 modified, net +84 lines (+125 created, -41 sidebar shrink), 12 new test cases (6 status-block + 5 about-view + 1 sidebar STATUS lock), 93 vitest tests passing (up from 81)
@@ -91,6 +92,8 @@ Recent decisions affecting current work:
 - Phase 5 Plan 01: vitest.setup.ts mocks `next/font/google` — module-load-time `JetBrains_Mono({...})` in app/layout.tsx is a Next.js compiler primitive (transformed at build time, not a real runtime function). Without the mock, any test that imports `metadata` from app/layout.tsx throws `JetBrains_Mono is not a function`. Mock returns `{ variable: "--font-mono", className: "font-mono" }` — drop-in replacement for the layout's destructure.
 - Phase 5 Plan 01: JetBrains Mono OG fonts live in `assets/`, NOT `public/` (T-05-01 information-disclosure mitigation). RSC code (`opengraph-image.tsx`, `app/icon.tsx`, etc.) reads them at build time via `readFile(join(process.cwd(), "assets/..."))`; the binaries never appear in `.next/static/` route surface. `assets/JetBrainsMono-{Bold,Medium}.ttf` (v2.304) + `assets/JETBRAINS-MONO-LICENSE.txt` (OFL-1.1) committed.
 - Phase 5 Plan 01: Wave 0 contract — every later plan's `<verify>` block resolves to a file path that already exists. 4 vitest scaffolds + 4 smoke scripts seeded; 3 of 4 smoke scripts intentionally exit 1 with FAIL output until Wave 1+ ships their source. The moment a Wave 1+ task ships its source, the corresponding smoke script flips green automatically (no script edits needed).
+- Phase 5 Plan 02: 8 sibling opengraph-image.tsx files (no shared helper) — RESEARCH Open Question 1 disposition. Per-route diff is one ROUTE_LABEL constant + one alt suffix; ~75 lines × 8 = ~600 lines duplicated. Clarity > DRY in v1; consolidation is a v1.1 candidate if the template diverges per route. Root + (terminal)/ both render about.md (homepage default + about-route landing) — Next.js metadata composition picks the most-specific match.
+- Phase 5 Plan 02: First next/og use in repo. All 11 RSCs (8 OG + 2 icon + 1 manifest) inline-style with hardcoded hex constants — Satori does NOT consume external CSS or var(--*). display:flex on every container (Pitfall 2). Font binaries loaded via readFile(join(process.cwd(), "assets/JetBrainsMono-{Bold,Medium}.ttf")) — assets/ vs public/ separation enforces T-05-05 (no public exposure of font binaries). manifest.ts ships icons:[] empty per Pitfall 12 (Next.js auto-includes from app/icon.tsx + app/apple-icon.tsx); display:browser locks T-05-09 (no PWA install push).
 
 ### Pending Todos
 
@@ -118,6 +121,6 @@ Items acknowledged and carried forward to later phases:
 
 ## Session Continuity
 
-Last session: 2026-05-10T15:58:05Z
-Stopped at: Plan 05-01 complete (Wave 0 foundation — devdeps + JetBrains Mono fonts + 9 scaffold files; npm test 26/26 / 101 tests green; npm run test:contrast scaffold passes)
-Resume file: .planning/phases/05-seo-accessibility-polish/05-02-PLAN.md (Wave 1 — favicon + manifest + 8 OG cards)
+Last session: 2026-05-10T16:08:30Z
+Stopped at: Plan 05-02 complete (Wave 1 Branch A — 11 next/og RSCs: 8 OG cards + favicon + apple-icon + manifest; scripts/check-og-files.mjs green; npm run build 23 pages OK; npm test 26/26 / 101 green)
+Resume file: .planning/phases/05-seo-accessibility-polish/05-03-PLAN.md (Wave 1 Branch B — Twitter card + viewport.themeColor + reduced-motion CSS reset)

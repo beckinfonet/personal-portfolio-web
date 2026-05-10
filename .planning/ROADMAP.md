@@ -117,7 +117,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. `curl -I <localhost-url>` shows `x-portfolio-source` and `x-built-with: nextjs-15-react-19` headers; opening DevTools console on first paint shows the JetBrains-style ASCII signature with email + GitHub URL; `view-source:` shows a 6-line HTML comment greeting in `<head>`
 **Plans:** 8 plans
 - [x] 05-01-PLAN.md — Wave 0: Devdeps (@axe-core/playwright + playwright + @playwright/test + chromium binary), JetBrains Mono TTFs (with OFL-1.1 license) committed to assets/, playwright.config.ts, 4 Vitest test scaffolds, 4 smoke-script scaffolds, test:contrast script (3 Rule-3 deviations: added @playwright/test devdep, excluded tests/ from vitest, mocked next/font/google)
-- [ ] 05-02-PLAN.md — Wave 1: 8 OG image cards (root + 7 routes via next/og ImageResponse, JetBrains Mono via readFile, inline hex per Pitfall 1, display:flex per Pitfall 2) + app/icon.tsx + app/apple-icon.tsx (>_ glyph) + app/manifest.ts (minimal, display:browser, icons:[] per Pitfall 12)
+- [x] 05-02-PLAN.md — Wave 1 Branch A: 8 OG image cards (root + 7 routes via next/og ImageResponse, JetBrains Mono via readFile from assets/, inline hex per Pitfall 1, display:flex per Pitfall 2) + app/icon.tsx + app/apple-icon.tsx (>_ glyph, one visual source) + app/manifest.ts (minimal, display:browser, icons:[] per Pitfall 12). 11 files created, scripts/check-og-files.mjs flips green, npm run build emits 23 static pages.
 - [ ] 05-03-PLAN.md — Wave 1: app/layout.tsx adds metadata.twitter (summary_large_image) + SEPARATE viewport export with themeColor per-scheme array (Pitfall 3 — corrects CONTEXT.md D-15's deprecated location); globals.css universal-selector reduced-motion reset (0.01ms per Pitfall 7); 8 layout.test.tsx assertions
 - [ ] 05-04-PLAN.md — Wave 1: AboutSocials RSC inline mini-contact card (Phase 4 → 5 carry-forward) — 3 rows (EMAIL/GITHUB/LINKEDIN) inserted after bio paragraphs, before highlights; reuses ExternalLink + .contact-row; TODO-guard via /^https?:\/\// regex; 5 new about-view.test.tsx assertions
 - [ ] 05-05-PLAN.md — Wave 2: lib/json-ld.ts (buildPersonSchema + filterValidUrls) with 10 unit tests; JsonLdPerson RSC with XSS escape (`<` → `\u003c` per Pitfall 6); HeadComment RSC (`<noscript dangerouslySetInnerHTML>` 6-line lowercase letter per Pattern 9); both mounted in app/layout.tsx <head>
@@ -166,6 +166,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 2. Shell | 7/7 | Complete | 2026-05-06 |
 | 3. Views | 0/TBD | Not started | - |
 | 4. Mobile-Responsive | 5/5 | Complete | 2026-05-07 |
-| 5. SEO + Accessibility Polish | 0/8 | Planned | - |
+| 5. SEO + Accessibility Polish | 2/8 | In progress | - |
 | 6. Backend + Content Population | 0/TBD | Not started | - |
 | 7. Deploy + Verification | 0/TBD | Not started | - |

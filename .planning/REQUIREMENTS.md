@@ -78,7 +78,7 @@ Each view is RSC by default; client behavior lives in shell-level islands.
 - [ ] **A11Y-01**: Skip-link to `#main-content` revealed on `:focus` at the top of `<body>` (WCAG 2.4.1)
 - [ ] **A11Y-02**: All interactive elements (sidebar buttons, palette items, palette trigger, theme toggle, accent picker, links) show a 2px accent `:focus-visible` outline with 2px offset; default outlines never killed without replacement
 - [x] **A11Y-03**: `@media (prefers-reduced-motion: reduce)` block disables `slideIn`, dampens cursor blink, and stops boot-fade animations (WCAG 2.3.3)
-- [ ] **A11Y-04**: Sidebar file rows are real `<button>` elements with `aria-label` that includes a plain-noun label (e.g. `aria-label="Contact information"` on `contact.sh`); `aria-current="page"` on the active row (per Risk 3 — recruiter usability)
+- [x] **A11Y-04**: Sidebar file rows are real `<button>` elements with `aria-label` that includes a plain-noun label (e.g. `aria-label="Contact information"` on `contact.sh`); `aria-current="page"` on the active row (per Risk 3 — recruiter usability)
 - [ ] **A11Y-05**: Semantic landmarks: `<header>` for top bar, `<nav aria-label="File explorer">` for sidebar, `<main id="main-content">` for content, `<footer>` for credits
 - [ ] **A11Y-06**: Live clock has `aria-hidden="true"` (decoration; no SR announcement every 30s)
 - [ ] **A11Y-07**: Color contrast meets WCAG 2.1 AA: ≥ 4.5:1 for body, ≥ 3:1 for large text, audited across 4 hues × 2 themes = 8 combinations using `@axe-core/playwright`; per-hue chroma overrides applied where needed (amber on light theme is the predicted failure per Pitfall 8)
@@ -251,7 +251,7 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | A11Y-01 | Phase 2 | Pending |
 | A11Y-02 | Phase 2 | Pending |
 | A11Y-03 | Phase 5 | Complete (05-03) |
-| A11Y-04 | Phase 2 | Pending |
+| A11Y-04 | Phase 2 | Complete |
 | A11Y-05 | Phase 2 | Pending |
 | A11Y-06 | Phase 2 | Pending |
 | A11Y-07 | Phase 5 | Pending |

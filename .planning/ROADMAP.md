@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Shell** - Persistent terminal shell with theme/accent system, command palette, sitemap, 404 (4 human-UAT items pending)
 - [x] **Phase 3: Views** - Seven per-view routes with metadata, primitives, RSC content rendering (2026-05-06)
 - [x] **Phase 4: Mobile-Responsive** - Bottom-sheet nav, mobile palette, sidebar redistribution, print styles (2026-05-07 — verdict PASS with Phase 5 + Phase 7 carry-forwards)
-- [ ] **Phase 5: SEO + Accessibility Polish** - OG images, JSON-LD, contrast audit, reduced-motion, easter eggs
+- [x] **Phase 5: SEO + Accessibility Polish** - OG images, JSON-LD, contrast audit, reduced-motion, easter eggs (2026-05-11 — verdict PASS; 56/56 axe cells WCAG 2.1 AA; 134/134 vitest; verifier audit corroborates; SEO-03c + real-device reduce-motion + Lighthouse + x-portfolio-source value all DEFERRED-PHASE-7)
 - [ ] **Phase 6: Backend + Content Population** - Sibling backend endpoints, real bio/projects/posts/resume PDF
 - [ ] **Phase 7: Deploy + Verification** - Production deploy, Lighthouse, Search Console, recruiter test, audits
 
@@ -166,6 +166,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 2. Shell | 7/7 | Complete | 2026-05-06 |
 | 3. Views | 0/TBD | Not started | - |
 | 4. Mobile-Responsive | 5/5 | Complete | 2026-05-07 |
-| 5. SEO + Accessibility Polish | 8/8 | In progress (pending verifier) | - |
+| 5. SEO + Accessibility Polish | 8/8 | Complete | 2026-05-11 |
 | 6. Backend + Content Population | 0/TBD | Not started | - |
 | 7. Deploy + Verification | 0/TBD | Not started | - |

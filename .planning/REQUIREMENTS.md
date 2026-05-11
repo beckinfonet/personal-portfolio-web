@@ -102,7 +102,7 @@ Each view is RSC by default; client behavior lives in shell-level islands.
 
 ### Content Population (CONTENT)
 
-- [ ] **CONTENT-01**: Real bio (short + long), highlights, role string, location, email, social handles populated in `lib/portfolio-data.ts`
+- [x] **CONTENT-01**: Real bio (short + long), highlights, role string, location, email, social handles populated in `lib/portfolio-data.ts` (Plan 06-02 — Wave 0 seeded; Wave 2 verified byte-mirror with BE seed/profile.json + locked via vitest assertions)
 - [ ] **CONTENT-02**: Real project list populated (≥ 3 projects with name, year, status, summary, tech, role, link) — final v1 set
 - [ ] **CONTENT-03**: Real `shipped.app` data populated with valid App Store + Google Play URLs (deep links resolved on tap from mobile)
 - [ ] **CONTENT-04**: Writing posts populated — v1 ships **at least one real post**; "zero posts / coming soon" state acceptable only if explicitly chosen during the content phase
@@ -263,10 +263,10 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | MOBILE-04 | Phase 4 | Complete (04-03) |
 | MOBILE-05 | Phase 4 | Complete (04-05) |
 | BACKEND-01 | Phase 6 | Pending |
-| BACKEND-02 | Phase 6 | Pending |
+| BACKEND-02 | Phase 6 | Partial (06-02: /api/profile reshaped; /api/skills + /api/experience + /api/apps + /api/posts still flat — Waves 3-6) |
 | BACKEND-03 | Phase 6 | Pending |
 | BACKEND-04 | Phase 6 | Pending |
-| CONTENT-01 | Phase 6 | Pending |
+| CONTENT-01 | Phase 6 | Complete (06-02) |
 | CONTENT-02 | Phase 6 | Pending |
 | CONTENT-03 | Phase 6 | Pending |
 | CONTENT-04 | Phase 6 | Pending |

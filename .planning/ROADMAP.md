@@ -138,7 +138,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. `npm run build && grep -rE "lorem|example\.com|placeholder|TODO|Product Studio" .next/server/` returns nothing (INFRA-05 prebuild script enforces this on every build)
 **Plans:** 9 plans
 - [x] 06-01-PLAN.md — Wave 1 (Wave 0 infra): backend smoke gate + seed entry + contract skeleton + db error log + FE resume-PDF gate + portfolio-data test scaffold (paired commits) — completed 2026-05-11; BE `e50aea5` + FE `1b0020d`
-- [ ] 06-02-PLAN.md — Wave 2: Profile reshape paired commit (nested Mongoose subdocs + _id:false + strict:throw; FE bio mirror)
+- [x] 06-02-PLAN.md — Wave 2: Profile reshape paired commit (nested Mongoose subdocs + _id:false + strict:throw; FE bio mirror) — completed 2026-05-11; BE `c57664d` + FE `ca58deb`; backend jest 2→3, frontend vitest 136→140; BACKEND-02 + CONTENT-01 satisfied
 - [ ] 06-03-PLAN.md — Wave 3: Skill→Stack rename paired commit (delete Skill.ts + add Stack.ts in same commit; drop legacy skills Mongo collection on first seed; Pitfall 4)
 - [ ] 06-04-PLAN.md — Wave 4: Experience reshape paired commit (flatten to {company,role,period,summary}; composite upsert key; CONTENT-07)
 - [ ] 06-05-PLAN.md — Wave 5: ShippedApps reshape paired commit (platforms enum + appStoreUrl/googlePlayUrl; CONTENT-03 + D-17)

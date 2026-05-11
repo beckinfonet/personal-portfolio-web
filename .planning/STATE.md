@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 6 Plan 01 complete (Wave 0 infra scaffolded)
-last_updated: "2026-05-11T02:12:00.000Z"
-last_activity: 2026-05-11 -- Phase 6 Plan 01 (Wave 0 infra) complete
+stopped_at: Phase 6 Plan 02 complete (Wave 2 Profile reshape paired commit)
+last_updated: "2026-05-11T02:18:37.000Z"
+last_activity: 2026-05-11 -- Phase 6 Plan 02 (Wave 2 Profile reshape) complete
 progress:
   total_phases: 7
   completed_phases: 5
   total_plans: 48
-  completed_plans: 40
-  percent: 83
+  completed_plans: 41
+  percent: 85
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 ## Current Position
 
 Phase: 06 (backend-content-population) — IN PROGRESS
-Plan: 1 of 9 complete (Wave 0 infra scaffolded; gates fail-loud by design until Waves 02-09 ship)
-Status: Ready to execute Plan 06-02 (Wave 2 profile reshape paired commit)
-Last activity: 2026-05-11 -- Phase 6 Plan 01 (Wave 0 infra) complete
+Plan: 2 of 9 complete (Wave 2 Profile reshape paired commits across both repos)
+Status: Ready to execute Plan 06-03 (Wave 3 Skill→Stack rename paired commit; delete Skill.ts + add Stack.ts in same commit; drop legacy skills Mongo collection on first seed)
+Last activity: 2026-05-11 -- Phase 6 Plan 02 (Wave 2 Profile reshape) complete
 
-Progress: [█████████████████░] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 ✓ · Phase 6 (1/9)
+Progress: [██████████████████] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 ✓ · Phase 6 (2/9)
 
 ## Performance Metrics
 
@@ -49,7 +49,7 @@ Progress: [█████████████████░] Phase 1 ✓ �
 
 **Recent Trend:**
 
-- Last plan: 06-01 (~10m agent-side) — 2 tasks (both autonomous, no checkpoints), 2 paired commits across two repos (portfolio-services `e50aea5`, portfolio-web `1b0020d`; each amended once to install paired-SHA citation per D-19). 5 new files (3 BE: scripts/check-backend.mjs, src/scripts/seed.ts, docs/api-contract.md; 2 FE: scripts/check-resume-pdf.mjs, lib/portfolio-data.test.ts) + 2 BE modified (package.json + src/config/database.ts). Vitest count drift 134 → 136 (+2 always-green scaffold assertions). Backend Jest unchanged 2/2. Lint + typecheck clean. Both gate scripts (check-backend.mjs against unreachable URL, check-resume-pdf.mjs against the 50-byte ASCII stub) intentionally exit 1 today — they flip green automatically as Waves 02-09 ship. 1 Rule-1 deviation: paired-commit cross-reference settled on one-direction-current (BE cites current FE SHA; FE cites historical BE SHA) because git's content-addressable hashing makes perfect bidirectional citation impossible without an unbounded amend cycle. No production code paths altered on either repo.
+- Last plan: 06-02 (~4m agent-side) — 2 tasks (both autonomous, no checkpoints), 2 paired commits across two repos (portfolio-services `c57664d`, portfolio-web `ca58deb`; NEITHER amended — one-direction-current per Wave 1 Rule-1 carryover; cross-reference recorded in 06-02-SUMMARY.md). 1 new file (BE `src/seed/profile.json`) + 7 BE modified (types/content.ts ProfileDto rewrite, models/Profile.ts nested-subdoc schema with _id:false×3 + strict:throw, controllers/contentController.ts getProfile 503-when-not-ready + _id-strip, seed/placeholders.ts placeholderProfile reshape, scripts/seed.ts Profile upsert by email, tests/app.test.ts +/api/profile spec 2→3, docs/api-contract.md GET /api/profile filled) + 1 FE modified (lib/portfolio-data.test.ts +4 PROFILE assertions; lib/portfolio-data.ts NOT modified because Wave 0 PROFILE.bio.long already mirrored seed verbatim). Vitest count drift 136 → 140 (+4 profile content tests). Backend Jest 2 → 3 (+1 /api/profile shape spec). Build + typecheck + INFRA-05 postbuild all clean on both repos. 4 deviations: (a) Rule-3 swap `import.meta.url` → CommonJS `__dirname` in seed.ts because tsconfig module=commonjs rejects ESM idiom; (b) Rule-1 fix tsc noUnusedLocals on `{_id, __v, createdAt, updatedAt, ...clean}` destructure via `void` discards; (c) Rule-2 pre-emptive cleanup of `placeholderApps.url` (example.com→github.com/beckinfonet/portfolio-web) and `placeholderExperience.company` (Example Co → Acme Studio) to avoid Wave 9 cutover surprise when FE renders BE responses through INFRA-05 grep; (d) plan/reality reconciliation: lib/portfolio-data.ts listed in files_modified but Wave 0 already shipped the byte-identical content — only the test file shipped on FE side. Wave template now proven; Waves 3-7 are mechanical repeats of the same recipe (BE: DTO + model + controller-503 + placeholder + seed JSON + seed.ts upsert + jest spec + contract section; FE: vitest assertions block).
 - Previous: 05-07 (~23m agent-side, 4 task-internal iterations) — 4 tasks (1 + 2 autonomous, 3 human-verify checkpoint, 4 with 4 iteration loops to green), 10 commits (0418724 Task 1 spec rewrite + dbfacc6 Run 1 audit + 9a2f7af build+start switch + 113b6e7 initial dark token bump + 62aa039 amber-on-light scoped override + 56dad99 reducedMotion + 0034e21 contextOptions nesting fix + ed573cd specificity scope fix + 76df6fa light-theme companion --muted bump + 7fed0fd Run 2 audit), 3 production files modified (tests/contrast.spec.ts 4×2×7 matrix + Pitfall 10 canary; playwright.config.ts webServer.command=build+start, timeout=120s, contextOptions.reducedMotion=reduce; app/globals.css 3 theme-scoped oklch override blocks appended at end-of-file), 2 audit-trail files created (05-07-AXE-RUN-1.md pre-remediation; 05-07-AXE-RUN-2.md post-remediation with full 4-iteration history), final 56/56 cells PASS axe color-contrast at WCAG 2.1 AA in 33.3s, no Vitest regressions (134/134 still green), lint+typecheck+build all clean, A11Y-07 requirement shipped, 4 deviations (2 Rule-3 blocking infra fixes — reducedMotion + contextOptions nesting; 1 Rule-1 cascade bug — :root specificity bleed into light theme; 1 Rule-2 missing critical — light-theme companion --muted bump; all 4 inside Outcome C scope, no scope creep)
 - Previous: 05-06 (2m 8s) — 2 tasks (Task 1 TDD with explicit RED commit; Task 2 autonomous), 3 task commits (b8da728 RED + f63c0dc GREEN for ConsoleSignature; b090001 for (terminal)/layout mount), 1 file created (console-signature.tsx 39 lines 'use client' island with BT-initials ASCII art + console.log on mount + return null) + 2 modified (console-signature.test.tsx +49/-8 sentinel→6 real assertions via vi.spyOn(console, 'log'); (terminal)/layout.tsx +5 lines for import + JSX mount with Pitfall 8 inline comment), 6 new test cases (call-count + ASCII art match + github line + email line + arg-count + null DOM), vitest now 26/134 (was 26/129; +5 net since scaffold sentinel was replaced), 0 deviations from plan (clean first-pass execution; ASCII art = "BT" initials per CONTEXT D-24 / RESEARCH Open Question disposition; no idempotency guard added because T-05-23 ACCEPTS StrictMode double-fire), DEV-01 requirement shipped, 7th client island in project, npm run build emits 24 static pages OK, lint + typecheck clean
 - Previous: 05-05 (4m 49s) — 4 tasks (Tasks 1+2 TDD with explicit RED commits; Tasks 3+4 autonomous), 6 task commits (4dfd9f8 RED + c07702b GREEN for lib/json-ld; e5298c1 RED + c7eb4d2 GREEN for JsonLdPerson; c5bebe0 for HeadComment; 4aacb60 for app/layout.tsx mounts), 3 files created (lib/json-ld.ts 47 lines pure helpers; json-ld-person.tsx 22 lines RSC with XSS escape; head-comment.tsx 21 lines RSC with <noscript> 6-line letter) + 4 modified (lib/json-ld.test.ts +121/-4 for 10 assertions; json-ld-person.test.tsx +49/-6 for 6 assertions; app/layout.tsx +5 lines for 2 mounts; app/layout.test.tsx +34 lines for 2 mount-point assertions), 16 new test cases (10 lib/json-ld + 6 JsonLdPerson — incl. T-05-16 XSS-escape invariant `expect(script.innerHTML).not.toMatch(/</)` — + 2 layout mount via renderToStaticMarkup), vitest now 26/129 (was 26/113), scripts/check-head-comment.mjs flips FAIL→PASS (3rd of 4 fail-loud scripts to flip; only check-headers remains, which already passes Phase 1's x-built-with), 1 Rule-3 deviation (RTL refused to mount <html> into <div> container — switched layout mount-point assertions to react-dom/server.renderToStaticMarkup with regex over serialized HTML; same contract verified, different inspection surface), SEO-02 + DEV-02 requirements shipped, npm run build emits 24 static pages OK, lint + typecheck + check:mobile clean
@@ -70,6 +70,7 @@ Progress: [█████████████████░] Phase 1 ✓ �
 | Phase 5 P6 | 2m 8s  | 2 tasks | 3 files (1 created + 2 modified) |
 | Phase 5 P7 | ~23m   | 4 tasks (4 internal iterations on Task 4) | 5 files (2 created + 3 modified) |
 | Phase 6 P1 | ~10m   | 2 tasks (both autonomous, 2 paired commits across repos, both amended once) | 7 files (5 created + 2 modified) |
+| Phase 6 P2 | ~4m    | 2 tasks (both autonomous, 2 paired commits across repos, neither amended — one-direction-current per Wave 1 Rule-1) | 9 files (1 created + 8 modified across two repos) |
 
 ## Accumulated Context
 
@@ -127,6 +128,12 @@ Recent decisions affecting current work:
 - Phase 5 Plan 07: Playwright `contextOptions.reducedMotion: "reduce"` is required for axe contrast audits to read the FINAL paint state. Without it, the `.content-block` slideIn (200ms opacity 0→1) is mid-flight when axe runs against pre-compiled pages, and axe composites foreground colors with the parent's mid-animation opacity ~0.14 → reports impossibly-dark colors. Enabling reduced-motion fires the Plan 05-03 universal `*` animation reset (animation-duration: 0.01ms) so axe sees the steady-state paint. Also semantically correct (WCAG conformance targets the steady-state design, which reduced-motion users always see).
 - Phase 5 Plan 07: `reducedMotion` lives on `BrowserContextOptions`, NOT the top-level `PlaywrightTestOptions`, in @playwright/test@1.59.1. Nest under `use.contextOptions.reducedMotion: "reduce"` (commit `0034e21`). The top-level placement compiles a tsc error that surfaces via the test runner's webServer step, NOT the playwright runner itself — Next.js's tsc picks up playwright.config.ts as part of the build's compile pass.
 - Phase 5 Plan 07: build+start (NOT dev) for the contrast matrix is mandatory because Next.js dev mode's lazy per-route compile (~2–10s) overruns the 5s `data-theme` canary timeout in 54/56 cells. The Pitfall 10 canary correctly diagnosed this in Run 1 (54 cells failed canary cleanly, NOT axe — preventing 54 false-pass results). Switched `webServer.command` to `npm run build && npm run start` + bumped timeout to 120_000ms in playwright.config.ts.
+- Phase 6 Plan 02: Rule-3 swap `import.meta.url + fileURLToPath(dirname(...))` → `join(__dirname, '..', 'seed')` in portfolio-services/src/scripts/seed.ts because portfolio-services/tsconfig.json sets `module: commonjs` which rejects `import.meta` with TS1343. Semantically equivalent; no tsconfig change needed; preserves Jest ts-jest + ts-node-dev compatibility. Inline comment documents the swap.
+- Phase 6 Plan 02: Rule-1 noUnusedLocals fix for `getProfile` destructure-strip pattern: `const { _id, __v, createdAt, updatedAt, ...clean } = doc` trips `strict: true` noUnusedLocals on the 4 extracted-and-discarded bindings. Added `void _id; void __v; void createdAt; void updatedAt;` immediately after to mark them as intentionally referenced. Same end result as underscore-prefix convention but works with object-rest destructuring where field rename is awkward. Pitfall 1 strip semantics preserved.
+- Phase 6 Plan 02: Rule-2 pre-emptive INFRA-05 cleanup in src/seed/placeholders.ts: changed `placeholderApps.url` from `https://example.com/...` to `https://github.com/beckinfonet/portfolio-web` and `placeholderExperience.company` from `Example Co` to `Acme Studio`. Both strings would trip FE's INFRA-05 grep at Wave 9 cutover when FE flips to `NEXT_PUBLIC_API_BASE_URL=<railway-host>` and renders BE responses through the build. Pre-cleanup avoids Wave 9 surprise. Waves 4-5 reshape these constants entirely.
+- Phase 6 Plan 02: One-direction-current paired-SHA citation continued from Wave 1: BE commit cites placeholder `<pending FE SHA — recorded in SUMMARY.md>` (NOT amended after FE commit lands, per Wave 1 Rule-1 cycle-avoidance); FE commit cites BE SHA `c57664d` verbatim. Cross-reference durably recorded in 06-02-SUMMARY.md as `BE c57664d ↔ FE ca58deb`. Pattern continues for all Phase 6 paired waves.
+- Phase 6 Plan 02: lib/portfolio-data.ts NOT modified despite being listed in plan's `files_modified`. Wave 0 already shipped the exact engineering-credible bio.long strings that the plan specifies. Byte-diff verified via Node script. Only `lib/portfolio-data.test.ts` shipped on FE side. Plan's CONTEXT.md text anticipates this ("The current PROFILE already has every Profile field…"). Documented in SUMMARY Deviations §4.
+- Phase 6 Plan 02 wave template: Future waves (3-7) follow the same 11-step recipe — BE DTO mirror + nested model w/ _id:false + 503 controller + placeholder reshape + seed JSON + seed.ts upsert slot + supertest spec + contract section; FE vitest assertions block (sometimes touching lib/portfolio-data.ts if the constant isn't already content-correct). Wave 3 (Stack) additionally drops legacy `skills` collection + renames `getSkills`→`getStack` + updates apiRoutes.ts (Pitfall 4 path) — largest deviation from template; Waves 4-7 closer to mechanical.
 
 ### Pending Todos
 
@@ -154,6 +161,6 @@ Items acknowledged and carried forward to later phases:
 
 ## Session Continuity
 
-Last session: 2026-05-11T02:12:00.000Z
-Stopped at: Phase 6 Plan 01 complete (Wave 0 infra scaffolded)
-Resume file: .planning/phases/06-backend-content-population/06-02-PLAN.md
+Last session: 2026-05-11T02:18:37.000Z
+Stopped at: Phase 6 Plan 02 complete (Wave 2 Profile reshape paired commit)
+Resume file: .planning/phases/06-backend-content-population/06-03-PLAN.md

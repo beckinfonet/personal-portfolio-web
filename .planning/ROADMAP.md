@@ -137,7 +137,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. `public/resume.pdf` is the real `Bakytbek_Tatibekov_Resume.pdf` — `file public/resume.pdf` confirms PDF; `wc -c` reports < 250KB; `pdfinfo` shows `Title` and `Author` metadata set
   5. `npm run build && grep -rE "lorem|example\.com|placeholder|TODO|Product Studio" .next/server/` returns nothing (INFRA-05 prebuild script enforces this on every build)
 **Plans:** 9 plans
-- [ ] 06-01-PLAN.md — Wave 1 (Wave 0 infra): backend smoke gate + seed entry + contract skeleton + db error log + FE resume-PDF gate + portfolio-data test scaffold (paired commits)
+- [x] 06-01-PLAN.md — Wave 1 (Wave 0 infra): backend smoke gate + seed entry + contract skeleton + db error log + FE resume-PDF gate + portfolio-data test scaffold (paired commits) — completed 2026-05-11; BE `e50aea5` + FE `1b0020d`
 - [ ] 06-02-PLAN.md — Wave 2: Profile reshape paired commit (nested Mongoose subdocs + _id:false + strict:throw; FE bio mirror)
 - [ ] 06-03-PLAN.md — Wave 3: Skill→Stack rename paired commit (delete Skill.ts + add Stack.ts in same commit; drop legacy skills Mongo collection on first seed; Pitfall 4)
 - [ ] 06-04-PLAN.md — Wave 4: Experience reshape paired commit (flatten to {company,role,period,summary}; composite upsert key; CONTENT-07)
@@ -176,5 +176,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 3. Views | 0/TBD | Not started | - |
 | 4. Mobile-Responsive | 5/5 | Complete | 2026-05-07 |
 | 5. SEO + Accessibility Polish | 8/8 | Complete | 2026-05-11 |
-| 6. Backend + Content Population | 0/9 | Not started | - |
+| 6. Backend + Content Population | 1/9 | In progress | - |
 | 7. Deploy + Verification | 0/TBD | Not started | - |

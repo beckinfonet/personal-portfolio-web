@@ -108,7 +108,7 @@ Each view is RSC by default; client behavior lives in shell-level islands.
 - [ ] **CONTENT-04**: Writing posts populated — v1 ships **at least one real post**; "zero posts / coming soon" state acceptable only if explicitly chosen during the content phase
 - [ ] **CONTENT-05**: Real `Bakytbek_Tatibekov_Resume.pdf` placed in `public/resume.pdf` (file size < 250KB, embedded font subset, internal `Title` / `Author` PDF metadata set)
 - [x] **CONTENT-06**: Final stack categories + entries populated for the `stack.json` view (Plan 06-03 — FE STACK constant verified byte-mirror with BE `src/seed/stack.json`; 4 categories: languages/frameworks/cloud/ai; locked via vitest uniqueness + non-empty assertions)
-- [ ] **CONTENT-07**: Final experience.log entries populated (role, company, period, summary)
+- [x] **CONTENT-07**: Final experience.log entries populated (role, company, period, summary) (Plan 06-04 — FE EXPERIENCE constant populated with 3 entries; D-14 byte-mirror with BE `src/seed/experience.json`; locked via vitest length>=1 + all-4-fields-present + no-legacy-fields assertions)
 - [ ] **CONTENT-08**: All placeholder strings (`example.com`, `Product Studio`, `lorem`, `TODO`, `placeholder`) verifiably absent from the production build (enforced by INFRA-05 prebuild script)
 
 ### Engineer Easter Eggs (DEV)
@@ -263,7 +263,7 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | MOBILE-04 | Phase 4 | Complete (04-03) |
 | MOBILE-05 | Phase 4 | Complete (04-05) |
 | BACKEND-01 | Phase 6 | Pending |
-| BACKEND-02 | Phase 6 | Partial (06-02: /api/profile reshaped; 06-03: /api/skills→/api/stack renamed + reshaped; /api/experience + /api/apps + /api/posts still flat — Waves 4-6) |
+| BACKEND-02 | Phase 6 | Partial (06-02: /api/profile reshaped; 06-03: /api/skills→/api/stack renamed + reshaped; 06-04: /api/experience reshaped to {company,role,period,summary} with composite unique index + strict:'throw'; /api/apps + /api/posts still flat — Waves 5-6) |
 | BACKEND-03 | Phase 6 | Pending |
 | BACKEND-04 | Phase 6 | Pending |
 | CONTENT-01 | Phase 6 | Complete (06-02) |
@@ -272,7 +272,7 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | CONTENT-04 | Phase 6 | Pending |
 | CONTENT-05 | Phase 6 | Pending |
 | CONTENT-06 | Phase 6 | Complete (06-03) |
-| CONTENT-07 | Phase 6 | Pending |
+| CONTENT-07 | Phase 6 | Complete (06-04) |
 | CONTENT-08 | Phase 6 | Pending |
 | DEV-01 | Phase 5 | Complete |
 | DEV-02 | Phase 5 | Complete (05-05) |

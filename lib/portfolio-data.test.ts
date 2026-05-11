@@ -105,3 +105,43 @@ describe("EXPERIENCE content (Wave 04)", () => {
     }
   });
 });
+
+describe("SHIPPED content (Wave 05)", () => {
+  test("SHIPPED has 2 or 3 entries (D-17)", () => {
+    expect(SHIPPED.length).toBeGreaterThanOrEqual(2);
+    expect(SHIPPED.length).toBeLessThanOrEqual(3);
+  });
+
+  test("every SHIPPED entry has non-empty platforms array (CONTENT-03)", () => {
+    for (const app of SHIPPED) {
+      expect(Array.isArray(app.platforms)).toBe(true);
+      expect(app.platforms.length).toBeGreaterThan(0);
+      for (const p of app.platforms) {
+        expect(["ios", "android"]).toContain(p);
+      }
+    }
+  });
+
+  test("every SHIPPED entry has at least one valid HTTPS store URL (Pitfall 5)", () => {
+    const httpsRegex = /^https?:\/\//;
+    for (const app of SHIPPED) {
+      const hasIos = app.platforms.includes("ios");
+      const hasAndroid = app.platforms.includes("android");
+      if (hasIos) {
+        expect(app.appStoreUrl).toBeTruthy();
+        expect(app.appStoreUrl!).toMatch(httpsRegex);
+      }
+      if (hasAndroid) {
+        expect(app.googlePlayUrl).toBeTruthy();
+        expect(app.googlePlayUrl!).toMatch(httpsRegex);
+      }
+    }
+  });
+
+  test("SHIPPED has no INFRA-05 forbidden strings or placeholder angle brackets", () => {
+    const serialized = JSON.stringify(SHIPPED);
+    expect(serialized).not.toMatch(/lorem|example\.com|placeholder|Product Studio/i);
+    expect(serialized).not.toMatch(/TODO/);
+    expect(serialized).not.toMatch(/<[a-z]/);   // catches "<from", "<app-", etc.
+  });
+});

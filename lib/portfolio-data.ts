@@ -95,7 +95,25 @@ export const WRITING: Writing[] = [
 ];
 
 export const SHIPPED: ShippedApp[] = [
-  // Phase 6 fills with real App Store / Play Store URLs.
+  // Entries mirrored from portfolio-services/src/seed/apps.json (D-14).
+  // Wave 08 reconciles PROFILE.highlights[1].value ("4 apps shipped") to SHIPPED.length.
+  {
+    name: "Heart Trainer",
+    platforms: ["ios"],
+    appStoreUrl: "https://apps.apple.com/us/app/heart-trainer/id1457699720",
+    role: "lead",
+    year: "2020",
+    summary: "Heart-rate guided fitness coach with adaptive workout plans built around real-time biometric input."
+  },
+  {
+    name: "Lingo Coach",
+    platforms: ["ios", "android"],
+    appStoreUrl: "https://apps.apple.com/us/app/lingo-coach/id1502348290",
+    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.lingo.coach",
+    role: "co-creator",
+    year: "2021",
+    summary: "Spaced-repetition language tutor combining native-speaker audio with adaptive review scheduling."
+  }
 ];
 
 export const STACK: StackCategory[] = [

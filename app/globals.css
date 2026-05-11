@@ -1570,6 +1570,17 @@ a:hover {
        4.5:1 against --bg. */
     --accent-dim: oklch(0.70 0.12 var(--accent-hue));
   }
+
+  /* Light-theme companion bump: Run 3 surfaced --muted #6a7370 on --bg #f4f2ea
+     at 4.35:1 (need 4.5:1) — hue-independent across all 4 light cells. On the
+     light theme we LOWER L (text gets darker against the light bg) to clear
+     the threshold. New value ≈ #5c625f at L=0.46 cleanly exceeds 4.5:1.
+     Selectors affected: topbar-path, theme-toggle button, live-clock,
+     breadcrumb-path, about-meta, contact-label, PrintFooter spans, sb-section-
+     header (over the lighter --panel #ffffff). */
+  [data-theme="light"] {
+    --muted: oklch(0.46 0.005 175);
+  }
 }
 
 /* Amber accent (hue 75) on light theme — RESEARCH Pitfall 5 predicted failure.

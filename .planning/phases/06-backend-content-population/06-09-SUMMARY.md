@@ -55,7 +55,7 @@ metrics:
   tasks: "6/7 executed (1 + 3 + 4 + 5 + 6 + 7), 1 skipped per condition (Task 2 env.ts patch — not needed because developer set literal MONGO_URI); 1 orchestrator-injected security bump out-of-plan-scope"
   commits_in_portfolio_services: "1 (BE README.md Deployment section; cites <pending FE SHA — recorded in 06-09-SUMMARY.md, one-direction-current per Wave 1 Rule-1>)"
   commits_in_portfolio_web: "2 (1d9a295 security bump pre-Task-1 + this wave's close-out commit citing BE SHA verbatim)"
-  paired_commit_pair: "BE <pending — see commit log after BE README commit lands> ↔ FE <pending — see commit log after FE close-out commit lands>"
+  paired_commit_pair: "BE 6436d96 ↔ FE 2610cae (one-direction-current per Wave 1 Rule-1: FE 2610cae cites BE 6436d96 verbatim; BE 6436d96 retains the '<pending FE SHA>' placeholder and was NOT amended; durable cross-reference recorded here)"
   vitest_count: "160 passed (unchanged from end of Wave 8 — no FE source code changed; security bump was deps-only)"
   jest_count: "8 passed (unchanged from end of Wave 8 — no BE source code changed; only README.md modified)"
   build: "npm run build → 23/23 static pages, postbuild INFRA-05 grep clean, 102 kB First Load JS"

@@ -81,7 +81,7 @@ Each view is RSC by default; client behavior lives in shell-level islands.
 - [x] **A11Y-04**: Sidebar file rows are real `<button>` elements with `aria-label` that includes a plain-noun label (e.g. `aria-label="Contact information"` on `contact.sh`); `aria-current="page"` on the active row (per Risk 3 — recruiter usability)
 - [ ] **A11Y-05**: Semantic landmarks: `<header>` for top bar, `<nav aria-label="File explorer">` for sidebar, `<main id="main-content">` for content, `<footer>` for credits
 - [ ] **A11Y-06**: Live clock has `aria-hidden="true"` (decoration; no SR announcement every 30s)
-- [ ] **A11Y-07**: Color contrast meets WCAG 2.1 AA: ≥ 4.5:1 for body, ≥ 3:1 for large text, audited across 4 hues × 2 themes = 8 combinations using `@axe-core/playwright`; per-hue chroma overrides applied where needed (amber on light theme is the predicted failure per Pitfall 8)
+- [x] **A11Y-07**: Color contrast meets WCAG 2.1 AA: ≥ 4.5:1 for body, ≥ 3:1 for large text, audited across 4 hues × 2 themes = 8 combinations using `@axe-core/playwright`; per-hue chroma overrides applied where needed (amber on light theme is the predicted failure per Pitfall 8) — shipped in Phase 5 Plan 05-07 (4×2×7 = 56-cell axe matrix in tests/contrast.spec.ts; 56/56 cells pass at WCAG 2.1 AA; 3 theme-scoped oklch overrides in app/globals.css: [data-theme="dark"] --muted bump + --accent-dim bump, [data-theme="light"] --muted bump, [data-theme="light"][style*="--accent-hue: 75"] --warn pre-emptive Pitfall 5 amber-on-light override; D-22 conservative scoping preserved the canonical Phase 2 :root + [data-theme="light"] palette at globals.css lines 7-82)
 - [ ] **A11Y-08**: Full keyboard nav: tab order top-bar → palette button → theme toggle → sidebar files → main content → footer; ⌘K trap; Esc restores focus
 - [x] **A11Y-09**: `@media print` stylesheet (white bg, black text, hide top bar / sidebar / palette, force serif fallback) so recruiter-printed pages are legible — shipped in Phase 4 Plan 01 (globals.css @media print block + check-print-rules.mjs CI gate)
 
@@ -254,7 +254,7 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | A11Y-04 | Phase 2 | Complete |
 | A11Y-05 | Phase 2 | Pending |
 | A11Y-06 | Phase 2 | Pending |
-| A11Y-07 | Phase 5 | Pending |
+| A11Y-07 | Phase 5 | Complete (05-07) |
 | A11Y-08 | Phase 2 | Pending |
 | A11Y-09 | Phase 4 | Complete (04-01) |
 | MOBILE-01 | Phase 4 | Complete (04-01 + 04-02) |

@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Plan 05-06 complete (Wave 3 — ConsoleSignature client island + mount in app/(terminal)/layout.tsx; DEV-01 shipped; 26/134 vitest green; build OK 24 static pages; lint + typecheck clean; 7th client island in project; Pitfall 8 enforced (NOT in app/layout.tsx); 3 task commits b8da728/f63c0dc/b090001)"
-last_updated: "2026-05-10T16:47:54Z"
+stopped_at: "Plan 05-07 complete (Wave 4 — 4×2×7 axe contrast matrix passes 56/56 at WCAG 2.1 AA; A11Y-07 shipped; 134/134 vitest still green; lint + typecheck + build clean; 4 iteration loops to green inside Task 4 due to dev-server lag (Run 1), reduced-motion animation timing (Iter b), :root specificity bleed (Iter c), light-theme companion --muted bump (Iter d); 10 task commits 0418724/dbfacc6/9a2f7af/113b6e7/62aa039/56dad99/0034e21/ed573cd/76df6fa/7fed0fd)"
+last_updated: "2026-05-11T00:23:27Z"
 last_activity: 2026-05-10
 progress:
   total_phases: 7
   completed_phases: 4
   total_plans: 39
-  completed_plans: 37
-  percent: 95
+  completed_plans: 38
+  percent: 97
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 ## Current Position
 
 Phase: 05 (seo-accessibility-polish) — EXECUTING
-Plan: 7 of 8
+Plan: 8 of 8
 Status: Ready to execute
 Last activity: 2026-05-10
 
-Progress: [█████████▌] 95% · Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 (6/8)
+Progress: [█████████▊] 97% · Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 (7/8)
 
 ## Performance Metrics
 
@@ -45,11 +45,12 @@ Progress: [█████████▌] 95% · Phase 1 ✓ · Phase 2 ✓ · 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 04    | 5     | 14m 0s agent + 30m reviewer | n/a (mixed agent/manual) |
-| 05    | 6     | ~24m agent | ~4m 0s (Wave 0 + Wave 1A + Wave 1B + Wave 2A + Wave 2B + Wave 3) |
+| 05    | 7     | ~47m agent | ~6m 43s (Wave 0 + Wave 1A + Wave 1B + Wave 2A + Wave 2B + Wave 3 + Wave 4 — wave 4 dominates with 4 iterations) |
 
 **Recent Trend:**
 
-- Last plan: 05-06 (2m 8s) — 2 tasks (Task 1 TDD with explicit RED commit; Task 2 autonomous), 3 task commits (b8da728 RED + f63c0dc GREEN for ConsoleSignature; b090001 for (terminal)/layout mount), 1 file created (console-signature.tsx 39 lines 'use client' island with BT-initials ASCII art + console.log on mount + return null) + 2 modified (console-signature.test.tsx +49/-8 sentinel→6 real assertions via vi.spyOn(console, 'log'); (terminal)/layout.tsx +5 lines for import + JSX mount with Pitfall 8 inline comment), 6 new test cases (call-count + ASCII art match + github line + email line + arg-count + null DOM), vitest now 26/134 (was 26/129; +5 net since scaffold sentinel was replaced), 0 deviations from plan (clean first-pass execution; ASCII art = "BT" initials per CONTEXT D-24 / RESEARCH Open Question disposition; no idempotency guard added because T-05-23 ACCEPTS StrictMode double-fire), DEV-01 requirement shipped, 7th client island in project, npm run build emits 24 static pages OK, lint + typecheck clean
+- Last plan: 05-07 (~23m agent-side, 4 task-internal iterations) — 4 tasks (1 + 2 autonomous, 3 human-verify checkpoint, 4 with 4 iteration loops to green), 10 commits (0418724 Task 1 spec rewrite + dbfacc6 Run 1 audit + 9a2f7af build+start switch + 113b6e7 initial dark token bump + 62aa039 amber-on-light scoped override + 56dad99 reducedMotion + 0034e21 contextOptions nesting fix + ed573cd specificity scope fix + 76df6fa light-theme companion --muted bump + 7fed0fd Run 2 audit), 3 production files modified (tests/contrast.spec.ts 4×2×7 matrix + Pitfall 10 canary; playwright.config.ts webServer.command=build+start, timeout=120s, contextOptions.reducedMotion=reduce; app/globals.css 3 theme-scoped oklch override blocks appended at end-of-file), 2 audit-trail files created (05-07-AXE-RUN-1.md pre-remediation; 05-07-AXE-RUN-2.md post-remediation with full 4-iteration history), final 56/56 cells PASS axe color-contrast at WCAG 2.1 AA in 33.3s, no Vitest regressions (134/134 still green), lint+typecheck+build all clean, A11Y-07 requirement shipped, 4 deviations (2 Rule-3 blocking infra fixes — reducedMotion + contextOptions nesting; 1 Rule-1 cascade bug — :root specificity bleed into light theme; 1 Rule-2 missing critical — light-theme companion --muted bump; all 4 inside Outcome C scope, no scope creep)
+- Previous: 05-06 (2m 8s) — 2 tasks (Task 1 TDD with explicit RED commit; Task 2 autonomous), 3 task commits (b8da728 RED + f63c0dc GREEN for ConsoleSignature; b090001 for (terminal)/layout mount), 1 file created (console-signature.tsx 39 lines 'use client' island with BT-initials ASCII art + console.log on mount + return null) + 2 modified (console-signature.test.tsx +49/-8 sentinel→6 real assertions via vi.spyOn(console, 'log'); (terminal)/layout.tsx +5 lines for import + JSX mount with Pitfall 8 inline comment), 6 new test cases (call-count + ASCII art match + github line + email line + arg-count + null DOM), vitest now 26/134 (was 26/129; +5 net since scaffold sentinel was replaced), 0 deviations from plan (clean first-pass execution; ASCII art = "BT" initials per CONTEXT D-24 / RESEARCH Open Question disposition; no idempotency guard added because T-05-23 ACCEPTS StrictMode double-fire), DEV-01 requirement shipped, 7th client island in project, npm run build emits 24 static pages OK, lint + typecheck clean
 - Previous: 05-05 (4m 49s) — 4 tasks (Tasks 1+2 TDD with explicit RED commits; Tasks 3+4 autonomous), 6 task commits (4dfd9f8 RED + c07702b GREEN for lib/json-ld; e5298c1 RED + c7eb4d2 GREEN for JsonLdPerson; c5bebe0 for HeadComment; 4aacb60 for app/layout.tsx mounts), 3 files created (lib/json-ld.ts 47 lines pure helpers; json-ld-person.tsx 22 lines RSC with XSS escape; head-comment.tsx 21 lines RSC with <noscript> 6-line letter) + 4 modified (lib/json-ld.test.ts +121/-4 for 10 assertions; json-ld-person.test.tsx +49/-6 for 6 assertions; app/layout.tsx +5 lines for 2 mounts; app/layout.test.tsx +34 lines for 2 mount-point assertions), 16 new test cases (10 lib/json-ld + 6 JsonLdPerson — incl. T-05-16 XSS-escape invariant `expect(script.innerHTML).not.toMatch(/</)` — + 2 layout mount via renderToStaticMarkup), vitest now 26/129 (was 26/113), scripts/check-head-comment.mjs flips FAIL→PASS (3rd of 4 fail-loud scripts to flip; only check-headers remains, which already passes Phase 1's x-built-with), 1 Rule-3 deviation (RTL refused to mount <html> into <div> container — switched layout mount-point assertions to react-dom/server.renderToStaticMarkup with regex over serialized HTML; same contract verified, different inspection surface), SEO-02 + DEV-02 requirements shipped, npm run build emits 24 static pages OK, lint + typecheck + check:mobile clean
 - Previous: 05-04 (3m 51s) — 2 tasks (Task 1 TDD; Task 2 autonomous), 3 task commits (c7d0d16 RED + 9c40f4c GREEN + 951d988 CSS), 1 file created (about-socials.tsx ~76 lines RSC) + 3 modified (about-view.tsx +2 lines wire-in; about-view.test.tsx +44 lines for 5 new assertions; globals.css +20 lines for .about-socials-card + .contact-muted), 5 new test cases (wrapper + EMAIL mailto + GITHUB ExternalLink + LINKEDIN ExternalLink + DOM-position invariant), vitest now 26/113 (was 26/108), 1 Rule-3 deviation (test-locator scoping fix to disambiguate aria-label collision with existing .about-cta-row), Phase 4 → Phase 5 carry-forward (Plan 04-05 Gate 9 recruiter friction) RESOLVED, A11Y-04 requirement shipped
 - Previous: 05-02 (~4m) — 3 tasks (all autonomous), 3 task commits + final-metadata commit, 11 files created (2 favicon RSCs + 1 manifest + 8 OG image RSCs) + 0 modified, scripts/check-og-files.mjs flips green (was fail-loud since 05-01), npm run build emits 23 static pages including all OG/icon/manifest endpoints, vitest stays at 26/26 / 101 green, no deviations from plan (only adjustment was a self-correcting rewording of a comment in manifest.ts to avoid a regex self-match against `! grep -q 'service.worker'`)
@@ -66,6 +67,7 @@ Progress: [█████████▌] 95% · Phase 1 ✓ · Phase 2 ✓ · 
 | Phase 5 P4 | 3m 51s | 2 tasks | 4 files (1 created + 3 modified) |
 | Phase 5 P5 | 4m 49s | 4 tasks | 7 files (3 created + 4 modified) |
 | Phase 5 P6 | 2m 8s  | 2 tasks | 3 files (1 created + 2 modified) |
+| Phase 5 P7 | ~23m   | 4 tasks (4 internal iterations on Task 4) | 5 files (2 created + 3 modified) |
 
 ## Accumulated Context
 
@@ -118,6 +120,11 @@ Recent decisions affecting current work:
 - Phase 5 Plan 06: ART_STYLE color is `#16a34a` (sRGB hex), NOT `oklch(0.78 0.18 145)` or `var(--accent)`. DevTools console parses CSS color values from `%c` style strings via the browser's CSS parser; oklch support is Chrome 111+/Firefox 113+/Safari 16.4+, but inlining sRGB hex matches the same mitigation pattern Plan 05-02 used for OG ImageResponse (Pitfall 1). #16a34a is the matrix-accent sRGB equivalent (hue 145, ~oklch 0.65); reads on both light + dark DevTools themes.
 - Phase 5 Plan 06: ConsoleSignature is the first side-effect-only client island in the project (no DOM, no state, no props — just useEffect + return null). Establishes a canonical shape for future analytics/instrumentation islands (Phase 7 DEPLOY-06 resume_download tracking?). LiveClock is the closest precedent but renders text from state; ConsoleSignature is purely event-driven null-render.
 - Phase 5 Plan 06: Pitfall 8 boundary preservation — ConsoleSignature mounted in (terminal)/layout.tsx (also RSC) keeps the client boundary local. Island has no children (returns null), so the RSC subtree stays RSC. Mounting in app/layout.tsx would force the entire app to client and spike First Load JS by ~50-200KB. Acceptance criteria explicitly check `! grep -q '<ConsoleSignature />' app/layout.tsx`; verified during Task 2.
+- Phase 5 Plan 07: Outcome C remediation authorized at human-verify checkpoint = build+start infrastructure swap + global --muted bump + global --accent-dim bump + pre-emptive amber-on-light scoped override. Execution required 4 internal iterations to reach 56/56 green: (a) build+start commit, (b) reduced-motion fix because .content-block slideIn was mid-animation when axe ran and composited foreground colors with parent opacity ~0.14 → impossibly-dark false-positive failures, (c) cascade specificity fix — `:root` and `[data-theme="light"]` both have specificity (0,1,0); my :root override at end-of-file won source-order and bled into light theme, (d) light-theme companion --muted bump — Run 1 amber-on-light cells canary-timed-out so the hue-INDEPENDENT light-theme --muted #6a7370 on #f4f2ea at 4.35:1 failure was invisible until iteration (d). All 3 final overrides are theme-scoped (`[data-theme="dark"]`, `[data-theme="light"]`, `[data-theme="light"][style*="--accent-hue: 75"]`); existing :root / [data-theme="light"] blocks at globals.css lines 7-82 untouched. A11Y-07 shipped.
+- Phase 5 Plan 07: Late-arriving CSS variable overrides in `app/globals.css` MUST be scoped to `[data-theme="dark"]` or `[data-theme="light"]` — never `:root` — because `:root` and `[data-theme=...]` share specificity (0,1,0) and any later-source `:root` block wins by source-order, bleeding into the wrong theme. The canonical `:root` block at line 7-37 is the ONLY place that uses `:root` for theme tokens, and only for base values both themes inherit unless overridden. Project-wide load-bearing convention going forward.
+- Phase 5 Plan 07: Playwright `contextOptions.reducedMotion: "reduce"` is required for axe contrast audits to read the FINAL paint state. Without it, the `.content-block` slideIn (200ms opacity 0→1) is mid-flight when axe runs against pre-compiled pages, and axe composites foreground colors with the parent's mid-animation opacity ~0.14 → reports impossibly-dark colors. Enabling reduced-motion fires the Plan 05-03 universal `*` animation reset (animation-duration: 0.01ms) so axe sees the steady-state paint. Also semantically correct (WCAG conformance targets the steady-state design, which reduced-motion users always see).
+- Phase 5 Plan 07: `reducedMotion` lives on `BrowserContextOptions`, NOT the top-level `PlaywrightTestOptions`, in @playwright/test@1.59.1. Nest under `use.contextOptions.reducedMotion: "reduce"` (commit `0034e21`). The top-level placement compiles a tsc error that surfaces via the test runner's webServer step, NOT the playwright runner itself — Next.js's tsc picks up playwright.config.ts as part of the build's compile pass.
+- Phase 5 Plan 07: build+start (NOT dev) for the contrast matrix is mandatory because Next.js dev mode's lazy per-route compile (~2–10s) overruns the 5s `data-theme` canary timeout in 54/56 cells. The Pitfall 10 canary correctly diagnosed this in Run 1 (54 cells failed canary cleanly, NOT axe — preventing 54 false-pass results). Switched `webServer.command` to `npm run build && npm run start` + bumped timeout to 120_000ms in playwright.config.ts.
 
 ### Pending Todos
 
@@ -131,7 +138,7 @@ Open questions surfaced during research synthesis (status updated 2026-05-06 aft
 2. Writing-posts v1 count (zero with "coming soon" state, or N real posts) — still open; needed for Phase 6 content scope
 3. `shipped.app` final app list with valid App Store / Play Store URLs — still open; needed before Phase 3 view work
 4. ✓ CI choice — RESOLVED in 01-CONTEXT.md D-01..D-06 (GitHub Actions, PR-only, knip hard-fail)
-5. Per-hue chroma/lightness overrides for WCAG compliance — still open; discovered during Phase 5 axe-core audit; potential rework loop into `app/globals.css` tokens
+5. ✓ Per-hue chroma/lightness overrides for WCAG compliance — RESOLVED 2026-05-10 in Plan 05-07. Three theme-scoped oklch overrides applied to `app/globals.css`: `[data-theme="dark"] --muted oklch(0.62 0.005 175)`, `[data-theme="dark"] --accent-dim oklch(0.70 0.12 var(--accent-hue))`, `[data-theme="light"] --muted oklch(0.46 0.005 175)`; plus `[data-theme="light"][style*="--accent-hue: 75"] --warn oklch(0.42 0.18 75)` as the predicted Pitfall 5 amber-on-light pre-emptive override. 56/56 axe cells pass WCAG 2.1 AA.
 6. Third social pick (Mastodon vs Bluesky vs X) for palette / about / contact — surfaced in 02-CONTEXT.md; data-only decision, deferred to planning or Phase 6 content pass
 
 ## Deferred Items
@@ -145,6 +152,6 @@ Items acknowledged and carried forward to later phases:
 
 ## Session Continuity
 
-Last session: 2026-05-10T16:47:54Z
-Stopped at: Plan 05-06 complete (Wave 3 — ConsoleSignature client island ('use client' + useEffect-on-mount + return null) + mount in app/(terminal)/layout.tsx as sibling between <CommandPalette /> and <PrintFooter />; DEV-01 shipped; 7th client island in project; BT-initials ASCII art via %c-styled console.log on first paint; Pitfall 8 enforced (NOT in app/layout.tsx); 26/134 vitest green (was 26/129; +5 net since scaffold sentinel was replaced with 6 real assertions); npm run build emits 24 static pages OK; lint + typecheck clean; 0 deviations from plan; 3 task commits b8da728/f63c0dc/b090001)
+Last session: 2026-05-11T00:23:27Z
+Stopped at: Plan 05-07 complete (Wave 4 — 4×2×7 = 56-cell axe color-contrast matrix passes WCAG 2.1 AA across all 4 hues × 2 themes × 7 routes; A11Y-07 shipped; 134/134 vitest still green; lint + typecheck + build clean; 4 internal Task-4 iterations to green (a build+start swap, b reduced-motion emulation, c specificity scope fix, d light-theme companion --muted bump); 3 theme-scoped oklch overrides appended to globals.css end-of-file with the existing :root/[data-theme="light"] blocks at lines 7-82 untouched; playwright.config.ts now uses build+start + contextOptions.reducedMotion=reduce + timeout=120s; 4 Rule-1/-2/-3 deviations all inside Outcome C scope; 10 task commits 0418724/dbfacc6/9a2f7af/113b6e7/62aa039/56dad99/0034e21/ed573cd/76df6fa/7fed0fd plus the upcoming final plan-metadata commit)
 Resume file: None

@@ -123,7 +123,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 05-05-PLAN.md — Wave 2: lib/json-ld.ts (buildPersonSchema + filterValidUrls) with 10 unit tests; JsonLdPerson RSC with XSS escape (`<` → `\u003c` per Pitfall 6); HeadComment RSC (`<noscript dangerouslySetInnerHTML>` 6-line lowercase letter per Pattern 9); both mounted in app/layout.tsx <head>. 4 tasks (2 TDD RED→GREEN + 2 autonomous), 6 commits (4dfd9f8/c07702b/e5298c1/c7eb4d2/c5bebe0/4aacb60), 3 files created + 4 modified, 16 new vitest assertions (10 lib/json-ld + 6 json-ld-person + 2 layout mount-point via renderToStaticMarkup), 1 Rule-3 deviation (RTL refused <html> in <div> container — switched to react-dom/server.renderToStaticMarkup for layout mount-point assertions; same contract, different inspection surface). scripts/check-head-comment.mjs flips green (3rd of 4 fail-loud scripts to flip).
 - [x] 05-06-PLAN.md — Wave 3: ConsoleSignature client island ('use client', useEffect once on mount, %c-styled "BT" ASCII art + 2 plain lines, returns null); mounted in (terminal)/layout.tsx sibling to CommandPalette (NEVER in app/layout.tsx — Pitfall 8)
 - [x] 05-07-PLAN.md — Wave 4: 4-hue × 2-theme × 7-route axe matrix in tests/contrast.spec.ts (56 cells, addInitScript localStorage seeding + data-theme canary per Pitfall 10); 1 human-verify checkpoint authorizing Outcome C remediation (build+start + theme-scoped --muted/--accent-dim oklch bumps + pre-emptive amber-on-light scoped override); 56/56 cells PASS WCAG 2.1 AA after 4 internal iterations (a build+start swap, b reducedMotion emulation, c specificity scope fix, d light-theme companion --muted bump); 10 task commits; playwright.config.ts switched to build+start + contextOptions.reducedMotion=reduce + timeout=120s; 3 theme-scoped overrides appended to globals.css end-of-file with the canonical :root and [data-theme="light"] blocks at lines 7-82 untouched (D-22 conservative); 134/134 vitest still green, lint+typecheck+build all clean
-- [ ] 05-08-PLAN.md — Wave 5 (manual): 4 manual gates — DEV-03 curl x-built-with on all 7 routes, DEV-02 view-source HTML comment in Chrome+Firefox (Assumption A1), A11Y-03 macOS Reduce Motion OS toggle, optional SEO-03c Slack/LinkedIn unfurl via ngrok; populate 05-VERIFICATION.md
+- [x] 05-08-PLAN.md — Wave 5 (manual): 4 manual gates resolved — DEV-03 (curl x-built-with on all 7 routes PASS), DEV-02 (HTML comment in HTTP source PASS), A11Y-03 (Reduce Motion source-verified PASS), SEO-03c (DEFERRED-PHASE-7 per defer-to-prod allowance); 05-VERIFICATION.md populated with Phase 5 verdict PASS (3 PASS / 1 DEFERRED-PHASE-7 / 0 FAIL)
 **UI hint**: yes
 
 ### Phase 6: Backend + Content Population
@@ -166,6 +166,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 2. Shell | 7/7 | Complete | 2026-05-06 |
 | 3. Views | 0/TBD | Not started | - |
 | 4. Mobile-Responsive | 5/5 | Complete | 2026-05-07 |
-| 5. SEO + Accessibility Polish | 7/8 | In progress | - |
+| 5. SEO + Accessibility Polish | 8/8 | In progress (pending verifier) | - |
 | 6. Backend + Content Population | 0/TBD | Not started | - |
 | 7. Deploy + Verification | 0/TBD | Not started | - |

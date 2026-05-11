@@ -82,3 +82,26 @@ describe("STACK content (Wave 03)", () => {
     expect(unique.size).toBe(categories.length);
   });
 });
+
+describe("EXPERIENCE content (Wave 04)", () => {
+  test("EXPERIENCE has at least 1 entry (CONTENT-07)", () => {
+    expect(EXPERIENCE.length).toBeGreaterThanOrEqual(1);
+  });
+
+  test("every EXPERIENCE entry has all 4 required fields", () => {
+    for (const entry of EXPERIENCE) {
+      expect(entry.company).toBeTruthy();
+      expect(entry.role).toBeTruthy();
+      expect(entry.period).toBeTruthy();
+      expect(entry.summary).toBeTruthy();
+    }
+  });
+
+  test("EXPERIENCE has no legacy startDate/endDate/highlights fields", () => {
+    for (const entry of EXPERIENCE as unknown as Record<string, unknown>[]) {
+      expect(entry.startDate).toBeUndefined();
+      expect(entry.endDate).toBeUndefined();
+      expect(entry.highlights).toBeUndefined();
+    }
+  });
+});

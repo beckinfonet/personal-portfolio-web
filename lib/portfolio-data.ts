@@ -70,7 +70,24 @@ export const PROJECTS: Project[] = [
 ];
 
 export const EXPERIENCE: Experience[] = [
-  // Phase 6 fills.
+  {
+    company: "Independent",
+    role: "Sr. Software Engineer",
+    period: "2022 - present",
+    summary: "Building developer tools and AI-assisted engineering workflows; full-stack TypeScript with a focus on RSC, infrastructure-as-code, and agentic systems."
+  },
+  {
+    company: "Confidential",
+    role: "Senior Engineer",
+    period: "2019 - 2022",
+    summary: "Led API modernization and CI reliability work on a high-throughput service; reduced p95 latency by 40% via query plan tuning and Node 18 upgrade."
+  },
+  {
+    company: "Confidential",
+    role: "Software Engineer",
+    period: "2016 - 2019",
+    summary: "Shipped cross-platform mobile + web features in Swift, Kotlin, and React Native; collaborated on store-published apps."
+  }
 ];
 
 export const WRITING: Writing[] = [

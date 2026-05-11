@@ -33,11 +33,11 @@ A distinctive personal portfolio that signals engineering craft through a termin
 - [ ] Light + dark themes with `data-theme` attribute, OS-preference detection on first load, localStorage persistence, no SSR flash
 - [ ] Hue-swappable accent (matrix / amber / cyan / magenta) as a real user setting persisted to localStorage
 - [ ] Fully responsive: bottom-sheet or hamburger file switcher below ~960px, touch-friendly ⌘K replacement, optimized typography for phones
-- [ ] Backend: add `/api/projects` endpoint and adjust existing endpoints' shapes to match the terminal data model in `portfolio-services/`
+- [x] Backend: add `/api/projects` endpoint and adjust existing endpoints' shapes to match the terminal data model in `portfolio-services/` — Validated in Phase 6 (Wave 7 projects greenfield + Waves 2-6 reshapes; all 7 v1 endpoints live on Railway production: https://personal-portfolio-services-production.up.railway.app)
 - [ ] Static seed data in `lib/portfolio-data.ts` (typed) used as fallback when API is unreachable, matching the new shape
-- [ ] Real resume PDF in `public/resume.pdf` (downloads as `Bakytbek_Tatibekov_Resume.pdf`)
+- [x] Real resume PDF in `public/resume.pdf` (downloads as `Bakytbek_Tatibekov_Resume.pdf`) — Validated in Phase 6 Wave 8 (canonical filename, 58440 bytes, Title + Author metadata via pdf-lib; companion DOCX shipped at orchestrator extension 1; build-pipeline gates wired into npm run prebuild)
 - [ ] Recruiter discoverability: resume button + contact link findable in <5 seconds on a fresh visit, on both desktop and mobile
-- [ ] All real content populated — no placeholder text in shipped views (final bio, full project list, real writing posts, real shipped apps)
+- [x] All real content populated — no placeholder text in shipped views (final bio, full project list, real writing posts, real shipped apps) — Validated in Phase 6 (Mongo seeded against production Railway with real content: profile=1 / projects=3 / stack=4 / experience=3 / apps=2 CarEx+MoveIn / posts=1; INFRA-05 grep clean on every build via postbuild script)
 - [ ] Vitest coverage for the terminal shell, view switching, ⌘K palette, theme toggle, and accent picker (replacing the deleted `homepage.test.tsx`)
 - [ ] Deployed to production URL with full sitemap
 
@@ -125,4 +125,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-07 after Phase 4 (Mobile-Responsive) — verdict PASS with Phase 5 + Phase 7 carry-forwards. Phases 1-4 of 7 complete in milestone v1.0.*
+*Last updated: 2026-05-11 after Phase 6 (Backend + Content Population) — verdict PASS, 12/12 requirements shipped, production cutover live end-to-end (Railway BE + Vercel FE). Phases 1-6 of 7 complete in milestone v1.0; Phase 7 (Deploy + Verification) is the final phase — production-URL Lighthouse, Search Console, npm audit, npx knip, and the 5-second recruiter test on both desktop and 375px mobile.*

@@ -24,3 +24,36 @@ describe("portfolio-data shape", () => {
     expect(Array.isArray(STACK)).toBe(true);
   });
 });
+
+describe("PROFILE content (Wave 02)", () => {
+  test("PROFILE.bio.long has at least 2 paragraphs", () => {
+    expect(PROFILE.bio.long.length).toBeGreaterThanOrEqual(2);
+    for (const para of PROFILE.bio.long) {
+      expect(typeof para).toBe("string");
+      expect(para.length).toBeGreaterThan(20);
+    }
+  });
+
+  test("PROFILE.socials has exactly 2 entries (D-16 freeze: github + linkedin)", () => {
+    expect(PROFILE.socials.length).toBe(2);
+    const kinds = PROFILE.socials.map((s) => s.kind);
+    expect(kinds).toContain("github");
+    expect(kinds).toContain("linkedin");
+  });
+
+  test("PROFILE.highlights has 3 stat cards", () => {
+    expect(PROFILE.highlights.length).toBe(3);
+    for (const h of PROFILE.highlights) {
+      expect(h.value).toBeTruthy();
+      expect(h.label).toBeTruthy();
+    }
+  });
+
+  test("PROFILE has no INFRA-05 forbidden strings", () => {
+    const forbidden = /lorem|example\.com|placeholder|Product Studio/i;
+    const serialized = JSON.stringify(PROFILE);
+    expect(serialized).not.toMatch(forbidden);
+    // Also: lowercase 'todo' is allowed in bio prose, but uppercase TODO is not.
+    expect(serialized).not.toMatch(/TODO/);
+  });
+});

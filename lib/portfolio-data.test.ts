@@ -145,3 +145,25 @@ describe("SHIPPED content (Wave 05)", () => {
     expect(serialized).not.toMatch(/<[a-z]/);   // catches "<from", "<app-", etc.
   });
 });
+
+describe("WRITING content (Wave 06)", () => {
+  test("WRITING has at least 1 entry (CONTENT-04, D-15)", () => {
+    expect(WRITING.length).toBeGreaterThanOrEqual(1);
+  });
+
+  test("every WRITING entry has all 6 required fields with HTTPS link", () => {
+    for (const post of WRITING) {
+      expect(post.title).toBeTruthy();
+      expect(post.slug).toBeTruthy();
+      expect(post.excerpt).toBeTruthy();
+      expect(post.date).toBeTruthy();
+      expect(post.readTime).toBeTruthy();
+      expect(post.link).toMatch(/^https?:\/\//);
+    }
+  });
+
+  test("WRITING slugs are unique (mirror of Mongo `unique: true` on slug)", () => {
+    const slugs = WRITING.map((w) => w.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
+  });
+});

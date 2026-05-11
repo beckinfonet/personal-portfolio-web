@@ -91,7 +91,16 @@ export const EXPERIENCE: Experience[] = [
 ];
 
 export const WRITING: Writing[] = [
-  // Phase 6 fills (or v1 ships with empty array + "coming soon" UI per CONTENT-04).
+  // D-14 mirror of portfolio-services/src/seed/posts.json — byte-identical content.
+  // D-15: v1 ships exactly 1 post. CONTENT-04 satisfied.
+  {
+    title: "RSC Discipline: Keeping the Persistent Shell Pure",
+    slug: "rsc-discipline-persistent-shell",
+    excerpt: "Building a terminal-aesthetic portfolio in Next.js 15 where only four client islands carry 'use client', and what that buys you when the rest is RSC.",
+    date: "May 2026",
+    readTime: "6 min read",
+    link: "https://github.com/beckinfonet/portfolio-web"
+  }
 ];
 
 export const SHIPPED: ShippedApp[] = [

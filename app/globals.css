@@ -1563,3 +1563,11 @@ a:hover {
   }
 }
 
+/* Amber accent (hue 75) on light theme — RESEARCH Pitfall 5 predicted failure.
+   Selector matches the inline style attribute AccentBootstrapScript sets on
+   <html> when amber is the chosen accent. Lower L (0.42 vs 0.5) plus higher
+   C (0.18 vs 0.16) bumps contrast against #f4f2ea while keeping the brand
+   amber feel. D-22 conservative: scoped per-hue, not global. */
+[data-theme="light"][style*="--accent-hue: 75"] {
+  --warn: oklch(0.42 0.18 75);
+}

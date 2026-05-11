@@ -105,7 +105,7 @@ Each view is RSC by default; client behavior lives in shell-level islands.
 - [x] **CONTENT-01**: Real bio (short + long), highlights, role string, location, email, social handles populated in `lib/portfolio-data.ts` (Plan 06-02 — Wave 0 seeded; Wave 2 verified byte-mirror with BE seed/profile.json + locked via vitest assertions)
 - [ ] **CONTENT-02**: Real project list populated (≥ 3 projects with name, year, status, summary, tech, role, link) — final v1 set
 - [x] **CONTENT-03**: Real `shipped.app` data populated with valid App Store + Google Play URLs (Plan 06-05 — Wave 5: SHIPPED populated with 2 entries byte-mirrored from BE seed/apps.json with canonical HTTPS store URLs; D-17 satisfied at 2-of-2-or-3 range; vitest 4 assertions lock cardinality + platforms enum + URL invariant + INFRA-05 placeholder-free; PROFILE.highlights[1].value reconciliation deferred to Wave 08; manual on-device store-link tap test deferred to Wave 08/09 per T-06-09 mitigation plan)
-- [ ] **CONTENT-04**: Writing posts populated — v1 ships **at least one real post**; "zero posts / coming soon" state acceptable only if explicitly chosen during the content phase
+- [x] **CONTENT-04**: Writing posts populated — v1 ships **at least one real post**; "zero posts / coming soon" state acceptable only if explicitly chosen during the content phase (Plan 06-06 — Wave 6: WRITING populated with exactly 1 entry byte-mirrored from BE seed/posts.json; D-15 satisfied at 1-post v1 cardinality; vitest 3 assertions lock length>=1 + all-6-fields-present + HTTPS link + unique slugs; placeholder-shape post title 'RSC Discipline: Keeping the Persistent Shell Pure' acceptable per D-15 Claude's-Discretion license, swappable at Wave 08/09 without type/test/schema change)
 - [ ] **CONTENT-05**: Real `Bakytbek_Tatibekov_Resume.pdf` placed in `public/resume.pdf` (file size < 250KB, embedded font subset, internal `Title` / `Author` PDF metadata set)
 - [x] **CONTENT-06**: Final stack categories + entries populated for the `stack.json` view (Plan 06-03 — FE STACK constant verified byte-mirror with BE `src/seed/stack.json`; 4 categories: languages/frameworks/cloud/ai; locked via vitest uniqueness + non-empty assertions)
 - [x] **CONTENT-07**: Final experience.log entries populated (role, company, period, summary) (Plan 06-04 — FE EXPERIENCE constant populated with 3 entries; D-14 byte-mirror with BE `src/seed/experience.json`; locked via vitest length>=1 + all-4-fields-present + no-legacy-fields assertions)
@@ -263,13 +263,13 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | MOBILE-04 | Phase 4 | Complete (04-03) |
 | MOBILE-05 | Phase 4 | Complete (04-05) |
 | BACKEND-01 | Phase 6 | Pending |
-| BACKEND-02 | Phase 6 | Partial (06-02: /api/profile reshaped; 06-03: /api/skills→/api/stack renamed + reshaped; 06-04: /api/experience reshaped to {company,role,period,summary} with composite unique index + strict:'throw'; 06-05: /api/apps reshaped from {name,description,stack[],url} to {name,platforms[],appStoreUrl?,googlePlayUrl?,role,year,summary?} with single-field unique on name + array-element-enum 'ios'|'android' validation + strict:'throw'; /api/posts still flat — Wave 6) |
+| BACKEND-02 | Phase 6 | Partial (06-02: /api/profile reshaped; 06-03: /api/skills→/api/stack renamed + reshaped; 06-04: /api/experience reshaped to {company,role,period,summary} with composite unique index + strict:'throw'; 06-05: /api/apps reshaped from {name,description,stack[],url} to {name,platforms[],appStoreUrl?,googlePlayUrl?,role,year,summary?} with single-field unique on name + array-element-enum 'ios'|'android' validation + strict:'throw'; 06-06: /api/posts reshaped from {title,slug,excerpt,publishedAt} to {title,slug,excerpt,date,readTime,link} with publishedAt→date rename + 2 new required fields + single-field unique on slug + strict:'throw' + ?limit query-param preserved + 503-branch pattern; all 5 existing endpoints reshaped — only /api/projects greenfield create remains for Wave 7) |
 | BACKEND-03 | Phase 6 | Pending |
 | BACKEND-04 | Phase 6 | Pending |
 | CONTENT-01 | Phase 6 | Complete (06-02) |
 | CONTENT-02 | Phase 6 | Pending |
 | CONTENT-03 | Phase 6 | Complete (06-05: SHIPPED populated with 2 ShippedApp entries byte-mirrored from BE seed/apps.json; canonical HTTPS store URL form per Pitfall 5; vitest 4 assertions lock cardinality 2-3 + platforms enum + URL invariant + INFRA-05 placeholder-free; manual on-device tap test deferred to Wave 08/09) |
-| CONTENT-04 | Phase 6 | Pending |
+| CONTENT-04 | Phase 6 | Complete (Plan 06-06) |
 | CONTENT-05 | Phase 6 | Pending |
 | CONTENT-06 | Phase 6 | Complete (06-03) |
 | CONTENT-07 | Phase 6 | Complete (06-04) |

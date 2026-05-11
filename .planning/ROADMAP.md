@@ -144,7 +144,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 06-05-PLAN.md — Wave 5: ShippedApps reshape paired commit (platforms enum + appStoreUrl/googlePlayUrl; CONTENT-03 + D-17) — completed 2026-05-11; BE `ee2a07d` + FE `9511a0d`; backend jest 4→5 (+1 /api/apps shape spec), frontend vitest 146→150 (+4 SHIPPED assertions); BACKEND-02 + CONTENT-03 satisfied; SHIPPED.length=2 (PROFILE.highlights[1].value reconciliation deferred to Wave 08 per plan)
 - [x] 06-06-PLAN.md — Wave 6: Writing/Posts reshape paired commit (publishedAt→date + readTime + link; D-15 — exactly 1 post; CONTENT-04) — completed 2026-05-11; BE `50c50af` + FE `4988954`; backend jest 5→7 (+2 specs: /api/posts shape + ?limit=1 cap), frontend vitest 150→153 (+3 WRITING assertions); BACKEND-02 + CONTENT-04 satisfied; WRITING.length=1 per D-15
 - [x] 06-07-PLAN.md — Wave 7: Projects greenfield paired commit (NEW model + controller + route; CONTENT-02; BACKEND-01) — completed 2026-05-11; BE `86846e6` + FE `57f0779`; backend jest 7→8 (+1 /api/projects shape spec), frontend vitest 153→156 (+3 PROJECTS assertions); BACKEND-01 + BACKEND-02 + CONTENT-02 satisfied; PROJECTS.length=3; all 7 v1 API endpoints wired and tested
-- [ ] 06-08-PLAN.md — Wave 8: Resume PDF + D-17 highlights reconciliation (real PDF at canonical filename; Title/Author via pdf-lib; CONTENT-05 + CONTENT-08 + CONTENT-01 close-out)
+- [x] 06-08-PLAN.md — Wave 8: Resume PDF + DOCX dual-format + D-17 highlights reconciliation + real-app swap (CarEx + MoveIn); CONTENT-01 + CONTENT-03 + CONTENT-05 + CONTENT-08 closed (BE c4e8870 ↔ FE d8650a8)
 - [ ] 06-09-PLAN.md — Wave 9: Railway deploy + Mongo seed + check-backend smoke gate + Vercel env-flip + 7-view eyeball verification (BACKEND-04)
 
 ### Phase 7: Deploy + Verification
@@ -176,5 +176,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 3. Views | 0/TBD | Not started | - |
 | 4. Mobile-Responsive | 5/5 | Complete | 2026-05-07 |
 | 5. SEO + Accessibility Polish | 8/8 | Complete | 2026-05-11 |
-| 6. Backend + Content Population | 7/9 | In progress | - |
+| 6. Backend + Content Population | 8/9 | In progress | - |
 | 7. Deploy + Verification | 0/TBD | Not started | - |

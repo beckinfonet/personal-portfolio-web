@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 6 Plan 07 complete (Wave 7 Projects greenfield paired commit; portfolio-services 86846e6 ↔ portfolio-web 57f0779)
-last_updated: "2026-05-11T03:03:31Z"
-last_activity: 2026-05-11 -- Phase 6 Plan 07 (Wave 7 Projects greenfield) complete
+stopped_at: Phase 6 Plan 08 complete (Wave 8 resume PDF + DOCX + D-17 highlights reconcile + CarEx + MoveIn real-app swap; portfolio-services c4e8870 ↔ portfolio-web d8650a8)
+last_updated: "2026-05-11T03:35:37Z"
+last_activity: 2026-05-11 -- Phase 6 Plan 08 (Wave 8 reconciliation + orchestrator extensions 1 + 2 + 3) complete
 progress:
   total_phases: 7
   completed_phases: 5
   total_plans: 48
-  completed_plans: 46
-  percent: 96
+  completed_plans: 47
+  percent: 98
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 ## Current Position
 
 Phase: 06 (backend-content-population) — IN PROGRESS
-Plan: 7 of 9 complete (Wave 7 Projects greenfield paired commit; NEW Project Mongoose model with 7 fields {name, year, status, summary, tech[], role, link} + unique on name + strict:'throw'; NEW getProjects controller with 503-branch + sort year desc + destructure-strip; NEW /api/projects route line; NEW seed/projects.json with 3 entries; CONTENT-02 + BACKEND-01 shipped; all 7 v1 API endpoints now wired and tested)
-Status: Ready to execute Plan 06-08 (Wave 8 reconciliation — non-autonomous: resume PDF + D-17 PROFILE.highlights[1].value reconciliation to SHIPPED.length=2)
-Last activity: 2026-05-11 -- Phase 6 Plan 07 (Wave 7 Projects greenfield) complete
+Plan: 8 of 9 complete (Wave 8 paired commit; real resume PDF 58440 bytes at canonical /Bakytbek_Tatibekov_Resume.pdf with Title + Author metadata via pdf-lib; real DOCX 19122 bytes added orchestrator extension 1; PROFILE.resumeDocxUrl optional field added across FE Profile/ BE ProfileDto/ BE Profile Mongoose model; SHIPPED + apps.json swapped to real shipped apps CarEx + MoveIn extension 2; PROFILE.highlights[1].value 4→2 D-17 reconciliation Case A; legacy public/resume.pdf 50-byte stub deleted in same commit per brownfield discipline; scripts/check-resume-pdf.mjs upgraded with Pitfall 6 Title/Author non-empty check + scripts/check-resume-docx.mjs new gate; both wired into npm run prebuild — first wave to gate at build time; about-view secondary 'resume.docx' link with aria-label 'Download resume as Word document'; pdf-lib added as devDep only; CONTENT-01 + CONTENT-03 + CONTENT-05 + CONTENT-08 closed)
+Status: Ready to execute Plan 06-09 (Wave 9 cutover — non-autonomous: Railway deploy + Mongo seed + Vercel env-flip; recruiter tap test on resume PDF + DOCX + CarEx + MoveIn live store URLs is the manual gate)
+Last activity: 2026-05-11 -- Phase 6 Plan 08 (Wave 8 reconciliation + orchestrator extensions 1+2+3) complete
 
-Progress: [██████████████████████] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 ✓ · Phase 6 (7/9)
+Progress: [██████████████████████] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 ✓ · Phase 6 (8/9)
 
 ## Performance Metrics
 
@@ -81,6 +81,7 @@ Progress: [██████████████████████] P
 | Phase 6 P5 | ~3m 59s | 2 tasks (both autonomous, 2 paired commits across repos, neither amended — one-direction-current per Wave 1 Rule-1) | 10 files (1 created + 9 modified across two repos; ShippedApps reshape via in-place edit, no rename overlay; 0 structural deviations + 1 content-discretion choice on app names per D-17 Claude's-Discretion license — tied with Wave 4 for cleanest Wave-2 template application) |
 | Phase 6 P6 | ~3m 58s | 2 tasks (both autonomous, 2 paired commits across repos, neither amended — one-direction-current per Wave 1 Rule-1) | 10 files (1 created + 9 modified across two repos; Writing/Posts reshape via in-place edit, publishedAt→date internal field rename + 2 new fields, no file rename overlay; 0 structural deviations + 1 content-discretion choice on post title/link per D-15 Claude's-Discretion license — ties Waves 4 + 5 for cleanest Wave-2 template application) |
 | Phase 6 P7 | ~3m 29s | 2 tasks (both autonomous, 2 paired commits across repos, neither amended — one-direction-current per Wave 1 Rule-1) | 11 files (2 created + 9 modified across two repos; Projects greenfield — first fully-additive BE endpoint in Phase 6, closer to Wave 1 create-from-scratch than Waves 2-6 in-place reshape; 0 structural deviations + 1 content-discretion choice on 3 project names per Claude's-Discretion license; BACKEND-01 + BACKEND-02 + CONTENT-02 shipped; all 7 v1 API endpoints now wired) |
+| Phase 6 P8 | ~6m 12s | 3 tasks bundled into single commit pair (orchestrator pre-resolved the Task 2 human-verify checkpoint via Extension 2; non-autonomous plan with 3 orchestrator-authorized extensions) | 18 touchpoints (3 created + 14 modified + 1 deleted across two repos; Wave 8 reconciliation — real resume PDF 58440B at canonical filename with pdf-lib Title+Author metadata + real DOCX 19122B with PK\x03\x04 ZIP magic + Profile.resumeDocxUrl? optional type extension + SHIPPED swap to CarEx+MoveIn real apps + PROFILE.highlights[1] D-17 numeric reconciliation 4→2 + legacy public/resume.pdf 50-byte stub deleted in same commit + check-resume-pdf.mjs Pitfall-6 metadata upgrade + new check-resume-docx.mjs gate + both gates wired into npm run prebuild (first build-time gate in project) + about-view secondary DOCX link with plain-noun aria-label + pdf-lib added as devDep only — two-prod-dep budget intact; 1 Rule-1 deviation: about-view.test.tsx ambiguous getByRole regex disambiguated to exact name match; 1 plan-structure deviation: orchestrator pre-authorized single commit pair instead of plan's two-pair Task 1 + Task 3 structure since Extension 2 locked Case A value=2; CONTENT-01 + CONTENT-03 + CONTENT-05 + CONTENT-08 closed; paired commits portfolio-services c4e8870 ↔ portfolio-web d8650a8) |
 | Phase Phase 6 P4 P4 | ~3m 20s | 2 tasks | 9 files |
 
 ## Accumulated Context

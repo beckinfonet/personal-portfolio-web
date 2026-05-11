@@ -1545,7 +1545,16 @@ a:hover {
    print block so the cascade picks them up last for the matching scope. */
 
 @supports (color: oklch(0 0 0)) {
-  :root {
+  /* Scoped to [data-theme="dark"] — NOT :root — so the override does NOT
+     bleed into light theme. The light theme's [data-theme="light"] block
+     at line ~50 has selector specificity (0,1,0); my :root override (also
+     0,1,0) would have won via source order alone and re-darkened the light
+     theme. Scoping to [data-theme="dark"] limits the bump to the dark
+     theme as intended. Verified: light theme keeps its own --muted #6a7370
+     against its lighter bg #f4f2ea (sRGB ratio 4.64:1) and its own
+     --accent-dim path (oklch(0.55 0.13 var(--accent-hue))) which already
+     passes contrast on the light --bg. */
+  [data-theme="dark"] {
     /* --muted: was oklch(~0.49 0.005 175) ≈ #6a7370. Run 1 showed 3.63-4.01:1
        against #0a0c0b / #0d100f / #151918 (all hue-independent failures —
        Sidebar headers, topbar path, about-meta, breadcrumb, contact-label,

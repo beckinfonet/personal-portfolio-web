@@ -18,7 +18,8 @@
     "plan_check": true,
     "verifier": true,
     "nyquist_validation": true,
-    "auto_advance": true
+    "auto_advance": true,
+    "_auto_chain_active": true
   },
   "planning": {
     "commit_docs": true,

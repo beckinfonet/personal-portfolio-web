@@ -167,3 +167,27 @@ describe("WRITING content (Wave 06)", () => {
     expect(new Set(slugs).size).toBe(slugs.length);
   });
 });
+
+describe("PROJECTS content (Wave 07)", () => {
+  test("PROJECTS has at least 3 entries (CONTENT-02)", () => {
+    expect(PROJECTS.length).toBeGreaterThanOrEqual(3);
+  });
+
+  test("every PROJECTS entry has all 7 required fields + HTTPS link", () => {
+    for (const p of PROJECTS) {
+      expect(p.name).toBeTruthy();
+      expect(p.year).toBeTruthy();
+      expect(p.status).toBeTruthy();
+      expect(p.summary).toBeTruthy();
+      expect(Array.isArray(p.tech)).toBe(true);
+      expect(p.tech.length).toBeGreaterThan(0);
+      expect(p.role).toBeTruthy();
+      expect(p.link).toMatch(/^https?:\/\//);
+    }
+  });
+
+  test("PROJECTS names are unique (mirrors Mongo `unique: true` on name)", () => {
+    const names = PROJECTS.map((p) => p.name);
+    expect(new Set(names).size).toBe(names.length);
+  });
+});

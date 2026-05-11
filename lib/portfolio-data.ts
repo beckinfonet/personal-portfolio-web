@@ -65,8 +65,35 @@ export const PROFILE: Profile = {
 };
 
 export const PROJECTS: Project[] = [
-  // Phase 6 fills with >=3 real entries. Empty array is acceptable shape-wise;
-  // postbuild grep does NOT fire on empty arrays.
+  // D-14 mirror of portfolio-services/src/seed/projects.json — byte-identical content.
+  // CONTENT-02 / BACKEND-01: v1 ships 3 real-shape projects.
+  {
+    name: "Terminal Portfolio",
+    year: "2026",
+    status: "shipped",
+    summary: "Brownfield redesign of this site into a terminal/IDE shell with seven RSC views, four-hue theme system, and full mobile redistribution.",
+    tech: ["Next.js 15", "React 19", "TypeScript", "Vitest", "Playwright"],
+    role: "lead",
+    link: "https://github.com/beckinfonet/portfolio-web"
+  },
+  {
+    name: "Portfolio Services",
+    year: "2026",
+    status: "shipped",
+    summary: "Express 5 + Mongoose backend for the terminal portfolio; hand-mirrored type contract with the Next.js frontend.",
+    tech: ["Express 5", "Mongoose 9", "TypeScript", "Jest", "Railway"],
+    role: "lead",
+    link: "https://github.com/beckinfonet/portfolio-services"
+  },
+  {
+    name: "GSD Workflow",
+    year: "2025",
+    status: "active",
+    summary: "Multi-agent Claude planning workflow for incremental software delivery; ships PLAN.md files as executable prompts.",
+    tech: ["Claude", "Anthropic SDK", "Bash", "TypeScript"],
+    role: "lead",
+    link: "https://github.com/beckinfonet"
+  }
 ];
 
 export const EXPERIENCE: Experience[] = [

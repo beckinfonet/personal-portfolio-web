@@ -18,7 +18,12 @@ export default defineConfig({
     // composite. Reduced-motion is also the most semantically correct state
     // for a contrast audit: the design must pass at the FINAL paint state,
     // which reduced-motion users always see. WCAG 2.1 AA testing convention.
-    reducedMotion: "reduce",
+    //
+    // `reducedMotion` lives on BrowserContextOptions (not the top-level
+    // PlaywrightTestOptions), so it's passed via `contextOptions`.
+    contextOptions: {
+      reducedMotion: "reduce",
+    },
   },
   // Phase 5 A11Y-07 Run 2 (Outcome C remediation): switch from `npm run dev` to
   // `npm run build && npm run start` so the matrix runs against a pre-compiled

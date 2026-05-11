@@ -47,6 +47,16 @@ export function AboutView({ profile, uptime }: AboutViewProps) {
         >
           ↓ resume.pdf
         </a>
+        {profile.resumeDocxUrl ? (
+          <a
+            className="btn-ghost"
+            href={profile.resumeDocxUrl}
+            download="Bakytbek_Tatibekov_Resume.docx"
+            aria-label="Download resume as Word document"
+          >
+            resume.docx
+          </a>
+        ) : null}
         {profile.socials.map((s) => (
           <ExternalLink
             key={s.kind}

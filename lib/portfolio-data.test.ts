@@ -1,4 +1,6 @@
 import { describe, test, expect } from "vitest";
+import { existsSync, statSync, readFileSync } from "node:fs";
+import { join } from "node:path";
 import { PROFILE, PROJECTS, EXPERIENCE, WRITING, SHIPPED, STACK } from "./portfolio-data";
 
 // Phase 6 Wave 0 scaffold. Waves 02-07 extend with per-type content assertions:
@@ -189,5 +191,58 @@ describe("PROJECTS content (Wave 07)", () => {
   test("PROJECTS names are unique (mirrors Mongo `unique: true` on name)", () => {
     const names = PROJECTS.map((p) => p.name);
     expect(new Set(names).size).toBe(names.length);
+  });
+});
+
+describe("PROFILE.highlights reconciliation (Wave 08, D-17)", () => {
+  test("PROFILE.highlights[1].value matches SHIPPED.length OR is a non-apps-count highlight", () => {
+    const second = PROFILE.highlights[1];
+    if (!second) {
+      // Case C: highlights trimmed to 2 — this assertion is moot. Confirm trim.
+      expect(PROFILE.highlights.length).toBeLessThanOrEqual(2);
+      return;
+    }
+    if (second.label === "apps shipped") {
+      // Case A: numeric reconciliation — value must equal SHIPPED.length
+      expect(second.value).toBe(String(SHIPPED.length));
+    } else {
+      // Case B: replaced with a different highlight — only assert it's non-empty
+      expect(second.value).toBeTruthy();
+      expect(second.label).toBeTruthy();
+    }
+  });
+});
+
+describe("PROFILE.resumeUrl + resumeDocxUrl (Wave 08)", () => {
+  // PROJECT_ROOT relative to this test file (lib/) — vitest cwd is portfolio-web/.
+  const PUBLIC_DIR = join(process.cwd(), "public");
+
+  test("PROFILE.resumeUrl is the canonical filename (Pitfall 9)", () => {
+    expect(PROFILE.resumeUrl).toBe("/Bakytbek_Tatibekov_Resume.pdf");
+  });
+
+  test("PROFILE.resumeUrl resolves to a real %PDF- file in public/", () => {
+    const path = join(PUBLIC_DIR, PROFILE.resumeUrl.replace(/^\//, ""));
+    expect(existsSync(path)).toBe(true);
+    const bytes = readFileSync(path);
+    expect(bytes.slice(0, 5).toString("ascii")).toBe("%PDF-");
+    // Sanity-bound — same 250KB cap as scripts/check-resume-pdf.mjs.
+    expect(statSync(path).size).toBeLessThan(250 * 1024);
+  });
+
+  test("PROFILE.resumeDocxUrl (if set) points to a real DOCX (PK\\x03\\x04 magic) in public/", () => {
+    if (!PROFILE.resumeDocxUrl) {
+      // Empty/undefined → DOCX feature intentionally disabled; nothing to assert.
+      return;
+    }
+    expect(PROFILE.resumeDocxUrl.startsWith("/")).toBe(true);
+    const path = join(PUBLIC_DIR, PROFILE.resumeDocxUrl.replace(/^\//, ""));
+    expect(existsSync(path)).toBe(true);
+    const bytes = readFileSync(path);
+    // DOCX is a ZIP container — PK\x03\x04 = 0x504b0304.
+    expect(bytes[0]).toBe(0x50);
+    expect(bytes[1]).toBe(0x4b);
+    expect(bytes[2]).toBe(0x03);
+    expect(bytes[3]).toBe(0x04);
   });
 });

@@ -7,6 +7,7 @@
   },
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/check-resume-pdf.mjs && node scripts/check-resume-docx.mjs",
     "build": "next build",
     "postbuild": "node scripts/check-placeholders.mjs",
     "start": "next start",
@@ -41,6 +42,7 @@
     "eslint-config-next": "^15.5.15",
     "jsdom": "26.1.0",
     "knip": "^6.11.0",
+    "pdf-lib": "^1.17.1",
     "playwright": "^1.59.1",
     "typescript": "5.8.3",
     "vitest": "3.1.4"

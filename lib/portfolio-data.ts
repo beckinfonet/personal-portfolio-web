@@ -35,7 +35,8 @@ export const PROFILE: Profile = {
   role: "Sr. Software Engineer",
   location: "Remote — open globally",
   email: "beckprograms@gmail.com",
-  resumeUrl: "/resume.pdf",
+  resumeUrl: "/Bakytbek_Tatibekov_Resume.pdf",
+  resumeDocxUrl: "/Bakytbek_Tatibekov_Resume.docx",
   bio: {
     short: "Senior software engineer focused on developer tools, infrastructure, and TypeScript-first web apps.",
     long: [
@@ -45,7 +46,7 @@ export const PROFILE: Profile = {
   },
   highlights: [
     { value: "12+", label: "years engineering" },
-    { value: "4", label: "apps shipped" },
+    { value: "2", label: "apps shipped" },
     { value: "OSS", label: "open-source contributor" }
   ],
   socials: [
@@ -132,23 +133,25 @@ export const WRITING: Writing[] = [
 
 export const SHIPPED: ShippedApp[] = [
   // Entries mirrored from portfolio-services/src/seed/apps.json (D-14).
-  // Wave 08 reconciles PROFILE.highlights[1].value ("4 apps shipped") to SHIPPED.length.
+  // Wave 08 reconciliation: PROFILE.highlights[1].value matches SHIPPED.length=2 ("2 apps shipped").
+  // Wave 08 content swap: developer-supplied real apps CarEx + MoveIn (orchestrator extension 2).
   {
-    name: "Heart Trainer",
-    platforms: ["ios"],
-    appStoreUrl: "https://apps.apple.com/us/app/heart-trainer/id1457699720",
+    name: "CarEx",
+    platforms: ["ios", "android"],
+    appStoreUrl: "https://apps.apple.com/us/app/carex-marketplace/id6758438618",
+    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.carex.market",
     role: "lead",
-    year: "2020",
-    summary: "Heart-rate guided fitness coach with adaptive workout plans built around real-time biometric input."
+    year: "2025",
+    summary: "Vehicle marketplace — iOS + Android consumer marketplace app for buying and selling vehicles."
   },
   {
-    name: "Lingo Coach",
+    name: "MoveIn",
     platforms: ["ios", "android"],
-    appStoreUrl: "https://apps.apple.com/us/app/lingo-coach/id1502348290",
-    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.lingo.coach",
-    role: "co-creator",
-    year: "2021",
-    summary: "Spaced-repetition language tutor combining native-speaker audio with adaptive review scheduling."
+    appStoreUrl: "https://apps.apple.com/us/app/movein-real-estate/id6758697464",
+    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.movein",
+    role: "lead",
+    year: "2025",
+    summary: "Real estate listings — iOS + Android app for browsing rental and for-sale property listings."
   }
 ];
 

@@ -12,7 +12,10 @@ describe("AboutView", () => {
 
   test("renders the resume download CTA (MOBILE-03 above-the-fold)", () => {
     render(<AboutView profile={PROFILE} uptime="8y 125d" />);
-    const resume = screen.getByRole("link", { name: /download resume/i });
+    /* Exact-match the primary PDF aria-label "Download resume" — Wave 8 added a
+       secondary DOCX link with aria-label "Download resume as Word document" so
+       a loose /download resume/i regex now matches multiple elements. */
+    const resume = screen.getByRole("link", { name: "Download resume" });
     expect(resume).toBeInTheDocument();
     expect(resume).toHaveAttribute("download");
   });

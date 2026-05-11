@@ -10,7 +10,7 @@ function fixtureProfile(overrides: Partial<Profile> = {}): Profile {
     role: "Engineer",
     location: "Remote",
     email: "test@example.test",
-    resumeUrl: "/resume.pdf",
+    resumeUrl: "/Bakytbek_Tatibekov_Resume.pdf",
     bio: { short: "", long: [] },
     highlights: [],
     socials: []

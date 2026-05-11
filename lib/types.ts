@@ -48,8 +48,10 @@ export interface Profile {
   location: string;
   /** Real email address; rendered as mailto + copyable plain text. */
   email: string;
-  /** Path to the resume PDF; defaults to "/resume.pdf". */
+  /** Path to the resume PDF; defaults to "/Bakytbek_Tatibekov_Resume.pdf". */
   resumeUrl: string;
+  /** Optional path to the DOCX (Word) version of the resume — recruiter convenience download. Empty/undefined hides the secondary link. */
+  resumeDocxUrl?: string;
   /** Short and long bio. */
   bio: Bio;
   /** Highlight stat cards for about view (3 entries expected). */

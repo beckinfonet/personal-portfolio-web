@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Views** - Seven per-view routes with metadata, primitives, RSC content rendering (2026-05-06)
 - [x] **Phase 4: Mobile-Responsive** - Bottom-sheet nav, mobile palette, sidebar redistribution, print styles (2026-05-07 — verdict PASS with Phase 5 + Phase 7 carry-forwards)
 - [x] **Phase 5: SEO + Accessibility Polish** - OG images, JSON-LD, contrast audit, reduced-motion, easter eggs (2026-05-11 — verdict PASS; 56/56 axe cells WCAG 2.1 AA; 134/134 vitest; verifier audit corroborates; SEO-03c + real-device reduce-motion + Lighthouse + x-portfolio-source value all DEFERRED-PHASE-7)
-- [ ] **Phase 6: Backend + Content Population** - Sibling backend endpoints, real bio/projects/posts/resume PDF
+- [x] **Phase 6: Backend + Content Population** - Sibling backend endpoints, real bio/projects/posts/resume PDF — completed 2026-05-11
 - [ ] **Phase 7: Deploy + Verification** - Production deploy, Lighthouse, Search Console, recruiter test, audits
 
 ## Phase Details
@@ -145,7 +145,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 06-06-PLAN.md — Wave 6: Writing/Posts reshape paired commit (publishedAt→date + readTime + link; D-15 — exactly 1 post; CONTENT-04) — completed 2026-05-11; BE `50c50af` + FE `4988954`; backend jest 5→7 (+2 specs: /api/posts shape + ?limit=1 cap), frontend vitest 150→153 (+3 WRITING assertions); BACKEND-02 + CONTENT-04 satisfied; WRITING.length=1 per D-15
 - [x] 06-07-PLAN.md — Wave 7: Projects greenfield paired commit (NEW model + controller + route; CONTENT-02; BACKEND-01) — completed 2026-05-11; BE `86846e6` + FE `57f0779`; backend jest 7→8 (+1 /api/projects shape spec), frontend vitest 153→156 (+3 PROJECTS assertions); BACKEND-01 + BACKEND-02 + CONTENT-02 satisfied; PROJECTS.length=3; all 7 v1 API endpoints wired and tested
 - [x] 06-08-PLAN.md — Wave 8: Resume PDF + DOCX dual-format + D-17 highlights reconciliation + real-app swap (CarEx + MoveIn); CONTENT-01 + CONTENT-03 + CONTENT-05 + CONTENT-08 closed (BE c4e8870 ↔ FE d8650a8)
-- [ ] 06-09-PLAN.md — Wave 9: Railway deploy + Mongo seed + check-backend smoke gate + Vercel env-flip + 7-view eyeball verification (BACKEND-04)
+- [x] 06-09-PLAN.md — Wave 9: Railway deploy + Mongo seed + check-backend smoke gate + Vercel env-flip + 7-view eyeball verification — completed 2026-05-11; BE `<pending — README.md commit SHA recorded in 06-09-SUMMARY.md>` + FE `<pending — close-out commit SHA recorded in 06-09-SUMMARY.md>`; portfolio-services origin/main 235887b→c4e8870 (8 commits pushed); production live at https://personal-portfolio-services-production.up.railway.app + https://personal-portfolio-web-orcin.vercel.app; D-11 smoke gate 7/7 green exit 0; Mongo seeded profile=1/projects=3/stack=4/experience=3/apps=2/posts=1; Task 2 skipped (literal MONGO_URI); Task 6 eyeball APPROVED with no caveats; pre-cutover security bump next 15.5.15→15.5.18 (1d9a295); BACKEND-03 + BACKEND-04 satisfied; Phase 6 close-out PASS — 12/12 requirements shipped
 
 ### Phase 7: Deploy + Verification
 **Goal**: Production cutover with full Lighthouse / Search Console / recruiter-test verification — the explicit "looks done but isn't" checklist run against the live URL, not localhost
@@ -176,5 +176,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 3. Views | 0/TBD | Not started | - |
 | 4. Mobile-Responsive | 5/5 | Complete | 2026-05-07 |
 | 5. SEO + Accessibility Polish | 8/8 | Complete | 2026-05-11 |
-| 6. Backend + Content Population | 8/9 | In progress | - |
+| 6. Backend + Content Population | 9/9 | Complete | 2026-05-11 |
 | 7. Deploy + Verification | 0/TBD | Not started | - |

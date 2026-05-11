@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: Phase 6 Plan 08 complete (Wave 8 resume PDF + DOCX + D-17 highlights reconcile + CarEx + MoveIn real-app swap; portfolio-services c4e8870 ↔ portfolio-web d8650a8)
-last_updated: "2026-05-11T03:35:37Z"
-last_activity: 2026-05-11 -- Phase 6 Plan 08 (Wave 8 reconciliation + orchestrator extensions 1 + 2 + 3) complete
+status: phase 6 closed; ready for phase 7 (deploy + verification)
+stopped_at: Phase 6 Plan 09 complete (Wave 9 cutover — Railway BE + Mongo seed + Vercel env-flip; production live at https://personal-portfolio-services-production.up.railway.app + https://personal-portfolio-web-orcin.vercel.app; pre-cutover security bump next 15.5.15→15.5.18)
+last_updated: "2026-05-11T05:55:00Z"
+last_activity: 2026-05-11 -- Phase 6 closed (Plan 09 deploy cutover + close-out; 9/9 plans; 12/12 requirements)
 progress:
   total_phases: 7
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 48
-  completed_plans: 47
-  percent: 98
+  completed_plans: 48
+  percent: 100
 ---
 
 # Project State
@@ -21,16 +21,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-06)
 
 **Core value:** A distinctive personal portfolio that signals engineering craft through a terminal/IDE aesthetic — without making non-technical recruiters work to find the resume and contact info.
-**Current focus:** Phase 6 — backend-content-population (next)
+**Current focus:** Phase 7 — Deploy + Verification (next)
 
 ## Current Position
 
-Phase: 06 (backend-content-population) — IN PROGRESS
-Plan: 8 of 9 complete (Wave 8 paired commit; real resume PDF 58440 bytes at canonical /Bakytbek_Tatibekov_Resume.pdf with Title + Author metadata via pdf-lib; real DOCX 19122 bytes added orchestrator extension 1; PROFILE.resumeDocxUrl optional field added across FE Profile/ BE ProfileDto/ BE Profile Mongoose model; SHIPPED + apps.json swapped to real shipped apps CarEx + MoveIn extension 2; PROFILE.highlights[1].value 4→2 D-17 reconciliation Case A; legacy public/resume.pdf 50-byte stub deleted in same commit per brownfield discipline; scripts/check-resume-pdf.mjs upgraded with Pitfall 6 Title/Author non-empty check + scripts/check-resume-docx.mjs new gate; both wired into npm run prebuild — first wave to gate at build time; about-view secondary 'resume.docx' link with aria-label 'Download resume as Word document'; pdf-lib added as devDep only; CONTENT-01 + CONTENT-03 + CONTENT-05 + CONTENT-08 closed)
-Status: Ready to execute Plan 06-09 (Wave 9 cutover — non-autonomous: Railway deploy + Mongo seed + Vercel env-flip; recruiter tap test on resume PDF + DOCX + CarEx + MoveIn live store URLs is the manual gate)
-Last activity: 2026-05-11 -- Phase 6 Plan 08 (Wave 8 reconciliation + orchestrator extensions 1+2+3) complete
+Phase: 06 (backend-content-population) — COMPLETE 2026-05-11
+Plan: 9 of 9 complete (Wave 9 cutover — production live end-to-end on Railway BE + Vercel FE; Mongo seeded with real content via Railway CLI; D-11 smoke gate 7/7 green; Vercel NEXT_PUBLIC_API_BASE_URL flipped to Railway URL with redeploy; Task 6 eyeball APPROVED with no caveats; Phase 6 close-out PASS — 12/12 requirements shipped (BACKEND-01..04 + CONTENT-01..08); pre-cutover security bump next 15.5.15→15.5.18 (1d9a295) resolved Vercel CVE warning before deploy; portfolio-services origin/main 235887b→c4e8870 (8 commits pushed) — first time Railway sees the real BE code)
+Status: Ready for Phase 7 — Deploy + Verification (production URL live at https://personal-portfolio-web-orcin.vercel.app; recruiter 5-second test, Lighthouse, Search Console, npm audit, npx knip all gate against the live URL)
+Last activity: 2026-05-11 -- Phase 6 closed (Plan 09 deploy cutover + close-out)
 
-Progress: [██████████████████████] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 ✓ · Phase 6 (8/9)
+Progress: [████████████████████████] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 ✓ · Phase 6 ✓ · Phase 7 (next)
 
 ## Performance Metrics
 

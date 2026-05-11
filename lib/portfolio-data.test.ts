@@ -57,3 +57,28 @@ describe("PROFILE content (Wave 02)", () => {
     expect(serialized).not.toMatch(/TODO/);
   });
 });
+
+describe("STACK content (Wave 03)", () => {
+  test("STACK has at least 1 category (CONTENT-06)", () => {
+    expect(STACK.length).toBeGreaterThanOrEqual(1);
+  });
+
+  test("every STACK entry has non-empty category + non-empty items[]", () => {
+    for (const entry of STACK) {
+      expect(typeof entry.category).toBe("string");
+      expect(entry.category.length).toBeGreaterThan(0);
+      expect(Array.isArray(entry.items)).toBe(true);
+      expect(entry.items.length).toBeGreaterThan(0);
+      for (const item of entry.items) {
+        expect(typeof item).toBe("string");
+        expect(item.length).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  test("STACK categories are unique (matches Mongo `unique: true` on Stack model)", () => {
+    const categories = STACK.map((s) => s.category);
+    const unique = new Set(categories);
+    expect(unique.size).toBe(categories.length);
+  });
+});

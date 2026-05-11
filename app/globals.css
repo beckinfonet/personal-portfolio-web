@@ -1535,3 +1535,31 @@ a:hover {
     page-break-inside: avoid;
   }
 }
+
+/* ── Phase 5 A11Y-07 contrast remediation (Outcome C — orchestrator-approved) ──
+   Global token bumps on the dark theme for hue-independent failures surfaced
+   in .planning/phases/05-seo-accessibility-polish/05-07-AXE-RUN-1.md.
+   Lightness increases preserve the oklch hue/chroma so the visual feel of
+   muted text and dim accent text stays close to the design handoff. These
+   live AFTER the @supports (color: oklch) :root block and AFTER the @media
+   print block so the cascade picks them up last for the matching scope. */
+
+@supports (color: oklch(0 0 0)) {
+  :root {
+    /* --muted: was oklch(~0.49 0.005 175) ≈ #6a7370. Run 1 showed 3.63-4.01:1
+       against #0a0c0b / #0d100f / #151918 (all hue-independent failures —
+       Sidebar headers, topbar path, about-meta, breadcrumb, contact-label,
+       PrintFooter spans, etc). Bumping L to 0.62 lifts the ratio above
+       4.5:1 against the darkest surface (--bg #0a0c0b). */
+    --muted: oklch(0.62 0.005 175);
+
+    /* --accent-dim: was oklch(0.45 0.12 var(--accent-hue)) which rendered as
+       #336a37 for the matrix hue and scored 1.72:1 on --bg (critical fail).
+       Used in stack `.color` swatch labels, `.to` accent text, and any
+       low-emphasis accent-tinted UI. Bumping L to 0.70 keeps the hue/chroma
+       so the brand greenish-amber-cyan-magenta feel survives while clearing
+       4.5:1 against --bg. */
+    --accent-dim: oklch(0.70 0.12 var(--accent-hue));
+  }
+}
+

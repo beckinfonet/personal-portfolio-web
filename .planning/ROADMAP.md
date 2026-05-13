@@ -157,7 +157,16 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Search Console shows the sitemap submitted and all seven routes indexed (or "Discovered" status pending crawl); `npm audit` reports zero high/critical advisories; `npx knip` reports zero unused files/exports
   4. 5-second recruiter hand-off test passes on the production URL on both desktop and 375px mobile — a non-engineer finds resume + contact in under 5 seconds, twice (once per device)
   5. Vercel Analytics is enabled and a `resume_download` custom event fires on the resume button click; manual 375px screenshot review confirms every shell element is accessible with no overflow
-**Plans**: TBD
+**Plans:** 9 plans
+- [ ] 07-01-PLAN.md — Wave 1: env-var flip to www.tatibekov.com + drop x-portfolio-source slot + redeploy (DEPLOY-01)
+- [ ] 07-02-PLAN.md — Wave 1: Wave 0 infra — scripts/check-production-routes.mjs + evidence directories
+- [ ] 07-03-PLAN.md — Wave 2: install @vercel/analytics + mount <Analytics /> + track('resume_download') on TopBar (DEPLOY-06)
+- [ ] 07-04-PLAN.md — Wave 3: PageSpeed Insights × 7 routes × 3-run median; 42-cell scores table (DEPLOY-02)
+- [ ] 07-05-PLAN.md — Wave 3: Google Search Console DNS TXT Domain property + sitemap submission (DEPLOY-03)
+- [ ] 07-06-PLAN.md — Wave 3: npm audit + npx knip pre-close-out gates (DEPLOY-05)
+- [ ] 07-07-PLAN.md — Wave 4: 5-second recruiter test on production + Slack/LinkedIn unfurl (DEPLOY-04)
+- [ ] 07-08-PLAN.md — Wave 4: 375px DevTools shell review × 7 routes + real-device carry closure (DEPLOY-07)
+- [ ] 07-09-PLAN.md — Wave 4: BE smoke gate re-run + status artifacts + 07-VERIFICATION.md sign-off
 
 ## Progress
 
@@ -177,4 +186,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7
 | 4. Mobile-Responsive | 5/5 | Complete | 2026-05-07 |
 | 5. SEO + Accessibility Polish | 8/8 | Complete | 2026-05-11 |
 | 6. Backend + Content Population | 9/9 | Complete | 2026-05-11 |
-| 7. Deploy + Verification | 0/TBD | Not started | - |
+| 7. Deploy + Verification | 0/9 | Not started | - |

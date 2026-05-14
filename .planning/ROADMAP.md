@@ -165,7 +165,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 07-04-PLAN.md — Wave 3: PageSpeed Insights × 7 routes × 3-run median; 42-cell scores table (DEPLOY-02)
 - [x] 07-05-PLAN.md — Wave 2: Google Search Console DNS TXT Domain property + sitemap submission (DEPLOY-03)
 - [x] 07-06-PLAN.md — Wave 3: npm audit + npx knip pre-close-out gates (DEPLOY-05)
-- [ ] 07-07-PLAN.md — Wave 4: 5-second recruiter test on production + Slack/LinkedIn unfurl (DEPLOY-04)
+- [x] 07-07-PLAN.md — Wave 4: 5-second recruiter test on production + Slack/LinkedIn unfurl (DEPLOY-04)
 - [x] 07-08-PLAN.md — Wave 3: 375px DevTools shell review × 7 routes + real-device carry closure (DEPLOY-07)
 - [ ] 07-09-PLAN.md — Wave 5: BE smoke gate re-run + status artifacts + 07-VERIFICATION.md sign-off
 

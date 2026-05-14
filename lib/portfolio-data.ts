@@ -99,23 +99,48 @@ export const PROJECTS: Project[] = [
 ];
 
 export const EXPERIENCE: Experience[] = [
+  // D-14 mirror of portfolio-services/src/seed/experience.json — byte-identical content.
   {
     company: "Independent",
     role: "Sr. Software Engineer",
     period: "2022 - present",
-    summary: "Building developer tools and AI-assisted engineering workflows; full-stack TypeScript with a focus on RSC, infrastructure-as-code, and agentic systems."
+    location: "Remote",
+    employmentType: "Full-time",
+    summary: "Leading AI-native product work — agentic booking, identity verification, and MCP integration.",
+    bullets: [
+      "Designed and shipped the MCP integration layer connecting agentic flows to backend services and external APIs.",
+      "Led a 4-engineer team building the agentic booking system end-to-end, from data model to chat-driven UX.",
+      "Cut identity-fraud onboarding incidents ~60% by introducing a multi-signal verification pipeline."
+    ],
+    tech: ["TypeScript", "React", "Node.js", "LangChain", "Postgres", "AWS"]
   },
   {
     company: "Confidential",
     role: "Senior Engineer",
     period: "2019 - 2022",
-    summary: "Led API modernization and CI reliability work on a high-throughput service; reduced p95 latency by 40% via query plan tuning and Node 18 upgrade."
+    location: "Hybrid",
+    employmentType: "Full-time",
+    summary: "Led API modernization and CI reliability work on a high-throughput service.",
+    bullets: [
+      "Reduced p95 API latency by 40% via query plan tuning and a Node 18 runtime upgrade.",
+      "Cut CI flake rate from ~12% to under 2% by isolating stateful test fixtures and parallelising the slow path.",
+      "Mentored two junior engineers through their first production on-call rotations."
+    ],
+    tech: ["TypeScript", "Node.js", "Express", "Postgres", "GitHub Actions"]
   },
   {
     company: "Confidential",
     role: "Software Engineer",
     period: "2016 - 2019",
-    summary: "Shipped cross-platform mobile + web features in Swift, Kotlin, and React Native; collaborated on store-published apps."
+    location: "Onsite",
+    employmentType: "Full-time",
+    summary: "Shipped cross-platform mobile + web features in Swift, Kotlin, and React Native.",
+    bullets: [
+      "Built shared React Native modules consumed by both the iOS and Android store-published apps.",
+      "Owned the in-app payments flow end-to-end, integrating Stripe SDKs on both platforms.",
+      "Collaborated with design to implement the first dark-mode pass across all primary user flows."
+    ],
+    tech: ["Swift", "Kotlin", "React Native", "TypeScript"]
   }
 ];
 

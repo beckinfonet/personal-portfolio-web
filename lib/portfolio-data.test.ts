@@ -116,6 +116,49 @@ describe("EXPERIENCE content (Wave 04)", () => {
       expect(entry.highlights).toBeUndefined();
     }
   });
+
+  test("every EXPERIENCE entry has bullets:string[] (spec 2026-05-14)", () => {
+    for (const entry of EXPERIENCE) {
+      expect(Array.isArray(entry.bullets)).toBe(true);
+      for (const b of entry.bullets) {
+        expect(typeof b).toBe("string");
+        expect(b.length).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  test("every EXPERIENCE entry has tech:string[] (spec 2026-05-14)", () => {
+    for (const entry of EXPERIENCE) {
+      expect(Array.isArray(entry.tech)).toBe(true);
+      for (const t of entry.tech) {
+        expect(typeof t).toBe("string");
+        expect(t.length).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  test("EXPERIENCE entries have at least one role with non-empty bullets (spec acceptance §10)", () => {
+    const someHaveBullets = EXPERIENCE.some((e) => e.bullets.length > 0);
+    expect(someHaveBullets).toBe(true);
+  });
+
+  test("EXPERIENCE entries have at least one role with non-empty tech (spec acceptance §10)", () => {
+    const someHaveTech = EXPERIENCE.some((e) => e.tech.length > 0);
+    expect(someHaveTech).toBe(true);
+  });
+
+  test("EXPERIENCE optional fields (location, employmentType) are strings when present", () => {
+    for (const entry of EXPERIENCE) {
+      if (entry.location !== undefined) {
+        expect(typeof entry.location).toBe("string");
+        expect(entry.location.length).toBeGreaterThan(0);
+      }
+      if (entry.employmentType !== undefined) {
+        expect(typeof entry.employmentType).toBe("string");
+        expect(entry.employmentType.length).toBeGreaterThan(0);
+      }
+    }
+  });
 });
 
 describe("SHIPPED content (Wave 05)", () => {

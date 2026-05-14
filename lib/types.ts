@@ -86,8 +86,16 @@ export interface Experience {
   role: string;
   /** Period string, e.g. "2022 - present", "2019 - 2022". Right-aligned muted 12px. */
   period: string;
-  /** Summary text, max 64ch. */
+  /** Lead-paragraph summary, max 68ch, repurposed as the 1-2 sentence intro above bullets (spec §1). */
   summary: string;
+  /** Diff-add-style achievement bullets, rendered with "+" markers (spec §1). Empty array allowed. */
+  bullets: string[];
+  /** Tech chip row rendered after STACK label (spec §1). Empty array allowed. */
+  tech: string[];
+  /** Optional employment location, e.g. "Remote", "Hybrid", "Onsite — NYC". Renders as " · {location}" in sub-line (spec §1). */
+  location?: string;
+  /** Optional employment type, e.g. "Full-time", "Contract". Renders as " · {employmentType}" in sub-line (spec §1). */
+  employmentType?: string;
 }
 
 /** A single writing/ view post. */

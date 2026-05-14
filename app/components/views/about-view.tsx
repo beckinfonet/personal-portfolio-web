@@ -4,6 +4,7 @@
 //   in app/globals.css (appended in Plan 03-04).
 // Note: H1 styling lives at `.terminal-main h1` (also in globals.css).
 
+import Link from "next/link";
 import type { Profile } from "@/lib/types";
 import { ExternalLink } from "@/app/components/primitives/external-link";
 import { StatusBlock } from "@/app/components/shell/status-block";
@@ -13,6 +14,11 @@ interface AboutViewProps {
   profile: Profile;
   uptime: string;
 }
+
+const HIGHLIGHT_HREFS: Partial<Record<Profile["highlights"][number]["label"], string>> = {
+  "years engineering": "/experience",
+  "apps shipped": "/shipped"
+};
 
 export function AboutView({ profile, uptime }: AboutViewProps) {
   return (
@@ -30,12 +36,25 @@ export function AboutView({ profile, uptime }: AboutViewProps) {
       <AboutSocials profile={profile} />
 
       <div className="about-cards">
-        {profile.highlights.map((h, i) => (
-          <div key={i} className="about-card">
-            <div className="about-card-value">{h.value}</div>
-            <div className="about-card-label">{h.label}</div>
-          </div>
-        ))}
+        {profile.highlights.map((h, i) => {
+          const href = HIGHLIGHT_HREFS[h.label];
+          const cardContent = (
+            <>
+              <div className="about-card-value">{h.value}</div>
+              <div className="about-card-label">{h.label}</div>
+            </>
+          );
+
+          return href ? (
+            <Link key={i} href={href} className="about-card about-card--link">
+              {cardContent}
+            </Link>
+          ) : (
+            <div key={i} className="about-card">
+              {cardContent}
+            </div>
+          );
+        })}
       </div>
 
       <div className="about-cta-row">

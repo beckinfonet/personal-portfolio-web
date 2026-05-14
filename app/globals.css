@@ -901,6 +901,23 @@ a:hover {
   padding: 14px;
 }
 
+.about-card--link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 120ms ease, transform 120ms ease;
+}
+
+.about-card--link:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.about-card--link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .about-card-value {
   font-size: 22px;
   font-weight: 700;
@@ -1437,8 +1454,20 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 8px;
+  grid-column: 2 / 3;
   margin-top: 12px;
   flex-wrap: wrap;
+}
+
+.shipped-row-store-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.shipped-row-store-badges .store-badge-link {
+  flex: 0 0 auto;
 }
 
 .shipped-row-meta {
@@ -1602,6 +1631,10 @@ a:hover {
     display: block;
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .shipped-row-affordances {
+    grid-column: 1 / -1;
   }
 
   /* Drawer file-row touch target (D-07, D-11; WCAG 2.5.5) */

@@ -9,10 +9,12 @@ import { readFileSync } from "node:fs";
 const CSS_FILE = "app/globals.css";
 const contents = readFileSync(CSS_FILE, "utf8");
 
-// Slice out the @media (max-width: 960px) block so the orphan-grid-track check
-// can grep inside it specifically (not anywhere in the file).
-const mobileBlockMatch = contents.match(/@media\s*\(max-width:\s*960px\)\s*\{([\s\S]*?)\n\}\s*\n/);
-const mobileBlock = mobileBlockMatch ? mobileBlockMatch[1] : "";
+// Slice out the sidebar redistribution @media (max-width: 960px) block so the
+// orphan-grid-track check can grep inside it specifically. globals.css has more
+// than one 960px media query, so choose the one that owns the sidebar rule.
+const mobileBlocks = [...contents.matchAll(/@media\s*\(max-width:\s*960px\)\s*\{([\s\S]*?)\n\}\s*\n/g)];
+const mobileBlock =
+  mobileBlocks.find((match) => /\.sidebar\s*\{/.test(match[1]))?.[1] ?? "";
 
 const checks = [
   { source: contents, pattern: /\.sidebar\s*\{[^}]*display:\s*none/, label: "sidebar display:none present (paired hide rule)" },

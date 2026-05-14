@@ -44,7 +44,14 @@ export function ShippedView({ shipped }: ShippedViewProps) {
                 {app.summary && (
                   <div className="shipped-row-summary">{app.summary}</div>
                 )}
-                <div className="shipped-row-affordances">
+              </div>
+              <div className="shipped-row-meta">
+                <div className="shipped-row-year">{app.year}</div>
+                <div className="shipped-row-status">shipped</div>
+                <div className="shipped-row-role">{app.role}</div>
+              </div>
+              <div className="shipped-row-affordances">
+                <div className="shipped-row-store-badges">
                   {showIos && app.appStoreUrl && (
                     <StoreBadge
                       platform="ios"
@@ -59,21 +66,16 @@ export function ShippedView({ shipped }: ShippedViewProps) {
                       appName={app.name}
                     />
                   )}
-                  {copyUrl && (
-                    <CopyButton
-                      value={copyUrl}
-                      ariaLabel={`Copy ${app.name} store link`}
-                      className="copy-button--icon"
-                      idleLabel="⧉"
-                      copiedLabel="✓"
-                    />
-                  )}
                 </div>
-              </div>
-              <div className="shipped-row-meta">
-                <div className="shipped-row-year">{app.year}</div>
-                <div className="shipped-row-status">shipped</div>
-                <div className="shipped-row-role">{app.role}</div>
+                {copyUrl && (
+                  <CopyButton
+                    value={copyUrl}
+                    ariaLabel={`Copy ${app.name} store link`}
+                    className="copy-button--icon"
+                    idleLabel="⧉"
+                    copiedLabel="✓"
+                  />
+                )}
               </div>
             </li>
           );

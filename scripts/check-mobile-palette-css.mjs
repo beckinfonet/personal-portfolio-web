@@ -8,9 +8,11 @@ import { readFileSync } from "node:fs";
 const CSS_FILE = "app/globals.css";
 const contents = readFileSync(CSS_FILE, "utf8");
 
-// Scope checks to the @media (max-width: 960px) block
-const mobileBlockMatch = contents.match(/@media \(max-width:\s*960px\)\s*\{[\s\S]*?(?=\n@media|\n\/\* ──|\Z)/);
-const mobileBlock = mobileBlockMatch ? mobileBlockMatch[0] : "";
+// Scope checks to the @media (max-width: 960px) block that owns cmdk overrides.
+// globals.css can contain multiple 960px blocks for unrelated view-specific CSS.
+const mobileBlocks = [...contents.matchAll(/@media\s*\(max-width:\s*960px\)\s*\{([\s\S]*?)\n\}\s*\n/g)];
+const mobileBlock =
+  mobileBlocks.find((match) => /\[cmdk-dialog\]/.test(match[1]))?.[1] ?? "";
 
 const checks = [
   { pattern: /@media \(max-width:\s*960px\)/, label: "mobile breakpoint block present", scope: "file" },

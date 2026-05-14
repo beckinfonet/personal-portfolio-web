@@ -10,6 +10,18 @@ describe("AboutView", () => {
     expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
   });
 
+  test("links the years engineering card to experience.log", () => {
+    render(<AboutView profile={PROFILE} uptime="8y 125d" />);
+    const years = screen.getByRole("link", { name: /12\+\s*years engineering/i });
+    expect(years).toHaveAttribute("href", "/experience");
+  });
+
+  test("links the apps shipped card to shipped.app", () => {
+    render(<AboutView profile={PROFILE} uptime="8y 125d" />);
+    const shipped = screen.getByRole("link", { name: /2\s*apps shipped/i });
+    expect(shipped).toHaveAttribute("href", "/shipped");
+  });
+
   test("renders the resume download CTA (MOBILE-03 above-the-fold)", () => {
     render(<AboutView profile={PROFILE} uptime="8y 125d" />);
     /* Exact-match the primary PDF aria-label "Download resume" — Wave 8 added a

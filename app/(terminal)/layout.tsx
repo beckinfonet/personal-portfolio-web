@@ -50,8 +50,8 @@ export default async function TerminalLayout({ children }: { children: ReactNode
             <span>© {currentYear} {profile.name}</span>
             <span aria-hidden="true">·</span>
             <span>compiled with care · rendered with intent · handcrafted in terminal mode</span>
-            <span aria-hidden="true">·</span>
-            <span>v1.0.0</span>
+            {/* <span aria-hidden="true">·</span> */}
+            
           </footer>
         </main>
       </div>

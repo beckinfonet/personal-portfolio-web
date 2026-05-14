@@ -9,8 +9,9 @@ tags:
   - manual-attestation
   - evidence-capture
   - checkpoint
-status: CHECKPOINT-AWAITING-HUMAN-EVIDENCE
-verdict: PENDING (gated on human-action checkpoint)
+status: PARTIAL-PASS (Tasks 1+2 verified; Task 3 DEFERRED-INDEXING-WAIT 24-48h per Pitfall 2)
+verdict: PARTIAL-PASS — final indexing-coverage outcome deferred to Plan 07-09 close-out
+updated: 2026-05-13
 dependency_graph:
   requires:
     - "07-01 (production redeploy + www.tatibekov.com canonical URLs in sitemap)"
@@ -33,11 +34,18 @@ decisions:
   - "Combined the three plan-level checkpoint:human-action tasks (DNS TXT, sitemap submit, coverage capture) into ONE consolidated checkpoint return — the user must complete all three before the orchestrator can resume Plan 07-05 Task 4 (the only auto task)."
   - "Scaffolded 07-VERIFICATION.md DEPLOY-03 section with PENDING markers rather than waiting until after human evidence — preserves task-4 append-or-create defensiveness and gives the user a concrete file to inspect during/after the manual flow."
 metrics:
-  duration: "~3 minutes (scaffold only; humanwork outstanding)"
-  completed: PENDING
-  tasks_completed_autonomously: 0 of 4
-  tasks_awaiting_human_action: 3 of 4
-  tasks_awaiting_consolidation: 1 of 4
+  duration: "~3 minutes scaffold + user manual GSC work (verification + sitemap submission); coverage capture deferred 24-48h"
+  completed: PARTIAL
+  tasks_completed_autonomously: 1 of 4 (scaffold)
+  tasks_completed_by_user_action: 2 of 3 (verification + sitemap submission)
+  tasks_deferred: 1 of 3 (coverage capture — DEFERRED-INDEXING-WAIT)
+human_evidence_recorded:
+  - "gsc/verification.png (115KB; GSC Domain property verified via DNS TXT on apex 2026-05-13)"
+  - "gsc/sitemap-submitted.png (168KB; https://www.tatibekov.com/sitemap.xml submitted with Success status 2026-05-13)"
+  - "gsc/coverage.png — DEFERRED 24-48h (capture on or after 2026-05-14 then commit)"
+follow_up:
+  - "After 2026-05-14: run URL Inspection on each of 7 routes in GSC; capture gsc/coverage.png; update 07-VERIFICATION.md DEPLOY-03 table with per-route statuses; record final outcome."
+  - "Plan 07-09 close-out picks up the deferred coverage capture and records the final DEPLOY-03 verdict."
 ---
 
 # Phase 07 Plan 05: Google Search Console Onboarding Summary

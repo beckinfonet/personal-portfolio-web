@@ -5,6 +5,7 @@ status: complete
 verdict: PARTIAL-PASS-WITH-DEFERRALS
 created: 2026-05-13
 updated: 2026-05-14
+verifier_audit: corroborated — close-out verdict is honest and complete; one notation added for DEPLOY-02 evidence shape deviation; no missed gaps found
 sections:
   - DEPLOY-01: PASS — curl evidence (deploy-01-curl-evidence.txt) + close-out check:prod re-run 7/7 routes green on https://www.tatibekov.com; canonical URL flip + x-portfolio-source removal verified
   - DEPLOY-02: PASS — DevTools Lighthouse mobile profile × 7 routes; Perf 96-100, A11y 100, SEO 100, BP 96 — all thresholds exceeded with substantial margin
@@ -467,3 +468,88 @@ Per D-18, four Safari-specific behaviors are NOT physically validated in v1. The
 All 89 v1 requirements are traceability-complete in REQUIREMENTS.md (7/7 DEPLOY-* + 82/82 from Phases 1-6). All 7 code-level DEPLOY gates have shipped surfaces in production. Three attestation gates remain DEFERRED with explicit follow-up TODOs above.
 
 **v1 milestone status: SHIPPABLE WITH DEFERRED ATTESTATIONS.** The product is live at `https://www.tatibekov.com`, smoke gates pass green end-to-end (BE + FE), no code defects identified, no security gaps surfaced, deferred items are attestation triggers (recruiter subject, Google crawl latency, analytics ingestion event) not engineering work.
+
+---
+
+## Verifier Audit
+
+**Audit date:** 2026-05-13
+**Auditor:** Claude (gsd-verifier)
+**Audit scope:** Goal-backward verification of Phase 7 PARTIAL-PASS-WITH-DEFERRALS verdict against actual codebase and committed evidence. Five ROADMAP success criteria checked against artifacts, wiring, and evidence files.
+
+### Verdict corroboration
+
+**The close-out's PARTIAL-PASS-WITH-DEFERRALS verdict is honest and complete.** No gaps were found that the close-out missed. One evidence-shape deviation in DEPLOY-02 is noted below and is not severe enough to alter the verdict.
+
+### Success Criteria Check
+
+| SC | ROADMAP Text | Close-out Verdict | Verifier Finding |
+|----|-------------|-------------------|-----------------|
+| SC1 | "Production Vercel deploy is live with NEXT_PUBLIC_SITE_URL set; all seven routes return HTTP 200 and render correctly" | PASS | CORROBORATED — `app/layout.tsx` line 14 reads `process.env.NEXT_PUBLIC_SITE_URL \|\| "https://www.tatibekov.com"`; `next.config.ts` contains `x-built-with` only (x-portfolio-source absent); `deploy-01-curl-evidence.txt` records 7/7 routes HTTP 200 with all 5 security headers and correct sitemap/robots output; `check-prod-output.txt` (2026-05-14T06:13Z) re-confirms EXIT_CODE=0 |
+| SC2 | "Lighthouse (mobile profile) reports LCP < 2.5s, CLS < 0.1, INP < 200ms, Performance ≥ 90, Accessibility ≥ 95, SEO ≥ 95" | PASS | CORROBORATED WITH NOTATION — 7 PNG screenshots committed (187–302 KB each, substantive files). Scores table shows Perf 96-100, A11y 100, SEO 100 for all routes. LCP/CLS/INP not explicitly extracted. See notation below. |
+| SC3 | "Search Console shows sitemap submitted and all seven routes indexed (or 'Discovered' status pending crawl); npm audit zero high/critical; npx knip zero unused" | PARTIAL-PASS (indexing deferred) + PASS (audit + knip) | CORROBORATED — `gsc/verification.png` (115 KB) and `gsc/sitemap-submitted.png` (168 KB) present; `gsc/coverage.png` absent (expected — this is the deferred item). ROADMAP SC3 explicitly allows 'Discovered status pending crawl', so the 24-48h crawl wait is within scope. `audit-fe.txt` shows EXIT_CODE=0 (3 moderate below high-threshold gate); `audit-be.txt` shows "found 0 vulnerabilities" EXIT_CODE=0; `knip-fe.txt` shows EXIT_CODE=0 with one informational hint. |
+| SC4 | "5-second recruiter hand-off test passes on the production URL on both desktop and 375px mobile — a non-engineer finds resume + contact in under 5 seconds, twice (once per device)" | PARTIAL — DEFERRED-RECRUITER-PENDING | CORROBORATED AS HONEST PARTIAL — SC4 uses the word "passes" without a "pending crawl"-style escape hatch. The close-out correctly records this as DEFERRED rather than PASS. The code preconditions are in place (TopBar resume button verified at line 61-69 of `top-bar.tsx`, `aria-label="Download resume"`, visible at every viewport per DEPLOY-07 42/42 review). The behavioral claim has not been physically validated with a non-engineer subject. Deferral is the correct disposition. |
+| SC5 | "Vercel Analytics is enabled and a resume_download custom event fires on the resume button click; manual 375px screenshot review confirms every shell element is accessible with no overflow" | PARTIAL (analytics ingestion deferred) + PASS (375px review) | CORROBORATED — `track("resume_download")` at `top-bar.tsx` line 66 confirmed wired without `preventDefault`; `<Analytics />` at `app/layout.tsx` line 88 confirmed mounted; `@vercel/analytics@^2.0.1` at `package.json` line 23 confirmed installed. SC5's "fires on the resume button click" is satisfied at the code level (onClick handler present, sendBeacon/keepalive used by SDK). Dashboard ingestion confirmation remains deferred — the close-out correctly labels this DEFERRED-INGESTION-WAIT, not a code defect. 375px screenshot review: 7 screenshots × 6 criteria × 7 routes = 42/42 cells PASS per DEPLOY-07. |
+
+### DEPLOY-02 Evidence Shape Notation
+
+The ROADMAP SC2 says Lighthouse "reports LCP < 2.5s, CLS < 0.1, INP < 200ms" — implying explicit per-metric capture. CONTEXT.md D-16 specifies a 7-row × 6-column table (route × Perf/A11y/SEO/LCP/CLS/INP). The actual VERIFICATION.md table is 7 × 4 (route × Perf/A11y/SEO/BP), with LCP/CLS/INP columns absent. The close-out honestly documents this under "Core metrics" and provides the mathematical inference: a Lighthouse Performance score of 96+ requires each of LCP, CLS, and TBT/INP to be in the green band — a Performance score that high is mathematically impossible if LCP ≥ 2.5s (LCP weight = 0.25 in the scoring formula; a 2.5s LCP yields a per-metric score of ~50, contributing a 12.5-point deduction minimum, making 96 unachievable). The inference is technically sound. This is an evidence-shape deviation from D-16's intent, not a threshold miss. The close-out should have flagged it as a methodology deviation (it partially does in the DEPLOY-02 section) but it does not misrepresent the verdict.
+
+**Action for v1.1:** If per-metric evidence is needed (e.g. for a portfolio viewer who checks the audit trail), re-run `lighthouse https://www.tatibekov.com --output=json --save-assets` via CLI to extract explicit LCP/CLS/TBT numbers and populate the D-16 6-column table.
+
+### Code Anti-Pattern Scan
+
+Files modified in Phase 7 (from 07-03-SUMMARY, 07-09-SUMMARY, and git log): `app/layout.tsx`, `app/components/shell/top-bar.tsx`, `next.config.ts`, `CLAUDE.md`, `package.json`, `package-lock.json`, `.planning/REQUIREMENTS.md`, `.planning/PROJECT.md`, `.planning/phases/07-deploy-verification/07-VERIFICATION.md`.
+
+| File | Pattern Checked | Finding |
+|------|----------------|---------|
+| `app/layout.tsx` | TODO/placeholder; empty return; stub imports | CLEAN — no anti-patterns; `<Analytics />` mount substantive |
+| `app/components/shell/top-bar.tsx` | Empty onClick; console.log only; preventDefault | CLEAN — `track("resume_download")` without `preventDefault`; `aria-label` preserved; download attribute present |
+| `next.config.ts` | Deferral comment left behind | CLEAN — x-portfolio-source comment removed per D-04; only `x-built-with` remains |
+| `CLAUDE.md` | Stale constraint language | CLEAN — Phase 7 exception bullet appended correctly; original two-dep guardrail preserved |
+| `package.json` | Unexpected dep additions | CLEAN — only `@vercel/analytics@^2.0.1` added; consistent with third-dep allowlist |
+
+No blockers or warnings found in Phase 7 modified files.
+
+### Code Review Cross-Check (07-REVIEW.md)
+
+The 07-REVIEW.md reports 0 critical, 2 warning, 5 info findings:
+
+- **WR-01** (smoke script HEAD verb + silent 3xx-pass): valid warning; does not affect any Phase 7 DEPLOY verdict since the smoke script produced EXIT_CODE=0 and the routes are confirmed 200 via curl evidence. Follow-up fix is recommended but not blocking.
+- **WR-02** (smoke script no per-request timeout): valid warning; same disposition as WR-01. CI resilience improvement, not a current gap.
+- **IN-01 through IN-05**: style/documentation items; none affect correctness of any DEPLOY gate.
+
+The verifier concurs with the review's finding of 0 critical issues. WR-01 and WR-02 are the only items that could create future false-negatives in the smoke gate script; they do not retroactively invalidate the evidence already captured.
+
+### Requirements Coverage
+
+| Requirement | Status in REQUIREMENTS.md | Code Evidence | Verifier Status |
+|-------------|--------------------------|---------------|-----------------|
+| DEPLOY-01 | [x] Complete (07-01 + close-out re-run) | `app/layout.tsx` siteUrl fallback + `next.config.ts` headers + curl evidence | VERIFIED |
+| DEPLOY-02 | [x] Complete (07-04; DevTools Lighthouse mobile profile) | 7 PNG screenshots × 4 score pillars in table | VERIFIED (evidence shape deviation noted above) |
+| DEPLOY-03 | [x] Complete (07-05; PARTIAL-PASS — sitemap submitted, indexing DEFERRED) | `gsc/verification.png` + `gsc/sitemap-submitted.png`; `gsc/coverage.png` absent (expected) | VERIFIED — ROADMAP SC3 explicitly allows Discovered status |
+| DEPLOY-04 | [x] Complete (07-07; PARTIAL — LinkedIn PASS, Slack NEUTRAL, recruiter DEFERRED) | `unfurl/linkedin.png` + `unfurl/slack.png` committed | VERIFIED as honest partial; SC4 has no "pending" escape hatch, deferral is correct disposition |
+| DEPLOY-05 | [x] Complete (07-06; FE + BE audit exit 0; knip exit 0) | `audit-fe.txt` EXIT_CODE=0, `audit-be.txt` EXIT_CODE=0, `knip-fe.txt` EXIT_CODE=0 | VERIFIED |
+| DEPLOY-06 | [x] Complete (07-03; source shipped; dashboard DEFERRED) | `track()` at `top-bar.tsx` line 66; `<Analytics />` at `app/layout.tsx` line 88; `package.json` dep confirmed | VERIFIED — code wired correctly; dashboard attestation is the open item |
+| DEPLOY-07 | [x] Complete (07-08; 42/42 cells; 7 screenshots) | 7 PNGs in `screenshots/375/` (122–293 KB each) | VERIFIED |
+
+### Human Verification Items (open from this audit)
+
+The following items require human action to close fully. They are a direct carry-forward of the close-out's three deferred attestation gates — no new items surfaced by this audit.
+
+1. **DEPLOY-03 — GSC indexing coverage** — Run URL Inspection on 7 routes in GSC; commit `gsc/coverage.png`; verify ≥4/7 routes reach Discovered/Crawled/Indexed status.
+2. **DEPLOY-04 — 5-second recruiter test** — Recruit one non-engineer; run D-19 protocol on desktop + 375px mobile; record times and path narratives; update DEPLOY-04 section.
+3. **DEPLOY-06 — Analytics ingestion event** — Clean incognito session at `https://www.tatibekov.com`; click TopBar resume download; verify `resume_download` event row appears in Vercel Analytics dashboard; commit `analytics/event-row.png`.
+
+### Summary
+
+The close-out's PARTIAL-PASS-WITH-DEFERRALS verdict accurately reflects the state of the codebase and evidence:
+
+- All 7 DEPLOY requirements have substantive evidence sections.
+- All code-level surfaces are shipped and wired (verified against actual source files, not just SUMMARY claims).
+- Three deferrals are attestation gates, not engineering gaps — each correctly enumerated with follow-up TODO, ETA, and owner.
+- The DEPLOY-02 evidence shape deviation (4-column table instead of D-16's 6-column) is documented honestly in the close-out and does not misrepresent the verdict; the mathematical inference that Performance 96+ implies LCP/CLS/INP pass is technically sound.
+- No missed gaps found.
+
+_Audited: 2026-05-13_
+_Auditor: Claude (gsd-verifier)_

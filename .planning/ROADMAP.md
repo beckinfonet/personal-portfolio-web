@@ -161,9 +161,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] 07-01-PLAN.md — Wave 1: env-var flip to www.tatibekov.com + drop x-portfolio-source slot + redeploy (DEPLOY-01)
 - [x] 07-02-PLAN.md — Wave 1: Wave 0 infra — scripts/check-production-routes.mjs + evidence directories
 - [x] 07-10-PLAN.md — Wave 1: shell hydrates from Mongo via lib/api.ts (eliminates static-PROFILE bypass in 6 components + (terminal) layout)
-- [ ] 07-03-PLAN.md — Wave 2: install @vercel/analytics + mount <Analytics /> + track('resume_download') on TopBar (DEPLOY-06)
+- [x] 07-03-PLAN.md — Wave 2: install @vercel/analytics + mount <Analytics /> + track('resume_download') on TopBar (DEPLOY-06)
 - [ ] 07-04-PLAN.md — Wave 3: PageSpeed Insights × 7 routes × 3-run median; 42-cell scores table (DEPLOY-02)
-- [ ] 07-05-PLAN.md — Wave 2: Google Search Console DNS TXT Domain property + sitemap submission (DEPLOY-03)
+- [x] 07-05-PLAN.md — Wave 2: Google Search Console DNS TXT Domain property + sitemap submission (DEPLOY-03)
 - [ ] 07-06-PLAN.md — Wave 3: npm audit + npx knip pre-close-out gates (DEPLOY-05)
 - [ ] 07-07-PLAN.md — Wave 4: 5-second recruiter test on production + Slack/LinkedIn unfurl (DEPLOY-04)
 - [ ] 07-08-PLAN.md — Wave 3: 375px DevTools shell review × 7 routes + real-device carry closure (DEPLOY-07)

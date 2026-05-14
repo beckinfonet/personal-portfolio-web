@@ -1,0 +1,16 @@
+# BE smoke gate re-run — Phase 7 close-out (D-22 / Phase 6 D-11)
+# Captured: 2026-05-14T06:13:31Z
+# Command: PROD_API_URL=https://personal-portfolio-services-production.up.railway.app node /Users/beckmaldinVL/development/personal-portfolio/portfolio-services/scripts/check-backend.mjs
+# Working dir: /Users/beckmaldinVL/development/personal-portfolio/portfolio-web/.claude/worktrees/agent-a7a3cacb52fc39e43
+
+✓ /api/health
+✓ /api/profile
+✓ /api/projects
+✓ /api/stack
+✓ /api/experience
+✓ /api/apps
+✓ /api/posts
+
+✓ check-backend: all 7 endpoints green
+
+EXIT_CODE=0

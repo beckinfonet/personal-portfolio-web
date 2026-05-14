@@ -1,0 +1,16 @@
+# FE production-routes smoke gate re-run — Phase 7 close-out (Plan 02 deliverable)
+# Captured: 2026-05-14T06:13:40Z
+# Command: NEXT_PUBLIC_SITE_URL=https://www.tatibekov.com node /Users/beckmaldinVL/development/personal-portfolio/portfolio-web/.claude/worktrees/agent-a7a3cacb52fc39e43/scripts/check-production-routes.mjs
+# Working dir: /Users/beckmaldinVL/development/personal-portfolio/portfolio-web/.claude/worktrees/agent-a7a3cacb52fc39e43
+
+✓ / → 200
+✓ /projects → 200
+✓ /stack → 200
+✓ /experience → 200
+✓ /writing → 200
+✓ /contact → 200
+✓ /shipped → 200
+
+✓ check-production-routes: all 7 routes green on https://www.tatibekov.com
+
+EXIT_CODE=0

@@ -1,5 +1,5 @@
 import type { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
-import { PROFILE } from "@/lib/portfolio-data";
+import type { Profile } from "@/lib/types";
 
 /**
  * Context passed to every palette verb's action function at runtime.
@@ -22,9 +22,14 @@ interface PaletteVerb {
 }
 
 /**
- * All command palette verbs (18 total — PALETTE-02 requires ≥16).
+ * Factory: build the 18-verb palette array bound to a live Profile.
  *
- * Composition:
+ * Plan 07-10 (DATA-04): the previous module-level `PALETTE_VERBS` const closed over
+ * the static `PROFILE` import, bypassing the lib/api.ts ISR chokepoint. This factory
+ * accepts the runtime profile so social URLs, email, and resumeUrl reflect the
+ * Mongo-sourced values (static fallback applied silently by getJson<Profile>()).
+ *
+ * Composition (18 total — PALETTE-02 requires ≥16):
  *   - 7 navigation   (Open <file-label>)
  *   - 1 download resume
  *   - 1 toggle theme
@@ -39,9 +44,10 @@ interface PaletteVerb {
  * PROFILE.socials in lib/portfolio-data.ts at the same time. (Phase 6 content pass.)
  *
  * Alias arrays power the cmdk keyword filter (D-04).
- * Social URLs come from PROFILE.socials so they stay in sync with lib/portfolio-data.ts.
+ * Social URLs come from profile.socials so they stay in sync with the live BE record.
  */
-export const PALETTE_VERBS: readonly PaletteVerb[] = [
+export function buildPaletteVerbs(profile: Profile): readonly PaletteVerb[] {
+  return [
   {
     id: "open-about",
     label: "Open about.md",
@@ -98,7 +104,7 @@ export const PALETTE_VERBS: readonly PaletteVerb[] = [
     keywords: ["cv", "resume", "pdf", "download"],
     action: ({ setOpen }) => {
       const a = document.createElement("a");
-      a.href = PROFILE.resumeUrl;
+      a.href = profile.resumeUrl;
       a.download = "Bakytbek_Tatibekov_Resume.pdf";
       a.click();
       setOpen(false);
@@ -149,7 +155,7 @@ export const PALETTE_VERBS: readonly PaletteVerb[] = [
     keywords: ["gh", "github", "code"],
     action: ({ setOpen }) => {
       window.open(
-        PROFILE.socials.find((s) => s.kind === "github")?.url ?? "https://github.com/beckinfonet",
+        profile.socials.find((s) => s.kind === "github")?.url ?? "https://github.com/beckinfonet",
         "_blank",
         "noopener,noreferrer"
       );
@@ -163,7 +169,7 @@ export const PALETTE_VERBS: readonly PaletteVerb[] = [
     keywords: ["linkedin", "professional"],
     action: ({ setOpen }) => {
       window.open(
-        PROFILE.socials.find((s) => s.kind === "linkedin")?.url ?? "https://linkedin.com",
+        profile.socials.find((s) => s.kind === "linkedin")?.url ?? "https://linkedin.com",
         "_blank",
         "noopener,noreferrer"
       );
@@ -176,7 +182,7 @@ export const PALETTE_VERBS: readonly PaletteVerb[] = [
     icon: "@",
     keywords: ["mail", "address", "email"],
     action: ({ setOpen }) => {
-      navigator.clipboard.writeText(PROFILE.email).catch(() => {});
+      navigator.clipboard.writeText(profile.email).catch(() => {});
       setOpen(false);
     }
   },
@@ -186,7 +192,7 @@ export const PALETTE_VERBS: readonly PaletteVerb[] = [
     icon: "⎘",
     keywords: ["github", "gh", "link"],
     action: ({ setOpen }) => {
-      const url = PROFILE.socials.find((s) => s.kind === "github")?.url ?? "https://github.com/beckinfonet";
+      const url = profile.socials.find((s) => s.kind === "github")?.url ?? "https://github.com/beckinfonet";
       navigator.clipboard.writeText(url).catch(() => {});
       setOpen(false);
     }
@@ -201,4 +207,5 @@ export const PALETTE_VERBS: readonly PaletteVerb[] = [
       setOpen(false);
     }
   }
-] satisfies readonly PaletteVerb[];
+  ] satisfies readonly PaletteVerb[];
+}

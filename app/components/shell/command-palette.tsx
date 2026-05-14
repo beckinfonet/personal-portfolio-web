@@ -1,14 +1,15 @@
 "use client";
 
 import { Command } from "cmdk";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { usePalette, useAccent } from "@/app/components/shell/shell-state-provider";
 import { Kbd } from "@/app/components/primitives/kbd";
-import { PALETTE_VERBS } from "@/lib/palette-verbs";
+import { buildPaletteVerbs } from "@/lib/palette-verbs";
+import type { Profile } from "@/lib/types";
 
-export function CommandPalette() {
+export function CommandPalette({ profile }: { profile: Profile }) {
   const { open, setOpen } = usePalette();
   const { setHue } = useAccent();
   const { resolvedTheme, setTheme } = useTheme();
@@ -16,6 +17,9 @@ export function CommandPalette() {
 
   /* Capture the element that had focus when the palette opened (PALETTE-04 / A11Y-08) */
   const triggerRef = useRef<HTMLElement | null>(null);
+
+  /* Verbs derived from live profile (Plan 07-10 / DATA-04) — memoized per profile identity */
+  const PALETTE_VERBS = useMemo(() => buildPaletteVerbs(profile), [profile]);
 
   /* Visible result count for aria-live announcement (PALETTE-03) */
   const [count, setCount] = useState(PALETTE_VERBS.length);
@@ -48,7 +52,7 @@ export function CommandPalette() {
     if (open) {
       setCount(PALETTE_VERBS.length);
     }
-  }, [open]);
+  }, [open, PALETTE_VERBS]);
 
   return (
     <Command.Dialog

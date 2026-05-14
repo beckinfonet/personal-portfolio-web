@@ -7,7 +7,7 @@
 // safety.
 import type { Profile } from "@/lib/types";
 
-export interface PersonSchema {
+interface PersonSchema {
   "@context": "https://schema.org";
   "@type": "Person";
   name: string;

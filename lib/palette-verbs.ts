@@ -5,7 +5,7 @@ import { PROFILE } from "@/lib/portfolio-data";
  * Context passed to every palette verb's action function at runtime.
  * Provided by CommandPalette component when user selects an item.
  */
-export interface PaletteActionContext {
+interface PaletteActionContext {
   router: AppRouterInstance;
   setOpen: (v: boolean) => void;
   setTheme: (theme: string) => void;
@@ -13,7 +13,7 @@ export interface PaletteActionContext {
   setHue: (hue: string) => void;
 }
 
-export interface PaletteVerb {
+interface PaletteVerb {
   readonly id: string;
   readonly label: string;
   readonly icon: string;

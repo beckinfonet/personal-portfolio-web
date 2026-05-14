@@ -4,6 +4,7 @@
     "eslint-config-next"
   ],
   "ignore": [
+    ".claude/**",
     "design_handoff_terminal_portfolio/**",
     "scripts/**",
     "lib/routes.ts",

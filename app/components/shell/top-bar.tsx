@@ -3,9 +3,9 @@
 import { useTheme } from "next-themes";
 import { usePalette, useDrawer } from "@/app/components/shell/shell-state-provider";
 import { LiveClock } from "@/app/components/shell/live-clock";
-import { PROFILE } from "@/lib/portfolio-data";
+import type { Profile } from "@/lib/types";
 
-export function TopBar() {
+export function TopBar({ profile }: { profile: Profile }) {
   const { resolvedTheme, setTheme } = useTheme();
   const { toggle } = usePalette();
   const { open: drawerOpen, toggle: toggleDrawer } = useDrawer();
@@ -59,7 +59,7 @@ export function TopBar() {
       {/* Persistent resume download — NEVER hidden at any viewport (SHELL-03 / Risk 3) */}
       <a
         className="topbar-btn topbar-resume"
-        href={PROFILE.resumeUrl}
+        href={profile.resumeUrl}
         download="Bakytbek_Tatibekov_Resume.pdf"
         aria-label="Download resume"
       >

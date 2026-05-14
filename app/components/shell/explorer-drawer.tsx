@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { useRouter, useSelectedLayoutSegment } from "next/navigation";
 import { useDrawer } from "@/app/components/shell/shell-state-provider";
 import { ROUTES } from "@/lib/routes";
-import { PROFILE } from "@/lib/portfolio-data";
+import type { Profile } from "@/lib/types";
 
 /* Route label → icon (mirrors sidebar.tsx ROUTE_ICONS verbatim) */
 const ROUTE_ICONS: Record<string, string> = {
@@ -17,7 +17,7 @@ const ROUTE_ICONS: Record<string, string> = {
   "shipped.app":    "▸"
 };
 
-export function ExplorerDrawer() {
+export function ExplorerDrawer({ profile }: { profile: Profile }) {
   const { open, setOpen } = useDrawer();
   const router = useRouter();
   const segment = useSelectedLayoutSegment();
@@ -127,7 +127,7 @@ export function ExplorerDrawer() {
           <div className="sb-download-header">For recruiters</div>
           <a
             className="sb-download-btn"
-            href={PROFILE.resumeUrl}
+            href={profile.resumeUrl}
             download="Bakytbek_Tatibekov_Resume.pdf"
             aria-label="Download resume"
           >

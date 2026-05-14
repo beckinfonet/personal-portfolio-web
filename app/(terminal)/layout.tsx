@@ -1,6 +1,9 @@
 // NO "use client" — RSC route-group layout (SHELL-01 / SHELL-02)
 // This layout persists across all routes: /, /projects, /stack, /experience, /writing, /contact, /shipped
-// Client islands (TopBar, Sidebar, CommandPalette, Breadcrumb) are STUBS — full implementations in Plan 04/05.
+// Plan 07-10 (DATA-04): async RSC; fetches profile once via getProfile() and prop-drills
+// to every shell child that previously imported the static PROFILE. lib/api.ts is the
+// chokepoint — Mongo edits flow site-wide on the next ISR window; static PROFILE in
+// lib/portfolio-data.ts remains the silent fallback inside getJson<Profile>().
 
 import type { ReactNode } from "react";
 import { TopBar } from "@/app/components/shell/top-bar";
@@ -10,10 +13,12 @@ import { ConsoleSignature } from "@/app/components/shell/console-signature";
 import { ExplorerDrawer } from "@/app/components/shell/explorer-drawer";
 import { Breadcrumb } from "@/app/components/shell/breadcrumb";
 import { PrintFooter } from "@/app/components/print-footer";
-import { PROFILE, CAREER_START_DATE } from "@/lib/portfolio-data";
+import { CAREER_START_DATE } from "@/lib/portfolio-data";
+import { getProfile } from "@/lib/api";
 import { formatUptime } from "@/lib/uptime";
 
-export default function TerminalLayout({ children }: { children: ReactNode }) {
+export default async function TerminalLayout({ children }: { children: ReactNode }) {
+  const profile = await getProfile();
   const currentYear = new Date().getFullYear();
   const uptime = formatUptime(CAREER_START_DATE, new Date());
 
@@ -25,12 +30,12 @@ export default function TerminalLayout({ children }: { children: ReactNode }) {
       </a>
 
       {/* TopBar: traffic lights + path label + ⌘K + theme toggle + LiveClock + resume button */}
-      <TopBar />
+      <TopBar profile={profile} />
 
       {/* Shell body: sidebar + main content */}
       <div className="terminal-body">
         {/* Sidebar: file tree + recruiter card + STATUS block (A11Y-05 <nav>) */}
-        <Sidebar uptime={uptime} />
+        <Sidebar uptime={uptime} profile={profile} />
 
         {/* Main content area (A11Y-05 <main>) */}
         <main id="main-content" tabIndex={-1} className="terminal-main">
@@ -42,7 +47,7 @@ export default function TerminalLayout({ children }: { children: ReactNode }) {
 
           {/* Footer (SHELL-07) */}
           <footer className="shell-footer">
-            <span>© {currentYear} {PROFILE.name}</span>
+            <span>© {currentYear} {profile.name}</span>
             <span aria-hidden="true">·</span>
             <span>built with React</span>
             <span aria-hidden="true">·</span>
@@ -52,19 +57,19 @@ export default function TerminalLayout({ children }: { children: ReactNode }) {
       </div>
 
       {/* ExplorerDrawer: 6th client island; visible only at <=960px via CSS */}
-      <ExplorerDrawer />
+      <ExplorerDrawer profile={profile} />
 
       {/* CommandPalette: mounted once outside terminal-body so its z-index overlay covers everything */}
-      <CommandPalette />
+      <CommandPalette profile={profile} />
 
       {/* ConsoleSignature: 7th client island; fires console.log on first paint (DEV-01).
           MUST be in (terminal)/layout — NOT in app/layout (Pitfall 8 — would collapse RSC tree). */}
-      <ConsoleSignature />
+      <ConsoleSignature email={profile.email} />
 
       {/* PrintFooter: always in DOM; visible only via @media print (Plan 04-04 / A11Y-09) */}
       <PrintFooter
         siteUrl={process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"}
-        email={PROFILE.email}
+        email={profile.email}
       />
     </>
   );

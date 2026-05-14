@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { ExplorerDrawer } from "./explorer-drawer";
 import { ShellStateProvider, useDrawer } from "./shell-state-provider";
 import { ROUTES } from "@/lib/routes";
+import { PROFILE } from "@/lib/portfolio-data";
 
 vi.mock("next/navigation", () => ({
   useSelectedLayoutSegment: vi.fn(() => null),
@@ -21,7 +22,7 @@ function DrawerHarness() {
       <button id="topbar-hamburger-btn" aria-label="Open file explorer" onClick={toggle}>
         ☰
       </button>
-      <ExplorerDrawer />
+      <ExplorerDrawer profile={PROFILE} />
     </>
   );
 }

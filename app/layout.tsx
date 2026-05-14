@@ -6,6 +6,7 @@ import { ShellStateProvider } from "@/app/components/shell/shell-state-provider"
 import { AccentBootstrapScript } from "@/app/components/shell/accent-bootstrap-script";
 import { HeadComment } from "@/app/components/shell/head-comment";
 import { JsonLdPerson } from "@/app/components/shell/json-ld-person";
+import { getProfile } from "@/lib/api";
 
 // Use logical OR (||) not nullish coalescing (??) — empty-string env vars bypass ??
 // and produce `Invalid URL` runtime errors. (Phase 1 D-Pitfall D — do not change.)
@@ -52,11 +53,15 @@ export const viewport: Viewport = {
 
 // NO "use client" — this file stays RSC (SHELL-02 / Pitfall 9).
 // suppressHydrationWarning on <html> is REQUIRED by next-themes.
-export default function RootLayout({
+// Plan 07-10 (DATA-04): async RSC; fetches profile once via getProfile() so JsonLdPerson
+// emits the live Mongo-sourced schema.org Person record. lib/api.ts ISR + graceful-fallback
+// contract means a static fixture is returned when Railway/Mongo is unreachable.
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const profile = await getProfile();
   return (
     <html lang="en" suppressHydrationWarning className={jetbrainsMono.variable}>
       <head>
@@ -66,8 +71,9 @@ export default function RootLayout({
         <AccentBootstrapScript />
         {/* HeadComment: 6-line lowercase letter for view-source: viewers (DEV-02 / Phase 5). */}
         <HeadComment />
-        {/* JsonLdPerson: schema.org Person on every route (SEO-02 / Phase 5). XSS-safe payload. */}
-        <JsonLdPerson />
+        {/* JsonLdPerson: schema.org Person on every route (SEO-02 / Phase 5). XSS-safe payload.
+            Profile prop fed from getProfile() (Plan 07-10) — Mongo-sourced on ISR window. */}
+        <JsonLdPerson profile={profile} />
       </head>
       <body>
         <ThemeProvider

@@ -23,7 +23,7 @@ export function TopBar({ profile }: { profile: Profile }) {
         aria-controls="explorer-drawer-sheet"
         onClick={toggleDrawer}
       >
-        ☰
+        ☰ menu
       </button>
 
       {/* Traffic lights — decorative (A11Y-05 <header>) */}

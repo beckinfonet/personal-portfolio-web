@@ -47,6 +47,13 @@ describe("TopBar", () => {
     ).toBeInTheDocument();
   });
 
+  test("hamburger button renders visible '☰ menu' label for discoverability", () => {
+    render(<TopBar profile={PROFILE} />, { wrapper: Providers });
+    const btn = screen.getByRole("button", { name: /open file explorer/i });
+    expect(btn).toHaveTextContent(/menu/i);
+    expect(btn.textContent).toContain("☰");
+  });
+
   test("hamburger button has aria-expanded='false' when drawer is closed", () => {
     render(<TopBar profile={PROFILE} />, { wrapper: Providers });
     const btn = screen.getByRole("button", { name: /open file explorer/i });

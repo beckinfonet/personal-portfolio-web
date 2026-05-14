@@ -1579,6 +1579,19 @@ a:hover {
     justify-content: center;
   }
 
+  /* Mobile safe-area + breathing room: the desktop 38px fixed height clips
+     the row under the iOS/Android status bar. Switch to min-height and pad
+     top using the safe-area inset (fallback 16px). Sticky behavior from the
+     base .topbar rule is preserved. */
+  .topbar {
+    padding-top: max(16px, env(safe-area-inset-top));
+    padding-bottom: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    height: auto;
+    min-height: 38px;
+  }
+
   /* Tablet portrait (768-960px) constrains drawer width for centered look */
   .drawer-sheet {
     max-width: 100vw;

@@ -6,7 +6,6 @@
 // Does NOT respect prefers-reduced-motion (D-26 — text-only, no animation).
 
 import { useEffect } from "react";
-import { PROFILE } from "@/lib/portfolio-data";
 
 /**
  * "BT" initials in JetBrains-style box-drawing ASCII (6 rows, ~17 cols).
@@ -26,14 +25,14 @@ const ASCII_ART = `
 const ART_STYLE = "color: #16a34a; font-family: monospace;";
 const TEXT_STYLE = "color: inherit; font-family: monospace;";
 
-export function ConsoleSignature() {
+export function ConsoleSignature({ email }: { email: string }) {
   useEffect(() => {
     // Single console.log with %c styling — works in Chrome, Firefox, Safari.
     console.log(
-      `%c${ASCII_ART}%c\nLike the site? Source at github.com/beckinfonet\nAvailable for hire — ${PROFILE.email}`,
+      `%c${ASCII_ART}%c\nLike the site? Source at github.com/beckinfonet\nAvailable for hire — ${email}`,
       ART_STYLE,
       TEXT_STYLE
     );
-  }, []);
+  }, [email]);
   return null;
 }

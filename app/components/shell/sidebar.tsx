@@ -3,11 +3,12 @@
 import { useSelectedLayoutSegment } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
-import { PROFILE } from "@/lib/portfolio-data";
+import type { Profile } from "@/lib/types";
 import { StatusBlock } from "@/app/components/shell/status-block";
 
 interface SidebarProps {
   uptime: string; /* Pre-computed in RSC layout via formatUptime() */
+  profile: Profile; /* Live profile from getProfile() (Plan 07-10) — static fallback via lib/api.ts */
 }
 
 /* Route label → icon (from 02-PATTERNS.md) */
@@ -21,7 +22,7 @@ const ROUTE_ICONS: Record<string, string> = {
   "shipped.app":    "▸"
 };
 
-export function Sidebar({ uptime }: SidebarProps) {
+export function Sidebar({ uptime, profile }: SidebarProps) {
   const segment = useSelectedLayoutSegment();
   const router = useRouter();
 
@@ -61,7 +62,7 @@ export function Sidebar({ uptime }: SidebarProps) {
         <div className="sb-download-header">For recruiters</div>
         <a
           className="sb-download-btn"
-          href={PROFILE.resumeUrl}
+          href={profile.resumeUrl}
           download="Bakytbek_Tatibekov_Resume.pdf"
           aria-label="Download resume"
         >

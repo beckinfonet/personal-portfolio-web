@@ -1,19 +1,26 @@
 ---
 phase: 01-foundation
 verified: 2026-05-06T07:12:00Z
-status: human_needed
+status: pass-with-deferrals
+human_uat_completed: 2026-05-14
 score: 5/5 roadmap success criteria verified
 re_verification: false
 human_verification:
-  - test: "Live curl -sI http://localhost:3000/ against npm run dev and confirm all 6 headers present (Strict-Transport-Security, X-Content-Type-Options, Referrer-Policy, X-Frame-Options, Permissions-Policy, x-built-with)"
-    expected: "Six header lines in curl output; x-portfolio-source absent"
-    why_human: "Cannot start dev server in a non-interactive verification pass; static config check passed but live header delivery needs a running server"
   - test: "After first PR merges, configure branch protection on main in GitHub UI: Settings → Branches → Add rule → main → Require status checks → select verify → Require branches up to date → 0 reviewers (per D-06)"
     expected: "CI green becomes a hard merge gate; direct pushes to main blocked after setup"
     why_human: "GitHub UI configuration step; no programmatic check from this repo"
+    status: deferred
+    deferred_at: "2026-05-14"
+    deferred_reason: "Owner electing to defer branch-protection setup; site is shipped on direct-push workflow (D-06 acceptable for solo maintainership)"
+resolved_human_verification:
+  - test: "Live curl -sI http://localhost:3000/ against npm run dev and confirm all 6 headers present"
+    resolved: "2026-05-14"
+    result: pass
+    notes: "All 6 headers verified live; x-portfolio-source absent as expected."
   - test: "Verify Vercel deploy runtime accepts engines.node: '22.x' when Phase 7 deploy lands"
-    expected: "No 'Found invalid Node.js Version' error in Vercel build logs"
-    why_human: "Cannot test until Phase 7 deploy; research confirmed format is correct (RESEARCH.md §9)"
+    resolved: "2026-05-14"
+    result: pass
+    notes: "De-facto verified: Phase 7 production deploy succeeded; site live at https://www.tatibekov.com with no 'Found invalid Node.js Version' errors in Vercel build logs."
 deferred:
   - truth: "lib/routes.ts, lib/api.ts (getProjects), and lib/types.ts (Highlight, Bio, Social) exports are consumed by importers"
     addressed_in: "Phase 2"
@@ -237,6 +244,20 @@ The fix options are:
 - Add the specific chunk path to an exclusion list
 
 **This must be resolved in the Phase 6 plan (CONTENT-08) or it will block `npm run build` even with clean content.**
+
+---
+
+## Human UAT Resolution (2026-05-14)
+
+Post-milestone human UAT pass against the live deployment + local dev. Recorded during `/gsd-audit-uat` close-out.
+
+| # | Test | Result | Notes |
+|---|------|--------|-------|
+| 1 | Live security headers via `curl -sI` | ✓ PASS | All 6 headers present; `x-portfolio-source` absent. |
+| 2 | GitHub branch protection on `main` | ⏸ DEFERRED | Owner electing to defer; solo maintainership on direct-push workflow remains acceptable per D-06. Not blocking v1 milestone close. |
+| 3 | Vercel deploy accepts `engines.node: "22.x"` | ✓ PASS | De-facto verified: Phase 7 production deploy succeeded; site live at https://www.tatibekov.com with no Node-version errors. |
+
+**Net status:** 2 of 3 human items resolved PASS; 1 explicitly deferred. Phase 1 no longer blocks milestone close.
 
 ---
 

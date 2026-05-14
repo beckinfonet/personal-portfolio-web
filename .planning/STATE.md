@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: milestone_complete
+status: Awaiting next milestone
 stopped_at: Phase 7 context gathered
-last_updated: "2026-05-14T01:30:40.097Z"
-last_activity: 2026-05-14 -- Quick task 260514-d7m: experience-view redesign
+last_updated: "2026-05-14T19:08:17.313Z"
+last_activity: 2026-05-14 — Milestone v1.0 completed and archived
 progress:
   total_phases: 7
   completed_phases: 7
   total_plans: 58
-  completed_plans: 48
+  completed_plans: 58
   percent: 100
 ---
 
@@ -25,12 +25,10 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 
 ## Current Position
 
-Phase: 07
-Plan: Not started
-Status: Milestone complete
-Last activity: 2026-05-14
-
-Progress: [████████████████████████] Phase 1 ✓ · Phase 2 ✓ · Phase 3 ✓ · Phase 4 ✓ · Phase 5 ✓ · Phase 6 ✓ · Phase 7 (next)
+Phase: Milestone v1.0 complete
+Plan: —
+Status: Awaiting next milestone
+Last activity: 2026-05-14 — Milestone v1.0 completed and archived
 
 ## Performance Metrics
 
@@ -201,9 +199,17 @@ Items acknowledged and carried forward to later phases:
 |----------|------|--------|-------------|
 | Phase 4 → Phase 5 | Gate 9 friction: recruiter self-simulation took 8–10s to find contact info because the hamburger menu was not discoverable on first glance. Lightest fix: lift the 3-row socials block (email + github + linkedin) inline onto /about beneath the lead paragraph. Pattern already exists in app/components/views/contact-view.tsx. | RESOLVED — Plan 05-04 (2026-05-10) | 2026-05-07 (Plan 04-05) |
 | Phase 4 → Phase 7 | Real-device gates 7 (iPhone Safari) + 8 (Android Chrome): confirm dvh/svh handling on actual devices, soft-keyboard behavior in palette, address-bar overlap at top bar. | Bundled with DEPLOY-04 production recruiter test | 2026-05-07 (Plan 04-05) |
+| Phase 1 → v1.1 | Configure branch protection on `main` in GitHub UI (Settings → Branches → require `verify` status check, branches up-to-date, 0 reviewers per D-06). Solo-maintainership direct-push workflow remains acceptable until then. | Deferred to v1.1 milestone planning | 2026-05-14 (milestone v1.0 close) |
+| Phase 7 → v1.1 | DEPLOY-03 GSC indexing coverage snapshot: capture per-route `URL is on Google` / `Discovered – currently not indexed` status for all 7 routes via Search Console URL Inspection. 24–48h crawl window from 2026-05-13 sitemap submission is now open. Followup task #7. | Deferred to v1.1 | 2026-05-14 (milestone v1.0 close) |
+| Phase 7 → v1.1 | DEPLOY-04 5-second recruiter hand-off test: non-engineer subject on desktop + 375px mobile per D-19 protocol, stopwatch on time-to-resume + time-to-contact. Dual-audience claim (Phase 7 ROADMAP SC4) unvalidated at v1.0 close. Followup task #9. | Deferred to v1.1 | 2026-05-14 (milestone v1.0 close) |
+| Phase 7 → v1.1 | DEPLOY-06 Vercel Analytics ingestion event attestation: clean incognito visit → resume click → confirm `resume_download` event row in dashboard. First attestation 2026-05-13 dashboard showed 0 events; needs clean retest. Followup task #8. | Deferred to v1.1 | 2026-05-14 (milestone v1.0 close) |
 
 ## Session Continuity
 
 Last session: 2026-05-13T17:53:33.849Z
 Stopped at: Phase 7 context gathered
 Resume file: .planning/phases/07-deploy-verification/07-CONTEXT.md
+
+## Operator Next Steps
+
+- Start the next milestone with /gsd-new-milestone

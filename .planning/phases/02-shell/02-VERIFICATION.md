@@ -1,23 +1,29 @@
 ---
 phase: 02-shell
 verified: 2026-05-06T09:20:00Z
-status: human_needed
+status: pass
+human_uat_completed: 2026-05-14
 score: 29/30 must-haves verified
 overrides_applied: 0
 gaps:
-human_verification:
+human_verification: []
+resolved_human_verification:
   - test: "Slow-3G no-flash on hard reload"
-    expected: "With localStorage['portfolio-accent']='340' and localStorage['theme']='light' pre-set, a hard reload on Slow-3G throttling shows zero color/theme flash on first paint — no green-to-magenta flash, no dark-to-light flash"
-    why_human: "jsdom cannot measure first-paint timing; AccentBootstrapScript IIFE structure is verified (it reads the key and sets --accent-hue synchronously), but the actual no-flash guarantee requires a recorded DevTools Network timeline"
+    resolved: "2026-05-14"
+    result: pass
+    notes: "Verified against live site; no green→magenta or dark→light flash on first paint with magenta+light pre-set in localStorage under Slow-3G throttling."
   - test: "Resume button visible at every viewport (375px through desktop) on every shell route"
-    expected: "On all seven routes at 375px viewport the TopBar resume download button (↓ resume.pdf) is visible in the top bar without scrolling; it does NOT use display:none at any breakpoint"
-    why_human: "CSS media queries show the path label and traffic dots hide at small viewports, but .topbar-resume has no hide rule — requires visual screenshot confirmation that the flex layout does not push the resume button off-screen at 375px"
+    resolved: "2026-05-14"
+    result: pass
+    notes: "Confirmed visible and clickable in TopBar at 375px on all 7 routes; no clipping or display:none at any breakpoint."
   - test: "VoiceOver tab pass with plain-noun sidebar labels"
-    expected: "Tabbing through the shell with VoiceOver active announces sidebar rows as 'About me', 'Projects', 'Tech stack', 'Experience', 'Writing', 'Contact information', 'Shipped apps' — no file-extension suffixes audible"
-    why_human: "Screen-reader output cannot be verified in jsdom; ROUTES.ariaLabel values are correct in source but runtime VoiceOver announcement requires manual testing"
+    resolved: "2026-05-14"
+    result: pass
+    notes: "VoiceOver announces all 7 sidebar rows with plain-noun labels (About me, Projects, Tech stack, Experience, Writing, Contact information, Shipped apps); no .sh / .md suffixes audible."
   - test: "4-hue x 2-theme visual smoke test"
-    expected: "Switching between all four accent hues (matrix, amber, cyan, magenta) and both themes (dark, light) shows no obviously illegible body text or focus rings; amber on light theme in particular should not fail readability"
-    why_human: "WCAG contrast audit is deferred to Phase 5 (A11Y-07), but a basic visual legibility check of the 8 combinations is required before proceeding"
+    resolved: "2026-05-14"
+    result: pass
+    notes: "All 8 combinations (matrix/amber/cyan/magenta × dark/light) show readable body text and visible focus rings; amber-on-light canary readable. Formal WCAG audit covered in Phase 5 A11Y-07."
 ---
 
 # Phase 2: Shell Verification Report
@@ -196,6 +202,21 @@ Not applicable. Phase 2 delivers shell infrastructure (CSS tokens, layout, clien
 **Expected:** All 8 combinations (4 hues × 2 themes) show readable body text and visible focus rings. Pay particular attention to amber on light theme — this is identified in research as a potential legibility risk (`--warn` uses `oklch(0.5 0.16 60)` on light, amber accent `oklch(0.42 0.16 75)` on light).
 
 **Why human:** Full WCAG contrast audit is deferred to Phase 5 (A11Y-07 via `@axe-core/playwright`). A basic visual check is required now to confirm no obviously illegible combination was shipped.
+
+---
+
+## Human UAT Resolution (2026-05-14)
+
+Post-milestone human UAT pass against the live deployment. Recorded during `/gsd-audit-uat` close-out.
+
+| # | Test | Result | Notes |
+|---|------|--------|-------|
+| 1 | Slow-3G no-flash on hard reload | ✓ PASS | Magenta+light pre-set in localStorage; zero color/theme flash on first paint under Slow-3G. |
+| 2 | Resume button visible at 375px on every route | ✓ PASS | Visible and clickable in TopBar across all 7 routes; no clipping. |
+| 3 | VoiceOver plain-noun sidebar labels | ✓ PASS | All 7 rows announced with plain nouns; no file-extension suffixes audible. |
+| 4 | 4-hue × 2-theme visual smoke (8 combos) | ✓ PASS | All combinations readable; amber-on-light canary readable. Formal WCAG audit lives in Phase 5 (A11Y-07). |
+
+**Net status:** 4 of 4 human items resolved PASS. Phase 2 fully verified.
 
 ---
 

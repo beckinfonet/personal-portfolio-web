@@ -7,6 +7,7 @@ created: 2026-05-13
 updated: 2026-05-13
 sections:
   - DEPLOY-03: PARTIAL-PASS — Tasks 1+2 verified; Task 3 indexing-coverage DEFERRED-INDEXING-WAIT (24-48h per Pitfall 2)
+  - DEPLOY-05: PASS — npm audit (FE + BE) + npx knip (FE) all exit 0; pre-close-out gates green
 ---
 
 # Phase 7: Deploy + Verification — Verification Report
@@ -69,3 +70,40 @@ After 2026-05-14:
 2. Screenshot the Pages / Coverage overview and commit to `.planning/phases/07-deploy-verification/gsc/coverage.png`.
 3. Update this VERIFICATION.md DEPLOY-03 section with the final outcome.
 4. Plan 07-09's close-out should pick this up and record the final DEPLOY-03 PASS verdict in its sign-off section.
+
+---
+
+## DEPLOY-05 — npm audit + knip (pre-close-out gates)
+
+**Methodology:** D-21 — `npm audit --omit=dev --audit-level=high` (FE + BE) + `npx knip` (FE only). All three must exit 0 before recording final scores in subsequent sections.
+
+### FE npm audit
+
+- Command: `npm audit --omit=dev --audit-level=high`
+- Date: 2026-05-14
+- Exit code: 0
+- Result: 3 moderate-severity vulnerabilities (below `--audit-level=high` gate threshold); 0 high/critical
+- Findings: `postcss <8.5.10` (transitive via `next` and `@vercel/analytics`) — GHSA-qx2v-qp2m-jg93 XSS via Unescaped `</style>` in CSS Stringify Output. Severity moderate. Below gate threshold and would require `npm audit fix --force` downgrading `next` to 9.3.3 (breaking) to clear — deferred per D-21 (gate is `--audit-level=high`, moderate findings do not block).
+- Evidence: `audit-fe.txt`
+- Remediation: none required (no high/critical surfaced); Phase 6 commit `1d9a295` (next 15.5.15 → 15.5.18 Vercel May 2026 CVE bump) held; Plan 03 `@vercel/analytics@^2.0.1` install introduced no new high/critical advisories.
+
+### BE npm audit (../portfolio-services/)
+
+- Command: `(cd ../portfolio-services && npm audit --omit=dev --audit-level=high)`
+- Date: 2026-05-14
+- Exit code: 0
+- Result: `found 0 vulnerabilities` — zero advisories at any severity
+- Evidence: `audit-be.txt`
+- Remediation: none required. BE sibling repo unchanged in Phase 7 per D-23; this gate confirms dependency posture held since Phase 6 close-out.
+
+### FE knip
+
+- Command: `npx knip`
+- Date: 2026-05-14
+- Exit code: 0
+- Result: zero unused files / exports / dependencies / types
+- Configuration hints: 1 — knip suggested removing `.claude/**` from `knip.json` `ignore` list (it does not match any files knip would otherwise analyze). Hint is informational, not a gate failure. Left in place per recent user commits insulating workflow scaffolding from analysis.
+- Evidence: `knip-fe.txt`
+- Remediation: none required. Plan 03 deltas (`@vercel/analytics` import + `<Analytics />` mount in `app/layout.tsx`) correctly recognized by knip's Next.js plugin as in-use; no dead code introduced.
+
+**DEPLOY-05 verdict: PASS** (3/3 gates exit 0; Phase 6 Vercel CVE bump `1d9a295` re-verified held; Plan 03 `@vercel/analytics` install introduced no new high/critical advisories.)

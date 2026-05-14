@@ -41,6 +41,10 @@
     --accent:     oklch(0.78 0.18 var(--accent-hue));
     --accent-dim: oklch(0.45 0.12 var(--accent-hue));
     --accent-bg:  oklch(0.78 0.18 var(--accent-hue) / 0.08);
+    /* Spec §4 — secondary accent for past-role cards in experience view (2026-05-14). */
+    --accent-2:     oklch(0.78 0.12 calc(var(--accent-hue) + 40));
+    --accent-2-dim: oklch(0.45 0.08 calc(var(--accent-hue) + 40));
+    --accent-2-bg:  oklch(0.78 0.12 calc(var(--accent-hue) + 40) / 0.08);
     --warn:       oklch(0.78 0.16 75);
     --red:        oklch(0.7 0.18 25);
     --blue:       oklch(0.72 0.14 230);
@@ -75,6 +79,10 @@
     --accent:     oklch(0.42 0.16 var(--accent-hue));
     --accent-dim: oklch(0.55 0.13 var(--accent-hue));
     --accent-bg:  oklch(0.42 0.16 var(--accent-hue) / 0.08);
+    /* Spec §4 — secondary accent (light theme). */
+    --accent-2:     oklch(0.42 0.10 calc(var(--accent-hue) + 40));
+    --accent-2-dim: oklch(0.55 0.08 calc(var(--accent-hue) + 40));
+    --accent-2-bg:  oklch(0.42 0.10 calc(var(--accent-hue) + 40) / 0.08);
     --warn:       oklch(0.5 0.16 60);
     --red:        oklch(0.5 0.18 25);
     --blue:       oklch(0.5 0.16 230);
@@ -1047,54 +1055,252 @@ a:hover {
 }
 
 /* ─────────────────────────────────────────
-   Phase 3 — experience-view (VIEW-04)
+   Experience view — redesigned 2026-05-14
+   Spec: .planning/specs/2026-05-14-experience-redesign.md
+   (replaces original Phase 3 / VIEW-04 hex-hash layout)
    ───────────────────────────────────────── */
 
 .experience-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  position: relative;
+}
+
+/* Vertical timeline rail — left-anchored dashed line spanning the full list. */
+.experience-list::before {
+  content: "";
+  position: absolute;
+  left: 11px;            /* aligns with center of 16px-wide marker (8px) + 3px offset */
+  top: 8px;
+  bottom: 8px;
+  width: 0;
+  border-left: 1px dashed var(--border-hi);
 }
 
 .experience-row {
-  padding: 16px 0;
-  border-bottom: 1px solid var(--border);
+  position: relative;
+  padding: 8px 0 8px 36px;   /* 36px left clears rail + marker */
+  margin-bottom: 18px;
 }
 
-.experience-row-header {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 12px;
+.experience-row:last-child {
+  margin-bottom: 0;
 }
 
-.experience-hash {
-  font-size: 13px;
-  color: var(--warn);
+/* Rail marker dot — hollow ring for past, filled accent ring for current. */
+.experience-rail-marker {
+  position: absolute;
+  left: 4px;
+  top: 18px;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--bg);
+  border: 2px solid var(--accent-2-dim, var(--muted-hi));
+  box-sizing: border-box;
+}
+
+.experience-rail-marker.is-current {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+/* Card */
+.experience-card {
+  position: relative;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-2-dim, var(--muted-hi));
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.experience-card.is-current {
+  border-left-color: var(--accent);
+}
+
+/* Header row — three columns: monogram | title block (flex 1) | period block. */
+.experience-card-header {
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  gap: 14px;
+  align-items: start;
+}
+
+.experience-monogram {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--accent-2, var(--muted-hi));
+  border: 1px solid var(--accent-2-dim, var(--muted-hi));
+  border-radius: 4px;
+  background: var(--accent-2-bg, transparent);
+}
+
+.experience-card.is-current .experience-monogram {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  background: var(--accent-bg);
+}
+
+.experience-title-block {
+  min-width: 0;   /* allow text overflow inside grid cell */
 }
 
 .experience-role {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--accent);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-hi);
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.experience-company {
-  font-size: 13px;
-  color: var(--muted);
+.experience-current-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-dim);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.experience-current-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.experience-subline {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--muted-hi);
+}
+
+.experience-period-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 2px;
 }
 
 .experience-period {
   font-size: 12px;
-  color: var(--muted);
-  margin-left: auto;
+  color: var(--muted-hi);
 }
 
-.experience-summary {
+.experience-duration {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.experience-lead {
   font-size: 13px;
   color: var(--text);
-  max-width: 64ch;
-  margin-top: 6px;
+  max-width: 68ch;
+  margin: 14px 0 0;
+  line-height: 1.6;
+}
+
+.experience-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.experience-bullet {
+  display: grid;
+  grid-template-columns: 16px 1fr;   /* hanging indent on wrap */
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.experience-bullet-marker {
+  color: var(--muted-hi);
+  font-weight: 700;
+  text-align: center;
+}
+
+.experience-card.is-current .experience-bullet-marker {
+  color: var(--accent);
+}
+
+.experience-bullet-text {
+  max-width: 68ch;
+}
+
+/* Dashed separator above STACK row. */
+.experience-stack-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--border);
+}
+
+.experience-stack-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  margin-right: 4px;
+}
+
+/* Mobile (≤960px) — collapse rail; markers stay anchored to card top-left (spec §5). */
+@media (max-width: 960px) {
+  .experience-list::before {
+    display: none;
+  }
+
+  .experience-row {
+    padding: 8px 0 8px 28px;
+    margin-bottom: 14px;
+  }
+
+  .experience-rail-marker {
+    left: 0;
+    top: 14px;
+  }
+
+  .experience-card {
+    padding: 14px;
+  }
+
+  .experience-card-header {
+    grid-template-columns: 32px 1fr;
+    row-gap: 8px;
+  }
+
+  .experience-period-block {
+    grid-column: 1 / -1;
+    align-items: flex-start;
+    text-align: left;
+    flex-direction: row;
+    gap: 10px;
+  }
 }
 
 /* ─────────────────────────────────────────

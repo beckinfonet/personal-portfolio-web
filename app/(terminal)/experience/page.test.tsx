@@ -27,4 +27,16 @@ describe("ExperiencePage (TEST-05 smoke)", () => {
       screen.getByText("git log --oneline --decorate experience.log")
     ).toBeInTheDocument();
   });
+
+  test("body renders at least one experience card aria-label (spec 2026-05-14 §6)", async () => {
+    const ui = await ExperiencePage();
+    render(ui);
+    // Every populated entry yields one article with aria-label="Experience at ... as ..., ..."
+    const cards = screen.getAllByRole("article");
+    expect(cards.length).toBeGreaterThanOrEqual(1);
+    expect(cards[0]).toHaveAttribute(
+      "aria-label",
+      expect.stringMatching(/^Experience at .+ as .+, .+$/)
+    );
+  });
 });

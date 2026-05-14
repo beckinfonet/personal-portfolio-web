@@ -49,7 +49,7 @@ export default async function TerminalLayout({ children }: { children: ReactNode
           <footer className="shell-footer">
             <span>© {currentYear} {profile.name}</span>
             <span aria-hidden="true">·</span>
-            <span>built with React</span>
+            <span>compiled with care · rendered with intent · handcrafted in terminal mode</span>
             <span aria-hidden="true">·</span>
             <span>v1.0.0</span>
           </footer>

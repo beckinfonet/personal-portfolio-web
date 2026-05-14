@@ -545,7 +545,7 @@ const TerminalApp = () => {
           <div style={{ marginTop: 64, paddingTop: 20, borderTop: `1px solid ${c.border}`, color: c.muted, fontSize: 11, display: 'flex', gap: 16 }}>
             <span>© {time.getFullYear()} {data.name}</span>
             <span>·</span>
-            <span>built with React</span>
+            <span>compiled with care · rendered with intent · handcrafted in terminal mode</span>
             <span style={{ marginLeft: 'auto' }}>v1.0.0</span>
           </div>
         </main>

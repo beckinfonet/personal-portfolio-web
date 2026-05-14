@@ -49,9 +49,25 @@ export default async function TerminalLayout({ children }: { children: ReactNode
           <footer className="shell-footer">
             <span>© {currentYear} {profile.name}</span>
             <span aria-hidden="true">·</span>
-            <span>compiled with care · rendered with intent · handcrafted in terminal mode</span>
-            {/* <span aria-hidden="true">·</span> */}
-            
+            <span className="shell-footer-motto">
+              <span className="shell-footer-segment">
+                <span className="shell-footer-phrase shell-footer-phrase--care">
+                  compiled with care
+                </span>
+                <span className="shell-footer-separator" aria-hidden="true">·</span>
+              </span>
+              <span className="shell-footer-segment">
+                <span className="shell-footer-phrase shell-footer-phrase--intent">
+                  rendered with intent
+                </span>
+                <span className="shell-footer-separator" aria-hidden="true">·</span>
+              </span>
+              <span className="shell-footer-segment">
+                <span className="shell-footer-phrase shell-footer-phrase--terminal">
+                  handcrafted in terminal mode
+                </span>
+              </span>
+            </span>
           </footer>
         </main>
       </div>

@@ -266,6 +266,35 @@ a:hover {
   display: flex;
   gap: 8px;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.shell-footer-motto {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+}
+
+.shell-footer-segment {
+  display: inline-flex;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.shell-footer-phrase--care {
+  color: var(--accent);
+}
+
+.shell-footer-phrase--intent {
+  color: var(--warn);
+}
+
+.shell-footer-phrase--terminal {
+  color: var(--blue);
+}
+
+.shell-footer-separator {
+  color: var(--muted);
 }
 
 /* ─────────────────────────────────────────

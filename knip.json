@@ -1,15 +1,12 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "ignoreDependencies": [
-    "next-themes",
-    "cmdk",
     "eslint-config-next"
   ],
   "ignore": [
     "design_handoff_terminal_portfolio/**",
     "scripts/**",
     "lib/routes.ts",
-    "lib/types.ts",
-    "lib/api.ts"
+    "lib/types.ts"
   ]
 }

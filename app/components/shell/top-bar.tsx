@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { track } from "@vercel/analytics";
 import { usePalette, useDrawer } from "@/app/components/shell/shell-state-provider";
 import { LiveClock } from "@/app/components/shell/live-clock";
 import type { Profile } from "@/lib/types";
@@ -62,6 +63,7 @@ export function TopBar({ profile }: { profile: Profile }) {
         href={profile.resumeUrl}
         download="Bakytbek_Tatibekov_Resume.pdf"
         aria-label="Download resume"
+        onClick={() => track("resume_download")}
       >
         ↓ resume.pdf
       </a>

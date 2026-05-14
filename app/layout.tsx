@@ -7,6 +7,7 @@ import { AccentBootstrapScript } from "@/app/components/shell/accent-bootstrap-s
 import { HeadComment } from "@/app/components/shell/head-comment";
 import { JsonLdPerson } from "@/app/components/shell/json-ld-person";
 import { getProfile } from "@/lib/api";
+import { Analytics } from "@vercel/analytics/next";
 
 // Use logical OR (||) not nullish coalescing (??) — empty-string env vars bypass ??
 // and produce `Invalid URL` runtime errors. (Phase 1 D-Pitfall D — do not change.)
@@ -84,6 +85,7 @@ export default async function RootLayout({
         >
           <ShellStateProvider>{children}</ShellStateProvider>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

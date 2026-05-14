@@ -21,6 +21,7 @@ Always read these before answering questions or making changes:
 - Next.js 15 App Router + React 19 + TypeScript strict (no framework swap)
 - Pure CSS + CSS custom properties (no Tailwind, no CSS-in-JS, no CSS modules)
 - Two new prod deps total: `next-themes@^0.4.6`, `cmdk@^1.1.1` — do not introduce others without revisiting `.planning/research/STACK.md`
+- Phase 7 exception: `@vercel/analytics@^2.0.1` added for `resume_download` event tracking (DEPLOY-06). Third and final v1 prod dep — same "no new prod deps" rule applies going forward.
 - Native `fetch` + `next: { revalidate }` for data — no SWR, no TanStack Query
 
 **Architecture rules (from `.planning/research/ARCHITECTURE.md`):**

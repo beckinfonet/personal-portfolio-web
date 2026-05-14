@@ -1,0 +1,101 @@
+# PENDING: run after Vercel redeploy completes
+#
+# This evidence file is staged by the worktree executor (plan 07-01). The actual
+# curl execution against https://www.tatibekov.com must happen AFTER the
+# orchestrator merges the worktree branch into main and the user pushes the
+# resulting commits to origin/main (triggering Vercel's redeploy). Vercel will
+# not redeploy until the empty-commit trigger (a84beb5) lands on main and
+# propagates through ~60-90s of build time.
+#
+# The orchestrator (or user) should run the commands below in sequence after
+# the Vercel Deployments tab shows the latest deployment as "Ready", capturing
+# stdout into this file (replacing this PENDING header).
+#
+# Worktree executor cannot run these curls itself because:
+#   1. The worktree branch is not on origin/main yet — Vercel only redeploys on
+#      pushes to the production branch.
+#   2. The production URL https://www.tatibekov.com is currently serving the
+#      pre-redeploy bundle. Running curls now would record stale evidence.
+#
+# All commit SHAs for plan 07-01 (worktree branch worktree-agent-adc2fe06eef37d98a):
+#   - f9d8706  chore(07-01): commit Vercel env-var evidence screenshot (DEPLOY-01 Task 1)
+#   - 4ad46cd  chore(07): canonicalize site URL to www.tatibekov.com + drop x-portfolio-source slot (DEPLOY-01, D-02/D-04, closes Ph5 D-30)
+#   - a84beb5  chore(07): redeploy with NEXT_PUBLIC_SITE_URL=https://www.tatibekov.com (DEPLOY-01)
+#
+# ===========================================================================
+# 1. Per-route HTTP status check (7 pathnames from lib/routes.ts)
+# ===========================================================================
+#
+# Expected: all 7 return 200. If any returns 4xx/5xx, halt and investigate
+# (likely build error, env var misconfiguration, or routing regression).
+#
+# for p in / /projects /stack /experience /writing /contact /shipped; do
+#   echo "$p $(curl -s -o /dev/null -w '%{http_code}' https://www.tatibekov.com$p)"
+# done
+#
+# ===========================================================================
+# 2. Sitemap content check
+# ===========================================================================
+#
+# curl -s https://www.tatibekov.com/sitemap.xml | grep -c '<loc>'
+# Expected: 7
+#
+# curl -s https://www.tatibekov.com/sitemap.xml | grep -c 'www.tatibekov.com'
+# Expected: >= 7 (one per <loc>)
+#
+# curl -s https://www.tatibekov.com/sitemap.xml | grep -c 'localhost'
+# Expected: 0
+#
+# ===========================================================================
+# 3. Robots.txt check
+# ===========================================================================
+#
+# curl -s https://www.tatibekov.com/robots.txt
+# Expected:
+#   User-Agent: *
+#   Allow: /
+#   Sitemap: https://www.tatibekov.com/sitemap.xml
+#
+# ===========================================================================
+# 4. Headers check on a representative route
+# ===========================================================================
+#
+# curl -sI https://www.tatibekov.com/
+# Expected (response headers):
+#   x-built-with: nextjs-15-react-19          PRESENT
+#   x-portfolio-source                        ABSENT
+#   strict-transport-security                 PRESENT
+#   x-content-type-options                    PRESENT
+#   x-frame-options                           PRESENT
+#   referrer-policy                           PRESENT
+#   permissions-policy                        PRESENT
+#
+# ===========================================================================
+# 5. Spot-check OG/canonical URL in served HTML
+# ===========================================================================
+#
+# curl -s https://www.tatibekov.com/ | grep -iE 'og:url|canonical' | head -5
+# Expected: any URL emitted references www.tatibekov.com (not localhost, not
+# vercel.app, not apex tatibekov.com).
+#
+# ===========================================================================
+# RECORDED EVIDENCE (to be filled in after Vercel redeploy completes):
+# ===========================================================================
+#
+# Vercel deployment ID: <TBD — record from Vercel Deployments tab>
+# Deployment Ready timestamp: <TBD>
+#
+# [1. Route status codes]
+# <TBD: paste output of the for-loop here>
+#
+# [2. Sitemap counts]
+# <TBD: <loc> count, www.tatibekov.com count, localhost count>
+#
+# [3. Robots.txt content]
+# <TBD: paste full body>
+#
+# [4. Response headers on /]
+# <TBD: paste curl -sI output>
+#
+# [5. OG/canonical spot-check]
+# <TBD: paste grep output>

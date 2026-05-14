@@ -22,4 +22,12 @@ describe("ShippedView", () => {
     expect(css).toMatch(/\.shipped-row-store-badges\s*\{[^}]*flex-wrap:\s*nowrap;/s);
     expect(css).toMatch(/\.shipped-row-store-badges\s+\.store-badge-link\s*\{[^}]*flex:\s*0\s+0\s+auto;/s);
   });
+
+  test("keeps mobile store badges aligned with the app title column", () => {
+    const css = readFileSync(join(process.cwd(), "app/globals.css"), "utf8");
+
+    expect(css).toContain(`  .shipped-row-affordances {
+    grid-column: 2 / -1;
+  }`);
+  });
 });

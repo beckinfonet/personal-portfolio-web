@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ExplorerDrawer } from "./explorer-drawer";
 import { ShellStateProvider, useDrawer } from "./shell-state-provider";
@@ -9,6 +9,18 @@ vi.mock("next/navigation", () => ({
   useSelectedLayoutSegment: vi.fn(() => null),
   useRouter: () => ({ push: vi.fn() })
 }));
+
+beforeEach(() => {
+  vi.spyOn(window, "scrollTo").mockImplementation(() => undefined);
+});
+
+afterEach(() => {
+  cleanup();
+  vi.restoreAllMocks();
+  document.documentElement.removeAttribute("data-scroll-lock");
+  document.documentElement.removeAttribute("style");
+  document.body.removeAttribute("style");
+});
 
 function Providers({ children }: { children: React.ReactNode }) {
   return <ShellStateProvider>{children}</ShellStateProvider>;
@@ -41,6 +53,22 @@ describe("ExplorerDrawer", () => {
     await waitFor(() => {
       expect(screen.getByRole("dialog")).toHaveAttribute("data-state", "open");
     });
+  });
+
+  test("locks page scrolling while drawer is open and restores it on close", async () => {
+    const user = userEvent.setup();
+    render(<DrawerHarness />, { wrapper: Providers });
+    await user.click(screen.getByRole("button", { name: /open file explorer/i }));
+    await waitFor(() => {
+      expect(document.documentElement).toHaveAttribute("data-scroll-lock", "drawer");
+    });
+    expect(document.documentElement.style.overflow).toBe("hidden");
+
+    await user.keyboard("{Escape}");
+    await waitFor(() => {
+      expect(document.documentElement).not.toHaveAttribute("data-scroll-lock");
+    });
+    expect(document.documentElement.style.overflow).toBe("");
   });
 
   test("renders dialog with role + aria-modal + aria-labelledby", async () => {

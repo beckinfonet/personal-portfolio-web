@@ -1634,7 +1634,7 @@ a:hover {
   }
 
   .shipped-row-affordances {
-    grid-column: 1 / -1;
+    grid-column: 2 / -1;
   }
 
   /* Drawer file-row touch target (D-07, D-11; WCAG 2.5.5) */

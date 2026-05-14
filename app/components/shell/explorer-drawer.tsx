@@ -25,6 +25,37 @@ export function ExplorerDrawer({ profile }: { profile: Profile }) {
 
   const isActive = (slug: string | null) => segment === slug;
 
+  /* Lock page scroll while the mobile drawer is open; the sheet remains scrollable. */
+  useEffect(() => {
+    if (!open) return;
+
+    const root = document.documentElement;
+    const body = document.body;
+    const scrollY = window.scrollY;
+    const previousRootOverflow = root.style.overflow;
+    const previousBodyOverflow = body.style.overflow;
+    const previousBodyPosition = body.style.position;
+    const previousBodyTop = body.style.top;
+    const previousBodyWidth = body.style.width;
+
+    root.setAttribute("data-scroll-lock", "drawer");
+    root.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.width = "100%";
+
+    return () => {
+      root.removeAttribute("data-scroll-lock");
+      root.style.overflow = previousRootOverflow;
+      body.style.overflow = previousBodyOverflow;
+      body.style.position = previousBodyPosition;
+      body.style.top = previousBodyTop;
+      body.style.width = previousBodyWidth;
+      window.scrollTo(0, scrollY);
+    };
+  }, [open]);
+
   /* Esc dismisses (A11Y-08) */
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {

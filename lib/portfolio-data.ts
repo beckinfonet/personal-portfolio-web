@@ -13,9 +13,10 @@ import type {
  * Strategy: real-where-trivial (D-08), generic temporary stand-in copy elsewhere
  * until Phase 6 fills real content (D-09).
  *
- * Real now (per D-08): identity, email, real GitHub URL, stack categories.
+ * Real now (per D-08): identity, email, real GitHub/LinkedIn URLs, stack
+ * categories.
  * Generic-temporary now (per D-09 — Phase 6 fills): location, bio, highlights,
- * projects, writing, shippedApps, experience, LinkedIn handle/url.
+ * projects, writing, shippedApps, experience.
  *
  * Naming convention: UPPERCASE module-level dataset constants per PATTERNS.md
  * §"UPPERCASE module-level constants" (matches existing STORAGE_KEY precedent;
@@ -58,8 +59,8 @@ export const PROFILE: Profile = {
     },
     {
       label: "LinkedIn",
-      handle: "in/bakytbek",
-      url: "https://linkedin.com/in/bakytbek",
+      handle: "/in/tatibekov/",
+      url: "https://linkedin.com/in/tatibekov/",
       kind: "linkedin"
     }
   ]

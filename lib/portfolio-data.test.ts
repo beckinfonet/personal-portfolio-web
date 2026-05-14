@@ -43,6 +43,16 @@ describe("PROFILE content (Wave 02)", () => {
     expect(kinds).toContain("linkedin");
   });
 
+  test("PROFILE.linkedin uses the canonical /in/tatibekov/ handle", () => {
+    const linkedin = PROFILE.socials.find((s) => s.kind === "linkedin");
+    expect(linkedin).toEqual(
+      expect.objectContaining({
+        handle: "/in/tatibekov/",
+        url: "https://linkedin.com/in/tatibekov/"
+      })
+    );
+  });
+
   test("PROFILE.highlights has 3 stat cards", () => {
     expect(PROFILE.highlights.length).toBe(3);
     for (const h of PROFILE.highlights) {

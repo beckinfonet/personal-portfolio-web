@@ -8,6 +8,7 @@ updated: 2026-05-13
 sections:
   - DEPLOY-03: PARTIAL-PASS — Tasks 1+2 verified; Task 3 indexing-coverage DEFERRED-INDEXING-WAIT (24-48h per Pitfall 2)
   - DEPLOY-05: PASS — npm audit (FE + BE) + npx knip (FE) all exit 0; pre-close-out gates green
+  - DEPLOY-07: PENDING-HUMAN-ACTION — scaffolded with PENDING markers + Known Limitations; awaiting reviewer to capture 7 DevTools 375px screenshots on production + flip 42 cells to PASS
 ---
 
 # Phase 7: Deploy + Verification — Verification Report
@@ -107,3 +108,66 @@ After 2026-05-14:
 - Remediation: none required. Plan 03 deltas (`@vercel/analytics` import + `<Analytics />` mount in `app/layout.tsx`) correctly recognized by knip's Next.js plugin as in-use; no dead code introduced.
 
 **DEPLOY-05 verdict: PASS** (3/3 gates exit 0; Phase 6 Vercel CVE bump `1d9a295` re-verified held; Plan 03 `@vercel/analytics` install introduced no new high/critical advisories.)
+
+---
+
+## DEPLOY-07 — 375px shell review (production) + real-device carry-forward closure
+
+**Status:** PENDING-HUMAN-ACTION — DevTools 375px shell-review evidence not yet captured. Executor agent has scaffolded this section and halted at the Task 1 human-action checkpoint awaiting the reviewer to perform the Chrome DevTools 375px walk-through across 7 production routes and signal resume.
+
+**Methodology:** D-20 — Chrome DevTools 375px viewport (iPhone SE preset or Responsive 375 width) on each of 7 production routes. Manual eyeball-pass on 6 criteria per route. Production URL: https://www.tatibekov.com.
+
+**Review date:** PENDING
+
+### Per-route review
+
+| Route | TopBar resume above fold | No horiz overflow | Hamburger reachable | No clipped text | Theme toggle reachable | Palette trigger reachable | Verdict |
+|-------|---|---|---|---|---|---|---------|
+| /           | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING |
+| /projects   | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING |
+| /stack      | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING |
+| /experience | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING |
+| /writing    | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING |
+| /contact    | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING |
+| /shipped    | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING |
+
+### Evidence
+
+7 screenshots PENDING capture at 375px viewport on production:
+
+- `screenshots/375/about.png` — / — PENDING
+- `screenshots/375/projects.png` — /projects — PENDING
+- `screenshots/375/stack.png` — /stack — PENDING
+- `screenshots/375/experience.png` — /experience — PENDING
+- `screenshots/375/writing.png` — /writing — PENDING
+- `screenshots/375/contact.png` — /contact — PENDING
+- `screenshots/375/shipped.png` — /shipped — PENDING
+
+**DEPLOY-07 verdict: PENDING-HUMAN-ACTION** — 42/42 cells await DevTools eyeball-pass. Reviewer to flip PENDING → ✓ per cell (or ✗ with footnote if FAIL; FAIL triggers fix-in-place per Plan Task 1 acceptance gating) once screenshots committed.
+
+### Real-device carry-forwards (pending closure via D-18)
+
+Per D-18, the following real-device gates will close via the DevTools-emulation + 56-cell axe matrix (Phase 5) + PSI mobile profile (Plan 04 Wave 3) combination ONCE the per-route review above flips to PASS:
+
+- **Phase 4 Gate 7 (iPhone Safari real-device):** PENDING — closes via DevTools iPhone SE emulation across 7 routes + Phase 5 axe 56-cell matrix (4 hues × 2 themes × 7 routes WCAG 2.1 AA already PASS).
+- **Phase 4 Gate 8 (Android Chrome real-device):** PENDING — closes via DevTools Pixel-equivalent emulation across 7 routes + same axe matrix.
+- **Phase 5 Gate 3 (reduce-motion real-device):** PENDING — closes via DevTools "Emulate CSS prefers-reduced-motion: reduce" + Phase 5 universal-selector reduced-motion reset in `app/globals.css` (Plan 05-03) + `scripts/check-reduced-motion.mjs` smoke gate already passing.
+
+### Known Limitations (consciously accepted per D-18)
+
+The following Safari-specific behaviors are NOT physically validated in v1. If a v1.1 user reports a Safari-only issue along any of these dimensions, that triggers physical-device validation:
+
+- **Safari `dvh`/`svh` viewport units** — Phase 4 uses `dvh` in some places; behavior under iOS Safari address-bar dynamics not physically tested.
+- **Soft-keyboard behavior** — mobile palette / contact input fields with iOS soft-keyboard active not physically tested.
+- **Mobile address-bar overlap at TopBar** — when iOS Safari address bar slides, behavior at the persistent TopBar not physically tested.
+- **`-webkit-overflow-scrolling: touch`** — momentum-scroll behavior in mobile sheets/drawers not physically tested.
+
+### Resume protocol for the reviewer
+
+The Plan 07-08 executor halted at the Task 1 human-action checkpoint. To resume:
+
+1. Open https://www.tatibekov.com in a regular Chrome tab.
+2. Open DevTools (F12 / right-click → Inspect), toggle device toolbar (Cmd+Shift+M on macOS), pick iPhone SE (375 × 667) or set Responsive width to exactly 375, zoom 100%.
+3. For each of the 7 routes — `/`, `/projects`, `/stack`, `/experience`, `/writing`, `/contact`, `/shipped` — wait for full render, apply the 6-point eyeball criteria, capture full-size screenshot via DevTools Cmd+Shift+P → "Capture full size screenshot", save to `.planning/phases/07-deploy-verification/screenshots/375/<route-slug>.png` where `<route-slug>` is `about` / `projects` / `stack` / `experience` / `writing` / `contact` / `shipped`.
+4. If any route fails an eyeball criterion: note the specific failure, apply the smallest CSS fix-in-place in `app/globals.css`, commit (`fix(07): correct <route> 375px overflow (DEPLOY-07 remediation)`), push, wait for redeploy, re-screenshot, update the table.
+5. Once all 7 PNGs exist and the 42-cell mental table is all PASS, signal the orchestrator to resume Plan 07-08 (Task 2 — auto consolidation): flip all PENDING → ✓ in the table above, replace `**Review date:** PENDING` with the actual date, replace the verdict line with `**DEPLOY-07 verdict: PASS** (42/42 cells across 7 routes × 6 criteria)`, flip the three real-device carry-forward lines from PENDING to closed, and commit (`docs(07): record DEPLOY-07 375px shell review + close Ph4 G7/G8 + Ph5 G3 real-device carries (PASS)`).

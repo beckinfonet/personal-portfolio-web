@@ -15,7 +15,7 @@ import type {
   StackCategory
 } from "./types";
 
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8080";
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
 
 /**
  * ISR-cached fetch with silent fallback. Existing pattern preserved per DATA-04.

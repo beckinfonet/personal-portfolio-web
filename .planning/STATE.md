@@ -5,7 +5,7 @@ milestone_name: milestone
 status: milestone_complete
 stopped_at: Phase 7 context gathered
 last_updated: "2026-05-14T01:30:40.097Z"
-last_activity: 2026-05-14 -- Phase 07 execution started
+last_activity: 2026-05-14 -- Quick task 260514-d7m: experience-view redesign
 progress:
   total_phases: 7
   completed_phases: 7
@@ -186,6 +186,12 @@ Open questions surfaced during research synthesis (status updated 2026-05-06 aft
 4. ✓ CI choice — RESOLVED in 01-CONTEXT.md D-01..D-06 (GitHub Actions, PR-only, knip hard-fail)
 5. ✓ Per-hue chroma/lightness overrides for WCAG compliance — RESOLVED 2026-05-10 in Plan 05-07. Three theme-scoped oklch overrides applied to `app/globals.css`: `[data-theme="dark"] --muted oklch(0.62 0.005 175)`, `[data-theme="dark"] --accent-dim oklch(0.70 0.12 var(--accent-hue))`, `[data-theme="light"] --muted oklch(0.46 0.005 175)`; plus `[data-theme="light"][style*="--accent-hue: 75"] --warn oklch(0.42 0.18 75)` as the predicted Pitfall 5 amber-on-light pre-emptive override. 56/56 axe cells pass WCAG 2.1 AA.
 6. Third social pick (Mastodon vs Bluesky vs X) for palette / about / contact — surfaced in 02-CONTEXT.md; data-only decision, deferred to planning or Phase 6 content pass
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260514-d7m | experience-view redesign (timeline rail, monogram, bullets, STACK chips) — paired FE+BE per `.planning/specs/2026-05-14-experience-redesign.md` | 2026-05-14 | FE `73666e0` · BE `aaa7b55` | [260514-d7m-experience-view-redesign-per-planning-sp](./quick/260514-d7m-experience-view-redesign-per-planning-sp/) |
 
 ## Deferred Items
 

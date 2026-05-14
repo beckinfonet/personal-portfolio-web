@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-05-06)
 Phase: Milestone v1.0 complete
 Plan: —
 Status: Awaiting next milestone
-Last activity: 2026-05-14 — Milestone v1.0 completed and archived
+Last activity: 2026-05-14 — Completed quick task 260514-hu9: mobile top-bar hamburger label + safe-area top padding
 
 ## Performance Metrics
 
@@ -190,6 +190,7 @@ Open questions surfaced during research synthesis (status updated 2026-05-06 aft
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260514-d7m | experience-view redesign (timeline rail, monogram, bullets, STACK chips) — paired FE+BE per `.planning/specs/2026-05-14-experience-redesign.md` | 2026-05-14 | FE `73666e0` · BE `aaa7b55` | [260514-d7m-experience-view-redesign-per-planning-sp](./quick/260514-d7m-experience-view-redesign-per-planning-sp/) |
+| 260514-hu9 | mobile top-bar: hamburger label `☰ menu` + safe-area top padding | 2026-05-14 | `441eb3f` | [260514-hu9-mobile-top-bar-hamburger-label-safe-area](./quick/260514-hu9-mobile-top-bar-hamburger-label-safe-area/) |
 
 ## Deferred Items
 

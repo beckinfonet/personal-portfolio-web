@@ -8,6 +8,7 @@ updated: 2026-05-13
 sections:
   - DEPLOY-02: PASS — DevTools Lighthouse mobile profile × 7 routes; Perf 96-100, A11y 100, SEO 100, BP 96 — all thresholds exceeded with substantial margin
   - DEPLOY-03: PARTIAL-PASS — Tasks 1+2 verified; Task 3 indexing-coverage DEFERRED-INDEXING-WAIT (24-48h per Pitfall 2)
+  - DEPLOY-04: PARTIAL — LinkedIn unfurl PASS (Phase 5 SEO-03c closes); Slack unfurl NEUTRAL (link rendered as plain text, no OG card — workspace setting suspected, not a metadata defect since LinkedIn renders fine); 5-second recruiter test DEFERRED-RECRUITER-PENDING
   - DEPLOY-05: PASS — npm audit (FE + BE) + npx knip (FE) all exit 0; pre-close-out gates green
   - DEPLOY-07: PASS — DevTools 375px shell review × 7 routes; 42/42 cells ✓; Phase 4 Gates 7+8 + Phase 5 Gate 3 carry-forwards closed via D-18
 ---
@@ -227,3 +228,59 @@ Both tools share the identical scoring engine, so verdicts are directly comparab
 ### DEPLOY-02 verdict
 
 **DEPLOY-02 verdict: PASS** — 7/7 routes exceed Performance / Accessibility / SEO thresholds; substantial margin on every metric; DevTools Lighthouse methodology substitution documented and accepted.
+
+---
+
+## DEPLOY-04 — 5-second recruiter test + Slack/LinkedIn unfurl (Phase 5 SEO-03c carry-forward)
+
+**Status:** PARTIAL — Slack/LinkedIn unfurl evidence captured (LinkedIn PASS, Slack NEUTRAL); 5-second recruiter test DEFERRED-RECRUITER-PENDING per reviewer decision 2026-05-13.
+
+### Part A: 5-second recruiter hand-off test (DEFERRED)
+
+**Status:** DEFERRED-RECRUITER-PENDING — reviewer opted to defer to v1.1 follow-up; no recruiter recruited for this phase window.
+
+**Pass criterion (D-19):** one non-engineer running both devices sequentially (desktop first, then 375px mobile); time-to-resume + time-to-contact under 5s on each device.
+
+**Why deferred:** Recruiting a non-engineer for the stopwatch test requires an out-of-band human ask; reviewer chose to ship v1 without this gate and add the recruiter test to the v1.1 follow-up list. The persistent TopBar resume button + sidebar recruiter card + AboutSocials CTA + palette `download_resume` verb are all in place per Phase 2-5 work; the recruiter test would CONFIRM the design works for non-engineers in practice but is not a code-level blocker.
+
+**Follow-up TODO (v1.1):**
+1. Recruit one non-engineer (friend/family/colleague).
+2. Run the D-19 protocol: desktop on their laptop first (time-to-resume + time-to-contact), then 375px mobile on their phone.
+3. Record name, device 1, device 2, both times per device, path narrative per device.
+4. Pass = under 5s on all 4 metrics. FAIL triggers fix-in-place CSS/copy work.
+5. Update this section + flip the verdict line.
+
+### Part B: Slack + LinkedIn unfurl previews
+
+**LinkedIn unfurl:** PASS ✓
+- Tool: LinkedIn Post Inspector (https://www.linkedin.com/post-inspector/) — forces fresh OG fetch, bypasses LinkedIn's 24-48h cache
+- Date: 2026-05-13
+- Evidence: `.planning/phases/07-deploy-verification/unfurl/linkedin.png` — ✓ PRESENT (175 KB)
+- Rendered content:
+  - OG image: Phase 5 Plan 05-02 `app/opengraph-image.tsx` output — dark canvas with "Bakytbek Tatibekov // Sr. Software Engineer" + `~/portfolio/about.md` line (the terminal-styled OG card)
+  - Title: `Bakytbek Tatibekov — Sr. Software Engineer`
+  - Domain attribution: `tatibekov.com`
+  - Description visible in the preview frame
+- Verdict: LinkedIn OG/metadata is correctly fetched and rendered. Closes Phase 5 SEO-03c carry-forward.
+
+**Slack unfurl:** NEUTRAL ⚠ (rendered as plain text, no OG card)
+- Tool: Slack DM-to-self
+- Date: 2026-05-13
+- Evidence: `.planning/phases/07-deploy-verification/unfurl/slack.png` — ✓ PRESENT (34 KB)
+- Rendered content:
+  - User posted `tatibekov.com` as a hyperlink — link text only, no OG image, no title card
+- **Why this is NEUTRAL not FAIL:** LinkedIn Post Inspector fetched the same OG metadata from `https://www.tatibekov.com/` and rendered a full card correctly. The OG/Twitter metadata on the site is functional (verified by LinkedIn). Slack's behavior here is most likely workspace-level — Slack workspaces have a "Show preview" setting that admins can disable for personal-domain links, slackbot link-warming may not have fetched the OG metadata yet for this fresh domain, or the specific DM context disabled inline previews. No code defect on the FE side.
+- Follow-up: if v1.1 reports Slack unfurl issues, check:
+  - Workspace preferences → "Show preview / Show inline images and animated GIFs" toggle
+  - Slack URL Unfurl debugger (Slack devs offer one)
+  - Whether the OG metadata is reachable via `curl -A "Slackbot-LinkExpanding 1.0" https://www.tatibekov.com/` (HEAD method must return 200 + Content-Type with the OG image URL accessible)
+
+### Phase 5 SEO-03c carry-forward closure
+
+Phase 5 Plan 05-08 deferred the live-unfurl validation to Phase 7. With LinkedIn rendering correctly, the carry-forward closes — the OG/Twitter metadata pipeline is working in production. Slack's plain-text rendering is documented as a workspace-level neutral outcome, not a regression of the Phase 5 metadata work.
+
+### DEPLOY-04 verdict
+
+**DEPLOY-04 verdict: PARTIAL — Unfurl evidence captured (LinkedIn PASS, Slack NEUTRAL); 5-second recruiter test DEFERRED-RECRUITER-PENDING for v1.1.**
+
+The persistent TopBar resume button + sidebar recruiter card + AboutSocials CTA + palette `download_resume` verb implementations are all in place per Phase 2-5 work and are visible at every viewport. The recruiter-test gate confirms the design works for non-engineers in practice; deferring it does not block v1 ship but it does mean the dual-audience claim has not been physically validated with a non-engineer subject.

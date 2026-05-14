@@ -115,7 +115,7 @@ Each view is RSC by default; client behavior lives in shell-level islands.
 
 - [x] **DEV-01**: `console.log` signature on first paint — JetBrains-style ASCII art name + "Like the site? Source at github.com/..." + email; mounted via `useEffect` in root layout
 - [x] **DEV-02**: 6-line HTML comment greeting in `<head>` for `view-source:` viewers (different message from console — e.g. job preferences, "want to talk?")
-- [x] **DEV-03**: Custom HTTP response headers (`x-built-with: nextjs-15-react-19`) declared in `next.config.ts` `headers()` and verified across 7 routes via Plan 05-08 Gate 1 curl loop; `x-portfolio-source` value DEFERRED-PHASE-7 per CONTEXT.md D-30 (needs production deploy URL)
+- [x] **DEV-03**: Custom HTTP response headers (`x-built-with: nextjs-15-react-19`) declared in `next.config.ts` `headers()` and verified across 7 routes via Plan 05-08 Gate 1 curl loop; `x-portfolio-source` slot REMOVED in Phase 7 D-04 (repo is private; Phase 5 D-30 closes as RESOLVED-as-dropped, not "filled"). DEV-03 status: PASS-with-deviation — only `x-built-with` ships.
 
 ### Testing (TEST)
 
@@ -276,7 +276,7 @@ Phase mapping populated by `gsd-roadmapper` on 2026-05-06.
 | CONTENT-08 | Phase 6 | Complete (06-08: npm run build clean; postbuild INFRA-05 .next/server/ grep finds zero forbidden strings) |
 | DEV-01 | Phase 5 | Complete |
 | DEV-02 | Phase 5 | Complete (05-05) |
-| DEV-03 | Phase 5 | Complete (05-08; `x-portfolio-source` value DEFERRED-PHASE-7) |
+| DEV-03 | Phase 5 | Complete (05-08; `x-portfolio-source` slot dropped Ph7 D-04 — PASS-with-deviation) |
 | TEST-01 | Phase 1 | Pending |
 | TEST-02 | Phase 2 | Pending |
 | TEST-03 | Phase 2 | Pending |

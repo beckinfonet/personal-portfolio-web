@@ -9,7 +9,6 @@ const securityHeaders = [
 ];
 
 const engineerHeaders = [
-  // x-portfolio-source deferred to Phase 7 per D-13 (revised) — set when public deploy URL finalized.
   { key: "x-built-with", value: "nextjs-15-react-19" }
 ];
 

@@ -10,7 +10,7 @@ import { getProfile } from "@/lib/api";
 
 // Use logical OR (||) not nullish coalescing (??) — empty-string env vars bypass ??
 // and produce `Invalid URL` runtime errors. (Phase 1 D-Pitfall D — do not change.)
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tatibekov.com";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],

@@ -18,7 +18,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 4: Mobile-Responsive** - Bottom-sheet nav, mobile palette, sidebar redistribution, print styles (2026-05-07 — verdict PASS with Phase 5 + Phase 7 carry-forwards)
 - [x] **Phase 5: SEO + Accessibility Polish** - OG images, JSON-LD, contrast audit, reduced-motion, easter eggs (2026-05-11 — verdict PASS; 56/56 axe cells WCAG 2.1 AA; 134/134 vitest; verifier audit corroborates; SEO-03c + real-device reduce-motion + Lighthouse + x-portfolio-source value all DEFERRED-PHASE-7)
 - [x] **Phase 6: Backend + Content Population** - Sibling backend endpoints, real bio/projects/posts/resume PDF — completed 2026-05-11
-- [ ] **Phase 7: Deploy + Verification** - Production deploy, Lighthouse, Search Console, recruiter test, audits
+- [x] **Phase 7: Deploy + Verification** - Production deploy, Lighthouse, Search Console, recruiter test, audits (2026-05-14 — verdict PARTIAL-PASS-WITH-DEFERRALS; production live at https://www.tatibekov.com; Lighthouse mobile 96-100 Perf / 100 A11y / 100 SEO across all 7 routes; 375px shell review 42/42 cells PASS + Ph4 G7/G8 + Ph5 G3 carry-forwards closed; npm audit 0 high/critical FE+BE + knip 0 unused; LinkedIn unfurl PASS / Slack NEUTRAL; 3 deferred attestation gates tracked in 07-HUMAN-UAT.md: DEPLOY-03 indexing 24-48h crawl wait, DEPLOY-04 5s recruiter test → v1.1, DEPLOY-06 Vercel Analytics ingestion event → clean incognito test)
 
 ## Phase Details
 

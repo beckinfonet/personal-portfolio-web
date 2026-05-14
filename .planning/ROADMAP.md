@@ -158,8 +158,8 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. 5-second recruiter hand-off test passes on the production URL on both desktop and 375px mobile — a non-engineer finds resume + contact in under 5 seconds, twice (once per device)
   5. Vercel Analytics is enabled and a `resume_download` custom event fires on the resume button click; manual 375px screenshot review confirms every shell element is accessible with no overflow
 **Plans:** 9 plans
-- [ ] 07-01-PLAN.md — Wave 1: env-var flip to www.tatibekov.com + drop x-portfolio-source slot + redeploy (DEPLOY-01)
-- [ ] 07-02-PLAN.md — Wave 1: Wave 0 infra — scripts/check-production-routes.mjs + evidence directories
+- [x] 07-01-PLAN.md — Wave 1: env-var flip to www.tatibekov.com + drop x-portfolio-source slot + redeploy (DEPLOY-01)
+- [x] 07-02-PLAN.md — Wave 1: Wave 0 infra — scripts/check-production-routes.mjs + evidence directories
 - [ ] 07-03-PLAN.md — Wave 2: install @vercel/analytics + mount <Analytics /> + track('resume_download') on TopBar (DEPLOY-06)
 - [ ] 07-04-PLAN.md — Wave 3: PageSpeed Insights × 7 routes × 3-run median; 42-cell scores table (DEPLOY-02)
 - [ ] 07-05-PLAN.md — Wave 3: Google Search Console DNS TXT Domain property + sitemap submission (DEPLOY-03)

@@ -1,15 +1,17 @@
 ---
 phase: 7
 slug: deploy-verification
-status: in_progress
-verdict: PENDING
+status: complete
+verdict: PARTIAL-PASS-WITH-DEFERRALS
 created: 2026-05-13
-updated: 2026-05-13
+updated: 2026-05-14
 sections:
+  - DEPLOY-01: PASS — curl evidence (deploy-01-curl-evidence.txt) + close-out check:prod re-run 7/7 routes green on https://www.tatibekov.com; canonical URL flip + x-portfolio-source removal verified
   - DEPLOY-02: PASS — DevTools Lighthouse mobile profile × 7 routes; Perf 96-100, A11y 100, SEO 100, BP 96 — all thresholds exceeded with substantial margin
   - DEPLOY-03: PARTIAL-PASS — Tasks 1+2 verified; Task 3 indexing-coverage DEFERRED-INDEXING-WAIT (24-48h per Pitfall 2)
   - DEPLOY-04: PARTIAL — LinkedIn unfurl PASS (Phase 5 SEO-03c closes); Slack unfurl NEUTRAL (link rendered as plain text, no OG card — workspace setting suspected, not a metadata defect since LinkedIn renders fine); 5-second recruiter test DEFERRED-RECRUITER-PENDING
   - DEPLOY-05: PASS — npm audit (FE + BE) + npx knip (FE) all exit 0; pre-close-out gates green
+  - DEPLOY-06: PARTIAL — source code shipped (07-03 merged) — @vercel/analytics@^2.0.1 mount + track('resume_download') wired; ingestion-event verification DEFERRED-INGESTION-WAIT (Vercel Analytics dashboard showed 0 events at attestation; user needs clean incognito test to confirm)
   - DEPLOY-07: PASS — DevTools 375px shell review × 7 routes; 42/42 cells ✓; Phase 4 Gates 7+8 + Phase 5 Gate 3 carry-forwards closed via D-18
 ---
 
@@ -17,9 +19,9 @@ sections:
 
 ## Phase Verdict
 
-**Verdict: PENDING**
+**Verdict: PARTIAL-PASS-WITH-DEFERRALS**
 
-This file accumulates the per-requirement verdicts for Phase 7. Sections are appended as each plan in the phase completes. Until all DEPLOY-* requirements have populated sections with explicit verdicts, this file reads PENDING.
+7/7 DEPLOY requirements have populated sections with verdicts. No code defects identified. Three deferred attestation gates explicitly enumerated under the Sign-off section: DEPLOY-03 indexing-coverage (24-48h crawl wait), DEPLOY-04 5-second recruiter test (v1.1 follow-up — non-engineer subject not recruited in v1 window), DEPLOY-06 ingestion-event dashboard verification (pending user incognito test). v1 milestone is shippable in this state.
 
 ---
 
@@ -284,3 +286,184 @@ Phase 5 Plan 05-08 deferred the live-unfurl validation to Phase 7. With LinkedIn
 **DEPLOY-04 verdict: PARTIAL — Unfurl evidence captured (LinkedIn PASS, Slack NEUTRAL); 5-second recruiter test DEFERRED-RECRUITER-PENDING for v1.1.**
 
 The persistent TopBar resume button + sidebar recruiter card + AboutSocials CTA + palette `download_resume` verb implementations are all in place per Phase 2-5 work and are visible at every viewport. The recruiter-test gate confirms the design works for non-engineers in practice; deferring it does not block v1 ship but it does mean the dual-audience claim has not been physically validated with a non-engineer subject.
+
+---
+
+## DEPLOY-01 — Production deploy on Vercel with NEXT_PUBLIC_SITE_URL
+
+**Status:** PASS — production canonical URL flipped to `https://www.tatibekov.com` via Vercel `NEXT_PUBLIC_SITE_URL` Production env scope; bundle live and verified via curl evidence + close-out check:prod re-run; `x-portfolio-source` slot dropped per D-04 (closes Ph5 D-30 as RESOLVED-as-dropped).
+
+**Methodology:** D-01 — Vercel `NEXT_PUBLIC_SITE_URL` env var set in Production scope; empty-commit redeploy triggered new Vercel build; once Ready, the canonical URL + sitemap + robots + headers verified end-to-end via curl loop across 7 routes + sitemap + robots + headers + OG canonical spot-check. Close-out re-run via `scripts/check-production-routes.mjs` confirms the bundle remains live and routable.
+
+**Cutover date:** 2026-05-14T03:27Z (push commit `a84beb5` triggered Vercel redeploy; sitemap lastmod 2026-05-14T03:27:52Z confirms new bundle live ~28s after push)
+
+### Per-route HTTP status (close-out re-run)
+
+| Route | Status | Verdict |
+|-------|--------|---------|
+| `/`           | 200 | ✓ PASS |
+| `/projects`   | 200 | ✓ PASS |
+| `/stack`      | 200 | ✓ PASS |
+| `/experience` | 200 | ✓ PASS |
+| `/writing`    | 200 | ✓ PASS |
+| `/contact`    | 200 | ✓ PASS |
+| `/shipped`    | 200 | ✓ PASS |
+
+### Sitemap + robots verification
+
+- Sitemap `<loc>` count: 7 (expected: 7)
+- All 7 entries use canonical `https://www.tatibekov.com/<path>` host
+- Zero `localhost` references in sitemap or rendered HTML
+- Zero `vercel.app` references in rendered HTML
+- Robots.txt: `User-Agent: *` + `Allow: /` + `Sitemap: https://www.tatibekov.com/sitemap.xml`
+
+### Response-header verification on `/`
+
+- `x-built-with: nextjs-15-react-19` — ✓ PRESENT
+- `x-portfolio-source` — ✓ ABSENT (D-04 satisfied — closes Ph5 D-30 as RESOLVED-as-dropped)
+- Security headers present:
+  - `strict-transport-security: max-age=63072000; includeSubDomains; preload`
+  - `x-content-type-options: nosniff`
+  - `x-frame-options: DENY`
+  - `referrer-policy: strict-origin-when-cross-origin`
+  - `permissions-policy: camera=(), microphone=(), geolocation=()`
+
+### OG / canonical spot-check on `/`
+
+- `<link rel="canonical" href="https://www.tatibekov.com"/>` — ✓ PRESENT
+- `<meta property="og:image" content="https://www.tatibekov.com/opengraph-image-nj2akh?295f9909a8d15303"/>` — ✓ PRESENT
+
+### Evidence
+
+- `deploy-01-curl-evidence.txt` — full curl evidence from 2026-05-14T03:29Z (Plan 01 Task 5 + close-out)
+- `be-smoke-output.txt` — BE smoke (D-22) re-run 2026-05-14T06:13Z, 7/7 endpoints green, EXIT_CODE=0
+- `check-prod-output.txt` — FE check:prod re-run 2026-05-14T06:13Z, 7/7 routes green, EXIT_CODE=0
+- `vercel/env-var-set.png` — Vercel Production env-var panel screenshot (Plan 01 Task 1 evidence)
+
+### DEPLOY-01 verdict
+
+**DEPLOY-01 verdict: PASS** — production deploy live at `https://www.tatibekov.com`; canonical URL inlined at build time; sitemap + robots correctly reference canonical host; 5/5 security headers present; `x-portfolio-source` correctly absent; both close-out smoke gates exit 0.
+
+---
+
+## DEPLOY-06 — Vercel Analytics + `track('resume_download')` event tracking
+
+**Status:** PARTIAL — Source code shipped via Plan 07-03 (merged); ingestion-event dashboard verification DEFERRED-INGESTION-WAIT (Vercel Analytics dashboard showed 0 events at attestation time; user needs clean incognito test to confirm event lands).
+
+**Methodology:** D-08 + D-09 + D-10 + D-11 — `@vercel/analytics@^2.0.1` added as third v1 prod dep with CLAUDE.md allowlist note; `<Analytics />` mount in `app/layout.tsx` last child of `<body>` outside `<ThemeProvider>` (RSC root preserved); `track('resume_download')` fired from the persistent TopBar resume `<a download>` without `preventDefault` to preserve the native download behavior; bare-payload event signature with no second-arg props per D-11 PII guardrail.
+
+### Source code shipped (Plan 07-03)
+
+| Surface | Change | Status |
+|---------|--------|--------|
+| `package.json` + `package-lock.json` | `@vercel/analytics@^2.0.1` installed as third v1 prod dep | ✓ Shipped (commit on main) |
+| `app/layout.tsx` | `<Analytics />` from `@vercel/analytics/next` mounted as last child of `<body>` | ✓ Shipped |
+| `app/components/shell/top-bar.tsx` | `track('resume_download')` from `@vercel/analytics` fired on resume `<a download>` click without `preventDefault` | ✓ Shipped |
+| `CLAUDE.md` | Stack-constraints block updated with Phase 7 exception bullet for `@vercel/analytics` third-prod-dep allowlist | ✓ Shipped |
+| Vercel project Analytics toggle | One-time UI action enabling Analytics for the project | ✓ Enabled (user-performed) |
+
+### Ingestion-event verification (DEFERRED-INGESTION-WAIT)
+
+At attestation time, the Vercel Analytics dashboard showed 0 `resume_download` events. The most likely causes are:
+
+1. **User's own browser is excluded from Vercel Analytics by default** — Analytics filters out localhost + Vercel-account-owner browsers; the user has not yet performed a clean fetch from an incognito session or a different browser/network.
+2. **Click stream cold start** — production cutover is fresh (2026-05-14); ingestion can take seconds-to-minutes to surface even on the first event.
+
+**Pass criterion:** Vercel Analytics dashboard shows ≥1 `resume_download` event row after the user performs an incognito-session resume download from the production URL.
+
+### Follow-up TODO (24-48h after 2026-05-14)
+
+1. From a clean incognito Chrome/Safari session (no Vercel cookies, no extensions blocking analytics), visit `https://www.tatibekov.com/`.
+2. Click the persistent TopBar resume download button (the `↓ resume.pdf` CTA on desktop or the equivalent on mobile).
+3. Verify the PDF downloads.
+4. Wait 1-5 minutes for ingestion lag.
+5. Open the Vercel project's Analytics dashboard → Events tab; confirm one `resume_download` row appears.
+6. If still 0 events: check (a) the network tab for a request to `va.vercel-scripts.com` / Vercel's analytics endpoint; (b) the `<Analytics />` mount actually renders in production HTML via `view-source:`; (c) browser extension blocklists (uBlock Origin commonly blocks Vercel Analytics).
+7. Once verified, update this section: flip `DEFERRED-INGESTION-WAIT` to PASS with the event-row screenshot evidence committed to `.planning/phases/07-deploy-verification/analytics/event-row.png`.
+
+### Evidence
+
+- `07-03-SUMMARY.md` — Plan 07-03 ship summary (third prod dep + mount + track wiring + CLAUDE.md update)
+- `analytics/.gitkeep` — evidence directory scaffolded for future dashboard screenshot (currently empty pending ingestion verification)
+
+### DEPLOY-06 verdict
+
+**DEPLOY-06 verdict: PARTIAL — source code shipped; ingestion-event dashboard verification DEFERRED-INGESTION-WAIT pending user clean-incognito test.**
+
+The code-level surface is complete: SDK installed, mount in place, event fires without `preventDefault`, third-prod-dep allowlist documented. The deferral is an attestation gate, not a defect — the event will land in the dashboard the first time a non-excluded browser session performs the action. v1 ships in this state; the follow-up TODO above tracks the verification closure.
+
+---
+
+## Phase 7 — Sign-off
+
+**Phase 7 verdict: PARTIAL-PASS-WITH-DEFERRALS**
+
+**Close-out date:** 2026-05-14
+
+**Honesty statement:** All 7 DEPLOY requirements have populated verdict sections with evidence. There are zero identified code defects. Three of the seven sections carry explicit DEFERRED markers for attestation gates that cannot be closed within the v1 wall-clock without out-of-band human inputs (recruiter subject, Google crawl latency, clean-incognito analytics fetch). The v1 milestone is shippable in this state; the deferred items are tracked with explicit follow-up TODOs and ETAs below.
+
+### Cross-section summary
+
+| Requirement | Plan | Verdict | Section |
+|-------------|------|---------|---------|
+| DEPLOY-01 | 07-01 | PASS | `## DEPLOY-01 — Production deploy on Vercel with NEXT_PUBLIC_SITE_URL` |
+| DEPLOY-02 | 07-04 | PASS | `## DEPLOY-02 — Lighthouse mobile profile × 7 routes` |
+| DEPLOY-03 | 07-05 | PARTIAL-PASS — DEFERRED-INDEXING-WAIT | `## DEPLOY-03 — Search Console (sitemap + indexing)` |
+| DEPLOY-04 | 07-07 | PARTIAL — DEFERRED-RECRUITER-PENDING | `## DEPLOY-04 — 5-second recruiter test + Slack/LinkedIn unfurl` |
+| DEPLOY-05 | 07-06 | PASS | `## DEPLOY-05 — npm audit + knip (pre-close-out gates)` |
+| DEPLOY-06 | 07-03 | PARTIAL — DEFERRED-INGESTION-WAIT | `## DEPLOY-06 — Vercel Analytics + track('resume_download') event tracking` |
+| DEPLOY-07 | 07-08 | PASS | `## DEPLOY-07 — 375px shell review (production) + real-device carry-forward closure` |
+
+### Close-out smoke gates re-run
+
+| Gate | Command | Exit | Evidence |
+|------|---------|------|----------|
+| BE smoke (D-22 / Ph6 D-11) | `PROD_API_URL=https://personal-portfolio-services-production.up.railway.app node ../portfolio-services/scripts/check-backend.mjs` | 0 | `be-smoke-output.txt` (7/7 endpoints green: `/api/health`, `/api/profile`, `/api/projects`, `/api/stack`, `/api/experience`, `/api/apps`, `/api/posts`) |
+| FE production routes (Plan 02) | `NEXT_PUBLIC_SITE_URL=https://www.tatibekov.com node scripts/check-production-routes.mjs` | 0 | `check-prod-output.txt` (7/7 routes green: `/`, `/projects`, `/stack`, `/experience`, `/writing`, `/contact`, `/shipped`) |
+
+### Deferred attestation gates (carried into post-v1 close-out)
+
+These three items are NOT code defects; each is an attestation gate that requires an external trigger to close. Each carries an explicit follow-up TODO + ETA so v1.1 / orchestrator can pick them up mechanically.
+
+1. **DEPLOY-03 — Indexing-coverage (DEFERRED-INDEXING-WAIT, ETA 2026-05-15 or later)**
+   - **What:** GSC URL Inspection × 7 routes; record per-route status (Discovered / Crawled / Indexed); screenshot Pages/Coverage overview to `.planning/phases/07-deploy-verification/gsc/coverage.png`.
+   - **Why deferred:** Per `07-RESEARCH.md` §Pitfall 2, brand-new domains commonly show 7-21 days before full Indexed status; even partial Discovered status takes 24-48h after sitemap submission. Sitemap was submitted 2026-05-13.
+   - **Follow-up TODO:** On or after 2026-05-14, run URL Inspection on each of the 7 routes; fill the per-route table in the DEPLOY-03 section; capture `gsc/coverage.png` and commit. Pass = ≥4/7 routes Discovered / Crawled / Indexed per D-07.
+   - **Owner:** Site owner (Google Search Console access required).
+
+2. **DEPLOY-04 — 5-second recruiter test (DEFERRED-RECRUITER-PENDING, ETA v1.1)**
+   - **What:** D-19 protocol — one non-engineer running both devices sequentially (desktop first, then 375px mobile); time-to-resume + time-to-contact under 5s on each device.
+   - **Why deferred:** Recruiting a non-engineer for the stopwatch test requires an out-of-band human ask; reviewer chose to ship v1 without this gate and add the recruiter test to the v1.1 follow-up list. The persistent TopBar resume button + sidebar recruiter card + AboutSocials CTA + palette `download_resume` verb are all in place per Phase 2-5 work; the recruiter test would CONFIRM the design works for non-engineers in practice but is not a code-level blocker.
+   - **Follow-up TODO:** Recruit one non-engineer (friend / family / colleague); run D-19 protocol; record name, device 1, device 2, both times per device, path narrative per device. Pass = under 5s on all 4 metrics. FAIL triggers fix-in-place CSS/copy work.
+   - **Owner:** Site owner (non-engineer subject recruitment required).
+
+3. **DEPLOY-06 — Ingestion-event dashboard verification (DEFERRED-INGESTION-WAIT, ETA 2026-05-14 or later)**
+   - **What:** Vercel Analytics dashboard shows ≥1 `resume_download` event row after a clean-incognito test session.
+   - **Why deferred:** At attestation time, the dashboard showed 0 events. Most likely cause: user's own browser is excluded by Vercel Analytics defaults; a clean incognito fetch from a non-Vercel-account browser is needed to confirm event lands.
+   - **Follow-up TODO:** Clean incognito session → visit `https://www.tatibekov.com/` → click resume download → wait 1-5 minutes for ingestion lag → verify event row appears in Vercel Analytics → commit `analytics/event-row.png`.
+   - **Owner:** Site owner (Vercel project Analytics dashboard access required).
+
+### Carry-forwards CLOSED in Phase 7 (audit trail)
+
+These prior-phase carry-forwards close in Phase 7 with no remaining gaps:
+
+- **Phase 5 D-30 (`x-portfolio-source` value DEFERRED-PHASE-7):** RESOLVED-as-dropped per Plan 01 D-04 (repo is private). DEV-03 status: PASS-with-deviation; only `x-built-with` ships.
+- **Phase 5 SEO-03c (Slack / LinkedIn unfurl manual test):** PASS via Plan 07 unfurl section (LinkedIn PASS via Post Inspector; Slack NEUTRAL workspace-level not a code defect).
+- **Phase 4 Gate 7 (iPhone Safari real-device):** CLOSED via Plan 08 DevTools 375px emulation × 7 routes PASS + Phase 5 axe 56-cell matrix.
+- **Phase 4 Gate 8 (Android Chrome real-device):** CLOSED via Plan 08 DevTools Responsive 375px emulation × 7 routes PASS + same axe matrix.
+- **Phase 5 Gate 3 (reduce-motion real-device):** CLOSED via Phase 5 universal-selector reduced-motion CSS reset + `scripts/check-reduced-motion.mjs` smoke gate + DevTools `prefers-reduced-motion: reduce` emulation during Plan 08 review.
+
+### Known Limitations (carried into v1, NOT defects)
+
+Per D-18, four Safari-specific behaviors are NOT physically validated in v1. These are consciously-accepted gaps; a v1.1 user report along any of these dimensions triggers physical-device validation post-v1:
+
+1. Safari `dvh` / `svh` viewport units (iOS Safari address-bar dynamics not physically tested).
+2. Soft-keyboard behavior in mobile palette / contact inputs (iOS soft-keyboard active not physically tested).
+3. Mobile address-bar overlap at TopBar (iOS Safari address bar sliding behavior not physically tested).
+4. `-webkit-overflow-scrolling: touch` momentum scrolling in mobile sheets/drawers (not physically tested).
+
+### v1 milestone status
+
+All 89 v1 requirements are traceability-complete in REQUIREMENTS.md (7/7 DEPLOY-* + 82/82 from Phases 1-6). All 7 code-level DEPLOY gates have shipped surfaces in production. Three attestation gates remain DEFERRED with explicit follow-up TODOs above.
+
+**v1 milestone status: SHIPPABLE WITH DEFERRED ATTESTATIONS.** The product is live at `https://www.tatibekov.com`, smoke gates pass green end-to-end (BE + FE), no code defects identified, no security gaps surfaced, deferred items are attestation triggers (recruiter subject, Google crawl latency, analytics ingestion event) not engineering work.

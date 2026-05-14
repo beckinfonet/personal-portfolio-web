@@ -1,0 +1,3 @@
+Configuration hints (1)
+.claude/**    knip.json  Remove from ignore
+EXIT_CODE=0

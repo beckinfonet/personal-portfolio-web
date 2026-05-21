@@ -37,13 +37,13 @@ Ships as a paired FE+BE commit per CLAUDE.md brownfield discipline.
   is now stale and should be synced to plural.
   **Why:** A project can span multiple public repos (Looper = mobile app +
   agentic-services backend). A single URL would tell only part of the story.
-- **D-02:** Phase 9 fetches stats for **every** URL in a project's `repoUrls`
+- **D-02 [informational]:** Phase 9 fetches stats for **every** URL in a project's `repoUrls`
   and **combines** them: total commit count summed across repos, language
   byte-breakdowns merged, earliest `created_at` for dev duration, latest
   `pushed_at` for last-active. Phase 10 renders the combined figures.
   **Why:** Direct consequence of D-01 — a multi-repo project shows one
   aggregate stat strip / panel, not one per repo.
-- **D-03:** This ripples into Phases 9 and 10. Their ROADMAP entries currently
+- **D-03 [informational]:** This ripples into Phases 9 and 10. Their ROADMAP entries currently
   assume one repo per project (`getRepoStats(repoUrl: string)`, "each project
   that has a `repoUrl`"). Those entries — and the SCHEMA-*/GH-*/LIST-*/DETAIL-*
   requirement wording that says `repoUrl` singular — must be updated to the

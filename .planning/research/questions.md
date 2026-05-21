@@ -40,4 +40,4 @@ deployed site, sometimes a repo, depending on the project?
 - If polymorphic, decide: add `repoUrl?: string`, or repurpose `link` as
   repo-only and add `liveUrl?: string` for live sites.
 
-**Status:** Open
+**Status:** **Resolved 2026-05-21** — `link` is polymorphic per JSDoc ("External link to live site / repo / case study. https only."). All 3 current seed entries happen to be GitHub URLs but the contract intentionally allows mixed destinations. v1.1 milestone adds a separate optional `repoUrl?: string` field rather than repurposing `link`. See PROJECT.md v1.1 milestone start evolution note for full decision context.

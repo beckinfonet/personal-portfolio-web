@@ -38,11 +38,24 @@ A distinctive personal portfolio that signals engineering craft through a termin
 - ✓ Vitest coverage: 161 tests across shell, palette, theme, accent, all 7 views, JSON-LD, console signature, mobile audits — v1.0 Phases 2/3/4/5
 - ✓ Deployed to https://www.tatibekov.com with full sitemap, JSON-LD Person, GSC verified, 8 next/og OG images — v1.0 Phase 5 + Phase 7
 
+## Current Milestone: v1.1 GitHub Repo Stats Enrichment
+
+**Goal:** Surface live GitHub repo metadata on the projects view to signal stack depth and project maturity to dual audiences — lean strip at the 5-second scan, richer panel for deeper interest.
+
+**Target features:**
+- Backend schema extension: optional `repoUrl?: string` field on Project (paired FE+BE per brownfield discipline)
+- New `lib/github.ts` module with native `fetch` + 24h ISR revalidate + `GITHUB_TOKEN` auth
+- Projects-list compact stat strip (`<commits> · <top-langs> · <dev-duration>`)
+- Project-detail "Tech highlights" panel (full language byte-breakdown, dev duration, last active, commit count)
+- Graceful degradation when `repoUrl` absent or GitHub unreachable (card renders unchanged)
+
 ### Active
 
-<!-- v1.1 hypotheses populate here when /gsd-new-milestone runs. v1.0 carry-forwards listed in STATE.md Deferred Items. -->
+<!-- v1.1 milestone active requirements. v1.0 carry-forwards listed in STATE.md Deferred Items. -->
 
-- [ ] Recruiter discoverability — physical-subject validation: DEPLOY-04 5-second recruiter hand-off test (non-engineer subject on desktop + 375px mobile) deferred from v1.0. Dual-audience claim (Phase 7 ROADMAP SC4) currently rests on DevTools emulation + self-simulation only.
+- [ ] **GitHub repo stats enrichment** — projects-list stat strip + project-detail Tech highlights panel, sourced from GitHub REST API with 24h ISR revalidate. Scoped seed promoted into v1.1; full spec in `.planning/seeds/github-repo-stats.md`.
+- [ ] **Backend Project schema** — add optional `repoUrl?: string` field to Project model + DTO + seed JSON + frontend type. Paired FE+BE commit per brownfield discipline.
+- [ ] Recruiter discoverability — physical-subject validation: DEPLOY-04 5-second recruiter hand-off test (non-engineer subject on desktop + 375px mobile) deferred from v1.0. Dual-audience claim (Phase 7 ROADMAP SC4) currently rests on DevTools emulation + self-simulation only. **Not in v1.1 milestone scope** — tracked as operational follow-up in STATE.md Deferred Items.
 
 ### Out of Scope
 
@@ -114,6 +127,10 @@ A distinctive personal portfolio that signals engineering craft through a termin
 | Use `next-themes` for theme management and `cmdk` for the command palette (per handoff recommendation) | Both are mature, well-fit primitives; building from scratch wastes effort on solved problems (focus management, persistence, SSR flash avoidance) | ✓ Good — shipped v1.0 |
 | Continue with pure CSS + CSS variables; no styling-framework swap | Handoff is token-driven and dynamic-palette-based — CSS custom properties are the idiomatic fit; introducing Tailwind mid-redesign is unrelated scope | ✓ Good — shipped v1.0 |
 | Keep API integration model (not static-only); static fallback in `lib/portfolio-data.ts` for offline / API-down scenarios | Preserves dynamic-content option for projects/writing/shipped apps without sacrificing resilience | ✓ Good — shipped v1.0 |
+| v1.1 GitHub stats: add new optional `repoUrl?: string` field to Project rather than repurposing existing `link` field | Q1 resolved 2026-05-21: `link` JSDoc documents it as polymorphic ("live site / repo / case study"). Repurposing would break the contract for future projects that link to live sites or writeups. Decoupling stats fetching from display link keeps both surfaces independent. | TBD — v1.1 scope |
+| v1.1 GitHub stats: use native `fetch` (no `@octokit/rest` dep) | Three GitHub endpoints with simple JSON payloads; the dep would buy nothing while consuming the prod-dep budget. Matches `lib/api.ts` pattern already established. | TBD — v1.1 scope |
+| v1.1 GitHub stats: daily ISR revalidate (86400s) rather than build-time or hourly | Build-time freezes stats between deploys (bad signal for "active" claim); hourly is overkill for portfolio cadence; daily matches existing `lib/api.ts` pattern at ~3-7 calls/day. | TBD — v1.1 scope |
+| v1.1 GitHub stats: drop coverage/CI-status signal from scope | Not GitHub-native (requires per-repo Codecov setup); ongoing maintenance burden out of proportion with signal value. Three free GitHub-native signals (duration / languages / activity) carry the feature. Revisit in v1.2 if visitors ask. | TBD — v1.1 scope |
 
 ## Evolution
 
@@ -150,5 +167,13 @@ This document evolves at phase transitions and milestone boundaries.
 - **All v1.0 phase Key Decisions confirmed ✓ Good** — table reflects shipped reality.
 - **Carry-forwards into v1.1 active:** Physical recruiter test for DEPLOY-04 (Active). Operational deferrals (branch protection, indexing snapshot, analytics event retest) live in STATE.md Deferred Items.
 
+### v1.1 milestone start (2026-05-21)
+
+- **Q1 resolved (research/questions.md):** `Project.link` is **polymorphic** per existing JSDoc. All 3 current seed entries happen to use GitHub URLs, but the contract intentionally allows live sites / case studies / repos. v1.1 therefore introduces a separate optional `repoUrl?: string` field rather than repurposing `link`. Original questions.md entry can now be marked **Resolved**.
+- **Seed promoted:** `.planning/seeds/github-repo-stats.md` (planted 2026-05-21 via `/gsd-explore`) auto-selected as the v1.1 driver. Seed v1 scope locked: 3 signals (created_at → dev duration; languages → top 1-3 by bytes; pushed_at + commit count → activity). Coverage / CI-status signals explicitly dropped from v1.
+- **Stack budget preserved:** No new prod deps in v1.1. Total v1 prod deps remain at 3: `next-themes`, `cmdk`, `@vercel/analytics`. `@octokit/rest` explicitly rejected — native `fetch` covers three simple JSON endpoints.
+- **Deploy-time requirement:** `GITHUB_TOKEN` env var must be added to Vercel Production scope before the feature ships (5,000 req/hr authenticated vs 60/hr unauthenticated; read-only public-repo scope).
+- **Out of v1.1 scope:** The four v1.0 operational carry-forwards (branch protection, DEPLOY-03 indexing snapshot, DEPLOY-04 recruiter test, DEPLOY-06 analytics retest) remain in STATE.md Deferred Items as separately-tracked operational tasks.
+
 ---
-*Last updated: 2026-05-14 after v1.0 milestone close — `/gsd-complete-milestone v1.0`. Next: `/gsd-new-milestone` to scope v1.1.*
+*Last updated: 2026-05-21 — `/gsd-new-milestone` v1.1 GitHub Repo Stats. Next: `/gsd-plan-phase 8` after roadmap approval.*

@@ -105,56 +105,56 @@ Explicitly excluded for v1.1. Documented to prevent scope creep.
 
 ## Traceability
 
-Filled by roadmapper. Initially empty.
+Filled by roadmapper at v1.1 roadmap creation (2026-05-21).
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCHEMA-01 | TBD | Pending |
-| SCHEMA-02 | TBD | Pending |
-| SCHEMA-03 | TBD | Pending |
-| SCHEMA-04 | TBD | Pending |
-| SCHEMA-05 | TBD | Pending |
-| SCHEMA-06 | TBD | Pending |
-| SCHEMA-07 | TBD | Pending |
-| GH-01 | TBD | Pending |
-| GH-02 | TBD | Pending |
-| GH-03 | TBD | Pending |
-| GH-04 | TBD | Pending |
-| GH-05 | TBD | Pending |
-| GH-06 | TBD | Pending |
-| GH-07 | TBD | Pending |
-| GH-08 | TBD | Pending |
-| GH-09 | TBD | Pending |
-| GH-10 | TBD | Pending |
-| LIST-01 | TBD | Pending |
-| LIST-02 | TBD | Pending |
-| LIST-03 | TBD | Pending |
-| LIST-04 | TBD | Pending |
-| LIST-05 | TBD | Pending |
-| LIST-06 | TBD | Pending |
-| LIST-07 | TBD | Pending |
-| LIST-08 | TBD | Pending |
-| LIST-09 | TBD | Pending |
-| DETAIL-01 | TBD | Pending |
-| DETAIL-02 | TBD | Pending |
-| DETAIL-03 | TBD | Pending |
-| DETAIL-04 | TBD | Pending |
-| DETAIL-05 | TBD | Pending |
-| DETAIL-06 | TBD | Pending |
-| DETAIL-07 | TBD | Pending |
-| DETAIL-08 | TBD | Pending |
-| DETAIL-09 | TBD | Pending |
-| DEPLOY-V11-01 | TBD | Pending |
-| DEPLOY-V11-02 | TBD | Pending |
-| DEPLOY-V11-03 | TBD | Pending |
-| DEPLOY-V11-04 | TBD | Pending |
-| DEPLOY-V11-05 | TBD | Pending |
+| SCHEMA-01 | Phase 8 | Pending |
+| SCHEMA-02 | Phase 8 | Pending |
+| SCHEMA-03 | Phase 8 | Pending |
+| SCHEMA-04 | Phase 8 | Pending |
+| SCHEMA-05 | Phase 8 | Pending |
+| SCHEMA-06 | Phase 8 | Pending |
+| SCHEMA-07 | Phase 8 | Pending |
+| GH-01 | Phase 9 | Pending |
+| GH-02 | Phase 9 | Pending |
+| GH-03 | Phase 9 | Pending |
+| GH-04 | Phase 9 | Pending |
+| GH-05 | Phase 9 | Pending |
+| GH-06 | Phase 9 | Pending |
+| GH-07 | Phase 9 | Pending |
+| GH-08 | Phase 9 | Pending |
+| GH-09 | Phase 9 | Pending |
+| GH-10 | Phase 9 | Pending |
+| LIST-01 | Phase 10 | Pending |
+| LIST-02 | Phase 10 | Pending |
+| LIST-03 | Phase 10 | Pending |
+| LIST-04 | Phase 10 | Pending |
+| LIST-05 | Phase 10 | Pending |
+| LIST-06 | Phase 10 | Pending |
+| LIST-07 | Phase 10 | Pending |
+| LIST-08 | Phase 10 | Pending |
+| LIST-09 | Phase 10 | Pending |
+| DETAIL-01 | Phase 10 | Pending |
+| DETAIL-02 | Phase 10 | Pending |
+| DETAIL-03 | Phase 10 | Pending |
+| DETAIL-04 | Phase 10 | Pending |
+| DETAIL-05 | Phase 10 | Pending |
+| DETAIL-06 | Phase 10 | Pending |
+| DETAIL-07 | Phase 10 | Pending |
+| DETAIL-08 | Phase 10 | Pending |
+| DETAIL-09 | Phase 10 | Pending |
+| DEPLOY-V11-01 | Phase 11 | Pending |
+| DEPLOY-V11-02 | Phase 11 | Pending |
+| DEPLOY-V11-03 | Phase 11 | Pending |
+| DEPLOY-V11-04 | Phase 11 | Pending |
+| DEPLOY-V11-05 | Phase 11 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 40 total
-- Mapped to phases: 0 (roadmapper pending)
-- Unmapped: 40 ⚠ — will resolve at roadmap creation
+- Mapped to phases: 40 (Phase 8 = 7, Phase 9 = 10, Phase 10 = 18, Phase 11 = 5)
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-05-21*
-*Last updated: 2026-05-21 after `/gsd-new-milestone` v1.1 initial definition*
+*Last updated: 2026-05-21 after `/gsd-new-milestone` v1.1 roadmap creation (traceability filled by roadmapper)*

@@ -3,10 +3,10 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: GitHub Repo Stats Enrichment
 status: planning
-last_updated: "2026-05-21T20:42:27.674Z"
+last_updated: "2026-05-21T21:00:00.000Z"
 last_activity: 2026-05-21
 progress:
-  total_phases: 0
+  total_phases: 4
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -20,14 +20,21 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-06)
 
 **Core value:** A distinctive personal portfolio that signals engineering craft through a terminal/IDE aesthetic — without making non-technical recruiters work to find the resume and contact info.
-**Current focus:** Milestone v1.1 — GitHub Repo Stats Enrichment (defining requirements)
+**Current focus:** Milestone v1.1 — GitHub Repo Stats Enrichment (Phase 8: Project Schema Extension — next: /gsd-plan-phase 8)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-05-21 — Milestone v1.1 started
+Phase: Phase 8 — Project Schema Extension (not yet started; roadmap approved 2026-05-21)
+Plan: — (run /gsd-plan-phase 8 to create)
+Status: Roadmap created; awaiting plan-phase
+Last activity: 2026-05-21 — v1.1 roadmap created (4 phases / 40 reqs / 100% coverage)
+Progress: 0/4 phases · 0/0 plans
+
+**v1.1 phase summary:**
+- [ ] Phase 8: Project Schema Extension (7 reqs · SCHEMA-01..07 · paired FE+BE)
+- [ ] Phase 9: GitHub API Integration (10 reqs · GH-01..10)
+- [ ] Phase 10: Projects UI Enrichment (18 reqs · LIST-01..09 + DETAIL-01..09)
+- [ ] Phase 11: Deploy + Smoke Verification (5 reqs · DEPLOY-V11-01..05)
 
 ## Performance Metrics
 

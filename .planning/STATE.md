@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: GitHub Repo Stats Enrichment
-status: executing
+status: verifying
 stopped_at: Phase 8 context gathered
-last_updated: "2026-05-21T22:19:03.081Z"
-last_activity: 2026-05-21 -- Phase 08 planning complete
+last_updated: "2026-05-21T22:33:55.765Z"
+last_activity: 2026-05-21
 progress:
   total_phases: 4
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 1
-  completed_plans: 0
-  percent: 0
+  completed_plans: 1
+  percent: 100
 ---
 
 # Project State
@@ -21,15 +21,15 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-06)
 
 **Core value:** A distinctive personal portfolio that signals engineering craft through a terminal/IDE aesthetic — without making non-technical recruiters work to find the resume and contact info.
-**Current focus:** Milestone v1.1 — GitHub Repo Stats Enrichment (Phase 8: Project Schema Extension — next: /gsd-plan-phase 8)
+**Current focus:** Phase 08 — project-schema-extension
 
 ## Current Position
 
-Phase: Phase 8 — Project Schema Extension (not yet started; roadmap approved 2026-05-21)
-Plan: — (run /gsd-plan-phase 8 to create)
-Status: Ready to execute
-Last activity: 2026-05-21 -- Phase 08 planning complete
-Progress: 0/4 phases · 0/0 plans
+Phase: 08 (project-schema-extension) — EXECUTING
+Plan: 1 of 1
+Status: Phase complete — ready for verification
+Last activity: 2026-05-21
+Progress: [██████████] 100%
 
 **v1.1 phase summary:**
 
@@ -90,6 +90,7 @@ Progress: 0/4 phases · 0/0 plans
 | Phase 6 P7 | ~3m 29s | 2 tasks (both autonomous, 2 paired commits across repos, neither amended — one-direction-current per Wave 1 Rule-1) | 11 files (2 created + 9 modified across two repos; Projects greenfield — first fully-additive BE endpoint in Phase 6, closer to Wave 1 create-from-scratch than Waves 2-6 in-place reshape; 0 structural deviations + 1 content-discretion choice on 3 project names per Claude's-Discretion license; BACKEND-01 + BACKEND-02 + CONTENT-02 shipped; all 7 v1 API endpoints now wired) |
 | Phase 6 P8 | ~6m 12s | 3 tasks bundled into single commit pair (orchestrator pre-resolved the Task 2 human-verify checkpoint via Extension 2; non-autonomous plan with 3 orchestrator-authorized extensions) | 18 touchpoints (3 created + 14 modified + 1 deleted across two repos; Wave 8 reconciliation — real resume PDF 58440B at canonical filename with pdf-lib Title+Author metadata + real DOCX 19122B with PK\x03\x04 ZIP magic + Profile.resumeDocxUrl? optional type extension + SHIPPED swap to CarEx+MoveIn real apps + PROFILE.highlights[1] D-17 numeric reconciliation 4→2 + legacy public/resume.pdf 50-byte stub deleted in same commit + check-resume-pdf.mjs Pitfall-6 metadata upgrade + new check-resume-docx.mjs gate + both gates wired into npm run prebuild (first build-time gate in project) + about-view secondary DOCX link with plain-noun aria-label + pdf-lib added as devDep only — two-prod-dep budget intact; 1 Rule-1 deviation: about-view.test.tsx ambiguous getByRole regex disambiguated to exact name match; 1 plan-structure deviation: orchestrator pre-authorized single commit pair instead of plan's two-pair Task 1 + Task 3 structure since Extension 2 locked Case A value=2; CONTENT-01 + CONTENT-03 + CONTENT-05 + CONTENT-08 closed; paired commits portfolio-services c4e8870 ↔ portfolio-web d8650a8) |
 | Phase Phase 6 P4 P4 | ~3m 20s | 2 tasks | 9 files |
+| Phase 08 P01 | 6min | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -177,6 +178,9 @@ Recent decisions affecting current work:
 - [Phase ?]: Phase 6 Plan 06: Controller `?limit` query-param preserved through the reshape. Old controller already had `Number(req.query.limit ?? 3)` with `?? 3` default + finite-positive guard; new controller keeps the same logic and adds `.limit(queryLimit)` on the Mongo query AND changes sort key from `{ publishedAt: -1 }` to `{ date: -1 }`. The /api/posts?limit=1 vitest spec asserts the cap explicitly. First Phase-6 wave to preserve a query-param through reshape; all others (Profile, Stack, Experience, Apps) are query-less.
 - [Phase ?]: Phase 6 Plan 06: Content choice within Claude's Discretion (D-15 / CONTEXT 'Claude's Discretion' license): The plan's Step 5 example post title `'RSC Discipline: Keeping the Persistent Shell Pure'` + link `https://github.com/beckinfonet/portfolio-web` is realistic-shape placeholder content — NOT a real published post URL. Developer not present at execution time; executor used the plan's exact example content (trips no INFRA-05 forbidden strings, follows canonical HTTPS form, content-internally consistent with this project's actual stack). Same content-stub pattern Waves 4 + 5 used for 'Confidential' company names and 'Heart Trainer'/'Lingo Coach' app names. Developer can swap at Wave 08 reconcile or Wave 09 cutover without changing any types/tests/schema.
 - [Phase ?]: Phase 6 Plan 06: One-direction-current paired-SHA citation continued — BE commit 50c50af cites pending-FE-SHA placeholder; FE commit 4988954 cites BE 50c50af verbatim. BE NOT amended. Durable cross-reference recorded in 06-06-SUMMARY.md: portfolio-services 50c50af ↔ portfolio-web 4988954.
+- Phase 8 Plan 01: `repoUrls` is a plural `string[]` (D-01) — supersedes the singular `repoUrl` wording in SCHEMA-01/02/03 and ROADMAP Phase 8 SC2. A roadmap/requirements text sync from singular to plural is a deferred documentation-consistency pass before Phase 9 planning (per 08-CONTEXT.md `<deferred>`).
+- Phase 8 Plan 01: No Mongoose `match`/regex validator on `repoUrls` — matches the existing `Project.link` precedent (no schema regex); HTTPS-shape checks live in the Jest `/api/projects` spec + the frontend vitest only. `placeholderProjects` (503-warming fallback) carries a shape-valid `repoUrls` (its own `link` wrapped in a single-element array) for shape symmetry with the seed. Both Claude's-Discretion calls per CONTEXT.md.
+- Phase 8 Plan 01: Paired BE+FE commit, one-direction-current SHA citation — `portfolio-services 7c9aa25` (cites a pending-FE-SHA placeholder, NOT amended after FE landed) ↔ `portfolio-web b1c8b1b` (cites BE `7c9aa25` verbatim). Durable cross-reference recorded in 08-01-SUMMARY.md. Both `projects.json` and `lib/portfolio-data.ts` PROJECTS reconciled to the 4 live production projects (Validation Ledger, Looper, MoveIn: Real Estate, CarEx) — D-14 byte-mirror restored. `link` values untouched (D-05); pushing `repoUrls` into production Mongo deferred to Phase 11.
 
 ### Pending Todos
 
@@ -215,9 +219,9 @@ Items acknowledged and carried forward to later phases:
 
 ## Session Continuity
 
-Last session: 2026-05-21T22:00:47.913Z
+Last session: 2026-05-21T22:33:39.586Z
 Stopped at: Phase 8 context gathered
-Resume file: .planning/phases/08-project-schema-extension/08-CONTEXT.md
+Resume file: None
 
 ## Operator Next Steps
 

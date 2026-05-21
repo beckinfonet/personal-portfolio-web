@@ -15,13 +15,13 @@ Requirements for the v1.1 release. Each maps to a roadmap phase.
 
 ### Project schema (paired FE+BE)
 
-- [ ] **SCHEMA-01**: Backend Mongoose `Project` model gains optional `repoUrls?: string[]` field with `strict: 'throw'` preserved
-- [ ] **SCHEMA-02**: Backend `ProjectDto` type extended with `repoUrls?: string[]` matching the model
-- [ ] **SCHEMA-03**: Frontend `lib/types.ts` `Project` interface gains `repoUrls?: string[]` with JSDoc clarifying its role ("Public GitHub repo URLs for the GitHub-stats fetch — Phase 9 combines stats across all entries; distinct from the polymorphic `link` field")
-- [ ] **SCHEMA-04**: Backend seed JSON (`portfolio-services/src/seed/projects.json`) and frontend static fallback (`lib/portfolio-data.ts`) byte-mirror each other with the new `repoUrls` field populated for the 4 existing project entries (D-14 discipline preserved)
-- [ ] **SCHEMA-05**: Backend Jest test covers presence/absence of `repoUrls` in `/api/projects` response shape
-- [ ] **SCHEMA-06**: Frontend vitest assertions verify the `repoUrls` field appears on every PROJECTS entry where present
-- [ ] **SCHEMA-07**: Schema change ships as paired FE+BE commit per CLAUDE.md brownfield discipline (cross-reference recorded in commit message)
+- [x] **SCHEMA-01**: Backend Mongoose `Project` model gains optional `repoUrls?: string[]` field with `strict: 'throw'` preserved
+- [x] **SCHEMA-02**: Backend `ProjectDto` type extended with `repoUrls?: string[]` matching the model
+- [x] **SCHEMA-03**: Frontend `lib/types.ts` `Project` interface gains `repoUrls?: string[]` with JSDoc clarifying its role ("Public GitHub repo URLs for the GitHub-stats fetch — Phase 9 combines stats across all entries; distinct from the polymorphic `link` field")
+- [x] **SCHEMA-04**: Backend seed JSON (`portfolio-services/src/seed/projects.json`) and frontend static fallback (`lib/portfolio-data.ts`) byte-mirror each other with the new `repoUrls` field populated for the 4 existing project entries (D-14 discipline preserved)
+- [x] **SCHEMA-05**: Backend Jest test covers presence/absence of `repoUrls` in `/api/projects` response shape
+- [x] **SCHEMA-06**: Frontend vitest assertions verify the `repoUrls` field appears on every PROJECTS entry where present
+- [x] **SCHEMA-07**: Schema change ships as paired FE+BE commit per CLAUDE.md brownfield discipline (cross-reference recorded in commit message)
 
 ### GitHub API integration (`lib/github.ts`)
 
@@ -109,13 +109,13 @@ Filled by roadmapper at v1.1 roadmap creation (2026-05-21).
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCHEMA-01 | Phase 8 | Pending |
-| SCHEMA-02 | Phase 8 | Pending |
-| SCHEMA-03 | Phase 8 | Pending |
-| SCHEMA-04 | Phase 8 | Pending |
-| SCHEMA-05 | Phase 8 | Pending |
-| SCHEMA-06 | Phase 8 | Pending |
-| SCHEMA-07 | Phase 8 | Pending |
+| SCHEMA-01 | Phase 8 | Complete |
+| SCHEMA-02 | Phase 8 | Complete |
+| SCHEMA-03 | Phase 8 | Complete |
+| SCHEMA-04 | Phase 8 | Complete |
+| SCHEMA-05 | Phase 8 | Complete |
+| SCHEMA-06 | Phase 8 | Complete |
+| SCHEMA-07 | Phase 8 | Complete |
 | GH-01 | Phase 9 | Pending |
 | GH-02 | Phase 9 | Pending |
 | GH-03 | Phase 9 | Pending |

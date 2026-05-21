@@ -53,17 +53,31 @@ explained.
 Free-text data gathering — user supplied the public GitHub repo URLs per
 project.
 
-**User's response:**
+**User's response (supplied across two turns):**
 - Validation Ledger: `https://github.com/beckinfonet/validation-ledger-mobile`
 - Looper: `https://github.com/beckinfonet/LooperMobile` (mobile) +
   `https://github.com/beckinfonet/looper-agentic` (services)
-- MoveIn: `https://github.com/beckinfonet/jaytap-mobile`
-- CarEx: `https://github.com/beckinfonet/CarEx`
+- MoveIn: `https://github.com/beckinfonet/jaytap-mobile` (mobile) +
+  `https://github.com/beckinfonet/JayTap-services` (services)
+- CarEx: `https://github.com/beckinfonet/CarEx` (mobile) +
+  `https://github.com/beckinfonet/carEx-services` (services)
 
 **Notes:** Live `/api/projects` data fetched from Railway to confirm the
 4-project list and existing polymorphic `link` values. User flagged
 frustration with over-complicated multi-part questions mid-discussion; later
 turns kept to plain, minimal phrasing.
+
+---
+
+## Private-repo handling
+
+User asked whether data can be skipped entirely for private repos.
+
+**Resolution:** Confirmed — yes, by design. Private/unreachable repos are not
+fetched; Phase 9 returns null for them and combines only the repos that
+return data. A project shows no stats only when *all* its `repoUrls` are
+private/unreachable. Captured in CONTEXT.md D-06. No new decision needed —
+this is the existing v1.1 graceful-degradation design (LIST-07 / DETAIL-07).
 
 ---
 

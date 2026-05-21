@@ -59,8 +59,8 @@ Ships as a paired FE+BE commit per CLAUDE.md brownfield discipline.
   |---|------|-------------|------------------|
   | 1 | Validation Ledger | `https://github.com/beckinfonet/validation-ledger-mobile` | `["https://github.com/beckinfonet/validation-ledger-mobile"]` |
   | 2 | Looper | `https://github.com/beckinfonet/looper-agentic` | `["https://github.com/beckinfonet/LooperMobile", "https://github.com/beckinfonet/looper-agentic"]` |
-  | 3 | MoveIn: Real Estate | `https://apps.apple.com/us/app/movein-real-estate/id6758697464` | `["https://github.com/beckinfonet/jaytap-mobile"]` |
-  | 4 | CarEx | `https://github.com/beckinfonet` | `["https://github.com/beckinfonet/CarEx"]` |
+  | 3 | MoveIn: Real Estate | `https://apps.apple.com/us/app/movein-real-estate/id6758697464` | `["https://github.com/beckinfonet/jaytap-mobile", "https://github.com/beckinfonet/JayTap-services"]` |
+  | 4 | CarEx | `https://github.com/beckinfonet` | `["https://github.com/beckinfonet/CarEx", "https://github.com/beckinfonet/carEx-services"]` |
 
   Full `summary`/`tech`/`year`/`status`/`role` for each entry come verbatim
   from the live API response — the executor should fetch it fresh, not
@@ -70,10 +70,18 @@ Ships as a paired FE+BE commit per CLAUDE.md brownfield discipline.
   Store URL, CarEx's `link` is the org page — neither is a repo. `repoUrls`
   is the dedicated, separate field for GitHub-stats fetching. `link` is left
   exactly as the live data has it; Phase 8 does not touch `link` values.
-- **D-06:** All 4 supplied repo URLs are assumed to be **public** GitHub
-  repos. If any is private/missing, Phase 9 returns null for it and the
-  project's card/panel degrades gracefully (LIST-07 / DETAIL-07). Phase 11
-  smoke test against production confirms reachability.
+- **D-06:** Each of the 4 projects now has **two** repo URLs in `repoUrls`
+  (a mobile app repo + a services/backend repo) except Validation Ledger,
+  which has one. Repo visibility is not assumed — some may be private.
+  **Private/unreachable repos are simply skipped, not fetched** (the v1.1
+  design intent — private-repo support is explicitly out of scope per
+  PROJECT.md). Phase 9 fetches each URL in `repoUrls`, gets `null` for any
+  private/missing repo (GitHub returns 404 to the public read-only token),
+  and **combines only the repos that returned data**. A project's card/panel
+  shows no stats *only* when **all** of its `repoUrls` are private/unreachable
+  (LIST-07 / DETAIL-07 graceful degradation — no "private" label, no broken
+  layout). Phase 11 smoke test against production confirms which repos
+  actually surface stats.
 
 ### JSDoc / field documentation
 - **D-07:** The `lib/types.ts` `Project.repoUrls?` field carries JSDoc

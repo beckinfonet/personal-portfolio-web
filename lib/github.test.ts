@@ -263,3 +263,90 @@ describe("getRepoStats — null paths", () => {
     warnSpy.mockRestore();
   });
 });
+
+describe("getRepoStats — disk fallback", () => {
+  test("a successful fetch writes its RepoStat back to the disk cache", async () => {
+    vi.stubGlobal("fetch", okFetch({ languages: { Rust: 77 } }));
+
+    await getRepoStats(["https://github.com/owner/repo"]);
+
+    expect(diskStore["owner/repo"]).toBeDefined();
+    expect((diskStore["owner/repo"] as { languages: unknown }).languages).toEqual({
+      Rust: 77
+    });
+  });
+
+  test("a 5xx-failing repo falls back to its last-known disk-cache entry", async () => {
+    diskStore = {
+      "owner/repo": {
+        createdAt: "2023-03-01T00:00:00Z",
+        pushedAt: "2026-04-01T00:00:00Z",
+        languages: { TypeScript: 999 },
+        commitCount: 123
+      }
+    };
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => new Response("Server Error", { status: 503 }))
+    );
+
+    const stats = await getRepoStats(["https://github.com/owner/repo"]);
+    expect(stats).not.toBeNull();
+    expect(stats?.commitCount).toBe(123);
+    expect(stats?.languages).toEqual({ TypeScript: 999 });
+    expect(stats?.createdAt).toBe("2023-03-01T00:00:00Z");
+  });
+
+  test("combines a mix of a fresh fetch and a disk-cached fallback", async () => {
+    diskStore = {
+      "owner/repo-b": {
+        createdAt: "2022-01-01T00:00:00Z",
+        pushedAt: "2026-03-01T00:00:00Z",
+        languages: { CSS: 200 },
+        commitCount: 50
+      }
+    };
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string) => {
+        if (url.includes("/owner/repo-b")) {
+          return new Response("Not Found", { status: 404 });
+        }
+        if (url.endsWith("/commits?per_page=1")) {
+          return new Response(JSON.stringify([{}]), { status: 200 });
+        }
+        if (url.endsWith("/languages")) {
+          return new Response(JSON.stringify({ TypeScript: 800 }), {
+            status: 200
+          });
+        }
+        return new Response(
+          JSON.stringify({
+            created_at: "2025-06-01T00:00:00Z",
+            pushed_at: "2026-05-01T00:00:00Z"
+          }),
+          { status: 200 }
+        );
+      })
+    );
+
+    const stats = await getRepoStats([
+      "https://github.com/owner/repo-a",
+      "https://github.com/owner/repo-b"
+    ]);
+    expect(stats?.languages).toEqual({ TypeScript: 800, CSS: 200 });
+    expect(stats?.commitCount).toBe(51);
+    expect(stats?.createdAt).toBe("2022-01-01T00:00:00Z");
+    expect(stats?.pushedAt).toBe("2026-05-01T00:00:00Z");
+  });
+
+  test("returns null when a repo fails and has no disk-cache entry", async () => {
+    diskStore = {};
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => new Response("Not Found", { status: 404 }))
+    );
+
+    expect(await getRepoStats(["https://github.com/owner/repo"])).toBeNull();
+  });
+});

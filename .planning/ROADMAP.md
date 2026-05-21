@@ -28,7 +28,7 @@ Full milestone detail (phase goals, success criteria, plan list) archived at [mi
 
 ### 🚧 v1.1 GitHub Repo Stats Enrichment (Phases 8–11)
 
-- [ ] **Phase 8: Project Schema Extension** — Add optional `repoUrls?: string[]` to Project across backend + frontend in a paired FE+BE commit
+- [x] **Phase 8: Project Schema Extension** — Add optional `repoUrls?: string[]` to Project across backend + frontend in a paired FE+BE commit
 - [ ] **Phase 9: GitHub API Integration** — New `lib/github.ts` module with native fetch, daily ISR cache, token auth, disk-cache fallback, and unit tests
 - [ ] **Phase 10: Projects UI Enrichment** — Compact stat strip on `/projects` cards + "Tech highlights" panel on project-detail with graceful degradation
 - [ ] **Phase 11: Deploy + Smoke Verification** — `GITHUB_TOKEN` in Vercel Production, deploy notes documented, smoke test against live `/projects`, ISR-cache behaviour confirmed
@@ -96,7 +96,7 @@ Phases execute in numeric order: 8 → 9 → 10 → 11
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 8. Project Schema Extension | 0/1 | Not started | - |
+| 8. Project Schema Extension | 1/1 | Complete | 2026-05-21 |
 | 9. GitHub API Integration | 0/TBD | Not started | - |
 | 10. Projects UI Enrichment | 0/TBD | Not started | - |
 | 11. Deploy + Smoke Verification | 0/TBD | Not started | - |

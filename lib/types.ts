@@ -85,6 +85,18 @@ export interface Project {
   repoUrls?: string[];
 }
 
+/** Combined GitHub stats across a project's repoUrls — Phase 9 / GitHub-stats fetch. */
+export interface GitHubRepoStats {
+  /** Earliest created_at across all repos (ISO 8601 date-time). */
+  createdAt: string;
+  /** Latest pushed_at across all repos (ISO 8601 date-time). */
+  pushedAt: string;
+  /** Merged language byte map — bytes summed per language key. */
+  languages: Record<string, number>;
+  /** Summed commit count across all repos. */
+  commitCount: number;
+}
+
 /** A single experience.log view entry. */
 export interface Experience {
   /** Company name, muted "@ company" rendering. */

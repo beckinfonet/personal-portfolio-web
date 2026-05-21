@@ -245,6 +245,25 @@ describe("PROJECTS content (Wave 07)", () => {
     const names = PROJECTS.map((p) => p.name);
     expect(new Set(names).size).toBe(names.length);
   });
+
+  test("every PROJECTS entry with repoUrls present is a string[] of HTTPS URLs (SCHEMA-06)", () => {
+    for (const p of PROJECTS) {
+      if (p.repoUrls !== undefined) {
+        expect(Array.isArray(p.repoUrls)).toBe(true);
+        for (const url of p.repoUrls) {
+          expect(typeof url).toBe("string");
+          expect(url).toMatch(/^https?:\/\//);
+        }
+      }
+    }
+  });
+
+  test("at least one PROJECTS entry has a non-empty repoUrls (catches empty-fallback regression)", () => {
+    const withRepoUrls = PROJECTS.filter(
+      (p) => Array.isArray(p.repoUrls) && p.repoUrls.length > 0
+    );
+    expect(withRepoUrls.length).toBeGreaterThan(0);
+  });
 });
 
 describe("PROFILE.highlights reconciliation (Wave 08, D-17)", () => {

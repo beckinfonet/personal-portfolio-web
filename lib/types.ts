@@ -76,6 +76,13 @@ export interface Project {
   role: string;
   /** External link to live site / repo / case study. https only. */
   link: string;
+  /**
+   * Optional public GitHub repo URLs for the v1.1 GitHub-stats fetch — Phase 9
+   * combines stats (commits, languages, activity) across all entries. Distinct
+   * from the polymorphic `link` field, which may point at a live site, App
+   * Store page, or case study. Omitted when a project has no public repo.
+   */
+  repoUrls?: string[];
 }
 
 /** A single experience.log view entry. */

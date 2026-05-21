@@ -68,33 +68,47 @@ export const PROFILE: Profile = {
 
 export const PROJECTS: Project[] = [
   // D-14 mirror of portfolio-services/src/seed/projects.json — byte-identical content.
-  // CONTENT-02 / BACKEND-01: v1 ships 3 real-shape projects.
+  // Phase 8 (SCHEMA-04): reconciled to the 4 live projects production Mongo serves;
+  // each carries the new optional repoUrls?: string[] field (D-04/D-06).
   {
-    name: "Terminal Portfolio",
+    name: "Validation Ledger",
     year: "2026",
     status: "shipped",
-    summary: "Brownfield redesign of this site into a terminal/IDE shell with seven RSC views, four-hue theme system, and full mobile redistribution.",
-    tech: ["Next.js 15", "React 19", "TypeScript", "Vitest", "Playwright"],
+    summary: "Fight against freight fraud, chameleon carriers, cluster theft and identity continuity",
+    tech: ["Swift", "NodeJS", "TypeScript", "Fastify", "Postgres", "Stripe"],
     role: "lead",
-    link: "https://github.com/beckinfonet/portfolio-web"
+    link: "https://github.com/beckinfonet/validation-ledger-mobile",
+    repoUrls: ["https://github.com/beckinfonet/validation-ledger-mobile"]
   },
   {
-    name: "Portfolio Services",
+    name: "Looper",
     year: "2026",
     status: "shipped",
-    summary: "Express 5 + Mongoose backend for the terminal portfolio; hand-mirrored type contract with the Next.js frontend.",
-    tech: ["Express 5", "Mongoose 9", "TypeScript", "Jest", "Railway"],
+    summary: "Text based app for communicating with businesses. Automated reservations and auto-confirmations",
+    tech: ["Express", "MongoDB", "TypeScript", "Jest", "Railway", "LangChain", "OpenAI", "Anthropic/Claude"],
     role: "lead",
-    link: "https://github.com/beckinfonet/portfolio-services"
+    link: "https://github.com/beckinfonet/looper-agentic",
+    repoUrls: ["https://github.com/beckinfonet/LooperMobile", "https://github.com/beckinfonet/looper-agentic"]
   },
   {
-    name: "GSD Workflow",
+    name: "MoveIn: Real Estate",
+    year: "2026",
+    status: "shipped",
+    summary: "3D virtual tours for real estate professionals and consumers",
+    tech: ["React Native", "React", "TypeScript", "Vitest", "Playwright"],
+    role: "lead",
+    link: "https://apps.apple.com/us/app/movein-real-estate/id6758697464",
+    repoUrls: ["https://github.com/beckinfonet/jaytap-mobile", "https://github.com/beckinfonet/JayTap-services"]
+  },
+  {
+    name: "CarEx",
     year: "2025",
     status: "active",
-    summary: "Multi-agent Claude planning workflow for incremental software delivery; ships PLAN.md files as executable prompts.",
+    summary: "Buying and Selling cars. Marketplace in Central Asia",
     tech: ["Claude", "Anthropic SDK", "Bash", "TypeScript"],
     role: "lead",
-    link: "https://github.com/beckinfonet"
+    link: "https://github.com/beckinfonet",
+    repoUrls: ["https://github.com/beckinfonet/CarEx", "https://github.com/beckinfonet/carEx-services"]
   }
 ];
 

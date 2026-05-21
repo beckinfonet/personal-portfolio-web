@@ -15,22 +15,22 @@ Requirements for the v1.1 release. Each maps to a roadmap phase.
 
 ### Project schema (paired FE+BE)
 
-- [ ] **SCHEMA-01**: Backend Mongoose `Project` model gains optional `repoUrl?: string` field with `strict: 'throw'` preserved
-- [ ] **SCHEMA-02**: Backend `ProjectDto` type extended with `repoUrl?: string` matching the model
-- [ ] **SCHEMA-03**: Frontend `lib/types.ts` `Project` interface gains `repoUrl?: string` with JSDoc clarifying its role ("Repo URL for GitHub stats fetch; distinct from polymorphic `link` field")
-- [ ] **SCHEMA-04**: Backend seed JSON (`portfolio-services/src/seed/projects.json`) and frontend static fallback (`lib/portfolio-data.ts`) byte-mirror each other with the new `repoUrl` field populated for the 3 existing project entries (D-14 discipline preserved)
-- [ ] **SCHEMA-05**: Backend Jest test covers presence/absence of `repoUrl` in `/api/projects` response shape
-- [ ] **SCHEMA-06**: Frontend vitest assertions verify the `repoUrl` field appears on every PROJECTS entry where present
+- [ ] **SCHEMA-01**: Backend Mongoose `Project` model gains optional `repoUrls?: string[]` field with `strict: 'throw'` preserved
+- [ ] **SCHEMA-02**: Backend `ProjectDto` type extended with `repoUrls?: string[]` matching the model
+- [ ] **SCHEMA-03**: Frontend `lib/types.ts` `Project` interface gains `repoUrls?: string[]` with JSDoc clarifying its role ("Public GitHub repo URLs for the GitHub-stats fetch — Phase 9 combines stats across all entries; distinct from the polymorphic `link` field")
+- [ ] **SCHEMA-04**: Backend seed JSON (`portfolio-services/src/seed/projects.json`) and frontend static fallback (`lib/portfolio-data.ts`) byte-mirror each other with the new `repoUrls` field populated for the 4 existing project entries (D-14 discipline preserved)
+- [ ] **SCHEMA-05**: Backend Jest test covers presence/absence of `repoUrls` in `/api/projects` response shape
+- [ ] **SCHEMA-06**: Frontend vitest assertions verify the `repoUrls` field appears on every PROJECTS entry where present
 - [ ] **SCHEMA-07**: Schema change ships as paired FE+BE commit per CLAUDE.md brownfield discipline (cross-reference recorded in commit message)
 
 ### GitHub API integration (`lib/github.ts`)
 
-- [ ] **GH-01**: New `lib/github.ts` module exports `getRepoStats(repoUrl: string): Promise<GitHubRepoStats | null>`
+- [ ] **GH-01**: New `lib/github.ts` module exports `getRepoStats(repoUrls: string[]): Promise<GitHubRepoStats | null>` — combines stats across every repo in the list; returns `null` only when all repos are unreachable
 - [ ] **GH-02**: Module uses native `fetch` only; no new prod dependencies (`@octokit/rest` explicitly rejected)
 - [ ] **GH-03**: Module authenticates via `GITHUB_TOKEN` env var when present; falls back to unauthenticated requests when absent (logs a one-line dev warning about reduced 60/hr ceiling)
-- [ ] **GH-04**: Module calls three GitHub REST endpoints: `GET /repos/{owner}/{repo}` (created_at + pushed_at), `GET /repos/{owner}/{repo}/languages` (byte breakdown), `GET /repos/{owner}/{repo}/commits?per_page=1` (commit count via Link header)
+- [ ] **GH-04**: Module calls three GitHub REST endpoints per repo in `repoUrls`: `GET /repos/{owner}/{repo}` (created_at + pushed_at), `GET /repos/{owner}/{repo}/languages` (byte breakdown), `GET /repos/{owner}/{repo}/commits?per_page=1` (commit count via Link header) — then combines: sums commit counts, merges language byte maps, takes earliest created_at + latest pushed_at
 - [ ] **GH-05**: Module uses `next: { revalidate: 86400 }` for daily ISR cache, matching `lib/api.ts` pattern
-- [ ] **GH-06**: Module returns `null` on missing/private repo, fetch failure, rate-limit hit, or parse error — never throws an exception to its callers
+- [ ] **GH-06**: Module never throws to callers; a missing/private repo, fetch failure, rate-limit hit, or parse error for one repo is skipped (that repo contributes nothing to the combined stats). `getRepoStats` returns `null` only when every repo in the list fails
 - [ ] **GH-07**: New `GitHubRepoStats` type exported with shape `{ createdAt: string, pushedAt: string, languages: Record<string, number>, commitCount: number }`
 - [ ] **GH-08**: Module logs remaining rate-limit headers (`X-RateLimit-Remaining`, `X-RateLimit-Reset`) at dev log level so we can observe ceiling consumption
 - [ ] **GH-09**: Module persists last-known stats to disk between builds so a transient GitHub outage during deploy does not break the build (e.g. `.next/cache/github-stats.json` or equivalent; falls back to disk cache when fetch fails)
@@ -44,7 +44,7 @@ Requirements for the v1.1 release. Each maps to a roadmap phase.
 - [ ] **LIST-04**: Duration computed from `created_at` to today; formatted in months for under a year (`4mo`) and years+months above (`1y 2mo`)
 - [ ] **LIST-05**: Strip is prefixed with a small monospace GitHub octocat-style glyph (or text token like `gh:`) to signal source
 - [ ] **LIST-06**: Mobile readability validated at 480px breakpoint; strip wraps gracefully or truncates the language list to top-1 if width-constrained
-- [ ] **LIST-07**: Project cards with no `repoUrl` set, or with `repoUrl` set but stats returned `null`, render unchanged — no strip, no placeholder, no "private" label
+- [ ] **LIST-07**: Project cards with empty/absent `repoUrls`, or with `repoUrls` set but combined stats returned `null` (all repos unreachable), render unchanged — no strip, no placeholder, no "private" label
 - [ ] **LIST-08**: Strip visual integrates with existing `.projects-row` styling; reuses tokens from `app/globals.css` without introducing new top-level CSS sections
 - [ ] **LIST-09**: Vitest covers rendering with stats present, rendering with null stats, and the mobile-truncation branch
 
@@ -55,8 +55,8 @@ Requirements for the v1.1 release. Each maps to a roadmap phase.
 - [ ] **DETAIL-03**: Dev duration shown with date range (e.g. `In development since Jan 2026 — 4mo`)
 - [ ] **DETAIL-04**: Last-active timestamp formatted relative (e.g. `Last active 3 days ago`, `Last active 2 months ago`)
 - [ ] **DETAIL-05**: Commit count displayed as a prominent stat
-- [ ] **DETAIL-06**: Panel includes a "View on GitHub →" CTA linking to the `repoUrl` with `target=_blank rel=noopener noreferrer` per SEO-05 pattern (uses existing `ExternalLink` primitive)
-- [ ] **DETAIL-07**: Projects without `repoUrl` or with null stats omit the panel cleanly — no degraded layout, no placeholder
+- [ ] **DETAIL-06**: Panel includes a "View on GitHub →" CTA linking to the project's primary repo (`repoUrls[0]`) with `target=_blank rel=noopener noreferrer` per SEO-05 pattern (uses existing `ExternalLink` primitive)
+- [ ] **DETAIL-07**: Projects with empty/absent `repoUrls` or with null combined stats omit the panel cleanly — no degraded layout, no placeholder
 - [ ] **DETAIL-08**: Panel meets WCAG 2.1 AA color-contrast under all 4 accent hues × 2 themes (extension of existing Phase 5 56-cell axe matrix)
 - [ ] **DETAIL-09**: Vitest covers the panel rendering branches
 

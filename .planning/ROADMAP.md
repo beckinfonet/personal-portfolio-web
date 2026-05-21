@@ -45,7 +45,8 @@ Full milestone detail (phase goals, success criteria, plan list) archived at [mi
   2. `lib/types.ts` `Project` interface exports `repoUrls?: string[]` with JSDoc documenting its purpose ("Public GitHub repo URLs for the GitHub-stats fetch — Phase 9 combines stats across all entries; distinct from the polymorphic `link` field"); `npm run build` + `tsc --noEmit` clean
   3. `lib/portfolio-data.ts` static fallback byte-mirrors `portfolio-services/src/seed/projects.json` for all four project entries including the new `repoUrls` field (D-14 discipline preserved); FE vitest asserts the field appears on every PROJECTS entry where present
   4. Schema change ships as a single paired commit pair (one BE SHA + one FE SHA cross-referenced in both commit messages); Mongoose `strict: 'throw'` invariant preserved on the Project model
-**Plans**: TBD
+**Plans**: 1 plan
+- [ ] 08-01-PLAN.md — Add optional repoUrls?: string[] to Project (BE model/DTO + FE interface), reconcile seed + fallback to the 4 live projects, paired BE+FE commit
 
 ### Phase 9: GitHub API Integration
 **Goal**: `lib/github.ts` module fetches three GitHub REST endpoints per repo, combines stats across a project's `repoUrls`, returns typed `GitHubRepoStats | null` with daily ISR cache, token auth, disk-cache fallback, and never throws to callers
@@ -95,7 +96,7 @@ Phases execute in numeric order: 8 → 9 → 10 → 11
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 8. Project Schema Extension | 0/TBD | Not started | - |
+| 8. Project Schema Extension | 0/1 | Not started | - |
 | 9. GitHub API Integration | 0/TBD | Not started | - |
 | 10. Projects UI Enrichment | 0/TBD | Not started | - |
 | 11. Deploy + Smoke Verification | 0/TBD | Not started | - |

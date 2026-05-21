@@ -25,16 +25,16 @@ Requirements for the v1.1 release. Each maps to a roadmap phase.
 
 ### GitHub API integration (`lib/github.ts`)
 
-- [ ] **GH-01**: New `lib/github.ts` module exports `getRepoStats(repoUrls: string[]): Promise<GitHubRepoStats | null>` — combines stats across every repo in the list; returns `null` only when all repos are unreachable
-- [ ] **GH-02**: Module uses native `fetch` only; no new prod dependencies (`@octokit/rest` explicitly rejected)
-- [ ] **GH-03**: Module authenticates via `GITHUB_TOKEN` env var when present; falls back to unauthenticated requests when absent (logs a one-line dev warning about reduced 60/hr ceiling)
-- [ ] **GH-04**: Module calls three GitHub REST endpoints per repo in `repoUrls`: `GET /repos/{owner}/{repo}` (created_at + pushed_at), `GET /repos/{owner}/{repo}/languages` (byte breakdown), `GET /repos/{owner}/{repo}/commits?per_page=1` (commit count via Link header) — then combines: sums commit counts, merges language byte maps, takes earliest created_at + latest pushed_at
-- [ ] **GH-05**: Module uses `next: { revalidate: 86400 }` for daily ISR cache, matching `lib/api.ts` pattern
-- [ ] **GH-06**: Module never throws to callers; a missing/private repo, fetch failure, rate-limit hit, or parse error for one repo is skipped (that repo contributes nothing to the combined stats). `getRepoStats` returns `null` only when every repo in the list fails
-- [ ] **GH-07**: New `GitHubRepoStats` type exported with shape `{ createdAt: string, pushedAt: string, languages: Record<string, number>, commitCount: number }`
-- [ ] **GH-08**: Module logs remaining rate-limit headers (`X-RateLimit-Remaining`, `X-RateLimit-Reset`) at dev log level so we can observe ceiling consumption
-- [ ] **GH-09**: Module persists last-known stats to disk between builds so a transient GitHub outage during deploy does not break the build (e.g. `.next/cache/github-stats.json` or equivalent; falls back to disk cache when fetch fails)
-- [ ] **GH-10**: Vitest unit tests cover the parser logic, Link-header commit-count extraction, null-fallback paths, and disk-cache fallback
+- [x] **GH-01**: New `lib/github.ts` module exports `getRepoStats(repoUrls: string[]): Promise<GitHubRepoStats | null>` — combines stats across every repo in the list; returns `null` only when all repos are unreachable
+- [x] **GH-02**: Module uses native `fetch` only; no new prod dependencies (`@octokit/rest` explicitly rejected)
+- [x] **GH-03**: Module authenticates via `GITHUB_TOKEN` env var when present; falls back to unauthenticated requests when absent (logs a one-line dev warning about reduced 60/hr ceiling)
+- [x] **GH-04**: Module calls three GitHub REST endpoints per repo in `repoUrls`: `GET /repos/{owner}/{repo}` (created_at + pushed_at), `GET /repos/{owner}/{repo}/languages` (byte breakdown), `GET /repos/{owner}/{repo}/commits?per_page=1` (commit count via Link header) — then combines: sums commit counts, merges language byte maps, takes earliest created_at + latest pushed_at
+- [x] **GH-05**: Module uses `next: { revalidate: 86400 }` for daily ISR cache, matching `lib/api.ts` pattern
+- [x] **GH-06**: Module never throws to callers; a missing/private repo, fetch failure, rate-limit hit, or parse error for one repo is skipped (that repo contributes nothing to the combined stats). `getRepoStats` returns `null` only when every repo in the list fails
+- [x] **GH-07**: New `GitHubRepoStats` type exported with shape `{ createdAt: string, pushedAt: string, languages: Record<string, number>, commitCount: number }`
+- [x] **GH-08**: Module logs remaining rate-limit headers (`X-RateLimit-Remaining`, `X-RateLimit-Reset`) at dev log level so we can observe ceiling consumption
+- [x] **GH-09**: Module persists last-known stats to disk between builds so a transient GitHub outage during deploy does not break the build (e.g. `.next/cache/github-stats.json` or equivalent; falls back to disk cache when fetch fails)
+- [x] **GH-10**: Vitest unit tests cover the parser logic, Link-header commit-count extraction, null-fallback paths, and disk-cache fallback
 
 ### Projects-list stat strip
 
@@ -116,16 +116,16 @@ Filled by roadmapper at v1.1 roadmap creation (2026-05-21).
 | SCHEMA-05 | Phase 8 | Complete |
 | SCHEMA-06 | Phase 8 | Complete |
 | SCHEMA-07 | Phase 8 | Complete |
-| GH-01 | Phase 9 | Pending |
-| GH-02 | Phase 9 | Pending |
-| GH-03 | Phase 9 | Pending |
-| GH-04 | Phase 9 | Pending |
-| GH-05 | Phase 9 | Pending |
-| GH-06 | Phase 9 | Pending |
-| GH-07 | Phase 9 | Pending |
-| GH-08 | Phase 9 | Pending |
-| GH-09 | Phase 9 | Pending |
-| GH-10 | Phase 9 | Pending |
+| GH-01 | Phase 9 | Complete |
+| GH-02 | Phase 9 | Complete |
+| GH-03 | Phase 9 | Complete |
+| GH-04 | Phase 9 | Complete |
+| GH-05 | Phase 9 | Complete |
+| GH-06 | Phase 9 | Complete |
+| GH-07 | Phase 9 | Complete |
+| GH-08 | Phase 9 | Complete |
+| GH-09 | Phase 9 | Complete |
+| GH-10 | Phase 9 | Complete |
 | LIST-01 | Phase 10 | Pending |
 | LIST-02 | Phase 10 | Pending |
 | LIST-03 | Phase 10 | Pending |

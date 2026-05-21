@@ -58,7 +58,7 @@ Full milestone detail (phase goals, success criteria, plan list) archived at [mi
   3. The module returns `null` (never throws) on 404 / private repo / 5xx / rate-limit / parse error; on transient fetch failure it falls back to last-known stats persisted to a disk cache (e.g. `.next/cache/github-stats.json`) so a GitHub outage at deploy time does not break the build
   4. Vitest unit tests cover: Link-header commit-count parsing, language byte-sort, null-fallback paths (404, 5xx, network error), disk-cache fallback, and the rate-limit-header log; remaining-rate-limit headers (`X-RateLimit-Remaining`, `X-RateLimit-Reset`) are surfaced at dev log level
 **Plans**: 1 plan
-- [ ] 09-01-PLAN.md — Build `lib/github.ts` (`getRepoStats` + `GitHubRepoStats` type) with native-fetch ISR, conditional bearer auth, Link-header commit counting, per-repo disk-cache outage fallback, and full Vitest coverage
+- [x] 09-01-PLAN.md — Build `lib/github.ts` (`getRepoStats` + `GitHubRepoStats` type) with native-fetch ISR, conditional bearer auth, Link-header commit counting, per-repo disk-cache outage fallback, and full Vitest coverage
 
 ### Phase 10: Projects UI Enrichment
 **Goal**: `/projects` route surfaces a lean stat strip per card and each project's detail page renders a "Tech highlights" panel â both backed by `lib/github.ts`, both gracefully omitted when stats are null

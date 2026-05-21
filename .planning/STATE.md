@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: GitHub Repo Stats Enrichment
-status: executing
+status: verifying
 stopped_at: Phase 9 context gathered
-last_updated: "2026-05-21T23:05:42.992Z"
-last_activity: 2026-05-21 -- Phase 09 planning complete
+last_updated: "2026-05-21T23:14:00.620Z"
+last_activity: 2026-05-21
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 2
-  completed_plans: 1
-  percent: 50
+  completed_plans: 2
+  percent: 100
 ---
 
 # Project State
@@ -21,15 +21,15 @@ progress:
 See: .planning/PROJECT.md (updated 2026-05-21)
 
 **Core value:** A distinctive personal portfolio that signals engineering craft through a terminal/IDE aesthetic — without making non-technical recruiters work to find the resume and contact info.
-**Current focus:** Phase 9 — GitHub API Integration
+**Current focus:** Phase 09 — github-api-integration
 
 ## Current Position
 
-Phase: 9
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-05-21 -- Phase 09 planning complete
-Progress: [█████░░░░░░░░░░░░░░░] 1/4 phases
+Phase: 09 (github-api-integration) — EXECUTING
+Plan: 1 of 1
+Status: Phase complete — ready for verification
+Last activity: 2026-05-21
+Progress: [██████████] 100%
 
 **v1.1 phase summary:**
 
@@ -92,6 +92,7 @@ Progress: [█████░░░░░░░░░░░░░░░] 1/4 pha
 | Phase 6 P8 | ~6m 12s | 3 tasks bundled into single commit pair (orchestrator pre-resolved the Task 2 human-verify checkpoint via Extension 2; non-autonomous plan with 3 orchestrator-authorized extensions) | 18 touchpoints (3 created + 14 modified + 1 deleted across two repos; Wave 8 reconciliation — real resume PDF 58440B at canonical filename with pdf-lib Title+Author metadata + real DOCX 19122B with PK\x03\x04 ZIP magic + Profile.resumeDocxUrl? optional type extension + SHIPPED swap to CarEx+MoveIn real apps + PROFILE.highlights[1] D-17 numeric reconciliation 4→2 + legacy public/resume.pdf 50-byte stub deleted in same commit + check-resume-pdf.mjs Pitfall-6 metadata upgrade + new check-resume-docx.mjs gate + both gates wired into npm run prebuild (first build-time gate in project) + about-view secondary DOCX link with plain-noun aria-label + pdf-lib added as devDep only — two-prod-dep budget intact; 1 Rule-1 deviation: about-view.test.tsx ambiguous getByRole regex disambiguated to exact name match; 1 plan-structure deviation: orchestrator pre-authorized single commit pair instead of plan's two-pair Task 1 + Task 3 structure since Extension 2 locked Case A value=2; CONTENT-01 + CONTENT-03 + CONTENT-05 + CONTENT-08 closed; paired commits portfolio-services c4e8870 ↔ portfolio-web d8650a8) |
 | Phase Phase 6 P4 P4 | ~3m 20s | 2 tasks | 9 files |
 | Phase 08 P01 | 6min | 2 tasks | 9 files |
+| Phase 09 P01 | 5min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -182,6 +183,9 @@ Recent decisions affecting current work:
 - Phase 8 Plan 01: `repoUrls` is a plural `string[]` (D-01) — supersedes the singular `repoUrl` wording in SCHEMA-01/02/03 and ROADMAP Phase 8 SC2. A roadmap/requirements text sync from singular to plural is a deferred documentation-consistency pass before Phase 9 planning (per 08-CONTEXT.md `<deferred>`).
 - Phase 8 Plan 01: No Mongoose `match`/regex validator on `repoUrls` — matches the existing `Project.link` precedent (no schema regex); HTTPS-shape checks live in the Jest `/api/projects` spec + the frontend vitest only. `placeholderProjects` (503-warming fallback) carries a shape-valid `repoUrls` (its own `link` wrapped in a single-element array) for shape symmetry with the seed. Both Claude's-Discretion calls per CONTEXT.md.
 - Phase 8 Plan 01: Paired BE+FE commit, one-direction-current SHA citation — `portfolio-services 7c9aa25` (cites a pending-FE-SHA placeholder, NOT amended after FE landed) ↔ `portfolio-web b1c8b1b` (cites BE `7c9aa25` verbatim). Durable cross-reference recorded in 08-01-SUMMARY.md. Both `projects.json` and `lib/portfolio-data.ts` PROJECTS reconciled to the 4 live production projects (Validation Ledger, Looper, MoveIn: Real Estate, CarEx) — D-14 byte-mirror restored. `link` values untouched (D-05); pushing `repoUrls` into production Mongo deferred to Phase 11.
+- [Phase ?]: Phase 9 Plan 01: Disk-cache layer shipped in the Task 2 commit (not Task 3) because Task 2's null-path tests assert null on 5xx/network/403 repos and that path runs through fetchRepoStats's readDiskCache fallback.
+- [Phase ?]: Phase 9 Plan 01: lib/github.test.ts mocks node:fs/promises with an in-memory diskStore reset in beforeEach — without it writeDiskCacheEntry from a passing test pollutes the real disk cache read by a later null-path test. First fetch-stubbing + fs-mocking test in the suite.
+- [Phase ?]: Phase 9 Plan 01: getRepoStats inlines the literal next: { revalidate: 86400 } rather than a named constant — the plan's acceptance-criteria grep and must_haves key_links pattern both require the literal in source.
 
 ### Pending Todos
 
@@ -220,9 +224,9 @@ Items acknowledged and carried forward to later phases:
 
 ## Session Continuity
 
-Last session: 2026-05-21T22:48:38.015Z
+Last session: 2026-05-21T23:13:42.488Z
 Stopped at: Phase 9 context gathered
-Resume file: .planning/phases/09-github-api-integration/09-CONTEXT.md
+Resume file: None
 
 ## Operator Next Steps
 

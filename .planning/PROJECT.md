@@ -38,6 +38,9 @@ A distinctive personal portfolio that signals engineering craft through a termin
 - ✓ Vitest coverage: 161 tests across shell, palette, theme, accent, all 7 views, JSON-LD, console signature, mobile audits — v1.0 Phases 2/3/4/5
 - ✓ Deployed to https://www.tatibekov.com with full sitemap, JSON-LD Person, GSC verified, 8 next/og OG images — v1.0 Phase 5 + Phase 7
 
+**Shipped in v1.1 (in progress):**
+- ✓ Optional `Project.repoUrls?: string[]` field across backend (Mongoose model + `ProjectDto`) and frontend (`lib/types.ts`); `projects.json` seed + `lib/portfolio-data.ts` fallback reconciled to the 4 live projects, D-14 byte-mirror preserved; paired BE+FE commit — v1.1 Phase 8
+
 ## Current Milestone: v1.1 GitHub Repo Stats Enrichment
 
 **Goal:** Surface live GitHub repo metadata on the projects view to signal stack depth and project maturity to dual audiences — lean strip at the 5-second scan, richer panel for deeper interest.
@@ -54,7 +57,7 @@ A distinctive personal portfolio that signals engineering craft through a termin
 <!-- v1.1 milestone active requirements. v1.0 carry-forwards listed in STATE.md Deferred Items. -->
 
 - [ ] **GitHub repo stats enrichment** — projects-list stat strip + project-detail Tech highlights panel, sourced from GitHub REST API with 24h ISR revalidate. Scoped seed promoted into v1.1; full spec in `.planning/seeds/github-repo-stats.md`.
-- [ ] **Backend Project schema** — add optional `repoUrl?: string` field to Project model + DTO + seed JSON + frontend type. Paired FE+BE commit per brownfield discipline.
+- [x] **Backend Project schema** — optional `repoUrls?: string[]` field on Project model + DTO + seed JSON + frontend type. Paired FE+BE commit. Validated in Phase 8: Project Schema Extension (2026-05-21).
 - [ ] Recruiter discoverability — physical-subject validation: DEPLOY-04 5-second recruiter hand-off test (non-engineer subject on desktop + 375px mobile) deferred from v1.0. Dual-audience claim (Phase 7 ROADMAP SC4) currently rests on DevTools emulation + self-simulation only. **Not in v1.1 milestone scope** — tracked as operational follow-up in STATE.md Deferred Items.
 
 ### Out of Scope
@@ -176,4 +179,4 @@ This document evolves at phase transitions and milestone boundaries.
 - **Out of v1.1 scope:** The four v1.0 operational carry-forwards (branch protection, DEPLOY-03 indexing snapshot, DEPLOY-04 recruiter test, DEPLOY-06 analytics retest) remain in STATE.md Deferred Items as separately-tracked operational tasks.
 
 ---
-*Last updated: 2026-05-21 — `/gsd-new-milestone` v1.1 GitHub Repo Stats. Next: `/gsd-plan-phase 8` after roadmap approval.*
+*Last updated: 2026-05-21 — Phase 8 (Project Schema Extension) complete. Next: Phase 9 (GitHub API Integration).*

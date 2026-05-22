@@ -1,13 +1,14 @@
 ---
 phase: 10-projects-ui-enrichment
 verified: 2026-05-22T00:30:00Z
-status: human_needed
-score: 17/18
+status: passed
+score: 18/18
 overrides_applied: 0
 human_verification:
   - test: "Open /projects at 480px viewport width in a browser"
     expected: "The gh: stat strip under each repo-backed card wraps gracefully to a second line with no horizontal scroll; all 1-3 language labels remain visible"
     why_human: "CSS flex-wrap behavior at narrow widths cannot be verified without a rendered browser; Playwright contrast tests run at default viewport, not 480px"
+    result: "PASS — verified 2026-05-22 on production https://www.tatibekov.com/projects at 480px viewport; gh: strips render cleanly with no horizontal scroll, all language labels visible"
 ---
 
 # Phase 10: Projects UI Enrichment — Verification Report
@@ -15,8 +16,8 @@ human_verification:
 **Phase Goal:** `/projects` route surfaces a lean stat strip per card and each project's detail page renders a "Tech highlights" panel — both backed by `lib/github.ts`, both gracefully omitted when stats are null
 
 **Verified:** 2026-05-22T00:30:00Z
-**Status:** human_needed
-**Re-verification:** No — initial verification
+**Status:** passed
+**Re-verification:** 2026-05-22 — human verification item resolved (480px mobile strip wrap confirmed on production)
 
 ---
 
@@ -34,7 +35,7 @@ human_verification:
 | 6 | Project with null stats expands to a minimal panel (Visit project CTA, no Tech highlights) | VERIFIED | `project-row.tsx` line 88-117: panel container always renders; `{panel && (...)}` gates the Tech highlights block; CTA row always includes `Visit project →` via `ExternalLink href={link}`; test "with panel null, expanded panel renders no Tech highlights heading but keeps the Visit project CTA" passes |
 | 7 | Strip source marker is a monospace gh: text token, not an SVG | VERIFIED | `project-row.tsx` line 73: `<span className="gh-token">gh:</span>`; CSS `.projects-row-stats .gh-token { color: var(--accent); }` |
 | 8 | Strip wraps via CSS flex-wrap at narrow widths — no JS truncation | VERIFIED | `app/globals.css` line 1084-1088: `.projects-row-stats { display: flex; flex-wrap: wrap; gap: 4px; line-height: 1.5; }`. No JS truncation logic in `project-row.tsx` |
-| 9 | Mobile readability at 480px — no horizontal scroll | UNCERTAIN | CSS `flex-wrap` is defined; no explicit 480px media query override removes it. Behavior needs human visual confirmation at 480px viewport |
+| 9 | Mobile readability at 480px — no horizontal scroll | VERIFIED | Human-verified 2026-05-22 on production https://www.tatibekov.com/projects at 480px viewport: `gh:` strips render cleanly (single line, no clipping), no horizontal scrollbar, all language labels visible, tech tags wrap as expected |
 | 10 | Tech highlights panel: full language breakdown (top 5 + other), duration, last-active, commit count, View on GitHub CTA | VERIFIED | `project-row.tsx` lines 91-105: `<h3>Tech highlights</h3>`, breakdown list with `{b.name} {b.pct}%`, `otherPct > 0` guard, `durationLine`, `lastActive`, `.projects-commit-stat` span, `<ExternalLink href={repoUrl}>View on GitHub →</ExternalLink>` |
 | 11 | Panel omits cleanly when stats unavailable | VERIFIED | `buildPanelModel(null)` returns null (line 180 `lib/project-stats.ts`); `{panel && (...)}` gates entire Tech highlights block; panel `<div>` container still renders (D-03) |
 | 12 | New CSS lives inside existing .projects-* block — no new top-level section, no new tokens | VERIFIED | `app/globals.css` line 1064-1139: new selectors appended inside existing block, before `/* Phase 3 — stack-view */` at line 1141. `grep -c "stack-view" globals.css` = 1 (unchanged). 56 custom property definitions (unchanged per SUMMARY) |

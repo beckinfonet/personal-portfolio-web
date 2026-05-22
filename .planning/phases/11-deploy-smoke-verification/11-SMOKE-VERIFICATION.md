@@ -17,14 +17,18 @@ The `GITHUB_TOKEN` value must **never** appear here.
 Confirm the token key is registered in the Vercel **Production** scope. Record
 the **key name only** — never the value.
 
-- Confirmation method (`vercel env ls` / Vercel dashboard): _<fill in>_
-- `GITHUB_TOKEN` present in Production scope: _<yes / no>_
-- Date confirmed: _<fill in>_
+- Confirmation method (`vercel env ls` / Vercel dashboard): Vercel dashboard — Settings → Environment Variables
+- `GITHUB_TOKEN` present in Production scope: yes
+- Date confirmed: 2026-05-22
 
 ```
-<paste the vercel env ls output line showing the GITHUB_TOKEN key — key name and
- scope only, no value>
+GITHUB_TOKEN            Sensitive   Production
 ```
+
+Observed in the Vercel dashboard Environment Variables list: a `GITHUB_TOKEN`
+row tagged `Sensitive` with the `Production` environment, alongside the
+pre-existing `NEXT_PUBLIC_SITE_URL` (Production) and `NEXT_PUBLIC_API_BASE_URL`
+(Production and Preview). Key name and scope only — no value shown or recorded.
 
 ---
 
@@ -111,7 +115,7 @@ per-request (ISR not holding).
 
 ## 5. Verdict
 
-- DEPLOY-V11-01 (`GITHUB_TOKEN` provisioned, Production scope): _<pass / fail>_
+- DEPLOY-V11-01 (`GITHUB_TOKEN` provisioned, Production scope): **pass** — confirmed in Vercel dashboard, Production scope (2026-05-22)
 - DEPLOY-V11-02 (deploy docs in README, production deploy): _<pass / fail>_
 - DEPLOY-V11-03 (local quality gates green): **pass** — `npm run lint`,
   `npm test`, and `npm run build` (with prebuild + postbuild placeholder grep)

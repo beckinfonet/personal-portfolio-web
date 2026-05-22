@@ -1061,6 +1061,83 @@ a:hover {
   margin-top: 2px;
 }
 
+/* Phase 10 — projects-view stat strip + Tech highlights panel (LIST-* / DETAIL-*).
+   Appended INSIDE the existing projects-view block — no new top-level section
+   divider (LIST-08 / D-10). The 3-column .projects-row grid is untouched. */
+
+.projects-row-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+}
+
+.projects-row-stats {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  line-height: 1.5;
+}
+
+.projects-row-stats .gh-token {
+  color: var(--accent);
+}
+
+.projects-tech-panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px;
+  margin: 0 0 16px 48px;
+}
+
+.projects-panel-heading {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+
+.projects-panel-breakdown {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--muted-hi);
+  line-height: 1.6;
+}
+
+.projects-panel-line {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.projects-commit-stat {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 8px;
+}
+
+.projects-panel-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+  font-size: 13px;
+}
+
 /* ─────────────────────────────────────────
    Phase 3 — stack-view (VIEW-03)
    ───────────────────────────────────────── */

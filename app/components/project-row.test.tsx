@@ -84,7 +84,7 @@ describe("ProjectRow — disclosure branch (DETAIL-01)", () => {
 
 describe("ProjectRow — panel branch (DETAIL-02/05/06/07)", () => {
   test("with panel present, expanded panel shows Tech highlights, commit stat, and a View on GitHub CTA at repoUrl", () => {
-    render(
+    const { container } = render(
       <ProjectRow
         {...baseProps}
         repoUrl="https://github.com/u/r"
@@ -96,7 +96,8 @@ describe("ProjectRow — panel branch (DETAIL-02/05/06/07)", () => {
       screen.getByRole("button", { name: `${baseProps.name}: ${baseProps.summary}` })
     );
     expect(screen.getByText("Tech highlights")).toBeInTheDocument();
-    expect(screen.getByText("247 commits")).toBeInTheDocument();
+    const commitStat = container.querySelector(".projects-commit-stat");
+    expect(commitStat?.textContent).toBe("247 commits");
     const ghCta = screen.getByRole("link", { name: /View on GitHub/i });
     expect(ghCta).toHaveAttribute("href", "https://github.com/u/r");
   });

@@ -174,12 +174,25 @@ async function fetchRepoStats(
       created_at: string;
       pushed_at: string;
     };
-    const languages = (await langRes.json()) as Record<string, number>;
+    const languagesJson = (await langRes.json()) as unknown;
     const commits = (await commitsRes.json()) as unknown[];
+
+    // GH-06 — a HTTP 200 with a non-object `languages` body (GitHub breaking
+    // its own API contract) would otherwise reach `Object.entries` in
+    // combineStats, which runs outside any try/catch and would throw to the
+    // caller. Treat a structurally-invalid body as a fetch failure.
+    if (
+      languagesJson === null ||
+      typeof languagesJson !== "object" ||
+      Array.isArray(languagesJson)
+    ) {
+      return (await readDiskCache())[key] ?? null;
+    }
+
     const stat: RepoStat = {
       createdAt: repoJson.created_at,
       pushedAt: repoJson.pushed_at,
-      languages,
+      languages: languagesJson as Record<string, number>,
       commitCount: commitCountFromLink(
         commitsRes.headers.get("link"),
         commits.length

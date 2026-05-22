@@ -239,6 +239,29 @@ describe("getRepoStats — null paths", () => {
     expect(await getRepoStats(["https://github.com/owner/repo"])).toBeNull();
   });
 
+  test("returns null (never throws) when the languages endpoint returns a non-object 200 body", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string) => {
+        if (url.endsWith("/languages")) {
+          return new Response("null", { status: 200 });
+        }
+        if (url.endsWith("/commits?per_page=1")) {
+          return new Response(JSON.stringify([{}]), { status: 200 });
+        }
+        return new Response(
+          JSON.stringify({
+            created_at: "2025-01-01T00:00:00Z",
+            pushed_at: "2026-05-01T00:00:00Z"
+          }),
+          { status: 200 }
+        );
+      })
+    );
+
+    expect(await getRepoStats(["https://github.com/owner/repo"])).toBeNull();
+  });
+
   test("logs rate-limit headers on a 403 and treats the repo as failed", async () => {
     const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
     vi.stubGlobal(
@@ -338,6 +361,39 @@ describe("getRepoStats — disk fallback", () => {
     expect(stats?.commitCount).toBe(51);
     expect(stats?.createdAt).toBe("2022-01-01T00:00:00Z");
     expect(stats?.pushedAt).toBe("2026-05-01T00:00:00Z");
+  });
+
+  test("a malformed-languages 200 response falls back to the disk-cache entry", async () => {
+    diskStore = {
+      "owner/repo": {
+        createdAt: "2023-03-01T00:00:00Z",
+        pushedAt: "2026-04-01T00:00:00Z",
+        languages: { TypeScript: 999 },
+        commitCount: 123
+      }
+    };
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string) => {
+        if (url.endsWith("/languages")) {
+          return new Response("null", { status: 200 });
+        }
+        if (url.endsWith("/commits?per_page=1")) {
+          return new Response(JSON.stringify([{}]), { status: 200 });
+        }
+        return new Response(
+          JSON.stringify({
+            created_at: "2025-01-01T00:00:00Z",
+            pushed_at: "2026-05-01T00:00:00Z"
+          }),
+          { status: 200 }
+        );
+      })
+    );
+
+    const stats = await getRepoStats(["https://github.com/owner/repo"]);
+    expect(stats?.languages).toEqual({ TypeScript: 999 });
+    expect(stats?.commitCount).toBe(123);
   });
 
   test("returns null when a repo fails and has no disk-cache entry", async () => {

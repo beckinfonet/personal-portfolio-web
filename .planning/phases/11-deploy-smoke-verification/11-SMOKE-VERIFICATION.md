@@ -8,7 +8,7 @@ slots after the owner provisions `GITHUB_TOKEN` (see
 **Security note:** this document records key names and observed numbers only.
 The `GITHUB_TOKEN` value must **never** appear here.
 
-**Status:** SCAFFOLD — awaiting Plan 02.
+**Status:** COMPLETE — Plan 02 verified 2026-05-22. All 5 DEPLOY-V11 requirements pass.
 
 ---
 
@@ -139,11 +139,17 @@ observed before and after the second `/projects` load must be **identical**. A
 decremented value would mean the page bypassed the cache and called GitHub
 per-request (ISR not holding).
 
-- First `x-ratelimit-remaining` observed: _<fill in — number only>_
-- Second `x-ratelimit-remaining` observed: _<fill in — number only>_
-- Values identical (ISR cache held, zero per-request GitHub calls): _<yes / no>_
-- `/projects` reload served from ISR cache: _<yes / no>_
-- Notes / observations: _<fill in>_
+- First `rate.remaining` observed: 4998
+- Second `rate.remaining` observed: 4998
+- Values identical (ISR cache held, zero per-request GitHub calls): yes
+- `/projects` reload served from ISR cache: yes
+- Notes / observations: Both back-to-back probes returned `4998` with a
+  `https://www.tatibekov.com/projects` load between them — the count did not
+  decrement, proving the page served entirely from the daily ISR cache
+  (`revalidate: 86400`) and made zero per-request GitHub API calls (D-08). The
+  observed value sits in the authenticated 5,000/hr bucket, which also confirms
+  the production server is using the provisioned `GITHUB_TOKEN` (an
+  unauthenticated request would report against the 60/hr ceiling).
 
 ---
 
@@ -157,6 +163,12 @@ per-request (ISR not holding).
   all verified exit 0 in Plan 01.
 - DEPLOY-V11-04 (smoke test — ≥1 card with real stats): **pass** — all 4 production
   cards render a real `gh:` strip after the projects-only `repoUrls` backfill
-- DEPLOY-V11-05 (daily-ISR confirmed): _<pass / fail>_
+- DEPLOY-V11-05 (daily-ISR confirmed): **pass** — back-to-back `rate.remaining`
+  probes both returned `4998`; no decrement across a `/projects` load
 
-**Overall Phase 11 verdict:** _<fill in after Plan 02>_
+**Overall Phase 11 verdict:** **PASS** — all 5 requirements (DEPLOY-V11-01..05)
+verified. `GITHUB_TOKEN` is live in Vercel Production scope, the GitHub-stats
+feature is deployed on https://www.tatibekov.com, all 4 `/projects` cards show
+real GitHub stats, and daily ISR is confirmed. One blocker surfaced during the
+smoke test (stale production database missing `repoUrls`) was diagnosed and
+resolved via a surgical projects-only backfill — see §3.

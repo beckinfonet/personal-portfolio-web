@@ -71,7 +71,7 @@ Full milestone detail (phase goals, success criteria, plan list) archived at [mi
   4. Detail-panel accessibility passes WCAG 2.1 AA color-contrast under all 4 accent hues Ã 2 themes (extension of v1.0 Phase 5 56-cell axe matrix â new panel selectors added to the contrast spec)
   5. Vitest covers strip rendering with stats present, strip rendering with null stats, the strip layout/wrap contract (retargeted from "truncation" per D-13), and the detail-panel rendering branches (present and null); strip integrates with existing `.projects-row` styling without introducing new top-level CSS sections (reuses tokens from `app/globals.css`)
 **Plans**: 3 plans
-- [ ] 10-01-PLAN.md — Build `lib/project-stats.ts` pure formatters (`buildStripModel` / `buildPanelModel` + helpers) with exhaustive Vitest coverage (TDD)
+- [x] 10-01-PLAN.md — Build `lib/project-stats.ts` pure formatters (`buildStripModel` / `buildPanelModel` + helpers) with exhaustive Vitest coverage (TDD)
 - [ ] 10-02-PLAN.md — Wire GitHub stats into `/projects`: new `ProjectRow` client-island disclosure, RSC parallel-fetch in `page.tsx`, strip + Tech highlights panel, `.projects-*` CSS extension
 - [ ] 10-03-PLAN.md — Extend `tests/contrast.spec.ts` with a panel-visible path so the strip + panel selectors are scanned under all 4 hues × 2 themes (DETAIL-08)
 
@@ -101,5 +101,5 @@ Phases execute in numeric order: 8 â 9 â 10 â 11
 |-------|----------------|--------|-----------|
 | 8. Project Schema Extension | 1/1 | Complete | 2026-05-21 |
 | 9. GitHub API Integration | 0/TBD | Not started | - |
-| 10. Projects UI Enrichment | 0/3 | Not started | - |
+| 10. Projects UI Enrichment | 1/3 | In Progress|  |
 | 11. Deploy + Smoke Verification | 0/TBD | Not started | - |

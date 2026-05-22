@@ -40,6 +40,8 @@ A distinctive personal portfolio that signals engineering craft through a termin
 
 **Shipped in v1.1 (in progress):**
 - ✓ Optional `Project.repoUrls?: string[]` field across backend (Mongoose model + `ProjectDto`) and frontend (`lib/types.ts`); `projects.json` seed + `lib/portfolio-data.ts` fallback reconciled to the 4 live projects, D-14 byte-mirror preserved; paired BE+FE commit — v1.1 Phase 8
+- ✓ `lib/github.ts` GitHub data layer: native `fetch` + `GITHUB_TOKEN` auth, `getRepoStats()` combining commits/languages/date-range across a project's repos, daily ISR revalidate + disk-cache fallback, never-throws contract — v1.1 Phase 9
+- ✓ Projects UI enrichment: `/projects` per-card `gh:` stat strip (`<commits> commits · <langs> · <duration>`) + per-row expand/collapse `ProjectRow` disclosure island rendering a "Tech highlights" panel (language byte-breakdown, dev duration, last-active, commit count, `View on GitHub →` CTA); both gracefully omitted when stats are null; axe contrast matrix extended to scan the expanded panel — v1.1 Phase 10
 
 ## Current Milestone: v1.1 GitHub Repo Stats Enrichment
 
@@ -56,7 +58,7 @@ A distinctive personal portfolio that signals engineering craft through a termin
 
 <!-- v1.1 milestone active requirements. v1.0 carry-forwards listed in STATE.md Deferred Items. -->
 
-- [ ] **GitHub repo stats enrichment** — projects-list stat strip + project-detail Tech highlights panel, sourced from GitHub REST API with 24h ISR revalidate. Scoped seed promoted into v1.1; full spec in `.planning/seeds/github-repo-stats.md`.
+- [x] **GitHub repo stats enrichment** — projects-list stat strip + project-detail Tech highlights panel, sourced from GitHub REST API with daily ISR revalidate. Validated across Phase 9 (`lib/github.ts` data layer) + Phase 10 (Projects UI Enrichment), 2026-05-22. Full spec in `.planning/seeds/github-repo-stats.md`.
 - [x] **Backend Project schema** — optional `repoUrls?: string[]` field on Project model + DTO + seed JSON + frontend type. Paired FE+BE commit. Validated in Phase 8: Project Schema Extension (2026-05-21).
 - [ ] Recruiter discoverability — physical-subject validation: DEPLOY-04 5-second recruiter hand-off test (non-engineer subject on desktop + 375px mobile) deferred from v1.0. Dual-audience claim (Phase 7 ROADMAP SC4) currently rests on DevTools emulation + self-simulation only. **Not in v1.1 milestone scope** — tracked as operational follow-up in STATE.md Deferred Items.
 
@@ -179,4 +181,4 @@ This document evolves at phase transitions and milestone boundaries.
 - **Out of v1.1 scope:** The four v1.0 operational carry-forwards (branch protection, DEPLOY-03 indexing snapshot, DEPLOY-04 recruiter test, DEPLOY-06 analytics retest) remain in STATE.md Deferred Items as separately-tracked operational tasks.
 
 ---
-*Last updated: 2026-05-21 — Phase 8 (Project Schema Extension) complete. Next: Phase 9 (GitHub API Integration).*
+*Last updated: 2026-05-22 — Phase 10 (Projects UI Enrichment) complete. Next: Phase 11 (Deploy + Smoke Verification).*

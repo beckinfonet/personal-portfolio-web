@@ -19,7 +19,6 @@ import { ExternalLink } from "@/app/components/primitives/external-link";
 import { TechChip } from "@/app/components/primitives/tech-chip";
 
 interface ProjectRowProps {
-  index: number;
   name: string;
   summary: string;
   year: string;
@@ -34,7 +33,6 @@ interface ProjectRowProps {
 }
 
 export function ProjectRow({
-  index,
   name,
   summary,
   year,

@@ -6,7 +6,6 @@ import { ProjectRow } from "./project-row";
 import type { StripModel, PanelModel } from "@/lib/project-stats";
 
 const baseProps = {
-  index: 0,
   name: "Terminal Portfolio",
   summary: "A terminal-themed personal portfolio.",
   year: "2026",

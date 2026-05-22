@@ -35,11 +35,11 @@ pre-existing `NEXT_PUBLIC_SITE_URL` (Production) and `NEXT_PUBLIC_API_BASE_URL`
 ## 2. Production deploy (DEPLOY-V11-02)
 
 - Deploy trigger used (git-integration auto-deploy on push to `main` /
-  `vercel --prod`): _<fill in>_
-- Production URL deployed: _<fill in — expected https://www.tatibekov.com>_
-- Deployment ID / commit SHA deployed: _<fill in>_
-- Date / time of deploy: _<fill in>_
-- Build succeeded (Vercel build log clean): _<yes / no>_
+  `vercel --prod`): git-integration auto-deploy — `git push origin main` (68 commits, `3db7080..6cd4d15`)
+- Production URL deployed: https://www.tatibekov.com
+- Deployment ID / commit SHA deployed: `6cd4d15`
+- Date / time of deploy: 2026-05-22
+- Build succeeded (Vercel build log clean): yes — `/projects` returns HTTP 200
 
 ---
 
@@ -54,16 +54,43 @@ least **one** card must show a real `gh:` stat strip
 under `*-services` / `*-agentic` may be private — a private repo degrades to
 **no strip** by design (graceful degradation, acceptable per D-07).
 
-| Project name | Observed commit count | Observed language(s) | Observed dev duration | Strip rendered? |
-| ------------ | --------------------- | -------------------- | --------------------- | --------------- |
-| _<fill in>_  | _<fill in>_           | _<fill in>_          | _<fill in>_           | _<yes / no>_    |
-| _<fill in>_  | _<fill in>_           | _<fill in>_          | _<fill in>_           | _<yes / no>_    |
-| _<fill in>_  | _<fill in>_           | _<fill in>_          | _<fill in>_           | _<yes / no>_    |
-| _<fill in>_  | _<fill in>_           | _<fill in>_          | _<fill in>_           | _<yes / no>_    |
+| Project name      | Observed commit count | Observed language(s) | Observed dev duration | Strip rendered? |
+| ----------------- | --------------------- | -------------------- | --------------------- | --------------- |
+| Validation Ledger | —                     | —                    | —                     | no              |
+| Looper            | —                     | —                    | —                     | no              |
+| MoveIn: Real Estate | —                   | —                    | —                     | no              |
+| CarEx             | —                     | —                    | —                     | no              |
 
-- At least one card shows real GitHub stats: _<yes / no>_
-- Cards with no strip — confirmed private/unreachable repos (by design): _<list>_
-- Notes / observations: _<fill in>_
+- At least one card shows real GitHub stats: **no** — DEPLOY-V11-04 BLOCKED
+- Cards with no strip — confirmed private/unreachable repos (by design): none — all 7
+  candidate repos are public (`HTTP 200` from the unauthenticated GitHub API)
+- Notes / observations:
+
+> **BLOCKER — root cause: stale production database (not a portfolio-web defect).**
+>
+> The frontend code, the deploy, and the `GITHUB_TOKEN` provisioning are all
+> correct. No strip renders because the production backend never serves the
+> `repoUrls` field:
+>
+> - `GET https://personal-portfolio-services-production.up.railway.app/api/projects`
+>   returns all 4 projects with HTTP 200 but **no `repoUrls` key** on any project.
+> - In `app/(terminal)/projects/page.tsx`, `getRepoStats` is only called when
+>   `p.repoUrls?.length` is truthy. With `repoUrls` absent, it is never called,
+>   `buildStripModel(null)` returns `null`, and every card correctly renders no
+>   strip (graceful degradation, LIST-07).
+> - The seed file `portfolio-services/src/seed/projects.json` **does** carry
+>   `repoUrls` for all 4 projects, and the backend model `src/models/Project.ts`
+>   declares `repoUrls: { type: [String] }`. The schema and seed data are correct.
+> - The production Railway MongoDB was last seeded **before** Phase 8 added
+>   `repoUrls`, so the live documents lack the field.
+>
+> **Fix (owner action — backend, not portfolio-web):** re-seed the production
+> database. From `portfolio-services/`, with the production `MONGO_URI` in the
+> environment (e.g. `railway run npm run seed`). The seed script upserts projects
+> by name — non-destructive; it just adds `repoUrls` to the 4 existing documents.
+> After re-seeding, the `/projects` `getProjects` fetch (`revalidate: 300`) picks
+> up `repoUrls` within ~5 min (or immediately on a redeploy), `getRepoStats` then
+> fires against the public repos with the provisioned token, and the strips render.
 
 ---
 

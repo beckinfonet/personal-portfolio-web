@@ -19,7 +19,7 @@ export default async function ProjectsPage() {
   const projects = await getProjects();
 
   // Resolve GitHub repo stats for every project in parallel — Promise.all over
-  // .map, NEVER a for...await loop, so one slow repo cannot serialize the page
+  // .map, never sequential awaiting, so one slow repo cannot serialize the page
   // (Pitfall 1). getRepoStats never throws, so no try/catch is needed.
   const stats = await Promise.all(
     projects.map((p) =>

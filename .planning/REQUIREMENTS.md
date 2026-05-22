@@ -38,27 +38,27 @@ Requirements for the v1.1 release. Each maps to a roadmap phase.
 
 ### Projects-list stat strip
 
-- [ ] **LIST-01**: Compact one-line stat strip rendered under each project card on `/projects`
-- [ ] **LIST-02**: Strip format follows `<commits> commits · <lang1> [/ <lang2>] [/ <lang3>] · <duration>` (e.g. `247 commits · TS / CSS · 4mo`)
-- [ ] **LIST-03**: Top 1-3 languages selected by byte count from `/languages` response; abbreviations match `lib/types.ts` `Stack` category conventions where applicable (e.g. `TypeScript` → `TS`)
-- [ ] **LIST-04**: Duration computed from `created_at` to today; formatted in months for under a year (`4mo`) and years+months above (`1y 2mo`)
-- [ ] **LIST-05**: Strip is prefixed with a small monospace GitHub octocat-style glyph (or text token like `gh:`) to signal source
-- [ ] **LIST-06**: Mobile readability validated at 480px breakpoint; strip wraps gracefully or truncates the language list to top-1 if width-constrained
-- [ ] **LIST-07**: Project cards with empty/absent `repoUrls`, or with `repoUrls` set but combined stats returned `null` (all repos unreachable), render unchanged — no strip, no placeholder, no "private" label
-- [ ] **LIST-08**: Strip visual integrates with existing `.projects-row` styling; reuses tokens from `app/globals.css` without introducing new top-level CSS sections
-- [ ] **LIST-09**: Vitest covers rendering with stats present, rendering with null stats, and the mobile-truncation branch
+- [x] **LIST-01**: Compact one-line stat strip rendered under each project card on `/projects`
+- [x] **LIST-02**: Strip format follows `<commits> commits · <lang1> [/ <lang2>] [/ <lang3>] · <duration>` (e.g. `247 commits · TS / CSS · 4mo`)
+- [x] **LIST-03**: Top 1-3 languages selected by byte count from `/languages` response; abbreviations match `lib/types.ts` `Stack` category conventions where applicable (e.g. `TypeScript` → `TS`)
+- [x] **LIST-04**: Duration computed from `created_at` to today; formatted in months for under a year (`4mo`) and years+months above (`1y 2mo`)
+- [x] **LIST-05**: Strip is prefixed with a small monospace GitHub octocat-style glyph (or text token like `gh:`) to signal source
+- [x] **LIST-06**: Mobile readability validated at 480px breakpoint; strip wraps gracefully or truncates the language list to top-1 if width-constrained
+- [x] **LIST-07**: Project cards with empty/absent `repoUrls`, or with `repoUrls` set but combined stats returned `null` (all repos unreachable), render unchanged — no strip, no placeholder, no "private" label
+- [x] **LIST-08**: Strip visual integrates with existing `.projects-row` styling; reuses tokens from `app/globals.css` without introducing new top-level CSS sections
+- [x] **LIST-09**: Vitest covers rendering with stats present, rendering with null stats, and the mobile-truncation branch
 
 ### Project-detail Tech highlights panel
 
-- [ ] **DETAIL-01**: New "Tech highlights" panel rendered on each project's detail page when stats are available
-- [ ] **DETAIL-02**: Panel shows full language byte-breakdown with percentages (top 5 + "other" if >5 languages)
-- [ ] **DETAIL-03**: Dev duration shown with date range (e.g. `In development since Jan 2026 — 4mo`)
-- [ ] **DETAIL-04**: Last-active timestamp formatted relative (e.g. `Last active 3 days ago`, `Last active 2 months ago`)
-- [ ] **DETAIL-05**: Commit count displayed as a prominent stat
-- [ ] **DETAIL-06**: Panel includes a "View on GitHub →" CTA linking to the project's primary repo (`repoUrls[0]`) with `target=_blank rel=noopener noreferrer` per SEO-05 pattern (uses existing `ExternalLink` primitive)
-- [ ] **DETAIL-07**: Projects with empty/absent `repoUrls` or with null combined stats omit the panel cleanly — no degraded layout, no placeholder
-- [ ] **DETAIL-08**: Panel meets WCAG 2.1 AA color-contrast under all 4 accent hues × 2 themes (extension of existing Phase 5 56-cell axe matrix)
-- [ ] **DETAIL-09**: Vitest covers the panel rendering branches
+- [x] **DETAIL-01**: New "Tech highlights" panel rendered on each project's detail page when stats are available
+- [x] **DETAIL-02**: Panel shows full language byte-breakdown with percentages (top 5 + "other" if >5 languages)
+- [x] **DETAIL-03**: Dev duration shown with date range (e.g. `In development since Jan 2026 — 4mo`)
+- [x] **DETAIL-04**: Last-active timestamp formatted relative (e.g. `Last active 3 days ago`, `Last active 2 months ago`)
+- [x] **DETAIL-05**: Commit count displayed as a prominent stat
+- [x] **DETAIL-06**: Panel includes a "View on GitHub →" CTA linking to the project's primary repo (`repoUrls[0]`) with `target=_blank rel=noopener noreferrer` per SEO-05 pattern (uses existing `ExternalLink` primitive)
+- [x] **DETAIL-07**: Projects with empty/absent `repoUrls` or with null combined stats omit the panel cleanly — no degraded layout, no placeholder
+- [x] **DETAIL-08**: Panel meets WCAG 2.1 AA color-contrast under all 4 accent hues × 2 themes (extension of existing Phase 5 56-cell axe matrix)
+- [x] **DETAIL-09**: Vitest covers the panel rendering branches
 
 ### Deploy readiness
 
@@ -126,24 +126,24 @@ Filled by roadmapper at v1.1 roadmap creation (2026-05-21).
 | GH-08 | Phase 9 | Complete |
 | GH-09 | Phase 9 | Complete |
 | GH-10 | Phase 9 | Complete |
-| LIST-01 | Phase 10 | Pending |
-| LIST-02 | Phase 10 | Pending |
-| LIST-03 | Phase 10 | Pending |
-| LIST-04 | Phase 10 | Pending |
-| LIST-05 | Phase 10 | Pending |
-| LIST-06 | Phase 10 | Pending |
-| LIST-07 | Phase 10 | Pending |
-| LIST-08 | Phase 10 | Pending |
-| LIST-09 | Phase 10 | Pending |
-| DETAIL-01 | Phase 10 | Pending |
-| DETAIL-02 | Phase 10 | Pending |
-| DETAIL-03 | Phase 10 | Pending |
-| DETAIL-04 | Phase 10 | Pending |
-| DETAIL-05 | Phase 10 | Pending |
-| DETAIL-06 | Phase 10 | Pending |
-| DETAIL-07 | Phase 10 | Pending |
-| DETAIL-08 | Phase 10 | Pending |
-| DETAIL-09 | Phase 10 | Pending |
+| LIST-01 | Phase 10 | Complete |
+| LIST-02 | Phase 10 | Complete |
+| LIST-03 | Phase 10 | Complete |
+| LIST-04 | Phase 10 | Complete |
+| LIST-05 | Phase 10 | Complete |
+| LIST-06 | Phase 10 | Complete |
+| LIST-07 | Phase 10 | Complete |
+| LIST-08 | Phase 10 | Complete |
+| LIST-09 | Phase 10 | Complete |
+| DETAIL-01 | Phase 10 | Complete |
+| DETAIL-02 | Phase 10 | Complete |
+| DETAIL-03 | Phase 10 | Complete |
+| DETAIL-04 | Phase 10 | Complete |
+| DETAIL-05 | Phase 10 | Complete |
+| DETAIL-06 | Phase 10 | Complete |
+| DETAIL-07 | Phase 10 | Complete |
+| DETAIL-08 | Phase 10 | Complete |
+| DETAIL-09 | Phase 10 | Complete |
 | DEPLOY-V11-01 | Phase 11 | Pending |
 | DEPLOY-V11-02 | Phase 11 | Pending |
 | DEPLOY-V11-03 | Phase 11 | Pending |

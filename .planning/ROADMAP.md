@@ -101,5 +101,5 @@ Phases execute in numeric order: 8 â 9 â 10 â 11
 |-------|----------------|--------|-----------|
 | 8. Project Schema Extension | 1/1 | Complete | 2026-05-21 |
 | 9. GitHub API Integration | 0/TBD | Not started | - |
-| 10. Projects UI Enrichment | 3/3 | Complete   | 2026-05-22 |
+| 10. Projects UI Enrichment | 3/3 | Complete    | 2026-05-22 |
 | 11. Deploy + Smoke Verification | 0/TBD | Not started | - |

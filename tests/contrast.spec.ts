@@ -50,6 +50,23 @@ for (const theme of THEMES) {
         // mode before axe runs.
         await expect(page.locator("html")).toHaveAttribute("data-theme", theme);
 
+        // DETAIL-08 / Pitfall 4: axe SKIPS `hidden` / `display:none` content.
+        // The Phase 10 Tech highlights panel (.projects-tech-panel) ships with
+        // `hidden` until its row is expanded, so on the /projects route axe would
+        // never scan the panel colors — a silent false pass. Expand the first row
+        // here so the panel selectors are visible when analyze() runs. The
+        // collapsed strip (.projects-row-stats / .gh-token) is server-rendered and
+        // visible without interaction, so it needs no special handling.
+        // The toBeVisible() assertion is a canary: if the panel does not become
+        // visible the test fails loudly here rather than producing a hidden-panel
+        // false pass.
+        if (route.pathname === "/projects") {
+          await page.locator(".projects-row-trigger").first().click();
+          await expect(
+            page.locator(".projects-tech-panel").first(),
+          ).toBeVisible();
+        }
+
         const results = await new AxeBuilder({ page })
           .withTags(["wcag2aa", "wcag21aa"])
           .analyze();

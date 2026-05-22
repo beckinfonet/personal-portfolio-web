@@ -1,5 +1,25 @@
 # Milestones
 
+## v1.1 GitHub Repo Stats Enrichment (Shipped: 2026-05-22)
+
+**Phases completed:** 4 phases, 7 plans, 10 tasks
+
+**Delivered:** Live GitHub repo statistics on the `/projects` page — each project card shows a real commit count, top languages, and dev duration, fetched server-side from the GitHub API with daily ISR caching.
+
+**Stats:** 70 commits, +9,696/−204 lines, shipped 2026-05-21 → 2026-05-22.
+
+**Key accomplishments:**
+
+- **Phase 8 — Schema extension:** optional `repoUrls?: string[]` added to the `Project` type across the backend Mongoose model + DTO and the frontend interface, with the seed and static fallback reconciled to the 4 live projects — shipped as one paired BE+FE commit.
+- **Phase 9 — GitHub API integration:** `lib/github.ts` server-only data module fetches and combines live GitHub repo stats across a project's `repoUrls` using native `fetch`, conditional `GITHUB_TOKEN` bearer auth, daily ISR, and a per-repo disk-cache outage fallback — 21 Vitest unit tests, zero new dependencies.
+- **Phase 10 — Projects UI enrichment:** compact `gh:` stat strip on each `/projects` card plus an expandable "Tech highlights" panel (language breakdown, dev duration, last-active, commit count, View-on-GitHub CTA), both gracefully omitted when stats are null; contrast matrix extended to cover the new selectors under 4 hues × 2 themes.
+- **Phase 11 — Deploy + smoke verification:** `GITHUB_TOKEN` provisioned in Vercel Production scope, README env/deploy docs rewritten (`.env.example` removed), feature deployed to https://www.tatibekov.com — all 4 production cards verified showing real stats, daily ISR confirmed.
+- **Production blocker caught + fixed during smoke test:** the production MongoDB had never been re-seeded after Phase 8, so `/api/projects` served no `repoUrls` and no strips rendered. Root-caused systematically and fixed via a surgical projects-only backfill script — a full re-seed was avoided because the seed files had drifted behind hand-edited production data.
+
+**Known deferred items at close:** 0 — the one open Phase 10 human-verification item (480px mobile strip wrap) was resolved before close.
+
+---
+
 ## v1.0 Terminal Portfolio MVP (Shipped: 2026-05-14)
 
 **Phases completed:** 7 phases, 58 plans, 106 tasks

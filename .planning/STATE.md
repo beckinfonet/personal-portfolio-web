@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: GitHub Repo Stats Enrichment
-status: milestone_complete
+status: Awaiting next milestone
 stopped_at: Phase 11 context gathered
-last_updated: "2026-05-22T07:38:40.380Z"
-last_activity: 2026-05-22 -- Phase 11 execution started
+last_updated: "2026-05-22T09:07:20.224Z"
+last_activity: 2026-05-22 — Milestone v1.1 completed and archived
 progress:
   total_phases: 4
   completed_phases: 4
   total_plans: 7
-  completed_plans: 5
+  completed_plans: 7
   percent: 100
 ---
 
@@ -25,18 +25,10 @@ See: .planning/PROJECT.md (updated 2026-05-21)
 
 ## Current Position
 
-Phase: 11
-Plan: Not started
-Status: Milestone complete
-Last activity: 2026-05-22
-Progress: [██████████] 100%
-
-**v1.1 phase summary:**
-
-- [x] Phase 8: Project Schema Extension (7 reqs · SCHEMA-01..07 · paired FE+BE)
-- [ ] Phase 9: GitHub API Integration (10 reqs · GH-01..10)
-- [ ] Phase 10: Projects UI Enrichment (18 reqs · LIST-01..09 + DETAIL-01..09)
-- [ ] Phase 11: Deploy + Smoke Verification (5 reqs · DEPLOY-V11-01..05)
+Phase: Milestone v1.1 complete
+Plan: —
+Status: Awaiting next milestone
+Last activity: 2026-05-22 — Milestone v1.1 completed and archived
 
 ## Performance Metrics
 

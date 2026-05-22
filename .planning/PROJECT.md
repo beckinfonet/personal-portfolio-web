@@ -38,10 +38,11 @@ A distinctive personal portfolio that signals engineering craft through a termin
 - ✓ Vitest coverage: 161 tests across shell, palette, theme, accent, all 7 views, JSON-LD, console signature, mobile audits — v1.0 Phases 2/3/4/5
 - ✓ Deployed to https://www.tatibekov.com with full sitemap, JSON-LD Person, GSC verified, 8 next/og OG images — v1.0 Phase 5 + Phase 7
 
-**Shipped in v1.1 (in progress):**
+**Shipped in v1.1 (2026-05-22):**
 - ✓ Optional `Project.repoUrls?: string[]` field across backend (Mongoose model + `ProjectDto`) and frontend (`lib/types.ts`); `projects.json` seed + `lib/portfolio-data.ts` fallback reconciled to the 4 live projects, D-14 byte-mirror preserved; paired BE+FE commit — v1.1 Phase 8
 - ✓ `lib/github.ts` GitHub data layer: native `fetch` + `GITHUB_TOKEN` auth, `getRepoStats()` combining commits/languages/date-range across a project's repos, daily ISR revalidate + disk-cache fallback, never-throws contract — v1.1 Phase 9
 - ✓ Projects UI enrichment: `/projects` per-card `gh:` stat strip (`<commits> commits · <langs> · <duration>`) + per-row expand/collapse `ProjectRow` disclosure island rendering a "Tech highlights" panel (language byte-breakdown, dev duration, last-active, commit count, `View on GitHub →` CTA); both gracefully omitted when stats are null; axe contrast matrix extended to scan the expanded panel — v1.1 Phase 10
+- ✓ Production cutover: `GITHUB_TOKEN` provisioned in Vercel Production scope, README env/deploy docs rewritten + `.env.example` removed, feature deployed to https://www.tatibekov.com — all 4 production cards verified showing real GitHub stats, daily ISR confirmed — v1.1 Phase 11
 
 ## Current Milestone: v1.1 GitHub Repo Stats Enrichment
 

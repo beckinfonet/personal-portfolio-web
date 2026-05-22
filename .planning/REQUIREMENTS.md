@@ -62,11 +62,11 @@ Requirements for the v1.1 release. Each maps to a roadmap phase.
 
 ### Deploy readiness
 
-- [ ] **DEPLOY-V11-01**: `GITHUB_TOKEN` env var added to Vercel Production scope (read-only public-repo scope)
-- [ ] **DEPLOY-V11-02**: README or deploy notes document the `GITHUB_TOKEN` requirement, the scope it needs, and the consequence of its absence
-- [ ] **DEPLOY-V11-03**: Existing `npm run build`, `npm run lint`, `npm test`, INFRA-05 postbuild placeholder grep all green with new module integrated
-- [ ] **DEPLOY-V11-04**: At least one production-served project card shows real GitHub stats post-deploy (smoke test against https://www.tatibekov.com/projects)
-- [ ] **DEPLOY-V11-05**: Daily ISR revalidate confirmed via second-load timing (no per-request GitHub call)
+- [x] **DEPLOY-V11-01**: `GITHUB_TOKEN` env var added to Vercel Production scope (read-only public-repo scope)
+- [x] **DEPLOY-V11-02**: README or deploy notes document the `GITHUB_TOKEN` requirement, the scope it needs, and the consequence of its absence
+- [x] **DEPLOY-V11-03**: Existing `npm run build`, `npm run lint`, `npm test`, INFRA-05 postbuild placeholder grep all green with new module integrated
+- [x] **DEPLOY-V11-04**: At least one production-served project card shows real GitHub stats post-deploy (smoke test against https://www.tatibekov.com/projects)
+- [x] **DEPLOY-V11-05**: Daily ISR revalidate confirmed via second-load timing (no per-request GitHub call)
 
 ## Future Requirements (not in v1.1)
 
@@ -144,11 +144,11 @@ Filled by roadmapper at v1.1 roadmap creation (2026-05-21).
 | DETAIL-07 | Phase 10 | Complete |
 | DETAIL-08 | Phase 10 | Complete |
 | DETAIL-09 | Phase 10 | Complete |
-| DEPLOY-V11-01 | Phase 11 | Pending |
-| DEPLOY-V11-02 | Phase 11 | Pending |
-| DEPLOY-V11-03 | Phase 11 | Pending |
-| DEPLOY-V11-04 | Phase 11 | Pending |
-| DEPLOY-V11-05 | Phase 11 | Pending |
+| DEPLOY-V11-01 | Phase 11 | Complete |
+| DEPLOY-V11-02 | Phase 11 | Complete |
+| DEPLOY-V11-03 | Phase 11 | Complete |
+| DEPLOY-V11-04 | Phase 11 | Complete |
+| DEPLOY-V11-05 | Phase 11 | Complete |
 
 **Coverage:**
 - v1.1 requirements: 40 total

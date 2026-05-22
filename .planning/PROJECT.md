@@ -180,5 +180,13 @@ This document evolves at phase transitions and milestone boundaries.
 - **Deploy-time requirement:** `GITHUB_TOKEN` env var must be added to Vercel Production scope before the feature ships (5,000 req/hr authenticated vs 60/hr unauthenticated; read-only public-repo scope).
 - **Out of v1.1 scope:** The four v1.0 operational carry-forwards (branch protection, DEPLOY-03 indexing snapshot, DEPLOY-04 recruiter test, DEPLOY-06 analytics retest) remain in STATE.md Deferred Items as separately-tracked operational tasks.
 
+### v1.1 milestone close (2026-05-22)
+
+- **Milestone shipped.** 4 phases (8 Project Schema Extension, 9 GitHub API Integration, 10 Projects UI Enrichment, 11 Deploy + Smoke Verification) complete. The GitHub-repo-stats feature is live on https://www.tatibekov.com/projects.
+- **Requirements:** All 5 Phase 11 requirements (DEPLOY-V11-01..05) verified — `GITHUB_TOKEN` provisioned in Vercel Production scope, README env/deploy docs rewritten, local quality gates green, all 4 `/projects` cards show real GitHub stats, daily ISR confirmed.
+- **Stack budget held:** No new prod deps in v1.1 — total v1 prod deps remain at 3 (`next-themes`, `cmdk`, `@vercel/analytics`).
+- **`.env.example` removed** from the repo (D-05); README `## Environment` now inlines the three env vars directly.
+- **Production blocker found + fixed during smoke test:** the production Railway MongoDB lacked the Phase 8 `repoUrls` field (DB never re-seeded). Resolved via a surgical projects-only backfill (`portfolio-services/scripts/backfill-project-repourls.mjs`) — a full `npm run seed` was avoided because the seed files have drifted behind hand-edited prod values. **Follow-up:** reconcile `portfolio-services` `profile.json` / `apps.json` seed files with production so future seeding is safe.
+
 ---
-*Last updated: 2026-05-22 — Phase 10 (Projects UI Enrichment) complete. Next: Phase 11 (Deploy + Smoke Verification).*
+*Last updated: 2026-05-22 — Phase 11 (Deploy + Smoke Verification) complete. Milestone v1.1 shipped.*

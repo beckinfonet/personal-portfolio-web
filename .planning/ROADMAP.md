@@ -85,7 +85,7 @@ Full milestone detail (phase goals, success criteria, plan list) archived at [mi
   3. At least one production-served project card on https://www.tatibekov.com/projects shows real GitHub stats post-deploy (commit count + language(s) + duration visible to a visitor) Ã¢ smoke test recorded in a verification artifact
   4. Daily ISR revalidate is confirmed: a second `curl` of `/projects` within the 86400s window does not produce a per-request GitHub API call (verified by observing `X-RateLimit-Remaining` not decrementing between back-to-back fetches, or by `next: { revalidate }` cache HIT in Vercel logs)
 **Plans**: 2 plans
-- [ ] 11-01-PLAN.md — Rewrite README env/deploy docs + remove .env.example, run local quality gates green, author owner provisioning guide + smoke-verification scaffold (autonomous)
+- [x] 11-01-PLAN.md — Rewrite README env/deploy docs + remove .env.example, run local quality gates green, author owner provisioning guide + smoke-verification scaffold (autonomous)
 - [ ] 11-02-PLAN.md — Owner provisions GITHUB_TOKEN in Vercel Production, deploy, smoke-test live /projects, confirm daily ISR (human-in-the-loop)
 
 ## Progress
@@ -104,4 +104,4 @@ Phases execute in numeric order: 8 Ã¢ 9 Ã¢ 10 Ã¢ 11
 | 8. Project Schema Extension | 1/1 | Complete | 2026-05-21 |
 | 9. GitHub API Integration | 1/1 | Complete | 2026-05-22 |
 | 10. Projects UI Enrichment | 3/3 | Complete    | 2026-05-22 |
-| 11. Deploy + Smoke Verification | 0/2 | Planned | - |
+| 11. Deploy + Smoke Verification | 1/2 | In Progress|  |

@@ -30,7 +30,7 @@ Full milestone detail (phase goals, success criteria, plan list) archived at [mi
 
 - [x] **Phase 8: Project Schema Extension** â Add optional `repoUrls?: string[]` to Project across backend + frontend in a paired FE+BE commit
 - [ ] **Phase 9: GitHub API Integration** â New `lib/github.ts` module with native fetch, daily ISR cache, token auth, disk-cache fallback, and unit tests
-- [ ] **Phase 10: Projects UI Enrichment** â Compact stat strip on `/projects` cards + "Tech highlights" panel on project-detail with graceful degradation
+- [x] **Phase 10: Projects UI Enrichment** â Compact stat strip on `/projects` cards + "Tech highlights" panel on project-detail with graceful degradation (completed 2026-05-22)
 - [ ] **Phase 11: Deploy + Smoke Verification** â `GITHUB_TOKEN` in Vercel Production, deploy notes documented, smoke test against live `/projects`, ISR-cache behaviour confirmed
 
 ## Phase Details
@@ -73,7 +73,7 @@ Full milestone detail (phase goals, success criteria, plan list) archived at [mi
 **Plans**: 3 plans
 - [x] 10-01-PLAN.md — Build `lib/project-stats.ts` pure formatters (`buildStripModel` / `buildPanelModel` + helpers) with exhaustive Vitest coverage (TDD)
 - [x] 10-02-PLAN.md — Wire GitHub stats into `/projects`: new `ProjectRow` client-island disclosure, RSC parallel-fetch in `page.tsx`, strip + Tech highlights panel, `.projects-*` CSS extension
-- [ ] 10-03-PLAN.md — Extend `tests/contrast.spec.ts` with a panel-visible path so the strip + panel selectors are scanned under all 4 hues × 2 themes (DETAIL-08)
+- [x] 10-03-PLAN.md — Extend `tests/contrast.spec.ts` with a panel-visible path so the strip + panel selectors are scanned under all 4 hues × 2 themes (DETAIL-08)
 
 ### Phase 11: Deploy + Smoke Verification
 **Goal**: Production cutover with `GITHUB_TOKEN` configured, deploy notes documented, real stats observable on https://www.tatibekov.com/projects, and daily-ISR behaviour confirmed
@@ -101,5 +101,5 @@ Phases execute in numeric order: 8 â 9 â 10 â 11
 |-------|----------------|--------|-----------|
 | 8. Project Schema Extension | 1/1 | Complete | 2026-05-21 |
 | 9. GitHub API Integration | 0/TBD | Not started | - |
-| 10. Projects UI Enrichment | 2/3 | In Progress|  |
+| 10. Projects UI Enrichment | 3/3 | Complete   | 2026-05-22 |
 | 11. Deploy + Smoke Verification | 0/TBD | Not started | - |
